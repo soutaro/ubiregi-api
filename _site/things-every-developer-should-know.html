@@ -1,0 +1,28 @@
+<head>
+  <title>Ubiregi API :: Things every developer should know</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1 id='things_every_developer_should_know'>Things every developer should know</h1>
+
+<h2 id='ubiregi_web_app_is_build_with_rails'>Ubiregi web app is build with Rails</h2>
+
+<p>We use Ruby on Rails 3 to develop ubiregi.com web app. We carefully described things non-rails-developer should mention about, but may be insufficient.</p>
+
+<p>If you have some problem, you may need to check Rails related documents.</p>
+
+<h2 id='the_api_is_entirely_httpbased_and_restful'>The API is entirely HTTP-based, and RESTful</h2>
+
+<p>Methods to retrieve data from the Ubiregi API requires a GET request. Methods to create new things requires a POST request. And to update things requires a PUT request. Most methods requires a particular HTTP method and will return an error if you do not make your request with the correct one.</p>
+
+<h2 id='json_is_used'>JSON is used</h2>
+
+<p>We use JSON for every structured data. It implies that binary data are encoded with base64 and non-ascii characters are UTF8 encoded.</p>
+
+<h2 id='use_https'>Use HTTPS</h2>
+
+<p>All requests to Ubiregi API must be HTTPS requests.</p>
+  </div>
+</body>

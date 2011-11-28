@@ -1,0 +1,161 @@
+<head>
+  <title>Ubiregi API :: Resources</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1 id='object_definitions'>Object definitions</h1>
+
+<h1 id='resources'>Resources</h1>
+
+<h2 id='get_account'>GET /account</h2>
+
+<h3 id='summary'>Summary</h3>
+
+<dl>
+<dt>Description</dt>
+
+<dd>Retrieves information about the account.</dd>
+
+<dt>URL Structure</dt>
+
+<dd><code>https://ubiregi.com/api/3/account</code></dd>
+</dl>
+
+<h3 id='parameters'>Parameters</h3>
+
+<p>There are no parameters.</p>
+
+<h3 id='sample_response'>Sample Response</h3>
+<pre>
+{
+  id: 123,
+  name: "Ubiregi",
+  username: "ubiregi",
+  email: "info@ubiregi.com",
+  menus: [1],
+  stocks: [1],
+}
+</pre>
+<h3 id='return_value_definitions'>Return value definitions</h3>
+<table>
+	<tr>
+		<th>id</th>
+		<td>ID of the user</td>
+	</tr>
+	<tr>
+		<th>name</th>
+		<td>The name of the account</td>
+	</tr>
+</table>
+<h2 id='get_menusiditems'>GET /menus/:id/items</h2>
+
+<h3 id='summary'>Summary</h3>
+
+<dl>
+<dt>Description</dt>
+
+<dd>Retrieves list of menu items.</dd>
+
+<dt>URL Structure</dt>
+
+<dd><code>https://ubiregi.com/api/3/menus/:id/items</code></dd>
+</dl>
+
+<h3 id='parameters'>Parameters</h3>
+
+<p>The parameters should be given as URL parameters.</p>
+
+<pre><code>/menus/0/items?since=2011-12-01T12:34:11Z&amp;until=2011-12-02T12:11:15Z&amp;glb=1023</code></pre>
+<table>
+	<tr>
+		<th>since (optional)</th>
+		<td>Time in ISO 8601 format. The timezone should be UTC. Inclusive.</td>
+	</tr>
+	<tr>
+		<th>until (optional)</th>
+		<td>Time in ISO 8601 format. the timezone must be UTC. Exclusive.</td>
+	</tr>
+	<tr>
+		<th>glb (optional)</th>
+		<td>Greates lower bound of id of menu item.</td>
+	</tr>
+</table>
+<h3 id='sample_response'>Sample Response</h3>
+<pre>
+{
+  timestamp: "2011-11-23T00:01:11Z",
+  next-url: "https://ubiregi.com/api/3/menus/30/items?since=2011-12-01T12:34:11Z&amp;until=2011-11-23T00:01:11Z&amp;glb=123",
+  items: [
+    _item_,
+    _item_,
+    ...
+  ]
+}
+</pre>
+<h3 id='return_value_definitions'>Return value definitions</h3>
+
+<dl>
+<dt>timestamp</dt>
+
+<dd>Time the request is processed on server. This would be used for next time to send the request.</dd>
+
+<dt>next_url (optional)</dt>
+
+<dd>URLs to send GET request to complete the refresh. null in the case there are no more item to refresh.</dd>
+
+<dt>items</dt>
+
+<dd>Array of updated items since <code>since</code> parameter.</dd>
+</dl>
+
+<h2 id='post_menusiditems'>POST /menus/:id/items</h2>
+
+<h3 id='summary'>Summary</h3>
+
+<dl>
+<dt>Description</dt>
+
+<dd>Add new menu item.</dd>
+
+<dt>URL Structure</dt>
+
+<dd><code>https://ubiregi.com/api/3/menus/:id/items</code></dd>
+</dl>
+
+<h4 id='remarks'>Remarks</h4>
+
+<p>A creation and update of new items is transactional, i.e. all items will be created successfully, or all items will be rejected.</p>
+
+<h2 id='get_menusidcategories'>GET /menus/:id/categories</h2>
+
+<h2 id='post_menusidcategories'>POST /menus/:id/categories</h2>
+
+<h2 id='get_menusidtags'>GET /menus/:id/tags</h2>
+
+<h2 id='get_tags'>GET /tags</h2>
+
+<h2 id='post_tags'>POST /tags</h2>
+
+<h2 id='get_checkouts'>GET /checkouts</h2>
+
+<h2 id='post_checkouts'>POST /checkouts</h2>
+
+<h2 id='get_customers'>GET /customers</h2>
+
+<h2 id='post_customers'>POST /customers</h2>
+
+<h2 id='get_customersidnotes'>GET /customers/:id/notes</h2>
+
+<h2 id='post_customersidnotes'>POST /customers/:id/notes</h2>
+
+<h2 id='get_stocks'>GET /stocks</h2>
+
+<h2 id='get_stocksid'>GET /stocks/:id/</h2>
+
+<h2 id='get_stocksitemsidevents'>GET /stocks/items/:id/events</h2>
+
+<h2 id='post_stocksitemsidevents'>POST /stocks/items/:id/events</h2>
+  </div>
+</body>
