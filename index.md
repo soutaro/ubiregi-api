@@ -11,8 +11,8 @@ sales data.
 
 Ubiregi API is a set of REST resources.
 
-* [Things every developer should know](/things-every-developer-should-know.html)
-* [Registration](/registration.html)
-* [Authentication](/authentication.html)
-* [Resources](/resources.html)
+* [Things every developer should know](/ubiregi-api/things-every-developer-should-know.html)
+* [Registration](/ubiregi-api/registration.html)
+* [Authentication](/ubiregi-api/authentication.html)
+* [Resources](/ubiregi-api/resources.html)
 
