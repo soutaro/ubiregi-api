@@ -1,13 +1,32 @@
 <head>
-  <title>Ubiregi API :: Resources</title>
+  <title>Resources - Ubiregi API</title>
   <meta charset="utf-8" />
-  <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+  <link rel="stylesheet" href="/ubiregi-api/bootstrap.min.css">
 </head>
 <body>
-  <div class="container">
-    <h1 id='object_definitions'>Object definitions</h1>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="container">
+	<div class="row">
+	  <div class="span12 offset2">
+	    <h3><a href="/ubiregi-api/index.html">Ubiregi API</a></h3>
+	    <ul class="nav">
+	      <li><a href="/ubiregi-api/registration.html">Registration</a>
+	      <li><a href="/ubiregi-api/authentication.html">Authentication</a>
+	      <li><a href="/ubiregi-api/resources.html">Resources</a>
+	      <li><a href="/ubiregi-api/errors.html">Error handling</a>
+	    </ul>
+	  </div>
+	</div>
+      </div>
+    </div>
+  </div>
+  <div class="container" style="margin-top:60px; margin-bottom:2em">
+    <div class="row">
+      <div class="span12 offset2">
+	<h1 id='object_definitions'>Object definitions</h1>
 
-<h1 id='resources'>Resources</h1>
+<h1 id='account'>Account</h1>
 
 <h2 id='get_account'>GET /account</h2>
 
@@ -49,6 +68,8 @@
 		<td>The name of the account</td>
 	</tr>
 </table>
+<h1 id='menu'>Menu</h1>
+
 <h2 id='get_menusiditems'>GET /menus/:id/items</h2>
 
 <h3 id='summary'>Summary</h3>
@@ -132,6 +153,32 @@
 
 <h2 id='post_menusidcategories'>POST /menus/:id/categories</h2>
 
+<h2 id='post_menuscategoriesiddelete'>POST /menus/categories/:id/delete</h2>
+
+<h3 id='summary'>Summary</h3>
+
+<dl>
+<dt>Description</dt>
+
+<dd>Delete the category.</dd>
+
+<dt>URL Structure</dt>
+
+<dd><code>https://ubiregi.com/api/3/menus/categories/:id/delete</code></dd>
+</dl>
+
+<h3 id='parameters'>Parameters</h3>
+
+<p>No parameter can be given.</p>
+
+<h3 id='remarks'>Remarks</h3>
+
+<p>All menu items associated with the category will be updated. Reloading items required.</p>
+
+<h3 id='sample_response'>Sample Response</h3>
+<pre>
+{}
+</pre>
 <h2 id='get_menusidtags'>GET /menus/:id/tags</h2>
 
 <h2 id='get_tags'>GET /tags</h2>
@@ -157,5 +204,11 @@
 <h2 id='get_stocksitemsidevents'>GET /stocks/items/:id/events</h2>
 
 <h2 id='post_stocksitemsidevents'>POST /stocks/items/:id/events</h2>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="container" style="text-align:center; margin-bottom:2em">
+    &copy; 2011 Ubiregi Inc. All rights reserved.
   </div>
 </body>

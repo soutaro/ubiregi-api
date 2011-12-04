@@ -1,24 +1,92 @@
 <head>
-  <title>Ubiregi API :: Welcome</title>
+  <title>Welcome - Ubiregi API</title>
   <meta charset="utf-8" />
-  <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+  <link rel="stylesheet" href="/ubiregi-api/bootstrap.min.css">
 </head>
 <body>
-  <div class="container">
-    <h1 id='ubiregi_api'>Ubiregi API</h1>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="container">
+	<div class="row">
+	  <div class="span12 offset2">
+	    <h3><a href="/ubiregi-api/index.html">Ubiregi API</a></h3>
+	    <ul class="nav">
+	      <li><a href="/ubiregi-api/registration.html">Registration</a>
+	      <li><a href="/ubiregi-api/authentication.html">Authentication</a>
+	      <li><a href="/ubiregi-api/resources.html">Resources</a>
+	      <li><a href="/ubiregi-api/errors.html">Error handling</a>
+	    </ul>
+	  </div>
+	</div>
+      </div>
+    </div>
+  </div>
+  <div class="container" style="margin-top:60px; margin-bottom:2em">
+    <div class="row">
+      <div class="span12 offset2">
+	<h1 style='font-size:70pt; font-family:Times; margin:50px 0; line-height:100%'>Ubiregi API</h1>
+<blockquote>
+<p>Ubiregi is simple and clean yet poweful; so the API is.</p>
+</blockquote>
 
-<p>Ubiregi API allows third parties to develop systems which interact with Ubiregi data, including menus, tags, customers, checkouts and sales data.</p>
+<p>Ubiregi API allows third parties to develop systems which interact with Ubiregi data, including menus, tags, customers, and checkouts.</p>
 
-<p>Ubiregi API is a set of REST resources.</p>
+<p>Using Ubiregi API, you can develop your own application for:</p>
 
 <ul>
-<li><a href='/ubiregi-api/things-every-developer-should-know.html'>Things every developer should know</a></li>
+<li>Editing menus with your <s>legacy</s> excellent system</li>
 
-<li><a href='/ubiregi-api/registration.html'>Registration</a></li>
+<li>Importing sales data into your <s>legacy</s> great system</li>
 
-<li><a href='/ubiregi-api/authentication.html'>Authentication</a></li>
+<li>Advanced sales analysis</li>
 
-<li><a href='/ubiregi-api/resources.html'>Resources</a></li>
+<li>Advanced stock control</li>
+
+<li>Booking</li>
 </ul>
+
+<p>and, such features essential for your or your clients&#8217; business.</p>
+
+<p>Ubiregi API provides almost full access to Ubiregi&#8217;s data. Everything except authentication is the same with what the Ubiregi app is doing. (In fact, the API v3 is essentialy more powerful than API v2, which is used until Ubiregi2 2.6.)</p>
+
+<h2 id='five_steps_to_developp_your_app'>Five Steps to Developp Your App</h2>
+
+<ol>
+<li>Signup to ubiregi.com</li>
+
+<li>Register for developer account and new application</li>
+
+<li>Install the application on your account</li>
+
+<li>Download the sample app</li>
+
+<li>Change the sample app, and it is your app now!</li>
+</ol>
+
+<h2 id='general_notes_'>General Notes <small>Things every developer should know</small></h2>
+
+<h3 id='the_api_is_entirely_httpbased_and_restful'>The API is entirely HTTP-based, and RESTful</h3>
+
+<p>Methods to retrieve data from the Ubiregi API requires a GET request. Methods to create new things requires a POST request. And to update things requires a PUT request. Most methods requires a particular HTTP method and will return an error if you do not make your request with the correct one.</p>
+
+<h3 id='ubiregi_web_app_is_build_with_rails'>Ubiregi web app is build with Rails</h3>
+
+<p>We use Ruby on Rails 3 to develop ubiregi.com web app. We carefully described things non-rails-developer should mention about, but may be insufficient.</p>
+
+<p>If you have some problem, you may need to check Rails related documents.</p>
+
+<h3 id='json_is_used'>JSON is used</h3>
+
+<p>We use JSON for every structured data. It implies that binary data are encoded with base64 and non-ascii characters are UTF8 encoded.</p>
+
+<h3 id='use_https'>Use HTTPS</h3>
+
+<p>All requests to Ubiregi API must be HTTPS requests.</p>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="container" style="text-align:center; margin-bottom:2em">
+    &copy; 2011 Ubiregi Inc. All rights reserved.
   </div>
 </body>

@@ -14,5 +14,8 @@ We are working to provide standardized mechanisms such as OAuth to simplify auth
 
 Just give HTTP request header on all requests named `X-Ubiregi-API-Token` which contains users API token.
 
-There are no standard mechanisms to give your application account's API token.
-Your application would ask your users to copy-and-paste API token from ubiregi.com web site.
+Users will find the API token for your application, after they installed your application.
+Then, the user will give you the information for authentication, the API token.
+The API token is installation specific.
+If your user uninstall your application, the token will be lost.
+After your user re-install your application, new token will be generated.

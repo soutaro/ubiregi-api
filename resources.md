@@ -5,7 +5,7 @@ layout: default
 
 # Object definitions
 
-# Resources
+# Account
 
 ## GET /account
 
@@ -46,6 +46,8 @@ There are no parameters.
 		<td>The name of the account</td>
 	</tr>
 </table>
+
+# Menu
 
 ## GET /menus/:id/items
 
@@ -123,6 +125,31 @@ A creation and update of new items is transactional, i.e. all items will be crea
 
 ## POST /menus/:id/categories
 
+## POST /menus/categories/:id/delete
+
+### Summary
+
+Description
+:   Delete the category.
+
+URL Structure
+:   `https://ubiregi.com/api/3/menus/categories/:id/delete`
+
+### Parameters
+
+No parameter can be given.
+
+### Remarks
+
+All menu items associated with the category will be updated.
+Reloading items required.
+
+### Sample Response
+
+<pre>
+{}
+</pre>
+
 ## GET /menus/:id/tags
 
 ## GET /tags
@@ -148,3 +175,4 @@ A creation and update of new items is transactional, i.e. all items will be crea
 ## GET /stocks/items/:id/events
 
 ## POST /stocks/items/:id/events
+
