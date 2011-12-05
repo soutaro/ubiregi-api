@@ -1,6 +1,7 @@
 ---
 title: Error handling
 layout: default
+tab: errors
 ---
 
 # Error handling

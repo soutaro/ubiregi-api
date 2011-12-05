@@ -1,6 +1,7 @@
 ---
 title: Registration
 layout: default
+tab: registration
 ---
 
 # Registration

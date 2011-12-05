@@ -1,6 +1,7 @@
 ---
 title: Resources
 layout: default
+tab: resources
 ---
 
 # Objects

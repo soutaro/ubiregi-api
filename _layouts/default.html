@@ -1,3 +1,14 @@
+{% case page.tab %}
+{% when 'registration' %}
+{% assign registration = 'active' %}
+{% when 'authentication' %}
+{% assign authentication = 'active' %}
+{% when 'resources' %}
+{% assign resources = 'active' %}
+{% when 'errors' %}
+{% assign errors = 'active' %}
+{% endcase %}
+
 <head>
   <title>{{ page.title }} - Ubiregi API</title>
   <meta charset="utf-8" />
@@ -12,10 +23,10 @@
       	  <div class="span12 offset2">
       	    <h3><a href="/ubiregi-api/index.html">Ubiregi API</a></h3>
       	    <ul class="nav">
-      	      <li><a href="/ubiregi-api/registration.html">Registration</a>
-      	      <li><a href="/ubiregi-api/authentication.html">Authentication</a>
-      	      <li><a href="/ubiregi-api/resources.html">Resources</a>
-      	      <li><a href="/ubiregi-api/errors.html">Error handling</a>
+    	        <li class="{{ registration }}"><a href="/ubiregi-api/registration.html">Registration</a>     	      
+      	      <li class="{{ authentication }}"><a href="/ubiregi-api/authentication.html">Authentication</a>
+      	      <li class="{{ resources }}"><a href="/ubiregi-api/resources.html">Resources</a>
+      	      <li class="{{ errors }}"><a href="/ubiregi-api/errors.html">Error handling</a>
       	    </ul>
       	  </div>
       	</div>

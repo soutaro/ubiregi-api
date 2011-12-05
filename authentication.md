@@ -1,6 +1,7 @@
 ---
 title: Authentication
 layout: default
+tab: authentication
 ---
 
 # Authentication
