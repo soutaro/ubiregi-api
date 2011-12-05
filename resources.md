@@ -3,7 +3,58 @@ title: Resources
 layout: default
 ---
 
-# Object definitions
+# Objects
+
+## Account
+
+<pre>
+{
+    token: 3q489y3bq94oghrnontv48,
+    login: "ubiregi-cafe",
+    email: "cafe@ubiregi.com",
+    name: "Ubiregi Cafe",
+    subscription_expire_at: "2011-11-13T00:00:00Z",
+    subscription_kind: "premium",
+    menus: [ 8 ],
+    stocks: [ 100 ],
+    tables: [ $tables ],
+    customer_tags: [ $customer_tags ],
+    cashiers: [ $cashiers ],
+}
+</pre>
+
+## Table
+
+<pre>
+{
+    id: 123,
+    name: "Table 1",
+    position: 3,
+}
+</pre>
+
+## Customer Tag
+
+<pre>
+{
+    id: 123,
+    name: "Dating",
+    potision: 13,
+    icon: ::base64EncodedIcon,
+}
+</pre>
+
+## Cashier
+
+<pre>
+{
+    id: 385,
+    name: "Soutaro Matsumoto",
+    icon: ::base64EncodedIcon,
+}
+</pre>
+
+## Menu Item
 
 # Account
 
@@ -11,41 +62,35 @@ layout: default
 
 ### Summary
 
-Description
-:    Retrieves information about the account.
+Retrieves information about the account.
 
-URL Structure
-:    `https://ubiregi.com/api/3/account`
+### Response
 
-### Parameters
-
-There are no parameters.
-
-### Sample Response
-
+An `Account` object.
 <pre>
 {
-  id: 123,
-  name: "Ubiregi",
-  username: "ubiregi",
-  email: "info@ubiregi.com",
-  menus: [1],
-  stocks: [1],
+    account: $account,
+    timestamp: "2011-11-02T09:11:34Z",
 }
 </pre>
 
-### Return value definitions
+### Parameters
 
 <table>
-	<tr>
-		<th>id</th>
-		<td>ID of the user</td>
-	</tr>
-	<tr>
-		<th>name</th>
-		<td>The name of the account</td>
-	</tr>
+<tr>
+<th>until (optional)</th>
+<td>
+    Timestamp used to make tables, customer_tags, and cashiers contains only updated ones.
+    Encouraged to include this parameter if the access is not the first one nor explicitly want to reload everything.
+</td>
+</tr>
 </table>
+
+### Note
+
+Accesses to `/account` do not expire.
+Even if your account is expired, it returns your account's information.
+However menus, stocks, tables, customer_tags, and cashiers will be empty in that case.
 
 # Menu
 

@@ -24,7 +24,50 @@
   <div class="container" style="margin-top:60px; margin-bottom:2em">
     <div class="row">
       <div class="span12 offset2">
-	<h1 id='object_definitions'>Object definitions</h1>
+	<h1 id='objects'>Objects</h1>
+
+<h2 id='account'>Account</h2>
+<pre>
+{
+    token: 3q489y3bq94oghrnontv48,
+    login: "ubiregi-cafe",
+    email: "cafe@ubiregi.com",
+    name: "Ubiregi Cafe",
+    subscription_expire_at: "2011-11-13T00:00:00Z",
+    subscription_kind: "premium",
+    menus: [ 8 ],
+    stocks: [ 100 ],
+    tables: [ $tables ],
+    customer_tags: [ $customer_tags ],
+    cashiers: [ $cashiers ],
+}
+</pre>
+<h2 id='table'>Table</h2>
+<pre>
+{
+    id: 123,
+    name: "Table 1",
+    position: 3,
+}
+</pre>
+<h2 id='customer_tag'>Customer Tag</h2>
+<pre>
+{
+    id: 123,
+    name: "Dating",
+    potision: 13,
+    icon: ::base64EncodedIcon,
+}
+</pre>
+<h2 id='cashier'>Cashier</h2>
+<pre>
+{
+    id: 385,
+    name: "Soutaro Matsumoto",
+    icon: ::base64EncodedIcon,
+}
+</pre>
+<h2 id='menu_item'>Menu Item</h2>
 
 <h1 id='account'>Account</h1>
 
@@ -32,42 +75,31 @@
 
 <h3 id='summary'>Summary</h3>
 
-<dl>
-<dt>Description</dt>
+<p>Retrieves information about the account.</p>
 
-<dd>Retrieves information about the account.</dd>
+<h3 id='response'>Response</h3>
 
-<dt>URL Structure</dt>
-
-<dd><code>https://ubiregi.com/api/3/account</code></dd>
-</dl>
+<p>An <code>Account</code> object. <pre>
+{
+    account: $account,
+    timestamp: "2011-11-02T09:11:34Z",
+}
+</pre></p>
 
 <h3 id='parameters'>Parameters</h3>
-
-<p>There are no parameters.</p>
-
-<h3 id='sample_response'>Sample Response</h3>
-<pre>
-{
-  id: 123,
-  name: "Ubiregi",
-  username: "ubiregi",
-  email: "info@ubiregi.com",
-  menus: [1],
-  stocks: [1],
-}
-</pre>
-<h3 id='return_value_definitions'>Return value definitions</h3>
 <table>
-	<tr>
-		<th>id</th>
-		<td>ID of the user</td>
-	</tr>
-	<tr>
-		<th>name</th>
-		<td>The name of the account</td>
-	</tr>
+<tr>
+<th>until (optional)</th>
+<td>
+    Timestamp used to make tables, customer_tags, and cashiers contains only updated ones.
+    Encouraged to include this parameter if the access is not the first one nor explicitly want to reload everything.
+</td>
+</tr>
 </table>
+<h3 id='note'>Note</h3>
+
+<p>Accesses to <code>/account</code> do not expire. Even if your account is expired, it returns your account&#8217;s information. However menus, stocks, tables, customer_tags, and cashiers will be empty in that case.</p>
+
 <h1 id='menu'>Menu</h1>
 
 <h2 id='get_menusiditems'>GET /menus/:id/items</h2>
