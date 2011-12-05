@@ -1,11 +1,8 @@
 ---
 title: Welcome
 layout: default
+logo: yes
 ---
-
-<h1 style="font-size:70pt; text-align:center; font-family:Times; margin:50px 0; line-height:100%">Ubiregi API</h1>
-
-<h3 style="text-align:center; margin-bottom:50px">Ubiregi is simple and clean yet poweful; so the API is.</h3>
 
 Ubiregi API allows third parties to develop systems which interact
 with Ubiregi data, including menus, tags, customers, and checkouts.
@@ -25,7 +22,7 @@ except authentication is the same with what the Ubiregi app is doing.
 (In fact, the API v3 is essentialy more powerful than API v2, which is
 used until Ubiregi2 2.6.)
 
-## Five Steps to Developp Your App
+## Five Steps to Develop Your App
 
 1. Signup to ubiregi.com
 2. Register for developer account and new application

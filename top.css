@@ -1,0 +1,36 @@
+.topbar-inner h3 a{
+    padding-left: 50px;
+    background: url(/ubiregi-api/images/ubiregi_topbar_logo.png) no-repeat 20px 5px;
+}
+
+.panel{
+    min-width: 940px;  
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#4F200A), to(#99401D));
+    background-image: -webkit-linear-gradient(#4F200A, #99401D);
+    background-image: -moz-linear-gradient(#4F200A, #99401D);
+    background-image: -o-linear-gradient(top, #4F200A, #99401D);
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#4F200A), to(#99401D));
+}
+ 
+.panel .inner-panel{
+    padding-top:100px;
+    padding-bottom:20px;  
+    background:url(/ubiregi-api/images/ubiregi_panel_background.png) repeat;
+}
+ 
+.panel h1{
+    color:#FFF;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    font-size:70pt;
+    text-align:center;
+    font-family:Times;
+    line-height:100%;
+}
+ 
+.panel h2{
+    color:#FFF;
+    font-weight:lighter;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+    text-align:center;
+    margin-bottom:50px;
+}
