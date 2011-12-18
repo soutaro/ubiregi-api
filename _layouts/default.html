@@ -7,6 +7,8 @@
 {% assign resources = 'active' %}
 {% when 'errors' %}
 {% assign errors = 'active' %}
+{% when 'sync' %}
+{% assign sync = 'active' %}
 {% endcase %}
 
 <head>
@@ -27,6 +29,7 @@
       	      <li class="{{ authentication }}"><a href="/ubiregi-api/authentication.html">Authentication</a>
       	      <li class="{{ resources }}"><a href="/ubiregi-api/resources.html">Resources</a>
       	      <li class="{{ errors }}"><a href="/ubiregi-api/errors.html">Error handling</a>
+      	      <li class="{{ sync }}"><a href="/ubiregi-api/sync.html">Synchronization</a>
       	    </ul>
       	  </div>
       	</div>

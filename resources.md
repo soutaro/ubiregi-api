@@ -6,6 +6,8 @@ tab: resources
 
 # Objects
 
+Every object has `created_at` and `updated_at` fields.
+
 ## Account
 
 <pre>
@@ -21,6 +23,16 @@ tab: resources
     tables: [ $tables ],
     customer_tags: [ $customer_tags ],
     cashiers: [ $cashiers ],
+    friends: [ $friends ],
+}
+</pre>
+
+## Friend
+
+<pre>
+{
+    id: 199,
+    name: "hogehoge",
 }
 </pre>
 
@@ -40,7 +52,7 @@ tab: resources
 {
     id: 123,
     name: "Dating",
-    potision: 13,
+    potision: null,
     icon: ::base64EncodedIcon,
 }
 </pre>
@@ -52,10 +64,92 @@ tab: resources
     id: 385,
     name: "Soutaro Matsumoto",
     icon: ::base64EncodedIcon,
+    enabled: true,
 }
 </pre>
 
 ## Menu Item
+
+<pre>
+{
+    id: 271,
+    name: "Coke",
+    price: 105,
+    price_type: INTAX,
+    vat: 5,
+    position: 102,
+    category_id: 105,
+}
+</pre>
+
+price_type
+: `INTAX` | `OUTTAX` | `PERCENT` | `NOSALES`
+
+vat
+: Present if `price_type` is `INTAX` or `OUTTAX`. Percentage of VAT.
+
+position
+: Present if the item is enabled.
+
+category_id
+: Present if the item is enabled.
+
+## Category
+
+<pre>
+{
+    id: 18,
+    name: "Soft Drink",
+    position: 4,
+}
+</pre>
+
+## Customer
+
+<pre>
+{
+    id: 131,
+    fields: [ $fields ],
+    deleted: false,
+    account_id: 131,
+    guid: ::UUID-like-sequence,
+}
+</pre>
+
+## Field
+
+<pre>
+{
+    id: 111,
+    name: "customer.field.name",
+    value: "Soutaro Matsumoto",
+    deleted: false,
+}
+</pre>
+
+## CustomerNote
+
+<pre>
+{
+    id: 858,
+    guid: ::UUID-like-sequence,
+    customer_id: 10,
+    kind: "icon",
+    comment: "Hello",
+    photo: ::URL,
+    checkout_id: 109,
+}
+</pre>
+
+## Stock
+
+<pre>
+{
+    id: 133,
+    sku: "haodifsod",
+    
+}
+</pre>
 
 # Account
 
@@ -196,25 +290,21 @@ Reloading items required.
 {}
 </pre>
 
-## GET /menus/:id/tags
-
-## GET /tags
-
-## POST /tags
-
 ## GET /checkouts
 
 ## POST /checkouts
+
+## GET /checkouts/:id
+
+## POST /checkouts/:id/delete
 
 ## GET /customers
 
 ## POST /customers
 
-## GET /customers/:id/notes
+## GET /customers/notes
 
 ## POST /customers/:id/notes
-
-## GET /stocks
 
 ## GET /stocks/:id/
 
