@@ -35,9 +35,28 @@ If a user allows an app to access its data (installs the app), the app can acces
 
 # The protocol
 
-Give HTTP request header on all requests named `X-Ubiregi-API-Token` which contains users secret token, and your request will be authorized.
+Give HTTP the following two request headers on all requests.
 
-If the token is invalid one, your request will result in `401` (Unauthorized) status.
+<table>
+<tr>
+<th width="190"><code>X-Ubiregi-AUTH-Token</code></th>
+<td>
+Users secret token to identify user and installation.
+This is used for authentication.
+Both of you and users are responsible to keep it secret.
+</td>
+</tr>
+<tr>
+<th><code>X-Ubiregi-APP-Secret</code></th>
+<td>
+To identify your app.
+This can be used to block the app.
+You are responsible to keep it secret.
+</td>
+</tr>
+</table>
+
+If `X-Ubiregi-AUTH-Token` is invalid, your request will result in `401` (Unauthorized) status.
 
 Note that there are another possibility to make your request failed.
 `402` (Payment required) may be returned in the case the user's subscription got expired.

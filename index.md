@@ -40,7 +40,7 @@ update things requires a PUT request. Most methods requires a
 particular HTTP method and will return an error if you do not make your
 request with the correct one.
 
-### Ubiregi web app is build with Rails
+### Ubiregi web app is built on Rails
 
 We use Ruby on Rails 3 to develop ubiregi.com web app. We carefully
 described things non-rails-developer should mention about, but may be
