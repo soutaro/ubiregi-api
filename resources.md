@@ -22,17 +22,23 @@ They are used to limit the size of the result sets.
 <table>
 <tr>
 <th>since</th>
-<td></td>
+<td>Limits the result set to contain only updated items since the parameter.</td>
 </tr>
 <tr>
 <th>until</th>
-<td></td>
+<td>Limits the result set to reject items updated since the parameter.</td>
 </tr>
 <tr>
 <th>glb</th>
-<td></td>
+<td>Greatest lower bound of id of the result set. This is used to retrieve next batch of the collection.</td>
 </tr>
 </table>
+
+The result set can be described as follows:
+
+> { item | since ≤ item.updated_at ⋀ item.updated_at < until ⋀ glb < item.id }
+
+The items are sorted by their `id`s.
 
 The result will be on following pattern.
 
@@ -48,23 +54,23 @@ timestamp
 : The server time. This is sent for the case client local clock is incorrect.
 
 next-url
-: The URL to retrieve next result set. This will be `null` in the case there are no more results.
+: The URL to retrieve next result set. This will be unspecified in the case there are no more results.
 
 $rows
 : Array of objects. The name will be different, `items` for MenuItems, `categories` for Categories, and `checkouts` for Checkouts.
 
 ## Ubiregi POST Convention
 
-POST action to collection create or update more than one items.
-This helps to make updating 50,000 menu items faster.
+POST actions to collection create or update more than one items.
+This helps to make updating many items faster.
 
 The request will be like the following:
 
 <pre>
 [
-    $object,
-    $object,
-    $object,
+    { name: "new object", ... },
+    { name: "another new object", ...},
+    { id: 123, name: "object to be updated" },
 ]
 </pre>
 
