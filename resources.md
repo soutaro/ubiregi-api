@@ -12,7 +12,7 @@ Most resource collections provides the following set of APIs.
 
 * Retrieving the collection (Index)
 * Creating or updating items (POST)
-* [Optional] Retrieving one item (GET)
+* **Optional**: Retrieving one item (GET)
 
 ## Standard Index Parameters
 
@@ -44,22 +44,41 @@ The result will be on following pattern.
 
 <pre>
 {
-    timestamp: $Timestamp,
-    next-url: $URL,
+    "timestamp": $Timestamp,
+    "next-url": $URL,
+    "last-updated-at": $Timestamp,
     $rows: [ $objects ],
 }
 </pre>
 
 timestamp
-: The server time. This is sent for the case client local clock is incorrect.
+: The server time. This is sent for the case client local clock is incorrect. If `until` parameter is specified, `timestamp` will be the requested `until`.
 
-next-url
+next-url (optional)
 : The URL to retrieve next result set. This will be unspecified in the case there are no more results.
+
+last-updated-at
+: The timestamp on the time, there were last update of an object which belongs to the resource you requested.
 
 $rows
 : Array of objects. The name will be different, `items` for MenuItems, `categories` for Categories, and `checkouts` for Checkouts.
 
-## Ubiregi POST Convention
+### Fetching Whole Collection
+
+There are limitation on the number of objects contained in one request; this is the reason we accept `glb` parameter.
+You might have a question that how to get the whole collection?
+A set of requests to fetch collections can be interleaved by requests which updates objects which is contained in the collection.
+In that case, the `updated_at` field will be updated and because of the `until` parameter included in the fetch request, the updated objects can not be fetched.
+
+`last-updated-at` field is to handle such case.
+If there are no `next-url` field sent, which means there are no more object for the parameters you specified, check if the `timestamp` field is newer than `last-updated-at`.
+
+1. Send a request without `until` and `glb` parameters.
+2. Check if the response contains `next-url` field.
+3. If contains, fetch the `next-url` and go step 2 again.
+4. If not caintains, send a request again but with `since` = `timestamp`, and got step 2 again.
+
+## POST Convention
 
 POST actions to collection create or update more than one items.
 This helps to make updating many items faster.
@@ -68,9 +87,9 @@ The request will be like the following:
 
 <pre>
 [
-    { name: "new object", ... },
-    { name: "another new object", ...},
-    { id: 123, name: "object to be updated" },
+    { "name": "new object", ... },
+    { "name": "another new object", ...},
+    { "id": 123, "name": "object to be updated" },
 ]
 </pre>
 
@@ -584,5 +603,4 @@ Updating checkout only accepts `deleted` attribute. All other attributes except 
 ## GET /stocks/events
 
 ## POST /stocks/events
-
 
