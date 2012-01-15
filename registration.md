@@ -34,6 +34,7 @@ Name
 ID
 : Unique identifier for your application.
   We recommend to give name in Java package name manner; inverse your domain, like `com.ubiregi.sampleapp`.
+  ID prefixed with `com.ubiregi` will be rejected.
 
 Description
 : Short description of your application.
