@@ -381,15 +381,15 @@ Will be used to allow access to friend's checkout.
 }
 </pre>
 
-# Account
+# /account
 
-## GET /account
+The user's account. Readonly.
 
-### Summary
+## Actions
 
-Retrieves information about the account.
+### GET /account
 
-### Response
+#### Response
 
 An `Account` object.
 <pre>
@@ -403,204 +403,105 @@ account
 : The account.
 
 timestamp
-: The time in server. This value should be used for `since` parameter in the next access. (Local computer time may be incorrect.)
+: The time in ubiregi.com server.
 
-### Parameters
-
-<table>
-<tr>
-<th>since (optional)</th>
-<td>
-    Timestamp used to make tables, customer_tags, payment_types, and cashiers fields contain only updated ones.
-    Encouraged to include this parameter if the access is not the first one nor explicitly want to reload everything.
-</td>
-</tr>
-</table>
-
-### Note
+## Note
 
 Accesses to `/account` do not expire.
 Even if your account is expired, it returns your account's information.
 However menus, stocks, tables, customer_tags, and cashiers will be empty in that case.
 
-# Cashier
+# /cashiers
 
-`/cashiers` resources will be provided.
+Collection of cashiers defined in the user's account.
 
-# Customer Tag
+## Actions
 
-`/customer_tags` resources will be provided.
+* GET on /cashiers
+* POST on /cashiers
 
-# Payment Type
+#### Response
 
-`/payment_types` resources will be provided.
+Collection of `cashier` objects.
 
-# Tables
+# /customer_tags
 
-`/tables` resources will be provided.
+Collection of customer tags defined in the account.
 
-# Menu
+## Actions
 
-## GET /menus/:id/items
+* GET on /customer_tags
+* POST on /customer_tags
 
-### Summary
+# /payment_types
 
-Description
-:   Retrieves list of menu items.
+Collection of payment methods defined in the account.
 
-URL Structure
-:   `https://ubiregi.com/api/3/menus/:id/items`
+## Actions
 
-### Parameters
+* GET on /payment_types
+* POST on /payment_types
 
-The parameters should be given as URL parameters.
+# /tables
 
-    /menus/0/items?since=2011-12-01T12:34:11Z&until=2011-12-02T12:11:15Z&glb=1023
+Collection of tables defined in the account.
 
-<table>
-	<tr>
-		<th>since (optional)</th>
-		<td>Time in ISO 8601 format. The timezone should be UTC. Inclusive.</td>
-	</tr>
-	<tr>
-		<th>until (optional)</th>
-		<td>Time in ISO 8601 format. the timezone must be UTC. Exclusive.</td>
-	</tr>
-	<tr>
-		<th>glb (optional)</th>
-		<td>Greates lower bound of id of menu item.</td>
-	</tr>
-</table>
+Tables objects are to be obsolete, and there are no update operations for `/tables`.
 
-### Sample Response
+## Actions
 
-<pre>
-{
-  timestamp: "2011-11-23T00:01:11Z",
-  next-url: "https://ubiregi.com/api/3/menus/30/items?since=2011-12-01T12:34:11Z&amp;until=2011-11-23T00:01:11Z&amp;glb=123",
-  items: [
-    _item_,
-    _item_,
-    ...
-  ]
-}
-</pre>
+* GET on /tables for indexing
 
-### Return value definitions
+# /menus/:id/items
 
-timestamp
-:   Time the request is processed on server.
-    This would be used for next time to send the request.
+Collection of items in menu specified by `:id`.
 
-next_url (optional)
-:   URLs to send GET request to complete the refresh.
-	null in the case there are no more item to refresh.
+## Actions
 
-items
-:   Array of updated items since `since` parameter.
+* GET on /menus/:id/items
+* POST on /menus/:id/items
 
-## POST /menus/:id/items
+# /menus/:id/categories
 
-### Summary
+Collection of categories in menu specified by `id`.
 
-Description
-:   Add new menu item.
+## Actions
 
-URL Structure
-:   `https://ubiregi.com/api/3/menus/:id/items`
+* GET on /menus/:id/categories
+* POST on /menus/:id/categories
+* POST on /menus/categories/:id/delete (for deletion)
 
-#### Remarks
+# /checkouts
 
-A creation and update of new items is transactional, i.e. all items will be created successfully, or all items will be rejected.
+Collection of checkouts of the account.
 
-## GET /menus/:id/categories
+* GET on /checkouts
+* POST on /checkouts
+* GET on /checkouts/:id (for fetching other account's checkout)
 
-## POST /menus/:id/categories
+# /customers
 
-## POST /menus/categories/:id/delete
+Collection of customers available for the account.
 
-### Summary
+## Actions
 
-Description
-:   Delete the category.
+* GET on /customers
+* POST on /customers
 
-URL Structure
-:   `https://ubiregi.com/api/3/menus/categories/:id/delete`
+# /customers/notes
 
-### Parameters
+Collection of customer notes associated with `/customers`.
 
-No parameter can be given.
+## Actions
 
-### Remarks
+* GET on /customers/notes
+* POST on /customers/:id/notes
 
-All menu items associated with the category will be updated.
-Reloading items required.
+# /stocks/events
 
-### Sample Response
+Collection of stocking events of the account.
 
-<pre>
-{}
-</pre>
+## Actions
 
-# Checkout
-
-## GET /checkouts
-
-### Summary
-
-Description
-: Retrieves checkouts of current account.
-
-URL Structure
-: https://ubiregi.com/api/3/checkouts
-
-### Parameters
-
-Standard index parameters are accepted.
-
-### Remarks
-
-Posted checkouts will be included in the response.
-Your client may need to take care of that checkouts.
-
-### Sample Response
-
-<pre>
-{
-    timestamp: "2011-11-12T09-11-13Z",
-    next-url: "....",
-    checkouts: [ $checkouts ],
-}
-</pre>
-
-## POST /checkouts
-
-### Summary
-
-Description
-: Create or update checkouts.
-
-### Remarks
-
-Follows Ubiregi POST conventions.
-
-Updating checkout only accepts `deleted` attribute. All other attributes except `id` will be ignored.
-
-## GET /checkouts/:id
-
-# Customer
-
-## GET /customers
-
-## POST /customers
-
-## GET /customers/notes
-
-## POST /customers/:id/notes
-
-# Stock
-
-## GET /stocks/events
-
-## POST /stocks/events
-
+* GET on /stocks/events
+* POST on /stocks/events
