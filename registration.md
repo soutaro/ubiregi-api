@@ -11,6 +11,8 @@ The registration form will open soon.
 
 ## Account
 
+> There are no developer registration yet (It is Beta!)
+
 Developer account can be used for testing developer's applications.
 
 Accounts marked as developers' do not expire.
@@ -27,29 +29,32 @@ And, if there are no enough explaination, we may stop the account.
 ## Application
 
 To access Ubiregi API using your application, you should register your application.
+Visit [Ubiregi developer dashboard](https://ubiregi.com/developer) and register your apps.
+(You need an Ubiregi account. It is ok to use a free trial account.)
+
+<img src="images/app_registration.png" width="100%">
+
+The left half of the page is registration form, and the right half is your apps.
+There are no way to edit your existing apps yet.
 
 Name
+: Unique identifier for your application.
+  We recommend to give name by inverting your full qualified domain name, like `com.ubiregi.sampleapp`.
+  Name prefixed with `com.ubiregi` will be rejected.
+
+Display Name
 : The name of your application to be displayed for your user.
 
-ID
-: Unique identifier for your application.
-  We recommend to give name in Java package name manner; inverse your domain, like `com.ubiregi.sampleapp`.
-  ID prefixed with `com.ubiregi` will be rejected.
-
 Description
-: Short description of your application.
+: Short description of your application. Make sure this is required.
 
 URL (Optional)
 : The URL of your application. 
 
-Note (Optional)
-: Any notes on your application.
-
-After our review process, your application will be registered on ubiregi.com server.
-Registered applications have its own URL to allow your users to install the application, and a secret to identify API access from the app.
+Once you finished app registration, the app will have the following two properties.
 
 Install URL
-: `https://ubiregi.com/apps/3948yasdkgh`
+: `https://ubiregi.com/apps/aaaa-bbbb-cccc-dddd`
 
 Secret
 : Random and unique 40 chars sequence

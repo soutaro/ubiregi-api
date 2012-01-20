@@ -22,12 +22,85 @@ except authentication is the same with what the Ubiregi app is doing.
 (In fact, the API v3 is essentialy more powerful than API v2, which is
 used until Ubiregi2 2.6.)
 
+## Implementation Status
+
+<table class="condensed-table">
+<thead>
+<tr>
+<th>Resource(s)</th>
+<th>Implementation</th>
+<th>Documentation</th>
+</tr>
+</thead>
+<tr>
+<th>/account</th>
+<td><b>Finished, excepts errors</b></td>
+<td>Not completed yet</td>
+</tr>
+<tr>
+<th>/cashiers</th>
+<td>Not yet (index included in /account)</td>
+<td>Not completed yet</td>
+</tr>
+<tr>
+<th>/customer_tags</th>
+<td>Not yet (index included in /account)</td>
+<td>Not completed yet</td>
+</tr>
+<tr>
+<th>/payment_types</th>
+<td>Not yet (index included in /account)</td>
+<td>Not completed yet</td>
+</tr>
+<tr>
+<th>/tables</th>
+<td>Not yet (index included in /account)</td>
+<td>Not completed yet</td>
+</tr>
+<tr>
+<th>/menus/:id/items</th>
+<td><b>Readonly</b></td>
+<td>-</td>
+</tr>
+<tr>
+<th>/menus/:id/categories</th>
+<td><b>Readonly</b></td>
+<td>-</td>
+</tr>
+<tr>
+<th>/checkouts</th>
+<td><b>Finished, excepts errors</b></td>
+<td>Not completed yet</td>
+</tr>
+<tr>
+<th>/customers</th>
+<td>Not yet</td>
+<td>Not yet</td>
+</tr>
+<tr>
+<th>/customers/notes</th>
+<td>Not yet</td>
+<td>Not yet</td>
+</tr>
+<tr>
+<th>/stocks/events</th>
+<td>Not yet</td>
+<td>Not yet</td>
+</tr>
+</table>
+
+## Examples
+
+[ubiregi-api-client-example.rb](ubiregi-api-client-example.rb)
+: A Ruby script which contains simple wrapper class of Ubiregi API, and simple app.
+Authentication, fetching account information and menus, posting a checkout, and fetching checkouts work.
+
 ## Five Steps to Develop Your App
 
 1. Signup to ubiregi.com
 2. Register for developer account and new application
 3. Install the application on your account
-4. Download the sample app
+4. Download the [sample app](ubiregi-api-client-example.rb)
 5. Change the sample app, and it is your app now!
 
 ## General Notes <small>Things every developer should know</small>
