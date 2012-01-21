@@ -1,6 +1,6 @@
 .topbar-inner h3 a{
     padding-left: 50px;
-    background: url(/ubiregi-api/images/ubiregi_topbar_logo.png) no-repeat 20px 5px;
+    background: url(images/ubiregi_topbar_logo.png) no-repeat 20px 5px;
 }
 
 .panel{
@@ -15,7 +15,7 @@
 .panel .inner-panel{
     padding-top:100px;
     padding-bottom:20px;  
-    background:url(/ubiregi-api/images/ubiregi_panel_background.png) repeat;
+    background:url(images/ubiregi_panel_background.png) repeat;
 }
  
 .panel h1{

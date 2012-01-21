@@ -1,0 +1,75 @@
+%h1 Authentication
+
+%p
+  Currently we provide very simple token based authentication mechanism.
+  Every installations of client have their own secret tokens which can be used for API access.
+
+%h2 Installation
+
+%p
+  A user will <it>install</it> apps to ubiregi.com.
+  Installations generate new secret tokens.
+  The user have to notify an app its secret token, and the app will be authenticated with the token.
+
+%ul
+  %li User need to <it>install</it> an app to use it
+  %li Each installation have their own secret token
+  %li
+    There are no automated way to notify app its secret token
+    %br
+    (We are planning to provide standardized mechanisms such as OAuth.)
+
+%p
+  User may <it>uninstall</it> an app.
+  Un-installation of an app will invalidate the secret token.
+  After your app got uninstalled by the user, your app can not access the user's data.
+
+%p
+  The secret token is installation specific.
+  If your user uninstall your application, the token will be invalidated.
+  After your user re-install your application, new token will be generated.
+
+%p
+  To install your app, visit your app's install URL.
+
+<img src="images/app_installation.png" width="100%">
+
+%p
+  You can install/uninstall the app to your account.
+  Visit #{ link_to "https://ubiregi.com/installs" } to list all applications you have installed.
+
+%h2 Authorization
+
+%p
+  There is only one authorizatioin levels, <strong>everything</strong>.
+  If a user allows an app to access its data (installs the app), the app can access everything.
+
+%h1 The protocol
+
+%p
+  Give HTTP the following two request headers on all requests.
+
+%table
+  %tr
+    %th{ :width => "190" } <code>X-Ubiregi-Auth-Token</code>
+    %td
+      Users secret token to identify user and installation.
+      This is used for authentication.
+      Both of you and users are responsible to keep it secret.
+  %tr
+    %th <code>X-Ubiregi-App-Secret</code>
+    %td
+      To identify your app.
+      This can be used to block the app.
+      You are responsible to keep it secret.
+
+%p
+  If <code>X-Ubiregi-Auth-Token</code> is invalid, your request will result in <code>401</code> (Unauthorized) status.
+
+%p
+  Note that there are another possibility to make your request failed.
+  <code>402</code> (Payment required) may be returned in the case the user's subscription got expired.
+  After the user renew the subscription, the status will be recovered.
+
+%p
+  Check the #{ link_to 'example app', 'ubiregi-api-client-example.rb' } to see how the authentication is exactly.
