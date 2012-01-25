@@ -497,13 +497,15 @@
           <p>
             The user's account. Readonly.
           </p>
-          <h3>GET /account</h3>
+          <h3>GET on /account</h3>
           <p>Download the information of current account.</p>
           <div class='row'>
             <div class='span8'>
+              <h4>Response</h4>
               <pre>{&#x000A;  &quot;account&quot;: $account,&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:34Z&quot;,&#x000A;}</pre>
             </div>
             <div class='span8'>
+              <h4>Fields</h4>
               <dl>
                 <dt>account</dt>
                 <dd>The account.</dd>
@@ -544,8 +546,68 @@
           <h3>POST on /menus/categories/:id/delete (for deletion)</h3>
           <h2>/checkouts</h2>
           <p>Collection of checkouts of the account.</p>
+          <p>GET access of singular checkout (GET on <code>/checkouts/:id</code>) allows the client to access friends' checkout</p>
           <h3>GET on /checkouts</h3>
+          <h4>Response</h4>
+          <div class='row'>
+            <div class='span8'>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:34Z&quot;,&#x000A;  &quot;next-url&quot;: $URL,&#x000A;  &quot;last_updated_at&quot;: &quot;2011-12-31T00:00:31Z&quot;,&#x000A;  &quot;checkouts&quot;: $checkouts,&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <p>The response follows the convention of index action.</p>
+              <h5>Fields</h5>
+              <dl>
+                <dt>checkouts</dt>
+                <dd>Checkouts.</dd>
+              </dl>
+            </div>
+          </div>
           <h3>POST on /checkouts</h3>
+          <h4>Request</h4>
+          <div class='row'>
+            <div class='span8'>
+              <pre>[&#x000A;  {&#x000A;    &quot;items_attributes&quot;: [&#x000A;      {&#x000A;        &quot;menu_item_id&quot;: 123,&#x000A;        &quot;count&quot;: 1,&#x000A;        &quot;sales&quot;: &quot;100&quot;,&#x000A;        &quot;tax&quot;: &quot;5&quot;,&#x000A;        &quot;discount_sales&quot;: &quot;20&quot;,&#x000A;        &quot;discount_tax&quot;: &quot;1&quot;&#x000A;      }&#x000A;    ],&#x000A;    'change': &quot;26&quot;,&#x000A;    'guid': $UUID-like-sequence,&#x000A;    'paid_at': $Time,&#x000A;    'payments_attributes': [&#x000A;      { &quot;payment_type_id&quot;: 101, &quot;amount&quot;: &quot;100&quot; }&#x000A;    ],&#x000A;    'customers_count': 1,&#x000A;    'customer_taggings_attributes': [&#x000A;      { &quot;customer_tag_id&quot;: 20 }&#x000A;    ],&#x000A;    'cashier_id': 948,&#x000A;    'deleted': false,&#x000A;  },&#x000A;  {&#x000A;    &quot;id&quot;: 4739,&#x000A;    &quot;deleted&quot;: true,&#x000A;  }&#x000A;]</pre>
+            </div>
+            <div class='span8'>
+              <p>Request is to create/update checkouts.
+              The dictionaries of attributes of checkouts will be applied to the database.</p>
+              <p>If the dictionary does not contains <code>id</code> field, it creates new checkout.
+              If the dictionary contains <code>id</code> field, it updates the checkout specified with the ID.</p>
+              <p>Only updating <code>deleted</code> field to <code>true</code> is accepted update.
+              Other fields will be ignored.
+              Other update to <code>deleted</code> field, setting to <code>false</code> or other, will result an error.</p>
+              <h5>Fields</h5>
+              <dl>
+                <dt>items_attributes</dt>
+                <dd>
+                  The attributes of checkout items.
+                  It is same with in the definition of objects, but without `id`.
+                </dd>
+                <dt>payments_attributes</dt>
+                <dd>
+                  The attributes of checkout payments, but without `id`.
+                </dd>
+                <dt>customer_taggings_attributes</dt>
+                <dd>
+                  Hashes only contains <code>customer_tag_id</code> fields, which specifies ID of the tags given to the checkout.
+                </dd>
+                <dt>id</dt>
+                <dd>
+                  If you want to update an existing checkout, specify ID of the checkout.
+                </dd>
+              </dl>
+            </div>
+          </div>
+          <h4>Response</h4>
+          <div class='row'>
+            <div class='span8'>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:34Z&quot;,&#x000A;  &quot;next-url&quot;: $URL,&#x000A;  &quot;last_updated_at&quot;: &quot;2011-12-31T00:00:31Z&quot;,&#x000A;  &quot;checkouts&quot;: $checkouts,&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <p>The response is same with index action, but containes only created/updated checkouts.
+              The <code>next-url</code> and <code>timestamp</code> fields should be ignored.</p>
+            </div>
+          </div>
           <h3>GET on /checkouts/:id (for fetching other account's checkout)</h3>
           <h2>/customers</h2>
           <p>Collection of customers available for the account.</p>

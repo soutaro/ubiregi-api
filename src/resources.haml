@@ -633,13 +633,14 @@
     %p
       The user's account. Readonly.
 
-    %h3 GET /account
+    %h3 GET on /account
 
     :markdown
       Download the information of current account.
     
     .row
       .span8
+        %h4 Response
         %pre
           = preserve do
             :escaped
@@ -648,6 +649,7 @@
                 "timestamp": "2011-11-02T09:11:34Z",
               }
       .span8
+        %h4 Fields
         %dl
           %dt account
           %dd The account.
@@ -716,8 +718,119 @@
     :markdown
       Collection of checkouts of the account.
 
+    :markdown
+      GET access of singular checkout (GET on `/checkouts/:id`) allows the client to access friends' checkout
+
     %h3 GET on /checkouts
+    
+    %h4 Response
+    .row
+      .span8
+        %pre
+          = preserve do
+            :escaped
+              {
+                "timestamp": "2011-11-02T09:11:34Z",
+                "next-url": $URL,
+                "last_updated_at": "2011-12-31T00:00:31Z",
+                "checkouts": $checkouts,
+              }
+      .span8
+        :markdown
+          The response follows the convention of index action.
+
+        %h5 Fields
+        
+        %dl
+          %dt checkouts
+          %dd Checkouts.
+    
     %h3 POST on /checkouts
+
+    %h4 Request
+    .row
+      .span8
+        %pre
+          = preserve do
+            :escaped
+              [
+                {
+                  "items_attributes": [
+                    {
+                      "menu_item_id": 123,
+                      "count": 1,
+                      "sales": "100",
+                      "tax": "5",
+                      "discount_sales": "20",
+                      "discount_tax": "1"
+                    }
+                  ],
+                  'change': "26",
+                  'guid': $UUID-like-sequence,
+                  'paid_at': $Time,
+                  'payments_attributes': [
+                    { "payment_type_id": 101, "amount": "100" }
+                  ],
+                  'customers_count': 1,
+                  'customer_taggings_attributes': [
+                    { "customer_tag_id": 20 }
+                  ],
+                  'cashier_id': 948,
+                  'deleted': false,
+                },
+                {
+                  "id": 4739,
+                  "deleted": true,
+                }
+              ]
+      .span8
+        :markdown
+          Request is to create/update checkouts.
+          The dictionaries of attributes of checkouts will be applied to the database.
+
+        :markdown
+          If the dictionary does not contains `id` field, it creates new checkout.
+          If the dictionary contains `id` field, it updates the checkout specified with the ID.
+          
+        :markdown
+          Only updating `deleted` field to `true` is accepted update.
+          Other fields will be ignored.
+          Other update to `deleted` field, setting to `false` or other, will result an error.
+
+        %h5 Fields
+        
+        %dl
+          %dt items_attributes
+          %dd
+            The attributes of checkout items.
+            It is same with in the definition of objects, but without `id`.
+          %dt payments_attributes
+          %dd
+            The attributes of checkout payments, but without `id`.
+          %dt customer_taggings_attributes
+          %dd
+            Hashes only contains <code>customer_tag_id</code> fields, which specifies ID of the tags given to the checkout.
+          %dt id
+          %dd
+            If you want to update an existing checkout, specify ID of the checkout.
+    %h4 Response
+    .row
+      .span8
+        %pre
+          = preserve do
+            :escaped
+        
+              {
+                "timestamp": "2011-11-02T09:11:34Z",
+                "next-url": $URL,
+                "last_updated_at": "2011-12-31T00:00:31Z",
+                "checkouts": $checkouts,
+              }
+      .span8
+        :markdown
+          The response is same with index action, but containes only created/updated checkouts.
+          The `next-url` and `timestamp` fields should be ignored.
+        
     %h3 GET on /checkouts/:id (for fetching other account's checkout)
 
     %h2 /customers
