@@ -628,15 +628,17 @@
       The price is culculated as follows: `sales` + `tax` - (`discount_sales` + `discount_tax`).
 
   .tab-pane#resources
-    %h2 /account
-
+    %h2 /accounts
+    
     %p
-      The user's account. Readonly.
-
-    %h3 GET on /account
-
+      User accounts. Readonly.
+    
+    %h3 GET on /accounts/<em>:id</em>, /accounts/current
+    
     :markdown
       Download the information of current account.
+      
+      If <em>:id</em> is <code>current</code>, the client's authenticated account will be in the response.
     
     .row
       .span8
@@ -659,42 +661,46 @@
     %h3 Note
 
     :markdown
-      Accesses to `/account` do not expire.
+      Accesses to /accounts/ do not expire.
       Even if your account is expired, it returns your account's information.
       However menus, stocks, tables, customer_tags, and cashiers will be empty in that case.
-
-    %h2 /cashiers
+      
+      It is allowed to access friend's account.
+      If you access your account's parents or children account, you will receive the information of the account.
+      In other case, your request will result in 40x error.
+    
+    %h2 /accounts/:id/cashiers
     
     :markdown
       Collection of cashiers defined in the user's account.
+    
+    %h3 GET on /accounts/:id/cashiers
+    %h3 POST on /accounts/:id/cashiers
 
-    %h3 GET on /cashiers
-    %h3 POST on /cashiers
-
-    %h2 /customer_tags
+    %h2 /accounts/:id/customer_tags
     
     :markdown
       Collection of customer tags defined in the account.
 
-    %h3 GET on /customer_tags
-    %h3 POST on /customer_tags
+    %h3 GET on /accounts/:id/customer_tags
+    %h3 POST on /accounts/:id/customer_tags
 
-    %h2 /payment_types
+    %h2 /accounts/:id/payment_types
 
     :markdown
       Collection of payment methods defined in the account.
 
-    %h3 GET on /payment_types
-    %h3 POST on /payment_types
+    %h3 GET on /accounts/:id/payment_types
+    %h3 POST on /accounts/:id/payment_types
     
-    %h2 /tables
+    %h2 /accounts/:id/tables
     
     :markdown
       Collection of tables defined in the account.
 
       Tables objects are to be obsolete, and there are no update operations for `/tables`.
 
-    %h3 GET on /tables for indexing
+    %h3 GET on /accounts/:id/tables for indexing
 
     %h2 /menus/:id/items
     
@@ -713,15 +719,12 @@
     %h3 POST on /menus/:id/categories
     %h3 POST on /menus/categories/:id/delete (for deletion)
 
-    %h2 /checkouts
+    %h2 /accounts/:id/checkouts
     
     :markdown
       Collection of checkouts of the account.
 
-    :markdown
-      GET access of singular checkout (GET on `/checkouts/:id`) allows the client to access friends' checkout
-
-    %h3 GET on /checkouts
+    %h3 GET on /accounts/:id/checkouts
     
     %h4 Response
     .row
@@ -745,7 +748,7 @@
           %dt checkouts
           %dd Checkouts.
     
-    %h3 POST on /checkouts
+    %h3 POST on /accounts/:id/checkouts
 
     %h4 Request
     .row
@@ -831,7 +834,13 @@
           The response is same with index action, but containes only created/updated checkouts.
           The `next-url` and `timestamp` fields should be ignored.
         
-    %h3 GET on /checkouts/:id (for fetching other account's checkout)
+    %h2 /checkouts/:id
+
+    :markdown
+      This action is to fetch friend's single checkout.
+      If the owner of the checkout is not your friend, your access will result in 400 error.
+    
+    %h3 GET on /checkouts/:id
 
     %h2 /customers
 
@@ -849,13 +858,13 @@
     %h3 GET on /customers/notes
     %h3 POST on /customers/:id/notes
 
-    %h2 /stocks/events
+    %h2 /accounts/:id//stocks/events
 
     :markdown
       Collection of stocking events of the account.
 
-    %h3 GET on /stocks/events
-    %h3 POST on /stocks/events
+    %h3 GET on /accounts/:id/stocks/events
+    %h3 POST on /accounts/:id/stocks/events
 
 :javascript
   $('.tabs').tabs()
