@@ -30,23 +30,25 @@
       %th Documentation
   %tbody
     %tr
-      %th /accounts/:id
-      %td <b>Readonly</b>
+      %th /accounts/<em>:account_id</em>
+      %td Finished
+      %td Finished
     %tr
-      %th /accounts/:id/cashiers
-      %td <b>Write/Update</b>
+      %th /accounts/<em>:account_id</em>/cashiers
+      %td Started
+      %td Started
     %tr
-      %th /customer_tags
-      %td Not yet (index included in /accounts)
-      %td Not completed yet
+      %th /accounts/<em>:account_id</em>/customer_tags
+      %td Not yet
+      %td Started
     %tr
-      %th /payment_types
-      %td Not yet (index included in /accounts)
-      %td Not completed yet
+      %th /accounts/<em>:account_id</em>/payment_types
+      %td Not yet
+      %td Started
     %tr
-      %th /tables
-      %td Not yet (index included in /accounts)
-      %td Not completed yet
+      %th /accounts/<em>:account_id</em>/tables
+      %td Not yet
+      %td Started
     %tr
       %th /menus/:id/items
       %td <b>Readonly</b>
@@ -56,9 +58,13 @@
       %td <b>Readonly</b>
       %td -
     %tr
-      %th /checkouts
-      %td <b>Finished, excepts errors</b>
-      %td Not completed yet
+      %th /accounts/<em>:account_id</em>/checkouts
+      %td Not yet
+      %td Not yet
+    %tr
+      %th /checkouts/<em>:checkout_id</em>
+      %td Not yet
+      %td Not yet
     %tr
       %th /customers
       %td Not yet
@@ -68,7 +74,7 @@
       %td Not yet
       %td Not yet
     %tr
-      %th /stocks/events
+      %th /accounts/<em>:account_id</em>/stocks/events
       %td Not yet
       %td Not yet
 

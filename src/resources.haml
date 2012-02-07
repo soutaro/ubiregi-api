@@ -633,12 +633,12 @@
     %p
       User accounts. Readonly.
     
-    %h3 GET on /accounts/<em>:id</em>, /accounts/current
+    %h3 GET on /accounts/<em>:account_id</em>, /accounts/current
     
     :markdown
       Download the information of current account.
       
-      If <em>:id</em> is <code>current</code>, the client's authenticated account will be in the response.
+      If <em>:account_id</em> is <code>current</code>, the client's authenticated account will be in the response.
     
     .row
       .span8
@@ -663,28 +663,25 @@
     :markdown
       Accesses to /accounts/ do not expire.
       
-      Even if your account is expired, it returns your account's information.
-      However menus, stocks, tables, customer_tags, and cashiers will be empty in that case.
+      Even if your account is expired, it returns the account's information.
       
-      It is allowed to access friend's account.
-      If you access your account's parents or children account, you will receive the information of the account.
-      In other case, your request will result in 40x error.
+      It is allowed to access child accounts.
+      If you access your child accounts, you will receive the information of the account.
+      In other case, your request will result in 404 (not found) error.
     
-    %h2 /accounts/:id/cashiers
+    %h2 /accounts/<em>:account_id</em>/cashiers
     
     :markdown
       Collection of cashiers defined in the user's account.
     
-    %h3 GET on /accounts/:id/cashiers
-    %h3 POST on /accounts/:id/cashiers
+    %h3 POST on /accounts/<em>:account_id</em>/cashiers
 
-    %h2 /accounts/:id/customer_tags
+    %h2 /accounts/<em>:account_id</em>/customer_tags
     
     :markdown
       Collection of customer tags defined in the account.
 
-    %h3 GET on /accounts/:id/customer_tags
-    %h3 POST on /accounts/:id/customer_tags
+    %h3 POST on /accounts/<em>:account_id</em>/customer_tags
 
     %h2 /accounts/:id/payment_types
 
@@ -817,6 +814,7 @@
           %dt id
           %dd
             If you want to update an existing checkout, specify ID of the checkout.
+
     %h4 Response
     .row
       .span8
@@ -859,7 +857,7 @@
     %h3 GET on /customers/notes
     %h3 POST on /customers/:id/notes
 
-    %h2 /accounts/:id//stocks/events
+    %h2 /accounts/:id/stocks/events
 
     :markdown
       Collection of stocking events of the account.

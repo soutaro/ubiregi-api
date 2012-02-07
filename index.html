@@ -69,27 +69,29 @@
         </thead>
         <tbody>
           <tr>
-            <th>/accounts/:id</th>
-            <td><b>Readonly</b></td>
+            <th>/accounts/<em>:account_id</em></th>
+            <td>Finished</td>
+            <td>Finished</td>
           </tr>
           <tr>
-            <th>/accounts/:id/cashiers</th>
-            <td><b>Write/Update</b></td>
+            <th>/accounts/<em>:account_id</em>/cashiers</th>
+            <td>Started</td>
+            <td>Started</td>
           </tr>
           <tr>
-            <th>/customer_tags</th>
-            <td>Not yet (index included in /accounts)</td>
-            <td>Not completed yet</td>
+            <th>/accounts/<em>:account_id</em>/customer_tags</th>
+            <td>Not yet</td>
+            <td>Started</td>
           </tr>
           <tr>
-            <th>/payment_types</th>
-            <td>Not yet (index included in /accounts)</td>
-            <td>Not completed yet</td>
+            <th>/accounts/<em>:account_id</em>/payment_types</th>
+            <td>Not yet</td>
+            <td>Started</td>
           </tr>
           <tr>
-            <th>/tables</th>
-            <td>Not yet (index included in /accounts)</td>
-            <td>Not completed yet</td>
+            <th>/accounts/<em>:account_id</em>/tables</th>
+            <td>Not yet</td>
+            <td>Started</td>
           </tr>
           <tr>
             <th>/menus/:id/items</th>
@@ -102,9 +104,14 @@
             <td>-</td>
           </tr>
           <tr>
-            <th>/checkouts</th>
-            <td><b>Finished, excepts errors</b></td>
-            <td>Not completed yet</td>
+            <th>/accounts/<em>:account_id</em>/checkouts</th>
+            <td>Not yet</td>
+            <td>Not yet</td>
+          </tr>
+          <tr>
+            <th>/checkouts/<em>:checkout_id</em></th>
+            <td>Not yet</td>
+            <td>Not yet</td>
           </tr>
           <tr>
             <th>/customers</th>
@@ -117,7 +124,7 @@
             <td>Not yet</td>
           </tr>
           <tr>
-            <th>/stocks/events</th>
+            <th>/accounts/<em>:account_id</em>/stocks/events</th>
             <td>Not yet</td>
             <td>Not yet</td>
           </tr>

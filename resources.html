@@ -497,10 +497,10 @@
           <p>
             User accounts. Readonly.
           </p>
-          <h3>GET on /accounts/<em>:id</em>, /accounts/current</h3>
+          <h3>GET on /accounts/<em>:account_id</em>, /accounts/current</h3>
           <p>Download the information of current account.</p>
           
-          <p>If <em>:id</em> is <code>current</code>, the client's authenticated account will be in the response.</p>
+          <p>If <em>:account_id</em> is <code>current</code>, the client's authenticated account will be in the response.</p>
           <div class='row'>
             <div class='span8'>
               <h4>Response</h4>
@@ -519,20 +519,17 @@
           <h3>Note</h3>
           <p>Accesses to /accounts/ do not expire.</p>
           
-          <p>Even if your account is expired, it returns your account's information.
-          However menus, stocks, tables, customer_tags, and cashiers will be empty in that case.</p>
+          <p>Even if your account is expired, it returns the account's information.</p>
           
-          <p>It is allowed to access friend's account.
-          If you access your account's parents or children account, you will receive the information of the account.
-          In other case, your request will result in 40x error.</p>
-          <h2>/accounts/:id/cashiers</h2>
+          <p>It is allowed to access child accounts.
+          If you access your child accounts, you will receive the information of the account.
+          In other case, your request will result in 404 (not found) error.</p>
+          <h2>/accounts/<em>:account_id</em>/cashiers</h2>
           <p>Collection of cashiers defined in the user's account.</p>
-          <h3>GET on /accounts/:id/cashiers</h3>
-          <h3>POST on /accounts/:id/cashiers</h3>
-          <h2>/accounts/:id/customer_tags</h2>
+          <h3>POST on /accounts/<em>:account_id</em>/cashiers</h3>
+          <h2>/accounts/<em>:account_id</em>/customer_tags</h2>
           <p>Collection of customer tags defined in the account.</p>
-          <h3>GET on /accounts/:id/customer_tags</h3>
-          <h3>POST on /accounts/:id/customer_tags</h3>
+          <h3>POST on /accounts/<em>:account_id</em>/customer_tags</h3>
           <h2>/accounts/:id/payment_types</h2>
           <p>Collection of payment methods defined in the account.</p>
           <h3>GET on /accounts/:id/payment_types</h3>
@@ -626,7 +623,7 @@
           <p>Collection of customer notes associated with <code>/customers</code>.</p>
           <h3>GET on /customers/notes</h3>
           <h3>POST on /customers/:id/notes</h3>
-          <h2>/accounts/:id//stocks/events</h2>
+          <h2>/accounts/:id/stocks/events</h2>
           <p>Collection of stocking events of the account.</p>
           <h3>GET on /accounts/:id/stocks/events</h3>
           <h3>POST on /accounts/:id/stocks/events</h3>
