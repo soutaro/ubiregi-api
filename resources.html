@@ -493,11 +493,11 @@
           <p>The price is culculated as follows: <code>sales</code> + <code>tax</code> - (<code>discount_sales</code> + <code>discount_tax</code>).</p>
         </div>
         <div class='tab-pane' id='resources'>
-          <h2>/account</h2>
+          <h2>/accounts/:id</h2>
           <p>
-            The user's account. Readonly.
+            The user's account specified by `:id`. Readonly.
           </p>
-          <h3>GET on /account</h3>
+          <h3>GET on /accounts/:id</h3>
           <p>Download the information of current account.</p>
           <div class='row'>
             <div class='span8'>
@@ -515,7 +515,7 @@
             </div>
           </div>
           <h3>Note</h3>
-          <p>Accesses to <code>/account</code> do not expire.
+          <p>Accesses to <code>/accounts/:id</code> do not expire.
           Even if your account is expired, it returns your account's information.
           However menus, stocks, tables, customer_tags, and cashiers will be empty in that case.</p>
           <h2>/cashiers</h2>

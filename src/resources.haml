@@ -628,12 +628,12 @@
       The price is culculated as follows: `sales` + `tax` - (`discount_sales` + `discount_tax`).
 
   .tab-pane#resources
-    %h2 /account
+    %h2 /accounts/:id
 
     %p
-      The user's account. Readonly.
+      The user's account specified by `:id`. Readonly.
 
-    %h3 GET on /account
+    %h3 GET on /accounts/:id
 
     :markdown
       Download the information of current account.
@@ -659,7 +659,7 @@
     %h3 Note
 
     :markdown
-      Accesses to `/account` do not expire.
+      Accesses to `/accounts/:id` do not expire.
       Even if your account is expired, it returns your account's information.
       However menus, stocks, tables, customer_tags, and cashiers will be empty in that case.
 
