@@ -638,7 +638,8 @@
     :markdown
       Download the information of current account.
       
-      If <em>:account_id</em> is <code>current</code>, the client's authenticated account will be in the response.
+      <em>:account_id</em> is either an integer which specifies an ID of account, or <code>current</code>.
+      If <code>current</code> is given in request, the client's authenticated account will be in the response.
     
     .row
       .span8
@@ -677,7 +678,7 @@
     %h3 POST on /accounts/<em>:account_id</em>/cashiers
 
     :markdown
-      Update the cashiers of an account specified by `:account_id`.
+      Update the cashiers of an account specified by *:account_id*.
       The child account's cashiers can be updated by parents.
     
     .row

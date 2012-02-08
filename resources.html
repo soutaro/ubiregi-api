@@ -500,7 +500,8 @@
           <h3>GET on /accounts/<em>:account_id</em>, /accounts/current</h3>
           <p>Download the information of current account.</p>
           
-          <p>If <em>:account_id</em> is <code>current</code>, the client's authenticated account will be in the response.</p>
+          <p><em>:account_id</em> is either an integer which specifies an ID of account, or <code>current</code>.
+          If <code>current</code> is given in request, the client's authenticated account will be in the response.</p>
           <div class='row'>
             <div class='span8'>
               <h4>Response</h4>
@@ -527,7 +528,7 @@
           <h2>/accounts/<em>:account_id</em>/cashiers</h2>
           <p>Collection of cashiers defined in the user's account.</p>
           <h3>POST on /accounts/<em>:account_id</em>/cashiers</h3>
-          <p>Update the cashiers of an account specified by <code>:account_id</code>.
+          <p>Update the cashiers of an account specified by <em>:account_id</em>.
           The child account's cashiers can be updated by parents.</p>
           <div class='row'>
             <div class='span8'>
