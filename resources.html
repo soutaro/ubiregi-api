@@ -526,7 +526,11 @@
           In other case, your request will result in 404 (not found) error.</p>
           <h2>/accounts/<em>:account_id</em>/cashiers</h2>
           <p>Collection of cashiers defined in the user's account.</p>
-          <h3>POST on /accounts/<em>:account_id</em>/cashiers</h3>
+          <h3>POST on /accounts/<em>:account_id</em>/cashiers, /accounts/current/cashiers</h3>
+          <p>Upload the information of cashiers specified by <code>:account_id</code>.</p>
+          
+          <p>If <em>:account_id</em> is <code>current</code>, information of cashiers in the client's authenticated
+          account is uploaded.</p>
           <h2>/accounts/<em>:account_id</em>/customer_tags</h2>
           <p>Collection of customer tags defined in the account.</p>
           <h3>POST on /accounts/<em>:account_id</em>/customer_tags</h3>

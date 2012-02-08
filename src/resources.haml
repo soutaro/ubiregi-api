@@ -674,7 +674,13 @@
     :markdown
       Collection of cashiers defined in the user's account.
     
-    %h3 POST on /accounts/<em>:account_id</em>/cashiers
+    %h3 POST on /accounts/<em>:account_id</em>/cashiers, /accounts/current/cashiers
+
+    :markdown
+      Upload the information of cashiers specified by `:account_id`.
+
+      If <em>:account_id</em> is <code>current</code>, information of cashiers in the client's authenticated 
+      account is uploaded.
 
     %h2 /accounts/<em>:account_id</em>/customer_tags
     
