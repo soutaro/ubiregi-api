@@ -674,49 +674,68 @@
     :markdown
       Collection of cashiers defined in the user's account.
     
-    %h3 POST on /accounts/<em>:account_id</em>/cashiers, /accounts/current/cashiers
+    %h3 POST on /accounts/<em>:account_id</em>/cashiers
 
     :markdown
-      Upload the information of cashiers specified by `:account_id`.
-
-      If <em>:account_id</em> is <code>current</code>, information of cashiers in the client's authenticated 
-      account is uploaded.
+      Update the cashiers of an account specified by `:account_id`.
+      The child account's cashiers can be updated by parents.
     
     .row
       .span8
-        %h4 Request (for Update)
+        %h4 Request
         %pre
           = preserve do
             :escaped
-              {"cashiers" : [{"id":1, "name":"Kota Mizushima", "enabled":true, "icon":$base64Encoded, "icon_mime":"image/png"]}
+              [
+                {
+                  "name": "New cashier",
+                  "enabled":true,
+                  "icon":$base64Encoded,
+                },
+                {
+                  "id": 1,
+                  "name": "Updating an existing cashier",
+                  "enabled": false,
+                }
+              ]
       .span8
         %h4 Fields
+        
         %dl
-          %dt array of cashiers
+          %dt id
+          %dd
+            ID of cashier object.
+            If unspecified, create a new cashier object.
+            If specified, update an existing cashier object.
+          %dt name
+          %dt enabled
+          %dt icon
+          %dd
+            Base64 encoded data of icon.
+            If unspecified, the icon is not updated.
+            If specified with <code>null</code>, the icon will be removed.
 
-    .row
-      .span8
-        %h4 Request (for Create)
-        %pre
-          = preserve do
-            :escaped
-              {"cashiers" : [{"name":"Scalaist", "enabled":true, "icon":$base64Encoded, "icon_mime":"image/png"]}
-      .span8
-        %h4 Fields
-        %dl
-          %dt array of cashiers
-    
     .row
       .span8
         %h4 Response
         %pre
           = preserve do
             :escaped
-              {"cashiers" : [$cashier1, $cashier2, ...  ]}
+              {
+                "timestamp": "2011-11-02T09:11:12Z",
+                "next-url": $URL,
+                "last_updated_at": "2011-11-02T09:11:12Z",
+                "cashiers" : [ $cashier1, $cashier2, ...  ],
+              }
       .span8
-        %h4 Fields
-        %dl
-          %dt array of cashiers
+        %p
+          The response follows the convention for indexing action of collections.
+          The order of the cashier objects are preserved.
+          
+        %p
+          The update/creation is transactional.
+          There are only two cases; everything processed successfully, or nothing changed since an error found.
+          
 
     %h2 /accounts/<em>:account_id</em>/customer_tags
     

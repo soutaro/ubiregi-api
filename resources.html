@@ -526,45 +526,48 @@
           In other case, your request will result in 404 (not found) error.</p>
           <h2>/accounts/<em>:account_id</em>/cashiers</h2>
           <p>Collection of cashiers defined in the user's account.</p>
-          <h3>POST on /accounts/<em>:account_id</em>/cashiers, /accounts/current/cashiers</h3>
-          <p>Upload the information of cashiers specified by <code>:account_id</code>.</p>
-          
-          <p>If <em>:account_id</em> is <code>current</code>, information of cashiers in the client's authenticated
-          account is uploaded.</p>
+          <h3>POST on /accounts/<em>:account_id</em>/cashiers</h3>
+          <p>Update the cashiers of an account specified by <code>:account_id</code>.
+          The child account's cashiers can be updated by parents.</p>
           <div class='row'>
             <div class='span8'>
-              <h4>Request (for Update)</h4>
-              <pre>{&quot;cashiers&quot; : [{&quot;id&quot;:1, &quot;name&quot;:&quot;Kota Mizushima&quot;, &quot;enabled&quot;:true, &quot;icon&quot;:$base64Encoded, &quot;icon_mime&quot;:&quot;image/png&quot;]}</pre>
+              <h4>Request</h4>
+              <pre>[&#x000A;  {&#x000A;    &quot;name&quot;: &quot;New cashier&quot;,&#x000A;    &quot;enabled&quot;:true,&#x000A;    &quot;icon&quot;:$base64Encoded,&#x000A;  },&#x000A;  {&#x000A;    &quot;id&quot;: 1,&#x000A;    &quot;name&quot;: &quot;Updating an existing cashier&quot;,&#x000A;    &quot;enabled&quot;: false,&#x000A;  }&#x000A;]</pre>
             </div>
             <div class='span8'>
               <h4>Fields</h4>
               <dl>
-                <dt>array of cashiers</dt>
-              </dl>
-            </div>
-          </div>
-          <div class='row'>
-            <div class='span8'>
-              <h4>Request (for Create)</h4>
-              <pre>{&quot;cashiers&quot; : [{&quot;name&quot;:&quot;Scalaist&quot;, &quot;enabled&quot;:true, &quot;icon&quot;:$base64Encoded, &quot;icon_mime&quot;:&quot;image/png&quot;]}</pre>
-            </div>
-            <div class='span8'>
-              <h4>Fields</h4>
-              <dl>
-                <dt>array of cashiers</dt>
+                <dt>id</dt>
+                <dd>
+                  ID of cashier object.
+                  If unspecified, create a new cashier object.
+                  If specified, update an existing cashier object.
+                </dd>
+                <dt>name</dt>
+                <dt>enabled</dt>
+                <dt>icon</dt>
+                <dd>
+                  Base64 encoded data of icon.
+                  If unspecified, the icon is not updated.
+                  If specified with <code>null</code>, the icon will be removed.
+                </dd>
               </dl>
             </div>
           </div>
           <div class='row'>
             <div class='span8'>
               <h4>Response</h4>
-              <pre>{&quot;cashiers&quot; : [$cashier1, $cashier2, ...  ]}</pre>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:12Z&quot;,&#x000A;  &quot;next-url&quot;: $URL,&#x000A;  &quot;last_updated_at&quot;: &quot;2011-11-02T09:11:12Z&quot;,&#x000A;  &quot;cashiers&quot; : [ $cashier1, $cashier2, ...  ],&#x000A;}</pre>
             </div>
             <div class='span8'>
-              <h4>Fields</h4>
-              <dl>
-                <dt>array of cashiers</dt>
-              </dl>
+              <p>
+                The response follows the convention for indexing action of collections.
+                The order of the cashier objects are preserved.
+              </p>
+              <p>
+                The update/creation is transactional.
+                There are only two cases; everything processed successfully, or nothing changed since an error found.
+              </p>
             </div>
           </div>
           <h2>/accounts/<em>:account_id</em>/customer_tags</h2>
