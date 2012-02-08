@@ -681,6 +681,42 @@
 
       If <em>:account_id</em> is <code>current</code>, information of cashiers in the client's authenticated 
       account is uploaded.
+    
+    .row
+      .span8
+        %h4 Request (for Update)
+        %pre
+          = preserve do
+            :escaped
+              {"cashiers" : [{"id":1, "name":"Kota Mizushima", "enabled":true, "icon":$base64Encoded, "icon_mime":"image/png"]}
+      .span8
+        %h4 Fields
+        %dl
+          %dt array of cashiers
+
+    .row
+      .span8
+        %h4 Request (for Create)
+        %pre
+          = preserve do
+            :escaped
+              {"cashiers" : [{"name":"Scalaist", "enabled":true, "icon":$base64Encoded, "icon_mime":"image/png"]}
+      .span8
+        %h4 Fields
+        %dl
+          %dt array of cashiers
+    
+    .row
+      .span8
+        %h4 Response
+        %pre
+          = preserve do
+            :escaped
+              {"cashiers" : [$cashier1, $cashier2, ...  ]}
+      .span8
+        %h4 Fields
+        %dl
+          %dt array of cashiers
 
     %h2 /accounts/<em>:account_id</em>/customer_tags
     

@@ -531,6 +531,42 @@
           
           <p>If <em>:account_id</em> is <code>current</code>, information of cashiers in the client's authenticated
           account is uploaded.</p>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Request (for Update)</h4>
+              <pre>{&quot;cashiers&quot; : [{&quot;id&quot;:1, &quot;name&quot;:&quot;Kota Mizushima&quot;, &quot;enabled&quot;:true, &quot;icon&quot;:$base64Encoded, &quot;icon_mime&quot;:&quot;image/png&quot;]}</pre>
+            </div>
+            <div class='span8'>
+              <h4>Fields</h4>
+              <dl>
+                <dt>array of cashiers</dt>
+              </dl>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Request (for Create)</h4>
+              <pre>{&quot;cashiers&quot; : [{&quot;name&quot;:&quot;Scalaist&quot;, &quot;enabled&quot;:true, &quot;icon&quot;:$base64Encoded, &quot;icon_mime&quot;:&quot;image/png&quot;]}</pre>
+            </div>
+            <div class='span8'>
+              <h4>Fields</h4>
+              <dl>
+                <dt>array of cashiers</dt>
+              </dl>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Response</h4>
+              <pre>{&quot;cashiers&quot; : [$cashier1, $cashier2, ...  ]}</pre>
+            </div>
+            <div class='span8'>
+              <h4>Fields</h4>
+              <dl>
+                <dt>array of cashiers</dt>
+              </dl>
+            </div>
+          </div>
           <h2>/accounts/<em>:account_id</em>/customer_tags</h2>
           <p>Collection of customer tags defined in the account.</p>
           <h3>POST on /accounts/<em>:account_id</em>/customer_tags</h3>
