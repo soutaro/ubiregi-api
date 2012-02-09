@@ -533,7 +533,7 @@
           <div class='row'>
             <div class='span8'>
               <h4>Request</h4>
-              <pre>[&#x000A;  {&#x000A;    &quot;name&quot;: &quot;New cashier&quot;,&#x000A;    &quot;enabled&quot;:true,&#x000A;    &quot;icon&quot;:$base64Encoded,&#x000A;  },&#x000A;  {&#x000A;    &quot;id&quot;: 1,&#x000A;    &quot;name&quot;: &quot;Updating an existing cashier&quot;,&#x000A;    &quot;enabled&quot;: false,&#x000A;  }&#x000A;]</pre>
+              <pre>{&#x000A;  &quot;cashiers&quot;: [&#x000A;    {&#x000A;      &quot;name&quot;: &quot;New cashier&quot;,&#x000A;      &quot;enabled&quot;:true,&#x000A;      &quot;icon&quot;:$base64Encoded,&#x000A;    },&#x000A;    {&#x000A;      &quot;id&quot;: 1,&#x000A;      &quot;name&quot;: &quot;Updating an existing cashier&quot;,&#x000A;      &quot;enabled&quot;: false,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
             </div>
             <div class='span8'>
               <h4>Fields</h4>
@@ -612,7 +612,7 @@
           <h4>Request</h4>
           <div class='row'>
             <div class='span8'>
-              <pre>[&#x000A;  {&#x000A;    &quot;items_attributes&quot;: [&#x000A;      {&#x000A;        &quot;menu_item_id&quot;: 123,&#x000A;        &quot;count&quot;: 1,&#x000A;        &quot;sales&quot;: &quot;100&quot;,&#x000A;        &quot;tax&quot;: &quot;5&quot;,&#x000A;        &quot;discount_sales&quot;: &quot;20&quot;,&#x000A;        &quot;discount_tax&quot;: &quot;1&quot;&#x000A;      }&#x000A;    ],&#x000A;    'change': &quot;26&quot;,&#x000A;    'guid': $UUID-like-sequence,&#x000A;    'paid_at': $Time,&#x000A;    'payments_attributes': [&#x000A;      { &quot;payment_type_id&quot;: 101, &quot;amount&quot;: &quot;100&quot; }&#x000A;    ],&#x000A;    'customers_count': 1,&#x000A;    'customer_taggings_attributes': [&#x000A;      { &quot;customer_tag_id&quot;: 20 }&#x000A;    ],&#x000A;    'cashier_id': 948,&#x000A;    'deleted': false,&#x000A;  },&#x000A;  {&#x000A;    &quot;id&quot;: 4739,&#x000A;    &quot;deleted&quot;: true,&#x000A;  }&#x000A;]</pre>
+              <pre>{&#x000A;  &quot;checkouts&quot;: [&#x000A;    {&#x000A;      &quot;items_attributes&quot;: [&#x000A;        {&#x000A;          &quot;menu_item_id&quot;: 123,&#x000A;          &quot;count&quot;: 1,&#x000A;          &quot;sales&quot;: &quot;100&quot;,&#x000A;          &quot;tax&quot;: &quot;5&quot;,&#x000A;          &quot;discount_sales&quot;: &quot;20&quot;,&#x000A;          &quot;discount_tax&quot;: &quot;1&quot;&#x000A;        }&#x000A;      ],&#x000A;      &quot;change&quot; : &quot;26&quot;,&#x000A;      &quot;guid&quot; : $UUID-like-sequence,&#x000A;      &quot;paid_at&quot;: $Time,&#x000A;      &quot;payments_attributes&quot;: [&#x000A;        { &quot;payment_type_id&quot;: 101, &quot;amount&quot;: &quot;100&quot; }&#x000A;      ],&#x000A;      &quot;customers_count': 1,&#x000A;      &quot;customer_taggings_attributes': [&#x000A;        { &quot;customer_tag_id&quot;: 20 }&#x000A;      ],&#x000A;      &quot;cashier_id&quot;: 948,&#x000A;      &quot;deleted&quot;: false,&#x000A;    },&#x000A;    {&#x000A;      &quot;id&quot;: 4739,&#x000A;      &quot;deleted&quot;: true,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
             </div>
             <div class='span8'>
               <p>Request is to create/update checkouts.

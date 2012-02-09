@@ -687,18 +687,20 @@
         %pre
           = preserve do
             :escaped
-              [
-                {
-                  "name": "New cashier",
-                  "enabled":true,
-                  "icon":$base64Encoded,
-                },
-                {
-                  "id": 1,
-                  "name": "Updating an existing cashier",
-                  "enabled": false,
-                }
-              ]
+              {
+                "cashiers": [
+                  {
+                    "name": "New cashier",
+                    "enabled":true,
+                    "icon":$base64Encoded,
+                  },
+                  {
+                    "id": 1,
+                    "name": "Updating an existing cashier",
+                    "enabled": false,
+                  }
+                ]
+              }
       .span8
         %h4 Fields
         
@@ -813,36 +815,38 @@
         %pre
           = preserve do
             :escaped
-              [
-                {
-                  "items_attributes": [
-                    {
-                      "menu_item_id": 123,
-                      "count": 1,
-                      "sales": "100",
-                      "tax": "5",
-                      "discount_sales": "20",
-                      "discount_tax": "1"
-                    }
-                  ],
-                  'change': "26",
-                  'guid': $UUID-like-sequence,
-                  'paid_at': $Time,
-                  'payments_attributes': [
-                    { "payment_type_id": 101, "amount": "100" }
-                  ],
-                  'customers_count': 1,
-                  'customer_taggings_attributes': [
-                    { "customer_tag_id": 20 }
-                  ],
-                  'cashier_id': 948,
-                  'deleted': false,
-                },
-                {
-                  "id": 4739,
-                  "deleted": true,
-                }
-              ]
+              {
+                "checkouts": [
+                  {
+                    "items_attributes": [
+                      {
+                        "menu_item_id": 123,
+                        "count": 1,
+                        "sales": "100",
+                        "tax": "5",
+                        "discount_sales": "20",
+                        "discount_tax": "1"
+                      }
+                    ],
+                    "change" : "26",
+                    "guid" : $UUID-like-sequence,
+                    "paid_at": $Time,
+                    "payments_attributes": [
+                      { "payment_type_id": 101, "amount": "100" }
+                    ],
+                    "customers_count': 1,
+                    "customer_taggings_attributes': [
+                      { "customer_tag_id": 20 }
+                    ],
+                    "cashier_id": 948,
+                    "deleted": false,
+                  },
+                  {
+                    "id": 4739,
+                    "deleted": true,
+                  }
+                ]
+              }
       .span8
         :markdown
           Request is to create/update checkouts.
