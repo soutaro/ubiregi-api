@@ -769,6 +769,71 @@
     %h3 GET on /menus/:menu_id/items
     %h3 POST on /menus/:menu_id/items
 
+    :markdown
+      Update/Create the menu item of the menu specified by `:menu_id` on current account.
+    
+    .row
+      .span8
+        %h4 Request
+        %pre
+          = preserve do
+            :escaped
+              {
+                "items": [
+                  {
+                    "id": "1",
+                    "name": "New menu item",
+                    "price":1000,
+                    "price_type":"intax",
+                    "vat": 5,
+                    "position": 102,
+                    "category_id": 105,
+                  },
+                  {
+                    "name": "Renamed menu item",
+                    "price":1500,
+                    "price_type":"intax",
+                    "vat": 5,
+                    "position": 102,
+                    "category_id": 105,
+                  }
+                ]
+              }
+      .span8
+        %h4 Fields
+        
+        %dl
+          %dt id
+          %dd
+            ID of menu item object.
+            If unspecified, create a new menu item object.
+            If specified, update an existing menu item object.
+          %dt name
+          %dt price
+          %dt price_type
+          %dd One of "intax",  "outtax", "percent", and "nosales" can be specified.
+          %dt vat
+          %dt position
+          %dt category_id
+
+    .row
+      .span8
+        %h4 Response
+        %pre
+          = preserve do
+            :escaped
+              {
+                "timestamp": "2011-11-02T09:11:12Z",
+                "items" : [ $item1, $item2, ...  ]
+              }
+      .span8
+        %p
+          The order of the menu item objects are preserved.
+          
+        %p
+          The update/creation is transactional.
+          There are only two cases; everything processed successfully, or nothing changed since an error found.
+          
     %h2 /menus/:menu_id/categories
     
     :markdown

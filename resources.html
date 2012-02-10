@@ -582,15 +582,55 @@
           
           <p>Tables objects are to be obsolete, and there are no update operations for <code>/tables</code>.</p>
           <h3>GET on /accounts/:id/tables for indexing</h3>
-          <h2>/menus/:id/items</h2>
+          <h2>/menus/:menu_id/items</h2>
           <p>Collection of items in menu specified by <code>:id</code>.</p>
-          <h3>GET on /menus/:id/items</h3>
-          <h3>POST on /menus/:id/items</h3>
-          <h2>/menus/:id/categories</h2>
-          <p>Collection of categories in menu specified by <code>id</code>.</p>
-          <h3>GET on /menus/:id/categories</h3>
-          <h3>POST on /menus/:id/categories</h3>
-          <h3>POST on /menus/categories/:id/delete (for deletion)</h3>
+          <h3>GET on /menus/:menu_id/items</h3>
+          <h3>POST on /menus/:menu_id/items</h3>
+          <p>Update/Create the menu item of the menu specified by <code>:menu_id</code> on current account.</p>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Request</h4>
+              <pre>{&#x000A;  &quot;items&quot;: [&#x000A;    {&#x000A;      &quot;id&quot;: &quot;1&quot;,&#x000A;      &quot;name&quot;: &quot;New menu item&quot;,&#x000A;      &quot;price&quot;:1000,&#x000A;      &quot;price_type&quot;:&quot;intax&quot;,&#x000A;      &quot;vat&quot;: 5,&#x000A;      &quot;position&quot;: 102,&#x000A;      &quot;category_id&quot;: 105,&#x000A;    },&#x000A;    {&#x000A;      &quot;name&quot;: &quot;Renamed menu item&quot;,&#x000A;      &quot;price&quot;:1500,&#x000A;      &quot;price_type&quot;:&quot;intax&quot;,&#x000A;      &quot;vat&quot;: 5,&#x000A;      &quot;position&quot;: 102,&#x000A;      &quot;category_id&quot;: 105,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <h4>Fields</h4>
+              <dl>
+                <dt>id</dt>
+                <dd>
+                  ID of menu item object.
+                  If unspecified, create a new menu item object.
+                  If specified, update an existing menu item object.
+                </dd>
+                <dt>name</dt>
+                <dt>price</dt>
+                <dt>price_type</dt>
+                <dd>One of "intax",  "outtax", "percent", and "nosales" can be specified.</dd>
+                <dt>vat</dt>
+                <dt>position</dt>
+                <dt>category_id</dt>
+              </dl>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Response</h4>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:12Z&quot;,&#x000A;  &quot;items&quot; : [ $item1, $item2, ...  ]&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <p>
+                The order of the menu item objects are preserved.
+              </p>
+              <p>
+                The update/creation is transactional.
+                There are only two cases; everything processed successfully, or nothing changed since an error found.
+              </p>
+            </div>
+          </div>
+          <h2>/menus/:menu_id/categories</h2>
+          <p>Collection of categories in menu specified by <code>menu_id</code>.</p>
+          <h3>GET on /menus/:menu_id/categories</h3>
+          <h3>POST on /menus/:menu_id/categories</h3>
+          <h3>POST on /menus/categories/:menu_id/delete (for deletion)</h3>
           <h2>/accounts/:id/checkouts</h2>
           <p>Collection of checkouts of the account.</p>
           <h3>GET on /accounts/:id/checkouts</h3>
