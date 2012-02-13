@@ -798,27 +798,27 @@
           The update/creation is transactional.
           There are only two cases; everything processed successfully, or nothing changed since an error found.
 
-    %h2 /accounts/:id/payment_types
+    %h2 /accounts/:account_id/payment_types
 
     :markdown
       Collection of payment methods defined in the account.
 
-    %h3 GET on /accounts/:id/payment_types
-    %h3 POST on /accounts/:id/payment_types
+    %h3 GET on /accounts/:account_id/payment_types
+    %h3 POST on /accounts/:account_id/payment_types
     
-    %h2 /accounts/:id/tables
+    %h2 /accounts/:account_id/tables
     
     :markdown
       Collection of tables defined in the account.
 
       Tables objects are to be obsolete, and there are no update operations for `/tables`.
 
-    %h3 GET on /accounts/:id/tables for indexing
+    %h3 GET on /accounts/:account_id/tables for indexing
 
     %h2 /menus/:menu_id/items
     
     :markdown
-      Collection of items in menu specified by `:id`.
+      Collection of items in menu specified by `:menu_id`.
 
     %h3 GET on /menus/:menu_id/items
     %h3 POST on /menus/:menu_id/items
@@ -897,12 +897,12 @@
     %h3 POST on /menus/:menu_id/categories
     %h3 POST on /menus/categories/:menu_id/delete (for deletion)
 
-    %h2 /accounts/:id/checkouts
+    %h2 /accounts/:account_id/checkouts
     
     :markdown
       Collection of checkouts of the account.
 
-    %h3 GET on /accounts/:id/checkouts
+    %h3 GET on /accounts/:account_id/checkouts
     
     %h4 Response
     .row
@@ -926,7 +926,7 @@
           %dt checkouts
           %dd Checkouts.
     
-    %h3 POST on /accounts/:id/checkouts
+    %h3 POST on /accounts/:account_id/checkouts
 
     %h4 Request
     .row
@@ -1039,13 +1039,13 @@
     %h3 GET on /customers/notes
     %h3 POST on /customers/:id/notes
 
-    %h2 /accounts/:id/stocks/events
+    %h2 /accounts/:account_id/stocks/events
 
     :markdown
       Collection of stocking events of the account.
 
-    %h3 GET on /accounts/:id/stocks/events
-    %h3 POST on /accounts/:id/stocks/events
+    %h3 GET on /accounts/:account_id/stocks/events
+    %h3 POST on /accounts/:account_id/stocks/events
 
 :javascript
   $('.tabs').tabs()
