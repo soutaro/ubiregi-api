@@ -573,6 +573,43 @@
           <h2>/accounts/<em>:account_id</em>/customer_tags</h2>
           <p>Collection of customer tags defined in the account.</p>
           <h3>POST on /accounts/<em>:account_id</em>/customer_tags</h3>
+          Update the customer_tags of an account specified by :account_id.
+          <div class='row'>
+            <div class='span8'>
+              <h4>Request</h4>
+              <pre>{&#x000A;  &quot;customer_tags&quot;: [&#x000A;    {&#x000A;      &quot;id&quot;: &quot;1&quot;,&#x000A;      &quot;name&quot;: &quot;Dating&quot;,&#x000A;      &quot;position&quot;: null,&#x000A;      &quot;icon&quot;: $base64Encoded,&#x000A;      &quot;icon_mime&quot;: &quot;image/png&quot;,&#x000A;    },&#x000A;    ...&#x000A;  ]&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <h4>Fields</h4>
+              <dl>
+                <dt>id</dt>
+                <dd>
+                  ID of customer tag object.
+                  If unspecified, create a customer tag object.
+                  If specified, update an existing customer tag object.
+                </dd>
+                <dt>name</dt>
+                <dt>position</dt>
+                <dt>icon</dt>
+                <dt>icon_mime</dt>
+              </dl>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Response</h4>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:12Z&quot;,&#x000A;  &quot;customer_tags&quot; : [ $customer_tag1, $customer_tag2, ...  ]&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <p>
+                The order of the customer tags objects are preserved.
+              </p>
+              <p>
+                The update/creation is transactional.
+                There are only two cases; everything processed successfully, or nothing changed since an error found.
+              </p>
+            </div>
+          </div>
           <h2>/accounts/:id/payment_types</h2>
           <p>Collection of payment methods defined in the account.</p>
           <h3>GET on /accounts/:id/payment_types</h3>
