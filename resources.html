@@ -235,10 +235,12 @@
                 <dd>Name of the tag.</dd>
                 <dt>position (optional)</dt>
                 <dd>Position of the tag. <code>null</code> in the case the tag is deleted.</dd>
+                <dt>icon_name</dt>
+                <dd>Name of icon.  <em>WriteOnly</em></dd>
                 <dt>icon</dt>
-                <dd>Icon image for the tag.</dd>
+                <dd>Icon image for the tag.  <em>ReadOnly</em></dd>
                 <dt>icon_mime</dt>
-                <dd>MIME type of the icon. Usually <code>image/png</code>.</dd>
+                <dd>MIME type of the icon. Usually <code>image/png</code>.  <em>ReadOnly</em></dd>
               </dl>
             </div>
             <div class='span8'>
@@ -577,7 +579,7 @@
           <div class='row'>
             <div class='span8'>
               <h4>Request</h4>
-              <pre>{&#x000A;  &quot;customer_tags&quot;: [&#x000A;    {&#x000A;      &quot;id&quot;: &quot;1&quot;,&#x000A;      &quot;name&quot;: &quot;Dating&quot;,&#x000A;      &quot;position&quot;: null,&#x000A;      &quot;icon&quot;: $base64Encoded,&#x000A;      &quot;icon_mime&quot;: &quot;image/png&quot;,&#x000A;    },&#x000A;    ...&#x000A;  ]&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;customer_tags&quot;: [&#x000A;    {&#x000A;      &quot;id&quot;: &quot;1&quot;,&#x000A;      &quot;name&quot;: &quot;Dating&quot;,&#x000A;      &quot;position&quot;: 10,&#x000A;      &quot;icon_name&quot;: $icon_name,&#x000A;    },&#x000A;    ...&#x000A;  ]&#x000A;}</pre>
             </div>
             <div class='span8'>
               <h4>Fields</h4>
@@ -590,8 +592,7 @@
                 </dd>
                 <dt>name</dt>
                 <dt>position</dt>
-                <dt>icon</dt>
-                <dt>icon_mime</dt>
+                <dt>icon_name</dt>
               </dl>
             </div>
           </div>

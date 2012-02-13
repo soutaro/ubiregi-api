@@ -269,10 +269,12 @@
           %dd Name of the tag.
           %dt position (optional)
           %dd Position of the tag. <code>null</code> in the case the tag is deleted.
-          %dt icon
-          %dd Icon image for the tag.
+          %dt icon_name
+          %dd Name of icon.  <em>WriteOnly</em>
+          %dt icon 
+          %dd Icon image for the tag.  <em>ReadOnly</em>
           %dt icon_mime
-          %dd MIME type of the icon. Usually <code>image/png</code>.
+          %dd MIME type of the icon. Usually <code>image/png</code>.  <em>ReadOnly</em>
       .span8
         %h3 Example
         
@@ -757,9 +759,8 @@
                   {
                     "id": "1",
                     "name": "Dating",
-                    "position": null,
-                    "icon": $base64Encoded,
-                    "icon_mime": "image/png",
+                    "position": 10,
+                    "icon_name": $icon_name,
                   },
                   ...
                 ]
@@ -775,8 +776,7 @@
             If specified, update an existing customer tag object.
           %dt name
           %dt position
-          %dt icon
-          %dt icon_mime
+          %dt icon_name
 
     .row
       .span8
