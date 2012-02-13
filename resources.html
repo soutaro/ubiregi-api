@@ -613,17 +613,17 @@
               </p>
             </div>
           </div>
-          <h2>/accounts/:id/payment_types</h2>
+          <h2>/accounts/:account_id/payment_types</h2>
           <p>Collection of payment methods defined in the account.</p>
-          <h3>GET on /accounts/:id/payment_types</h3>
-          <h3>POST on /accounts/:id/payment_types</h3>
-          <h2>/accounts/:id/tables</h2>
+          <h3>GET on /accounts/:account_id/payment_types</h3>
+          <h3>POST on /accounts/:account_id/payment_types</h3>
+          <h2>/accounts/:account_id/tables</h2>
           <p>Collection of tables defined in the account.</p>
           
           <p>Tables objects are to be obsolete, and there are no update operations for <code>/tables</code>.</p>
-          <h3>GET on /accounts/:id/tables for indexing</h3>
+          <h3>GET on /accounts/:account_id/tables for indexing</h3>
           <h2>/menus/:menu_id/items</h2>
-          <p>Collection of items in menu specified by <code>:id</code>.</p>
+          <p>Collection of items in menu specified by <code>:menu_id</code>.</p>
           <h3>GET on /menus/:menu_id/items</h3>
           <h3>POST on /menus/:menu_id/items</h3>
           <p>Update/Create the menu item of the menu specified by <code>:menu_id</code> on current account.</p>
@@ -671,9 +671,9 @@
           <h3>GET on /menus/:menu_id/categories</h3>
           <h3>POST on /menus/:menu_id/categories</h3>
           <h3>POST on /menus/categories/:menu_id/delete (for deletion)</h3>
-          <h2>/accounts/:id/checkouts</h2>
+          <h2>/accounts/:account_id/checkouts</h2>
           <p>Collection of checkouts of the account.</p>
-          <h3>GET on /accounts/:id/checkouts</h3>
+          <h3>GET on /accounts/:account_id/checkouts</h3>
           <h4>Response</h4>
           <div class='row'>
             <div class='span8'>
@@ -688,7 +688,7 @@
               </dl>
             </div>
           </div>
-          <h3>POST on /accounts/:id/checkouts</h3>
+          <h3>POST on /accounts/:account_id/checkouts</h3>
           <h4>Request</h4>
           <div class='row'>
             <div class='span8'>
@@ -746,10 +746,10 @@
           <p>Collection of customer notes associated with <code>/customers</code>.</p>
           <h3>GET on /customers/notes</h3>
           <h3>POST on /customers/:id/notes</h3>
-          <h2>/accounts/:id/stocks/events</h2>
+          <h2>/accounts/:account_id/stocks/events</h2>
           <p>Collection of stocking events of the account.</p>
-          <h3>GET on /accounts/:id/stocks/events</h3>
-          <h3>POST on /accounts/:id/stocks/events</h3>
+          <h3>GET on /accounts/:account_id/stocks/events</h3>
+          <h3>POST on /accounts/:account_id/stocks/events</h3>
         </div>
       </div>
       <script type='text/javascript'>
