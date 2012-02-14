@@ -895,7 +895,57 @@
 
     %h3 GET on /menus/:menu_id/categories
     %h3 POST on /menus/:menu_id/categories
-    %h3 POST on /menus/categories/:menu_id/delete (for deletion)
+    
+    .row
+      .span8
+        %h4 Request
+        %pre
+          = preserve do
+            :escaped
+              {
+                "categories": [
+                  {
+                    "name":"New Category",
+                    "position":4,
+                  },
+                  {
+                    "id": 1,
+                    "name": "Renamed Category",
+                    "position":4,
+                  }
+                ]
+              }
+      .span8
+        %h4 Fields
+        
+        %dl
+          %dt id
+          %dd
+            ID of category object.
+            If unspecified, create a new category object.
+            If specified, update an existing category object.
+          %dt name
+          %dd
+            name of category object.
+          %dt position
+
+    .row
+      .span8
+        %h4 Response
+        %pre
+          = preserve do
+            :escaped
+              {
+                "timestamp": "2011-11-02T09:11:12Z",
+                "categories" : [ $category1, $category2, ...  ]
+              }
+      .span8
+        %p
+          The order of the category objects are preserved.
+          
+        %p
+          The update/creation is transactional.
+          There are only two cases; everything processed successfully, or nothing changed since an error found.
 
     %h2 /accounts/:account_id/checkouts
     

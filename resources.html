@@ -670,7 +670,43 @@
           <p>Collection of categories in menu specified by <code>menu_id</code>.</p>
           <h3>GET on /menus/:menu_id/categories</h3>
           <h3>POST on /menus/:menu_id/categories</h3>
-          <h3>POST on /menus/categories/:menu_id/delete (for deletion)</h3>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Request</h4>
+              <pre>{&#x000A;  &quot;categories&quot;: [&#x000A;    {&#x000A;      &quot;name&quot;:&quot;New Category&quot;,&#x000A;      &quot;position&quot;:4,&#x000A;    },&#x000A;    {&#x000A;      &quot;id&quot;: 1,&#x000A;      &quot;name&quot;: &quot;Renamed Category&quot;,&#x000A;      &quot;position&quot;:4,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <h4>Fields</h4>
+              <dl>
+                <dt>id</dt>
+                <dd>
+                  ID of category object.
+                  If unspecified, create a new category object.
+                  If specified, update an existing category object.
+                </dd>
+                <dt>name</dt>
+                <dd>
+                  name of category object.
+                </dd>
+                <dt>position</dt>
+              </dl>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Response</h4>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:12Z&quot;,&#x000A;  &quot;categories&quot; : [ $category1, $category2, ...  ]&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <p>
+                The order of the category objects are preserved.
+              </p>
+              <p>
+                The update/creation is transactional.
+                There are only two cases; everything processed successfully, or nothing changed since an error found.
+              </p>
+            </div>
+          </div>
           <h2>/accounts/:account_id/checkouts</h2>
           <p>Collection of checkouts of the account.</p>
           <h3>GET on /accounts/:account_id/checkouts</h3>
