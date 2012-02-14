@@ -631,6 +631,55 @@
     :markdown
       The price is culculated as follows: `sales` + `tax` - (`discount_sales` + `discount_tax`).
 
+    %h2 Stock Event
+
+    :markdown
+      Event object related to stock control.
+      The object is used to tell someone that stock-related event has occured.
+      Type of a stock event is either "inventory", "arrival", "shipping", or "order".
+
+    .row
+      .span8
+        %h3 Fields
+
+        %dl
+          %dt id
+          %dd ID of the event.
+          %dt menu_item_id
+          %dd ID of the menu item associated with the event.
+          %dt app_created_at
+          %dd Time when the event has been created in a client app.  <em>WriteOnly</em>
+          %dt event_type
+          %dd Type of the event (either "inventory", "arrival", "shipping", or "order").
+          %dt amount
+          %dd 
+            Amount related to the event.  <em>Note that the meaning of the value of this attribute depends on `event_type`</em>.
+            Assume that the value of amount is 55.  The meaning of this value depends on the value of `event_type` as followings:
+            %ul
+              %li "inventory" : The number of inventory specified by `menu_item_id` is 55.
+              %li "arrival" :  55 items specified by `menu_item_id` has arrived.
+              %li "shipping" : 55 items specified by `menu_item_id` has shipped.
+              %li "order" : 55 items specified by `menu_item_id` has been ordered.
+          %dt uuid
+          %dd UUID associated to the event.  This is used to prevent duplicated posts.
+          %dt body
+          %dd An arbitrary JSON data.  The usage of the value is not decided yet.
+      .span8
+        %h3 Example
+        
+        %pre
+          = preserve do
+            :escaped
+              {
+                "id" : 1,
+                "menu_item_id" : 2,
+                "app_created_at" : "2012-02-14T00:00:00Z",
+                "event_type" : "arrival",
+                "amount" : 55,
+                "uuid" : $UUID,
+                "body" : { "note" : "This object represents that 55 items specified by `menu_item_id` has arrived" },
+              }
+
   .tab-pane#resources
     %h2 /accounts
     
@@ -1096,6 +1145,9 @@
 
     %h3 GET on /accounts/:account_id/stocks/events
     %h3 POST on /accounts/:account_id/stocks/events
+
+    :markdown
+      Send new stock events to the account specified by `:account_id`.
 
 :javascript
   $('.tabs').tabs()

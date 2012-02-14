@@ -495,6 +495,44 @@
           </div>
           <h3>Notes</h3>
           <p>The price is culculated as follows: <code>sales</code> + <code>tax</code> - (<code>discount_sales</code> + <code>discount_tax</code>).</p>
+          <h2>Stock Event</h2>
+          <p>Event object related to stock control.
+          The object is used to tell someone that stock-related event has occured.
+          Type of a stock event is either "inventory", "arrival", "shipping", or "order".</p>
+          <div class='row'>
+            <div class='span8'>
+              <h3>Fields</h3>
+              <dl>
+                <dt>id</dt>
+                <dd>ID of the event.</dd>
+                <dt>menu_item_id</dt>
+                <dd>ID of the menu item associated with the event.</dd>
+                <dt>app_created_at</dt>
+                <dd>Time when the event has been created in a client app.  <em>WriteOnly</em></dd>
+                <dt>event_type</dt>
+                <dd>Type of the event (either "inventory", "arrival", "shipping", or "order").</dd>
+                <dt>amount</dt>
+                <dd>
+                  Amount related to the event.  <em>Note that the meaning of the value of this attribute depends on `event_type`</em>.
+                  Assume that the value of amount is 55.  The meaning of this value depends on the value of `event_type` as followings:
+                  <ul>
+                    <li>"inventory" : The number of inventory specified by `menu_item_id` is 55.</li>
+                    <li>"arrival" :  55 items specified by `menu_item_id` has arrived.</li>
+                    <li>"shipping" : 55 items specified by `menu_item_id` has shipped.</li>
+                    <li>"order" : 55 items specified by `menu_item_id` has been ordered.</li>
+                  </ul>
+                </dd>
+                <dt>uuid</dt>
+                <dd>UUID associated to the event.  This is used to prevent duplicated posts.</dd>
+                <dt>body</dt>
+                <dd>An arbitrary JSON data.  The usage of the value is not decided yet.</dd>
+              </dl>
+            </div>
+            <div class='span8'>
+              <h3>Example</h3>
+              <pre>{&#x000A;  &quot;id&quot; : 1,&#x000A;  &quot;menu_item_id&quot; : 2,&#x000A;  &quot;app_created_at&quot; : &quot;2012-02-14T00:00:00Z&quot;,&#x000A;  &quot;event_type&quot; : &quot;arrival&quot;,&#x000A;  &quot;amount&quot; : 55,&#x000A;  &quot;uuid&quot; : $UUID,&#x000A;  &quot;body&quot; : { &quot;note&quot; : &quot;This object represents that 55 items specified by `menu_item_id` has arrived&quot; },&#x000A;}</pre>
+            </div>
+          </div>
         </div>
         <div class='tab-pane' id='resources'>
           <h2>/accounts</h2>
@@ -786,6 +824,7 @@
           <p>Collection of stocking events of the account.</p>
           <h3>GET on /accounts/:account_id/stocks/events</h3>
           <h3>POST on /accounts/:account_id/stocks/events</h3>
+          <p>Send new stock events to the account specified by <code>:account_id</code>.</p>
         </div>
       </div>
       <script type='text/javascript'>
