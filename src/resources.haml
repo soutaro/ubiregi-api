@@ -663,7 +663,7 @@
           %dt uuid
           %dd UUID associated to the event.  This is used to prevent duplicated posts.
           %dt body
-          %dd An arbitrary JSON data.  The usage of the value is not decided yet.
+          %dd An arbitrary JSON object.  The usage of the value is not decided yet.
       .span8
         %h3 Example
         
@@ -1144,10 +1144,63 @@
       Collection of stocking events of the account.
 
     %h3 GET on /accounts/:account_id/stocks/events
+    :markdown
+      Get all stock events associated with the account specified by `:account_id`.
+
     %h3 POST on /accounts/:account_id/stocks/events
 
     :markdown
       Send new stock events to the account specified by `:account_id`.
+
+    .row
+      .span8
+        %h4 Request
+        %pre
+          = preserve do
+            :escaped
+              {
+                "events": [
+                  {
+                    "menu_item_id": 2,
+                    "app_created_at" : "2012-02-14T00:00:00Z",
+                    "event_type" : "arrival",
+                    "amount" : 55,
+                    "uuid" : $UUID,
+                    "body" : { "memo" : "Memo Memo" },
+                  },
+                  ...
+                ]
+              }
+      .span8
+        %h4 Fields
+
+        %dl
+          %dt menu_item_id
+          %dt app_created_at (<em>WriteOnly</em>)
+          %dt event_type
+          %dd Either "inventory",  "arrival", "shipping", or "order" can be specified.
+          %dt amount
+          %dt uuid
+          %dt body
+          %dd arbitrary JSON object.
+
+    .row
+      .span8
+        %h4 Response
+        %pre
+          = preserve do
+            :escaped
+              {
+                "timestamp": "2012-02-14T09:00:00Z",
+                "events" : [ $event1, $event2, ...  ]
+              }
+      .span8
+        %p
+          The order of the event objects are preserved.
+
+        %p
+          The update/creation is transactional.
+          There are only two cases; everything processed successfully, or nothing changed since an error found.
 
 :javascript
   $('.tabs').tabs()
