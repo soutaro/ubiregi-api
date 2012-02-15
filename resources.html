@@ -509,6 +509,8 @@
                 <dd>ID of the menu item associated with the event.</dd>
                 <dt>app_created_at</dt>
                 <dd>Time when the event has been created in a client app.  <em>WriteOnly</em></dd>
+                <dt>inventory_at</dt>
+                <dd>Time when the inentory event has occured.  It maybe different from app_created_at.</dd>
                 <dt>event_type</dt>
                 <dd>Type of the event (either "inventory", "arrival", "shipping", or "order").</dd>
                 <dt>amount</dt>
@@ -530,7 +532,7 @@
             </div>
             <div class='span8'>
               <h3>Example</h3>
-              <pre>{&#x000A;  &quot;id&quot; : 1,&#x000A;  &quot;menu_item_id&quot; : 2,&#x000A;  &quot;app_created_at&quot; : &quot;2012-02-14T00:00:00Z&quot;,&#x000A;  &quot;event_type&quot; : &quot;arrival&quot;,&#x000A;  &quot;amount&quot; : 55,&#x000A;  &quot;uuid&quot; : $UUID,&#x000A;  &quot;body&quot; : { &quot;note&quot; : &quot;This object represents that 55 items specified by `menu_item_id` has arrived&quot; },&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;id&quot; : 1,&#x000A;  &quot;menu_item_id&quot; : 2,&#x000A;  &quot;app_created_at&quot; : &quot;2012-02-14T00:00:00Z&quot;,&#x000A;  &quot;inventory__at&quot; : &quot;2012-02-14T01:00:00Z&quot;,&#x000A;  &quot;event_type&quot; : &quot;arrival&quot;,&#x000A;  &quot;amount&quot; : 55,&#x000A;  &quot;uuid&quot; : $UUID,&#x000A;  &quot;body&quot; : { &quot;note&quot; : &quot;This object represents that 55 items specified by `menu_item_id` has arrived&quot; },&#x000A;}</pre>
             </div>
           </div>
         </div>
@@ -829,13 +831,14 @@
           <div class='row'>
             <div class='span8'>
               <h4>Request</h4>
-              <pre>{&#x000A;  &quot;events&quot;: [&#x000A;    {&#x000A;      &quot;menu_item_id&quot;: 2,&#x000A;      &quot;app_created_at&quot; : &quot;2012-02-14T00:00:00Z&quot;,&#x000A;      &quot;event_type&quot; : &quot;arrival&quot;,&#x000A;      &quot;amount&quot; : 55,&#x000A;      &quot;uuid&quot; : $UUID,&#x000A;      &quot;body&quot; : { &quot;memo&quot; : &quot;Memo Memo&quot; },&#x000A;    },&#x000A;    ...&#x000A;  ]&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;events&quot;: [&#x000A;    {&#x000A;      &quot;menu_item_id&quot;: 2,&#x000A;      &quot;app_created_at&quot; : &quot;2012-02-14T00:00:00Z&quot;,&#x000A;      &quot;inventory_at&quot; : &quot;2012-02-14T01:00:00Z&quot;,&#x000A;      &quot;event_type&quot; : &quot;arrival&quot;,&#x000A;      &quot;amount&quot; : 55,&#x000A;      &quot;uuid&quot; : $UUID,&#x000A;      &quot;body&quot; : { &quot;memo&quot; : &quot;Memo Memo&quot; },&#x000A;    },&#x000A;    ...&#x000A;  ]&#x000A;}</pre>
             </div>
             <div class='span8'>
               <h4>Fields</h4>
               <dl>
                 <dt>menu_item_id</dt>
                 <dt>app_created_at (<em>WriteOnly</em>)</dt>
+                <dt>inventory_at</dt>
                 <dt>event_type</dt>
                 <dd>Either "inventory",  "arrival", "shipping", or "order" can be specified.</dd>
                 <dt>amount</dt>

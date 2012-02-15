@@ -649,6 +649,8 @@
           %dd ID of the menu item associated with the event.
           %dt app_created_at
           %dd Time when the event has been created in a client app.  <em>WriteOnly</em>
+          %dt inventory_at
+          %dd Time when the inentory event has occured.  It maybe different from app_created_at.
           %dt event_type
           %dd Type of the event (either "inventory", "arrival", "shipping", or "order").
           %dt amount
@@ -674,6 +676,7 @@
                 "id" : 1,
                 "menu_item_id" : 2,
                 "app_created_at" : "2012-02-14T00:00:00Z",
+                "inventory__at" : "2012-02-14T01:00:00Z",
                 "event_type" : "arrival",
                 "amount" : 55,
                 "uuid" : $UUID,
@@ -1163,6 +1166,7 @@
                   {
                     "menu_item_id": 2,
                     "app_created_at" : "2012-02-14T00:00:00Z",
+                    "inventory_at" : "2012-02-14T01:00:00Z",
                     "event_type" : "arrival",
                     "amount" : 55,
                     "uuid" : $UUID,
@@ -1177,6 +1181,7 @@
         %dl
           %dt menu_item_id
           %dt app_created_at (<em>WriteOnly</em>)
+          %dt inventory_at
           %dt event_type
           %dd Either "inventory",  "arrival", "shipping", or "order" can be specified.
           %dt amount
