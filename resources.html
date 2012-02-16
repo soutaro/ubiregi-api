@@ -222,6 +222,80 @@
               <pre>{&#x000A;  &quot;id&quot;: 123,&#x000A;  &quot;name&quot;: &quot;Table 1&quot;,&#x000A;  &quot;position&quot;: 3,&#x000A;}</pre>
             </div>
           </div>
+          <h2>Customer</h2>
+          <p>A customer object associated with an account.
+          This can be used to send/retrieve a customer information to/from an account.</p>
+          <div class='row'>
+            <div class='span8'>
+              <h3>Fields</h3>
+              <dl>
+                <dt>id</dt>
+                <dd>ID of the object.</dd>
+                <dt>account_id</dt>
+                <dd>Account id which this customer is associated with.</dd>
+                <dt>account_name</dt>
+                <dd>Name of the account specified by `account_id`.  <em>ReadOnly</em></dd>
+                <dt>fields</dt>
+                <dd>An array of customer field object.</dd>
+                <dt>guid</dt>
+                <dd>GUID.</dd>
+              </dl>
+            </div>
+            <div class='span8'>
+              <h3>Example</h3>
+              <pre>{&#x000A;  &quot;id&quot;: 100,&#x000A;  &quot;account_id&quot;: 2,&#x000A;  &quot;account_name&quot;: &quot;A Curry Rice Shop&quot;,&#x000A;  &quot;fields&quot;: [$customer_field,...],&#x000A;  &quot;guid&quot;: $UUID-like-sequence&#x000A;}</pre>
+            </div>
+          </div>
+          <h2>Customer Field</h2>
+          <p>A customer field belongs to a customer.
+          This is mainly used to be included in a customer object.</p>
+          <div class='row'>
+            <div class='span8'>
+              <h3>Fields</h3>
+              <dl>
+                <dt>customer_id</dt>
+                <dd>ID of customer which the field belongs to.</dd>
+                <dt>guid</dt>
+                <dd>GUID.</dd>
+                <dt>app_created_at</dt>
+                <dd>Time when the field has been created in a client app.  <em>WriteOnly</em></dd>
+                <dt>name</dt>
+                <dd>
+                  Name of the field.  The value of this field is one of the followings:
+                  <dl>
+                    <dt>"customer.field.customerID"</dt>
+                    <dd>key string representing customer id.</dd>
+                    <dt>"customer.field.name"</dt>
+                    <dd>key string representing customer's name.</dd>
+                    <dt>"customer.field.ruby"</dt>
+                    <dd>key string representing customer's ruby.</dd>
+                    <dt>"customer.field.birthday"</dt>
+                    <dd>key string representing customer's birthday.</dd>
+                    <dt>"customer.field.sex"</dt>
+                    <dd>key string representing customer's sex.</dd>
+                    <dt>"customer.field.email"</dt>
+                    <dd>key string representing customer's email address.</dd>
+                    <dt>"customer.field.phone"</dt>
+                    <dd>key string representing customer's phone number.</dd>
+                    <dt>"customer.field.twitter"</dt>
+                    <dd>key string representing customer's twitter id.</dd>
+                    <dt>"customer.field.zip"</dt>
+                    <dd>key string representing customer's zip code.</dd>
+                    <dt>"customer.field.address1"</dt>
+                    <dd>key string representing customer's address (1).</dd>
+                    <dt>"customer.field.address2"</dt>
+                    <dd>key string representing customer's address (2).</dd>
+                  </dl>
+                </dd>
+                <dt>value</dt>
+                <dd>Value of the field.</dd>
+              </dl>
+            </div>
+            <div class='span8'>
+              <h3>Example</h3>
+              <pre>{&#x000A;  &quot;customer_id&quot;: 1,&#x000A;  &quot;guid&quot;: $UUID-like-sequence,&#x000A;  &quot;app_created_at&quot;: &quot;2012-02-14T00:00:00Z&quot;,&#x000A;  &quot;name&quot;: &quot;customer.field.name&quot;,&#x000A;  &quot;value&quot;: &quot;Ubiregi Taro&quot;&#x000A;}</pre>
+            </div>
+          </div>
           <h2>Customer Tag</h2>
           <p>Tags to give various information on checkouts.
           This can be used to record that <em>the customer is 20th girl</em>, <em>they came for dating</em>, and so on.</p>
@@ -817,7 +891,29 @@
           <h2>/customers</h2>
           <p>Collection of customers available for the account.</p>
           <h3>GET on /customers</h3>
+          <p>Retrieve collection of all customers available for the account.</p>
           <h3>POST on /customers</h3>
+          <p>Create/Update information of new customers available for the account.</p>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Request</h4>
+              <pre>{&#x000A;  &quot;customers&quot;: [&#x000A;    {&#x000A;      &quot;menu_item_id&quot;: 2,&#x000A;      &quot;app_created_at&quot; : &quot;2012-02-14T00:00:00Z&quot;,&#x000A;      &quot;inventory_at&quot; : &quot;2012-02-14T01:00:00Z&quot;,&#x000A;      &quot;event_type&quot; : &quot;arrival&quot;,&#x000A;      &quot;amount&quot; : 55,&#x000A;      &quot;uuid&quot; : $UUID,&#x000A;      &quot;body&quot; : { &quot;memo&quot; : &quot;Memo Memo&quot; },&#x000A;    },&#x000A;    ...&#x000A;  ]&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <h4>Fields</h4>
+              <dl>
+                <dt>menu_item_id</dt>
+                <dt>app_created_at (<em>WriteOnly</em>)</dt>
+                <dt>inventory_at</dt>
+                <dt>event_type</dt>
+                <dd>Either "inventory",  "arrival", "shipping", or "order" can be specified.</dd>
+                <dt>amount</dt>
+                <dt>uuid</dt>
+                <dt>body</dt>
+                <dd>arbitrary JSON object.</dd>
+              </dl>
+            </div>
+          </div>
           <h2>/customers/notes</h2>
           <p>Collection of customer notes associated with <code>/customers</code>.</p>
           <h3>GET on /customers/notes</h3>

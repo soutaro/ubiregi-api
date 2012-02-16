@@ -252,6 +252,100 @@
                 "position": 3,
               }
 
+    %h2 Customer
+
+    :markdown
+      A customer object associated with an account.
+      This can be used to send/retrieve a customer information to/from an account.
+
+    .row
+      .span8
+        %h3 Fields
+
+        %dl
+          %dt id
+          %dd ID of the object.
+          %dt account_id
+          %dd Account id which this customer is associated with.
+          %dt account_name
+          %dd Name of the account specified by `account_id`.  <em>ReadOnly</em>
+          %dt fields
+          %dd An array of customer field object.
+          %dt guid
+          %dd GUID.
+      .span8
+        %h3 Example
+
+        %pre
+          = preserve do
+            :escaped
+              {
+                "id": 100,
+                "account_id": 2,
+                "account_name": "A Curry Rice Shop",
+                "fields": [$customer_field,...],
+                "guid": $UUID-like-sequence
+              }
+
+    %h2 Customer Field
+
+    :markdown
+      A customer field belongs to a customer.
+      This is mainly used to be included in a customer object.
+
+    .row
+      .span8
+        %h3 Fields
+
+        %dl
+          %dt customer_id
+          %dd ID of customer which the field belongs to.
+          %dt guid
+          %dd GUID.
+          %dt app_created_at
+          %dd Time when the field has been created in a client app.  <em>WriteOnly</em>
+          %dt name
+          %dd 
+            Name of the field.  The value of this field is one of the followings:
+            %dl
+              %dt "customer.field.customerID"
+              %dd key string representing customer id.
+              %dt "customer.field.name"
+              %dd key string representing customer's name.
+              %dt "customer.field.ruby"
+              %dd key string representing customer's ruby.
+              %dt "customer.field.birthday"
+              %dd key string representing customer's birthday.
+              %dt "customer.field.sex"
+              %dd key string representing customer's sex.
+              %dt "customer.field.email"
+              %dd key string representing customer's email address.
+              %dt "customer.field.phone"
+              %dd key string representing customer's phone number.
+              %dt "customer.field.twitter"
+              %dd key string representing customer's twitter id.
+              %dt "customer.field.zip"
+              %dd key string representing customer's zip code.
+              %dt "customer.field.address1"
+              %dd key string representing customer's address (1).
+              %dt "customer.field.address2"
+              %dd key string representing customer's address (2).
+          %dt value
+          %dd Value of the field.
+      .span8
+        %h3 Example
+        
+        %pre
+          = preserve do
+            :escaped
+              {
+                "customer_id": 1,
+                "guid": $UUID-like-sequence,
+                "app_created_at": "2012-02-14T00:00:00Z",
+                "name": "customer.field.name",
+                "value": "Ubiregi Taro"
+              }
+
     %h2 Customer Tag
 
     :markdown
@@ -1131,7 +1225,50 @@
       Collection of customers available for the account.
 
     %h3 GET on /customers
+
+    :markdown
+
+      Retrieve collection of all customers available for the account.
+
     %h3 POST on /customers
+
+    :markdown
+
+      Create/Update information of new customers available for the account.
+
+    .row
+      .span8
+        %h4 Request
+        %pre
+          = preserve do
+            :escaped
+              {
+                "customers": [
+                  {
+                    "menu_item_id": 2,
+                    "app_created_at" : "2012-02-14T00:00:00Z",
+                    "inventory_at" : "2012-02-14T01:00:00Z",
+                    "event_type" : "arrival",
+                    "amount" : 55,
+                    "uuid" : $UUID,
+                    "body" : { "memo" : "Memo Memo" },
+                  },
+                  ...
+                ]
+              }
+      .span8
+        %h4 Fields
+
+        %dl
+          %dt menu_item_id
+          %dt app_created_at (<em>WriteOnly</em>)
+          %dt inventory_at
+          %dt event_type
+          %dd Either "inventory",  "arrival", "shipping", or "order" can be specified.
+          %dt amount
+          %dt uuid
+          %dt body
+          %dd arbitrary JSON object.
     
     %h2 /customers/notes
     
