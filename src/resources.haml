@@ -269,7 +269,7 @@
           %dd Account id which this customer is associated with.
           %dt account_name
           %dd Name of the account specified by `account_id`.  <em>ReadOnly</em>
-          %dt fields
+          %dt fields_attributes
           %dd An array of customer field object.
           %dt guid
           %dd GUID.
@@ -283,7 +283,7 @@
                 "id": 100,
                 "account_id": 2,
                 "account_name": "A Curry Rice Shop",
-                "fields": [$customer_field,...],
+                "fields_attributes": $customer_fields,
                 "guid": $UUID-like-sequence
               }
 
@@ -876,7 +876,7 @@
             :escaped
               {
                 "timestamp": "2011-11-02T09:11:12Z",
-                "cashiers" : [ $cashier1, $cashier2, ...  ]
+                "cashiers" : $cashiers
               }
       .span8
         %p
@@ -909,8 +909,7 @@
                     "name": "Dating",
                     "position": 10,
                     "icon_name": $icon_name,
-                  },
-                  ...
+                  }
                 ]
               }
       .span8
@@ -934,7 +933,7 @@
             :escaped
               {
                 "timestamp": "2011-11-02T09:11:12Z",
-                "customer_tags" : [ $customer_tag1, $customer_tag2, ...  ]
+                "customer_tags" : $customer_tags
               }
       .span8
         %p
@@ -1024,7 +1023,7 @@
             :escaped
               {
                 "timestamp": "2011-11-02T09:11:12Z",
-                "items" : [ $item1, $item2, ...  ]
+                "items" : $items
               }
       .span8
         %p
@@ -1083,7 +1082,7 @@
             :escaped
               {
                 "timestamp": "2011-11-02T09:11:12Z",
-                "categories" : [ $category1, $category2, ...  ]
+                "categories" : $categories
               }
       .span8
         %p
@@ -1245,30 +1244,47 @@
               {
                 "customers": [
                   {
-                    "menu_item_id": 2,
-                    "app_created_at" : "2012-02-14T00:00:00Z",
-                    "inventory_at" : "2012-02-14T01:00:00Z",
-                    "event_type" : "arrival",
-                    "amount" : 55,
-                    "uuid" : $UUID,
-                    "body" : { "memo" : "Memo Memo" },
-                  },
-                  ...
+                    "account_id": 1, 
+                    "guid": $UUID-like-sequence,
+                    "deleted": false,
+                    "fields_attributes": [
+                      "customer_id": 10,
+                      "guid": "2012-02-15-abcdefg",
+                      "app_created_at": "2012-02-14T00:00Z",
+                      "deleted": false,
+                      "name": "customer.field.name",
+                      "value": "SPJ"
+                    ]
+                  }
                 ]
               }
       .span8
         %h4 Fields
 
         %dl
-          %dt menu_item_id
-          %dt app_created_at (<em>WriteOnly</em>)
-          %dt inventory_at
-          %dt event_type
-          %dd Either "inventory",  "arrival", "shipping", or "order" can be specified.
-          %dt amount
-          %dt uuid
-          %dt body
-          %dd arbitrary JSON object.
+          %dt account_id
+          %dt guid
+          %dt deleted
+          %dt fields_attributes
+          %dd Array of customer field
+
+    .row
+      .span8
+        %h4 Response
+        %pre
+          = preserve do
+            :escaped
+              {
+                "timestamp": "2012-02-14T09:00:00Z",
+                "customers" : $customers
+              }
+      .span8
+        %p
+          The order of the customer objects are preserved.
+
+        %p
+          The update/creation is transactional.
+          There are only two cases; everything processed successfully, or nothing changed since an error found.
     
     %h2 /customers/notes
     
@@ -1308,8 +1324,7 @@
                     "amount" : 55,
                     "uuid" : $UUID,
                     "body" : { "memo" : "Memo Memo" },
-                  },
-                  ...
+                  }
                 ]
               }
       .span8
@@ -1334,7 +1349,7 @@
             :escaped
               {
                 "timestamp": "2012-02-14T09:00:00Z",
-                "events" : [ $event1, $event2, ...  ]
+                "events" : $events
               }
       .span8
         %p

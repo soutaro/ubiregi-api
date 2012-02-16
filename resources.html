@@ -235,7 +235,7 @@
                 <dd>Account id which this customer is associated with.</dd>
                 <dt>account_name</dt>
                 <dd>Name of the account specified by `account_id`.  <em>ReadOnly</em></dd>
-                <dt>fields</dt>
+                <dt>fields_attributes</dt>
                 <dd>An array of customer field object.</dd>
                 <dt>guid</dt>
                 <dd>GUID.</dd>
@@ -243,7 +243,7 @@
             </div>
             <div class='span8'>
               <h3>Example</h3>
-              <pre>{&#x000A;  &quot;id&quot;: 100,&#x000A;  &quot;account_id&quot;: 2,&#x000A;  &quot;account_name&quot;: &quot;A Curry Rice Shop&quot;,&#x000A;  &quot;fields&quot;: [$customer_field,...],&#x000A;  &quot;guid&quot;: $UUID-like-sequence&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;id&quot;: 100,&#x000A;  &quot;account_id&quot;: 2,&#x000A;  &quot;account_name&quot;: &quot;A Curry Rice Shop&quot;,&#x000A;  &quot;fields_attributes&quot;: $customer_fields,&#x000A;  &quot;guid&quot;: $UUID-like-sequence&#x000A;}</pre>
             </div>
           </div>
           <h2>Customer Field</h2>
@@ -676,7 +676,7 @@
           <div class='row'>
             <div class='span8'>
               <h4>Response</h4>
-              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:12Z&quot;,&#x000A;  &quot;cashiers&quot; : [ $cashier1, $cashier2, ...  ]&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:12Z&quot;,&#x000A;  &quot;cashiers&quot; : $cashiers&#x000A;}</pre>
             </div>
             <div class='span8'>
               <p>
@@ -695,7 +695,7 @@
           <div class='row'>
             <div class='span8'>
               <h4>Request</h4>
-              <pre>{&#x000A;  &quot;customer_tags&quot;: [&#x000A;    {&#x000A;      &quot;id&quot;: &quot;1&quot;,&#x000A;      &quot;name&quot;: &quot;Dating&quot;,&#x000A;      &quot;position&quot;: 10,&#x000A;      &quot;icon_name&quot;: $icon_name,&#x000A;    },&#x000A;    ...&#x000A;  ]&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;customer_tags&quot;: [&#x000A;    {&#x000A;      &quot;id&quot;: &quot;1&quot;,&#x000A;      &quot;name&quot;: &quot;Dating&quot;,&#x000A;      &quot;position&quot;: 10,&#x000A;      &quot;icon_name&quot;: $icon_name,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
             </div>
             <div class='span8'>
               <h4>Fields</h4>
@@ -715,7 +715,7 @@
           <div class='row'>
             <div class='span8'>
               <h4>Response</h4>
-              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:12Z&quot;,&#x000A;  &quot;customer_tags&quot; : [ $customer_tag1, $customer_tag2, ...  ]&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:12Z&quot;,&#x000A;  &quot;customer_tags&quot; : $customer_tags&#x000A;}</pre>
             </div>
             <div class='span8'>
               <p>
@@ -768,7 +768,7 @@
           <div class='row'>
             <div class='span8'>
               <h4>Response</h4>
-              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:12Z&quot;,&#x000A;  &quot;items&quot; : [ $item1, $item2, ...  ]&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:12Z&quot;,&#x000A;  &quot;items&quot; : $items&#x000A;}</pre>
             </div>
             <div class='span8'>
               <p>
@@ -809,7 +809,7 @@
           <div class='row'>
             <div class='span8'>
               <h4>Response</h4>
-              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:12Z&quot;,&#x000A;  &quot;categories&quot; : [ $category1, $category2, ...  ]&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:12Z&quot;,&#x000A;  &quot;categories&quot; : $categories&#x000A;}</pre>
             </div>
             <div class='span8'>
               <p>
@@ -897,21 +897,32 @@
           <div class='row'>
             <div class='span8'>
               <h4>Request</h4>
-              <pre>{&#x000A;  &quot;customers&quot;: [&#x000A;    {&#x000A;      &quot;menu_item_id&quot;: 2,&#x000A;      &quot;app_created_at&quot; : &quot;2012-02-14T00:00:00Z&quot;,&#x000A;      &quot;inventory_at&quot; : &quot;2012-02-14T01:00:00Z&quot;,&#x000A;      &quot;event_type&quot; : &quot;arrival&quot;,&#x000A;      &quot;amount&quot; : 55,&#x000A;      &quot;uuid&quot; : $UUID,&#x000A;      &quot;body&quot; : { &quot;memo&quot; : &quot;Memo Memo&quot; },&#x000A;    },&#x000A;    ...&#x000A;  ]&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;customers&quot;: [&#x000A;    {&#x000A;      &quot;account_id&quot;: 1, &#x000A;      &quot;guid&quot;: $UUID-like-sequence,&#x000A;      &quot;deleted&quot;: false,&#x000A;      &quot;fields_attributes&quot;: [&#x000A;        &quot;customer_id&quot;: 10,&#x000A;        &quot;guid&quot;: &quot;2012-02-15-abcdefg&quot;,&#x000A;        &quot;app_created_at&quot;: &quot;2012-02-14T00:00Z&quot;,&#x000A;        &quot;deleted&quot;: false,&#x000A;        &quot;name&quot;: &quot;customer.field.name&quot;,&#x000A;        &quot;value&quot;: &quot;SPJ&quot;&#x000A;      ]&#x000A;    }&#x000A;  ]&#x000A;}</pre>
             </div>
             <div class='span8'>
               <h4>Fields</h4>
               <dl>
-                <dt>menu_item_id</dt>
-                <dt>app_created_at (<em>WriteOnly</em>)</dt>
-                <dt>inventory_at</dt>
-                <dt>event_type</dt>
-                <dd>Either "inventory",  "arrival", "shipping", or "order" can be specified.</dd>
-                <dt>amount</dt>
-                <dt>uuid</dt>
-                <dt>body</dt>
-                <dd>arbitrary JSON object.</dd>
+                <dt>account_id</dt>
+                <dt>guid</dt>
+                <dt>deleted</dt>
+                <dt>fields_attributes</dt>
+                <dd>Array of customer field</dd>
               </dl>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Response</h4>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2012-02-14T09:00:00Z&quot;,&#x000A;  &quot;customers&quot; : $customers&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <p>
+                The order of the customer objects are preserved.
+              </p>
+              <p>
+                The update/creation is transactional.
+                There are only two cases; everything processed successfully, or nothing changed since an error found.
+              </p>
             </div>
           </div>
           <h2>/customers/notes</h2>
@@ -927,7 +938,7 @@
           <div class='row'>
             <div class='span8'>
               <h4>Request</h4>
-              <pre>{&#x000A;  &quot;events&quot;: [&#x000A;    {&#x000A;      &quot;menu_item_id&quot;: 2,&#x000A;      &quot;app_created_at&quot; : &quot;2012-02-14T00:00:00Z&quot;,&#x000A;      &quot;inventory_at&quot; : &quot;2012-02-14T01:00:00Z&quot;,&#x000A;      &quot;event_type&quot; : &quot;arrival&quot;,&#x000A;      &quot;amount&quot; : 55,&#x000A;      &quot;uuid&quot; : $UUID,&#x000A;      &quot;body&quot; : { &quot;memo&quot; : &quot;Memo Memo&quot; },&#x000A;    },&#x000A;    ...&#x000A;  ]&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;events&quot;: [&#x000A;    {&#x000A;      &quot;menu_item_id&quot;: 2,&#x000A;      &quot;app_created_at&quot; : &quot;2012-02-14T00:00:00Z&quot;,&#x000A;      &quot;inventory_at&quot; : &quot;2012-02-14T01:00:00Z&quot;,&#x000A;      &quot;event_type&quot; : &quot;arrival&quot;,&#x000A;      &quot;amount&quot; : 55,&#x000A;      &quot;uuid&quot; : $UUID,&#x000A;      &quot;body&quot; : { &quot;memo&quot; : &quot;Memo Memo&quot; },&#x000A;    }&#x000A;  ]&#x000A;}</pre>
             </div>
             <div class='span8'>
               <h4>Fields</h4>
@@ -947,7 +958,7 @@
           <div class='row'>
             <div class='span8'>
               <h4>Response</h4>
-              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2012-02-14T09:00:00Z&quot;,&#x000A;  &quot;events&quot; : [ $event1, $event2, ...  ]&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2012-02-14T09:00:00Z&quot;,&#x000A;  &quot;events&quot; : $events&#x000A;}</pre>
             </div>
             <div class='span8'>
               <p>
