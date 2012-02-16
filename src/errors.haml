@@ -19,6 +19,14 @@
   %dd The request does not contains valid authentication token for your application.
   %dt 402 (Payment required)
   %dd The account's subscriptions are all expired.
+  %dt 403 (Forbidden)
+  %dd 
+    Your request is rejected by the server.  For example, if you modify read-only
+    attribute, status code 403 is returned.
+  %dt 404 (Not Found)
+  %dd 
+    Resources client want to require is not found.  If the status code is 404,
+    we recommend you to check account id, menu id, customer id, and so on in request JSON.
 
 %h2 JSON body example
 
@@ -27,10 +35,7 @@
     :escaped
       [
         {
-          "resource": "https://ubiregi.com/api/3/menus/1",
-          "errors": {
-            "*": ["permission denied"],
-          }
+          "reason": "you are not allowed to change the information of this account"
         }
       ]
 
@@ -39,10 +44,6 @@
     :escaped
       [
         {
-          "resource": "https://ubiregi.com/api/3/menus/items/134",
-          "errors": {
-            "name": ["can't be blank"],
-            "price": ["should be a number"],
-          }
-        },
+          "reason": "the resource you requested was not found"
+        }
       ]

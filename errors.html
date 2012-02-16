@@ -44,10 +44,20 @@
         <dd>The request does not contains valid authentication token for your application.</dd>
         <dt>402 (Payment required)</dt>
         <dd>The account's subscriptions are all expired.</dd>
+        <dt>403 (Forbidden)</dt>
+        <dd>
+          Your request is rejected by the server.  For example, if you modify read-only
+          attribute, status code 403 is returned.
+        </dd>
+        <dt>404 (Not Found)</dt>
+        <dd>
+          Resources client want to require is not found.  If the status code is 404,
+          we recommend you to check account id, menu id, customer id, and so on in request JSON.
+        </dd>
       </dl>
       <h2>JSON body example</h2>
-      <pre>[&#x000A;  {&#x000A;    &quot;resource&quot;: &quot;https://ubiregi.com/api/3/menus/1&quot;,&#x000A;    &quot;errors&quot;: {&#x000A;      &quot;*&quot;: [&quot;permission denied&quot;],&#x000A;    }&#x000A;  }&#x000A;]</pre>
-      <pre>[&#x000A;  {&#x000A;    &quot;resource&quot;: &quot;https://ubiregi.com/api/3/menus/items/134&quot;,&#x000A;    &quot;errors&quot;: {&#x000A;      &quot;name&quot;: [&quot;can't be blank&quot;],&#x000A;      &quot;price&quot;: [&quot;should be a number&quot;],&#x000A;    }&#x000A;  },&#x000A;]</pre>
+      <pre>[&#x000A;  {&#x000A;    &quot;reason&quot;: &quot;you are not allowed to change the information of this account&quot;&#x000A;  }&#x000A;]</pre>
+      <pre>[&#x000A;  {&#x000A;    &quot;reason&quot;: &quot;the resource you requested was not found&quot;&#x000A;  }&#x000A;]</pre>
       <hr />
       <div class='row' style='text-align:center; margin-bottom:2em'>
         &copy; 2011 Ubiregi Inc. All rights reserved.
