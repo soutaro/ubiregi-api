@@ -359,15 +359,16 @@
           %dt id
           %dd ID of this object.
           %dt customer_id
-          %dd ID to which thie object belongs.
-          %dt guid
+          %dd ID which thie object belongs to.
+          %dd app_created_at (<em>required</em> and <em>WriteOnly</em>)
+          %dt Time when the note is created in a client app
+          %dt guid (<em>required</em>)
           %dd GUID
           %dt checkout_id
-          %dt kind
+          %dt kind (<em>ReadOnly</em>)
           %dt note
           %dt photo
-          %dt checkout_summary (<em>ReadOnly</em>)
-          %dd Checkout Summary object of the customer
+          %dt checkout_summary
       .span8
         %h3 Example
         
@@ -377,6 +378,7 @@
               {
                 "id": 1,
                 "customer_id": 1,
+                "app_created_at": "2012-02-14T00:00:00Z",
                 "guid": $UUID-like-sequence,
                 "checkout_id": 2,
                 "kind": 2,
@@ -1335,7 +1337,7 @@
     :markdown
       Retrieve collection of customer notes of all customers available for the account.
 
-    %h3 POST on /customers/:customer_id/notes
+    %h3 POST on /customers/notes
 
     :markdown
       Create/Update customer notes specified by `:customer_id` for the account.
