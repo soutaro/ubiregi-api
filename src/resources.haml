@@ -449,8 +449,8 @@
           %dt kind
           %dd
             :markdown
-              `CASH` | `CARD` | `OTHER`  
-              One `CASH` kind payment type exists all accounts.
+              "CASH" | "CARD" | "OTHER"
+              "CASH" kind payment type exists in all accounts.
 
       .span8
         %h3 Example
@@ -1451,6 +1451,58 @@
               {
                 "timestamp": "2012-02-14T09:00:00Z",
                 "events" : $events
+              }
+      .span8
+        %p
+          The order of the event objects are preserved.
+
+        %p
+          The update/creation is transactional.
+          There are only two cases; everything processed successfully, or nothing changed since an error found.
+
+    %h3 POST on /accounts/:account_id/payment_types
+
+    :markdown
+      Change payment type of the account specified by `:account_id`.
+
+    .row
+      .span8
+        %h4 Request
+        %pre
+          = preserve do
+            :escaped
+              {
+                "payment_types": [
+                  {
+                    "id": 1,
+                    "name": "Book Coupon"",
+                    "change": true,
+                    "kind": "OTHER"
+                  }
+                ]
+              }
+      .span8
+        %h4 Fields
+
+        %dl
+          %dt id
+          %dd ID of the payment type
+          %dt name
+          %dd Name of the payment type
+          %dt change
+          %dd Whether customer will received changes or not.  If true, customer will receive change.
+          %dt kind
+          %dd Either "CASH", "CARD", or "Other" can be specified.
+
+    .row
+      .span8
+        %h4 Response
+        %pre
+          = preserve do
+            :escaped
+              {
+                "timestamp": "2012-02-14T09:00:00Z",
+                "payment_types" : $payment_types
               }
       .span8
         %p

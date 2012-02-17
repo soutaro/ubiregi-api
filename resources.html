@@ -368,8 +368,8 @@
                 </dd>
                 <dt>kind</dt>
                 <dd>
-                  <p><code>CASH</code> | <code>CARD</code> | <code>OTHER</code><br/>
-                  One <code>CASH</code> kind payment type exists all accounts.</p>
+                  <p>"CASH" | "CARD" | "OTHER"
+                  "CASH" kind payment type exists in all accounts.</p>
                 </dd>
               </dl>
             </div>
@@ -1024,6 +1024,42 @@
             <div class='span8'>
               <h4>Response</h4>
               <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2012-02-14T09:00:00Z&quot;,&#x000A;  &quot;events&quot; : $events&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <p>
+                The order of the event objects are preserved.
+              </p>
+              <p>
+                The update/creation is transactional.
+                There are only two cases; everything processed successfully, or nothing changed since an error found.
+              </p>
+            </div>
+          </div>
+          <h3>POST on /accounts/:account_id/payment_types</h3>
+          <p>Change payment type of the account specified by <code>:account_id</code>.</p>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Request</h4>
+              <pre>{&#x000A;  &quot;payment_types&quot;: [&#x000A;    {&#x000A;      &quot;id&quot;: 1,&#x000A;      &quot;name&quot;: &quot;Book Coupon&quot;&quot;,&#x000A;      &quot;change&quot;: true,&#x000A;      &quot;kind&quot;: &quot;OTHER&quot;&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <h4>Fields</h4>
+              <dl>
+                <dt>id</dt>
+                <dd>ID of the payment type</dd>
+                <dt>name</dt>
+                <dd>Name of the payment type</dd>
+                <dt>change</dt>
+                <dd>Whether customer will received changes or not.  If true, customer will receive change.</dd>
+                <dt>kind</dt>
+                <dd>Either "CASH", "CARD", or "Other" can be specified.</dd>
+              </dl>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Response</h4>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2012-02-14T09:00:00Z&quot;,&#x000A;  &quot;payment_types&quot; : $payment_types&#x000A;}</pre>
             </div>
             <div class='span8'>
               <p>
