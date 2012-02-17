@@ -358,10 +358,10 @@
         %dl
           %dt id
           %dd ID of this object.
-          %dt customer_id
+          %dt customer_id (<em>required</em>)
           %dd ID which thie object belongs to.
-          %dd app_created_at (<em>required</em> and <em>WriteOnly</em>)
-          %dt Time when the note is created in a client app
+          %dt app_created_at (<em>required</em> and <em>WriteOnly</em>)
+          %dd Time when the note is created in a client app
           %dt guid (<em>required</em>)
           %dd GUID
           %dt checkout_id
@@ -1341,6 +1341,59 @@
 
     :markdown
       Create/Update customer notes specified by `:customer_id` for the account.
+
+    .row
+      .span8
+        %h4 Request
+        %pre
+          = preserve do
+            :escaped
+              {
+                "notes": [
+                  {
+                    "id": 1,
+                    "customer_id": 1, 
+                    "guid": $UUID-like-sequence,
+                    "app_created_at": "2012-02-17T00:00Z",
+                    "checkout_id": 2,
+                    "note": "Memo Memo"
+                  }
+                ]
+              }
+        %h4 Fields
+        %dl
+          %dt id
+          %dd ID of this object.
+          %dt customer_id (<em>required</em>)
+          %dd ID which thie object belongs to.
+          %dd app_created_at (<em>required</em> and <em>WriteOnly</em>)
+          %dt Time when the note is created in a client app
+          %dt guid (<em>required</em>)
+          %dd GUID
+          %dt checkout_id
+          %dt kind (<em>ReadOnly</em>)
+          %dt note
+          %dt photo
+          %dt checkout_summary (<em>ReadOnly</em>)
+
+    .row
+      .span8
+        %h4 Response
+        %pre
+          = preserve do
+            :escaped
+              {
+                "timestamp": "2012-02-17T00:10:00Z",
+                "notes" : $notes
+              }
+      .span8
+        %p
+          The order of the customer note objects are preserved.
+
+        %p
+          The update/creation is transactional.
+          There are only two cases; everything processed successfully, or nothing changed since an error found.
+
 
     %h2 /accounts/:account_id/stocks/events
 
