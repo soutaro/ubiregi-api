@@ -346,6 +346,44 @@
                 "value": "Ubiregi Taro"
               }
 
+    %h2 Customer Note
+
+    :markdown
+      A customer note belongs to a customer.
+
+    .row
+      .span8
+        %h3 Fields
+
+        %dl
+          %dt id
+          %dd ID of this object.
+          %dt customer_id
+          %dd ID to which thie object belongs.
+          %dt guid
+          %dd GUID
+          %dt checkout_id
+          %dt kind
+          %dt note
+          %dt photo
+          %dt checkout_summary
+      .span8
+        %h3 Example
+        
+        %pre
+          = preserve do
+            :escaped
+              {
+                "id": 1,
+                "customer_id": 1,
+                "guid": $UUID-like-sequence,
+                "checkout_id": 2,
+                "kind": 2,
+                "note": "Memo Memo",
+                "photo": $base64Encoded,
+                "checkout_summary": "Summary"
+              }
+
     %h2 Customer Tag
 
     :markdown
@@ -1292,7 +1330,14 @@
       Collection of customer notes associated with `/customers`.
 
     %h3 GET on /customers/notes
-    %h3 POST on /customers/:id/notes
+
+    :markdown
+      Retrieve collection of customer notes of all customers available for the account.
+
+    %h3 POST on /customers/:customer_id/notes
+
+    :markdown
+      Create/Update customer notes specified by `:customer_id` for the account.
 
     %h2 /accounts/:account_id/stocks/events
 
