@@ -54,6 +54,10 @@
             <dd>This annotation represents boolean values.  A value of boolean type is either <em>true</em> or <em>false</em>.</dd>
           </dl>
           <h3>Compound types</h3>
+          <dl>
+            <dt>array of $type</dt>
+            <dd>array of values which type is $type.</dd>
+          </dl>
           <h2>Meta variables</h2>
           <dl>
             <dt>$<em>type</em></dt>
@@ -199,15 +203,15 @@
                 <dd>Footer text to be printed on receipt.</dd>
                 <dt>receipt_logo</dt>
                 <dd>Base64 encoded logo image to be printed on receipt.</dd>
-                <dt>menus :: [integer]</dt>
+                <dt>menus ::  array of integer</dt>
                 <dd>Array of menu ids.</dd>
-                <dt>tables :: [$table]</dt>
+                <dt>tables ::  array of $table</dt>
                 <dd>Array of tables.</dd>
-                <dt>customer_tags :: [$customer_tag]</dt>
+                <dt>customer_tags :: array of $customer_tag</dt>
                 <dd>Array of customer tags.</dd>
-                <dt>payment_types :: [$payment_type]</dt>
+                <dt>payment_types :: array of $payment_type</dt>
                 <dd>Array of payment types.</dd>
-                <dt>cashiers :: [$cashier]</dt>
+                <dt>cashiers :: array of $cashier</dt>
                 <dd>Array of cashiers.</dd>
                 <dt>friends</dt>
                 <dd>Array of parent or child accounts.</dd>

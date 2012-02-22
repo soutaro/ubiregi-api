@@ -28,7 +28,10 @@
       %dd This annotation represents boolean values.  A value of boolean type is either <em>true</em> or <em>false</em>.
 
     %h3 Compound types
-    
+
+    %dl
+      %dt array of $type
+      %dd array of values which type is $type.
 
     %h2 Meta variables
 
@@ -204,15 +207,15 @@
           %dd Footer text to be printed on receipt.
           %dt receipt_logo
           %dd Base64 encoded logo image to be printed on receipt.
-          %dt menus :: [integer]
+          %dt menus ::  array of integer
           %dd Array of menu ids.
-          %dt tables :: [$table]
+          %dt tables ::  array of $table
           %dd Array of tables.
-          %dt customer_tags :: [$customer_tag]
+          %dt customer_tags :: array of $customer_tag
           %dd Array of customer tags.
-          %dt payment_types :: [$payment_type]
+          %dt payment_types :: array of $payment_type
           %dd Array of payment types.
-          %dt cashiers :: [$cashier]
+          %dt cashiers :: array of $cashier
           %dd Array of cashiers.
           %dt friends
           %dd Array of parent or child accounts.
