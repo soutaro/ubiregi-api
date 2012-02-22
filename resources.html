@@ -153,13 +153,13 @@
             <div class='span8'>
               <h3>Fields</h3>
               <dl>
-                <dt>id</dt>
+                <dt>id :: ("current" | integer)</dt>
                 <dd>Account ID.</dd>
-                <dt>login (optional)</dt>
+                <dt>login (optional) :: string</dt>
                 <dd>Account's login</dd>
-                <dt>email (optional)</dt>
+                <dt>email (optional) :: string</dt>
                 <dd>Account's email</dd>
-                <dt>name</dt>
+                <dt>name :: string</dt>
                 <dd>Account name to be displayed to users.</dd>
                 <dt>expire_at (optional)</dt>
                 <dd>
@@ -177,21 +177,21 @@
                 </dd>
                 <dt>timezone</dt>
                 <dd>Timezone.</dd>
-                <dt>receipt_title</dt>
+                <dt>receipt_title :: string</dt>
                 <dd>Receipt title.</dd>
-                <dt>receipt_footer</dt>
+                <dt>receipt_footer :: string</dt>
                 <dd>Footer text to be printed on receipt.</dd>
                 <dt>receipt_logo</dt>
                 <dd>Base64 encoded logo image to be printed on receipt.</dd>
-                <dt>menus</dt>
+                <dt>menus :: [integer]</dt>
                 <dd>Array of menu ids.</dd>
-                <dt>tables</dt>
+                <dt>tables :: [$table]</dt>
                 <dd>Array of tables.</dd>
-                <dt>customer_tags</dt>
+                <dt>customer_tags :: [$customer_tag]</dt>
                 <dd>Array of customer tags.</dd>
-                <dt>payment_types</dt>
+                <dt>payment_types :: [$payment_type]</dt>
                 <dd>Array of payment types.</dd>
-                <dt>cashiers</dt>
+                <dt>cashiers :: [$cashier]</dt>
                 <dd>Array of cashiers.</dd>
                 <dt>friends</dt>
                 <dd>Array of parent or child accounts.</dd>
@@ -209,11 +209,11 @@
             <div class='span8'>
               <h3>Fields</h3>
               <dl>
-                <dt>id</dt>
+                <dt>id :: integer</dt>
                 <dd>ID of the object.</dd>
-                <dt>name</dt>
+                <dt>name :: string</dt>
                 <dd>Name of the table.</dd>
-                <dt>position</dt>
+                <dt>position :: integer</dt>
                 <dd>Position of the table.</dd>
               </dl>
             </div>
@@ -229,13 +229,13 @@
             <div class='span8'>
               <h3>Fields</h3>
               <dl>
-                <dt>id</dt>
+                <dt>id :: integer</dt>
                 <dd>ID of the object.</dd>
-                <dt>account_id</dt>
+                <dt>account_id :: ("current"|integer)</dt>
                 <dd>Account id which this customer is associated with.</dd>
-                <dt>account_name</dt>
+                <dt>account_name :: string</dt>
                 <dd>Name of the account specified by `account_id`.  <em>ReadOnly</em></dd>
-                <dt>fields_attributes</dt>
+                <dt>fields_attributes [$field_attribute]</dt>
                 <dd>An array of customer field object.</dd>
                 <dt>guid</dt>
                 <dd>GUID.</dd>
@@ -253,13 +253,13 @@
             <div class='span8'>
               <h3>Fields</h3>
               <dl>
-                <dt>customer_id</dt>
+                <dt>customer_id :: integer</dt>
                 <dd>ID of customer which the field belongs to.</dd>
                 <dt>guid</dt>
                 <dd>GUID.</dd>
                 <dt>app_created_at</dt>
                 <dd>Time when the field has been created in a client app.  <em>WriteOnly</em></dd>
-                <dt>name</dt>
+                <dt>name :: string</dt>
                 <dd>
                   Name of the field.  The value of this field is one of the followings:
                   <dl>
@@ -287,7 +287,7 @@
                     <dd>key string representing customer's address (2).</dd>
                   </dl>
                 </dd>
-                <dt>value</dt>
+                <dt>value :: string</dt>
                 <dd>Value of the field.</dd>
               </dl>
             </div>
@@ -302,17 +302,17 @@
             <div class='span8'>
               <h3>Fields</h3>
               <dl>
-                <dt>id</dt>
+                <dt>id :: integer</dt>
                 <dd>ID of this object.</dd>
-                <dt>customer_id (<em>required</em>)</dt>
+                <dt>customer_id :: integer (<em>required</em>)</dt>
                 <dd>ID which thie object belongs to.</dd>
                 <dt>app_created_at (<em>required</em> and <em>WriteOnly</em>)</dt>
                 <dd>Time when the note is created in a client app</dd>
                 <dt>guid (<em>required</em>)</dt>
                 <dd>GUID</dd>
-                <dt>checkout_id</dt>
+                <dt>checkout_id :: integer</dt>
                 <dt>kind (<em>ReadOnly</em>)</dt>
-                <dt>note</dt>
+                <dt>note :: string</dt>
                 <dt>photo</dt>
                 <dt>checkout_summary</dt>
               </dl>
@@ -329,17 +329,17 @@
             <div class='span8'>
               <h3>Fields</h3>
               <dl>
-                <dt>id</dt>
+                <dt>id :: integer</dt>
                 <dd>ID of the object.</dd>
-                <dt>name</dt>
+                <dt>name :: string</dt>
                 <dd>Name of the tag.</dd>
                 <dt>position (optional)</dt>
                 <dd>Position of the tag. <code>null</code> in the case the tag is deleted.</dd>
-                <dt>icon_name</dt>
+                <dt>icon_name :: string</dt>
                 <dd>Name of icon.  <em>WriteOnly</em></dd>
                 <dt>icon</dt>
                 <dd>Icon image for the tag.  <em>ReadOnly</em></dd>
-                <dt>icon_mime</dt>
+                <dt>icon_mime :: string</dt>
                 <dd>MIME type of the icon. Usually <code>image/png</code>.  <em>ReadOnly</em></dd>
               </dl>
             </div>
@@ -354,9 +354,9 @@
             <div class='span8'>
               <h3>Fields</h3>
               <dl>
-                <dt>id</dt>
+                <dt>id :: integer</dt>
                 <dd>ID of the object.</dd>
-                <dt>name</dt>
+                <dt>name :: string</dt>
                 <dd>Name of the payment type.</dd>
                 <dt>position (optional)</dt>
                 <dd>
@@ -366,7 +366,7 @@
                 <dd>
                   <p><code>true</code> if customers will receive change.</p>
                 </dd>
-                <dt>kind</dt>
+                <dt>kind :: string</dt>
                 <dd>
                   <p>"CASH" | "CARD" | "OTHER"
                   "CASH" kind payment type exists in all accounts.</p>
@@ -384,17 +384,17 @@
             <div class='span8'>
               <h3>Fields</h3>
               <dl>
-                <dt>id</dt>
+                <dt>id :: integer</dt>
                 <dd>ID of the object.</dd>
-                <dt>name</dt>
+                <dt>name :: string</dt>
                 <dd>Name of the cashier.</dd>
-                <dt>enabled</dt>
+                <dt>enabled :: boolean</dt>
                 <dd>
                   <p><code>true</code> if the cashier is enabled. <code>false</code> if the cashier is deleted.</p>
                 </dd>
                 <dt>icon</dt>
                 <dd>Base 64 encoded binary data of icon.</dd>
-                <dt>icon_mime</dt>
+                <dt>icon_mime :: string</dt>
                 <dd>
                   <p>MIME type of the icon. Usually, <code>image/png</code> or <code>image/jpeg</code>.</p>
                 </dd>
@@ -411,9 +411,9 @@
             <div class='span8'>
               <h3>Fields</h3>
               <dl>
-                <dt>id</dt>
+                <dt>id :: integer</dt>
                 <dd>ID of account.</dd>
-                <dt>name</dt>
+                <dt>name :: string</dt>
                 <dd>Name of the account.</dd>
               </dl>
             </div>
@@ -428,17 +428,17 @@
             <div class='span8'>
               <h3>Fields</h3>
               <dl>
-                <dt>id</dt>
+                <dt>id :: int</dt>
                 <dd>ID of the object.</dd>
                 <dt>sku</dt>
                 <dd>SKU of the item.</dd>
-                <dt>name</dt>
+                <dt>name :: string</dt>
                 <dd>Name of the item.</dd>
                 <dt>barcode</dt>
                 <dd>Barcode of the item (ReadOnly).</dd>
-                <dt>price</dt>
+                <dt>price :: integer</dt>
                 <dd>Price of the item. Note that price is a string to avoid inacculate compuation using floats.</dd>
-                <dt>price_type</dt>
+                <dt>price_type :: string</dt>
                 <dd>
                   <p>Note on price. One of <code>intax</code>, <code>outtax</code>, <code>percent</code>, and <code>nosales</code>.
                   <code>intax</code> is used for normal items, such that the VAT is included in the price.
@@ -472,9 +472,9 @@
             <div class='span8'>
               <h3>Fields</h3>
               <dl>
-                <dt>id</dt>
+                <dt>id :: integer</dt>
                 <dd>ID of the object.</dd>
-                <dt>name</dt>
+                <dt>name :: string</dt>
                 <dd>Name of the category.</dd>
                 <dt>position</dt>
                 <dd>
@@ -492,7 +492,7 @@
             <div class='span8'>
               <h3>Fields</h3>
               <dl>
-                <dt>id</dt>
+                <dt>id :: integer</dt>
                 <dd>ID of the object</dd>
                 <dt>guid</dt>
                 <dd>
@@ -501,17 +501,17 @@
                   This is used to prevent a checkout posted from being inserted more than one time.
                   The pair of <code>guid</code> and <code>paid_at</code> is used to identify a checkout.
                 </dd>
-                <dt>account_id</dt>
+                <dt>account_id :: ("current"|integer)</dt>
                 <dd>ID of account which the checkout is belonging to.</dd>
-                <dt>price</dt>
+                <dt>price :: real</dt>
                 <dd>Server culculated total sales of the checkout.</dd>
-                <dt>change</dt>
+                <dt>change :: boolean</dt>
                 <dd>Change given to the customer.</dd>
-                <dt>deleted</dt>
+                <dt>deleted :: boolean</dt>
                 <dd><code>true</code> if the checkout is canceled by user, or <code>false</code> in other case.</dd>
-                <dt>cashier_id</dt>
+                <dt>cashier_id :: integer</dt>
                 <dd>ID of the cashier who processed the checkout. May be <code>null</code> if input skipped.</dd>
-                <dt>customers_count</dt>
+                <dt>customers_count :: integer</dt>
                 <dd>
                   Number of customers associated with the checkout.
                   Zero in the case ommited.
@@ -550,11 +550,11 @@
             <div class='span8'>
               <h3>Fields</h3>
               <dl>
-                <dt>id</dt>
+                <dt>id :: integer</dt>
                 <dd>ID of the object</dd>
-                <dt>payment_type_id</dt>
+                <dt>payment_type_id :: integer</dt>
                 <dd>ID of payment_type</dd>
-                <dt>amount</dt>
+                <dt>amount :: real</dt>
                 <dd>Amount the customer paid</dd>
               </dl>
             </div>
@@ -569,22 +569,22 @@
             <div class='span8'>
               <h3>Fields</h3>
               <dl>
-                <dt>id</dt>
+                <dt>id :: integer</dt>
                 <dd>ID of the object</dd>
-                <dt>menu_item_id</dt>
+                <dt>menu_item_id :: integer</dt>
                 <dd>ID of the menu item</dd>
                 <dt>count</dt>
                 <dd>
                   The number of the items the customer bought.
                   May be negative to express a return.
                 </dd>
-                <dt>sales</dt>
+                <dt>sales :: real</dt>
                 <dd>Sales amount without TAX.</dd>
-                <dt>tax</dt>
+                <dt>tax :: real</dt>
                 <dd>TAX for the item.</dd>
-                <dt>discount_sales</dt>
+                <dt>discount_sales :: real</dt>
                 <dd>Sales discounted</dd>
-                <dt>discount_tax</dt>
+                <dt>discount_tax :: real</dt>
                 <dd>TAX discounted</dd>
               </dl>
             </div>
@@ -603,17 +603,17 @@
             <div class='span8'>
               <h3>Fields</h3>
               <dl>
-                <dt>id</dt>
+                <dt>id :: int</dt>
                 <dd>ID of the event.</dd>
-                <dt>menu_item_id</dt>
+                <dt>menu_item_id :: int</dt>
                 <dd>ID of the menu item associated with the event.</dd>
                 <dt>app_created_at</dt>
                 <dd>Time when the event has been created in a client app.  <em>WriteOnly</em></dd>
                 <dt>inventory_at</dt>
                 <dd>Time when the inentory event has occured.  It maybe different from app_created_at.</dd>
-                <dt>event_type</dt>
+                <dt>event_type :: string</dt>
                 <dd>Type of the event (either "inventory", "arrival", "shipping", or "order").</dd>
-                <dt>amount</dt>
+                <dt>amount :: real</dt>
                 <dd>
                   Amount related to the event.  <em>Note that the meaning of the value of this attribute depends on `event_type`</em>.
                   Assume that the value of amount is 55.  The meaning of this value depends on the value of `event_type` as followings:
@@ -682,7 +682,7 @@
             <div class='span8'>
               <h4>Fields</h4>
               <dl>
-                <dt>id</dt>
+                <dt>id :: integer</dt>
                 <dd>
                   ID of cashier object.
                   If unspecified, create a new cashier object.
@@ -726,7 +726,7 @@
             <div class='span8'>
               <h4>Fields</h4>
               <dl>
-                <dt>id</dt>
+                <dt>id :: integer</dt>
                 <dd>
                   ID of customer tag object.
                   If unspecified, create a customer tag object.
@@ -766,7 +766,7 @@
           <div class='row'>
             <div class='span8'>
               <h4>Request</h4>
-              <pre>{&#x000A;  &quot;items&quot;: [&#x000A;    {&#x000A;      &quot;id&quot;: &quot;1&quot;,&#x000A;      &quot;name&quot;: &quot;New menu item&quot;,&#x000A;      &quot;price&quot;:1000,&#x000A;      &quot;price_type&quot;:&quot;intax&quot;,&#x000A;      &quot;vat&quot;: 5,&#x000A;      &quot;position&quot;: 102,&#x000A;      &quot;category_id&quot;: 105,&#x000A;    },&#x000A;    {&#x000A;      &quot;name&quot;: &quot;Renamed menu item&quot;,&#x000A;      &quot;price&quot;:1500,&#x000A;      &quot;price_type&quot;:&quot;intax&quot;,&#x000A;      &quot;vat&quot;: 5,&#x000A;      &quot;position&quot;: 102,&#x000A;      &quot;category_id&quot;: 105,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;items&quot;: [&#x000A;    {&#x000A;      &quot;id&quot;: 1,&#x000A;      &quot;name&quot;: &quot;New menu item&quot;,&#x000A;      &quot;price&quot;:1000,&#x000A;      &quot;price_type&quot;:&quot;intax&quot;,&#x000A;      &quot;vat&quot;: 5,&#x000A;      &quot;position&quot;: 102,&#x000A;      &quot;category_id&quot;: 105,&#x000A;    },&#x000A;    {&#x000A;      &quot;name&quot;: &quot;Renamed menu item&quot;,&#x000A;      &quot;price&quot;:1500,&#x000A;      &quot;price_type&quot;:&quot;intax&quot;,&#x000A;      &quot;vat&quot;: 5,&#x000A;      &quot;position&quot;: 102,&#x000A;      &quot;category_id&quot;: 105,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
             </div>
             <div class='span8'>
               <h4>Fields</h4>
@@ -814,7 +814,7 @@
             <div class='span8'>
               <h4>Fields</h4>
               <dl>
-                <dt>id</dt>
+                <dt>id :: integer</dt>
                 <dd>
                   ID of category object.
                   If unspecified, create a new category object.
@@ -889,7 +889,7 @@
                 <dd>
                   Hashes only contains <code>customer_tag_id</code> fields, which specifies ID of the tags given to the checkout.
                 </dd>
-                <dt>id</dt>
+                <dt>id :: integer</dt>
                 <dd>
                   If you want to update an existing checkout, specify ID of the checkout.
                 </dd>
@@ -924,9 +924,9 @@
             <div class='span8'>
               <h4>Fields</h4>
               <dl>
-                <dt>account_id</dt>
+                <dt>account_id :: ("current"|integer)</dt>
                 <dt>guid</dt>
-                <dt>deleted</dt>
+                <dt>deleted :: boolean</dt>
                 <dt>fields_attributes</dt>
                 <dd>Array of customer field</dd>
               </dl>
@@ -959,9 +959,9 @@
               <pre>{&#x000A;  &quot;notes&quot;: [&#x000A;    {&#x000A;      &quot;id&quot;: 1,&#x000A;      &quot;customer_id&quot;: 1, &#x000A;      &quot;guid&quot;: $UUID-like-sequence,&#x000A;      &quot;app_created_at&quot;: &quot;2012-02-17T00:00Z&quot;,&#x000A;      &quot;checkout_id&quot;: 2,&#x000A;      &quot;note&quot;: &quot;Memo Memo&quot;&#x000A;    }&#x000A;  ]&#x000A;}</pre>
               <h4>Fields</h4>
               <dl>
-                <dt>id</dt>
+                <dt>id :: integer</dt>
                 <dd>ID of this object.</dd>
-                <dt>customer_id (<em>required</em>)</dt>
+                <dt>customer_id :: integer (<em>required</em>)</dt>
                 <dd>ID which thie object belongs to.</dd>
                 <dd>app_created_at (<em>required</em> and <em>WriteOnly</em>)</dd>
                 <dt>Time when the note is created in a client app</dt>
@@ -969,7 +969,7 @@
                 <dd>GUID</dd>
                 <dt>checkout_id</dt>
                 <dt>kind (<em>ReadOnly</em>)</dt>
-                <dt>note</dt>
+                <dt>note :: string</dt>
                 <dt>photo</dt>
                 <dt>checkout_summary (<em>ReadOnly</em>)</dt>
               </dl>
@@ -1004,12 +1004,12 @@
             <div class='span8'>
               <h4>Fields</h4>
               <dl>
-                <dt>menu_item_id</dt>
+                <dt>menu_item_id :: integer</dt>
                 <dt>app_created_at (<em>WriteOnly</em>)</dt>
                 <dt>inventory_at</dt>
-                <dt>event_type</dt>
+                <dt>event_type :: string</dt>
                 <dd>Either "inventory",  "arrival", "shipping", or "order" can be specified.</dd>
-                <dt>amount</dt>
+                <dt>amount :: real</dt>
                 <dt>uuid</dt>
                 <dt>body</dt>
                 <dd>arbitrary JSON object.</dd>
@@ -1041,13 +1041,13 @@
             <div class='span8'>
               <h4>Fields</h4>
               <dl>
-                <dt>id</dt>
+                <dt>id :: integer</dt>
                 <dd>ID of the payment type</dd>
-                <dt>name</dt>
+                <dt>name :: string</dt>
                 <dd>Name of the payment type</dd>
-                <dt>change</dt>
+                <dt>change :: boolean</dt>
                 <dd>Whether customer will received changes or not.  If true, customer will receive change.</dd>
-                <dt>kind</dt>
+                <dt>kind :: string</dt>
                 <dd>Either "CASH", "CARD", or "Other" can be specified.</dd>
               </dl>
             </div>
