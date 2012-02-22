@@ -527,8 +527,8 @@
                 <dd>Server culculated total sales of the checkout.</dd>
                 <dt>change :: boolean</dt>
                 <dd>Change given to the customer.</dd>
-                <dt>deleted :: boolean</dt>
-                <dd><code>true</code> if the checkout is canceled by user, or <code>false</code> in other case.</dd>
+                <dt>status :: integer</dt>
+                <dd>Either 1(Close), 2(Open), 3(Delete), or 4(Cancel).</dd>
                 <dt>cashier_id :: integer</dt>
                 <dd>ID of the cashier who processed the checkout. May be <code>null</code> if input skipped.</dd>
                 <dt>customers_count :: integer</dt>
@@ -550,7 +550,7 @@
             </div>
             <div class='span8'>
               <h3>Example</h3>
-              <pre>{&#x000A;  &quot;id&quot;: 1,&#x000A;  &quot;guid&quot;: $UUID-like-sequence,&#x000A;  &quot;account_id&quot;: 1,&#x000A;  &quot;paid_at&quot;: &quot;2011-12-24T16:20:20Z&quot;,&#x000A;  &quot;price&quot;: &quot;385.0&quot;,&#x000A;  &quot;change&quot;: &quot;4000.0&quot;,&#x000A;  &quot;deleted&quot;: true,&#x000A;  &quot;cashier_id&quot;: null,&#x000A;  &quot;customers_count&quot;: 0,&#x000A;  &quot;payments&quot;: [ $Payments ],&#x000A;  &quot;items&quot;: [ $CheckoutItems ],&#x000A;  &quot;table_ids&quot;: [ $TableIDs ],&#x000A;  &quot;customer_tag_ids&quot;: [ $CustomerTagIDs ],&#x000A;  &quot;modifier&quot;: &quot;0.0&quot;&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;id&quot;: 1,&#x000A;  &quot;guid&quot;: $UUID-like-sequence,&#x000A;  &quot;account_id&quot;: 1,&#x000A;  &quot;paid_at&quot;: &quot;2011-12-24T16:20:20Z&quot;,&#x000A;  &quot;price&quot;: &quot;385.0&quot;,&#x000A;  &quot;change&quot;: &quot;4000.0&quot;,&#x000A;  &quot;status&quot;: 4,&#x000A;  &quot;cashier_id&quot;: null,&#x000A;  &quot;customers_count&quot;: 0,&#x000A;  &quot;payments&quot;: [ $Payments ],&#x000A;  &quot;items&quot;: [ $CheckoutItems ],&#x000A;  &quot;table_ids&quot;: [ $TableIDs ],&#x000A;  &quot;customer_tag_ids&quot;: [ $CustomerTagIDs ],&#x000A;  &quot;modifier&quot;: &quot;0.0&quot;&#x000A;}</pre>
             </div>
           </div>
           <h3>Notes</h3>
@@ -884,7 +884,7 @@
           <h4>Request</h4>
           <div class='row'>
             <div class='span8'>
-              <pre>{&#x000A;  &quot;checkouts&quot;: [&#x000A;    {&#x000A;      &quot;items_attributes&quot;: [&#x000A;        {&#x000A;          &quot;menu_item_id&quot;: 123,&#x000A;          &quot;count&quot;: 1,&#x000A;          &quot;sales&quot;: &quot;100&quot;,&#x000A;          &quot;tax&quot;: &quot;5&quot;,&#x000A;          &quot;discount_sales&quot;: &quot;20&quot;,&#x000A;          &quot;discount_tax&quot;: &quot;1&quot;&#x000A;        }&#x000A;      ],&#x000A;      &quot;change&quot; : &quot;26&quot;,&#x000A;      &quot;guid&quot; : $UUID-like-sequence,&#x000A;      &quot;paid_at&quot;: $Time,&#x000A;      &quot;payments_attributes&quot;: [&#x000A;        { &quot;payment_type_id&quot;: 101, &quot;amount&quot;: &quot;100&quot; }&#x000A;      ],&#x000A;      &quot;customers_count': 1,&#x000A;      &quot;customer_taggings_attributes': [&#x000A;        { &quot;customer_tag_id&quot;: 20 }&#x000A;      ],&#x000A;      &quot;cashier_id&quot;: 948,&#x000A;      &quot;deleted&quot;: false,&#x000A;    },&#x000A;    {&#x000A;      &quot;id&quot;: 4739,&#x000A;      &quot;deleted&quot;: true,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;checkouts&quot;: [&#x000A;    {&#x000A;      &quot;items_attributes&quot;: [&#x000A;        {&#x000A;          &quot;menu_item_id&quot;: 123,&#x000A;          &quot;count&quot;: 1,&#x000A;          &quot;sales&quot;: &quot;100&quot;,&#x000A;          &quot;tax&quot;: &quot;5&quot;,&#x000A;          &quot;discount_sales&quot;: &quot;20&quot;,&#x000A;          &quot;discount_tax&quot;: &quot;1&quot;&#x000A;        }&#x000A;      ],&#x000A;      &quot;change&quot; : &quot;26&quot;,&#x000A;      &quot;guid&quot; : $UUID-like-sequence,&#x000A;      &quot;paid_at&quot;: $Time,&#x000A;      &quot;payments_attributes&quot;: [&#x000A;        { &quot;payment_type_id&quot;: 101, &quot;amount&quot;: &quot;100&quot; }&#x000A;      ],&#x000A;      &quot;customers_count': 1,&#x000A;      &quot;customer_taggings_attributes': [&#x000A;        { &quot;customer_tag_id&quot;: 20 }&#x000A;      ],&#x000A;      &quot;cashier_id&quot;: 948,&#x000A;      &quot;status&quot;: 1,&#x000A;    },&#x000A;    {&#x000A;      &quot;id&quot;: 4739,&#x000A;      &quot;status&quot;: 4,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
             </div>
             <div class='span8'>
               <p>Request is to create/update checkouts.
@@ -926,10 +926,6 @@
               The <code>next-url</code> and <code>timestamp</code> fields should be ignored.</p>
             </div>
           </div>
-          <h2>/checkouts/:id</h2>
-          <p>This action is to fetch friend's single checkout.
-          If the owner of the checkout is not your friend, your access will result in 400 error.</p>
-          <h3>GET on /checkouts/:id</h3>
           <h2>/customers</h2>
           <p>Collection of customers available for the account.</p>
           <h3>GET on /customers</h3>

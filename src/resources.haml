@@ -662,8 +662,8 @@
           %dd Server culculated total sales of the checkout.
           %dt change :: boolean
           %dd Change given to the customer.
-          %dt deleted :: boolean
-          %dd <code>true</code> if the checkout is canceled by user, or <code>false</code> in other case.
+          %dt status :: integer
+          %dd Either 1(Close), 2(Open), 3(Delete), or 4(Cancel).
           %dt cashier_id :: integer
           %dd ID of the cashier who processed the checkout. May be <code>null</code> if input skipped.
           %dt customers_count :: integer
@@ -694,7 +694,7 @@
                 "paid_at": "2011-12-24T16:20:20Z",
                 "price": "385.0",
                 "change": "4000.0",
-                "deleted": true,
+                "status": 4,
                 "cashier_id": null,
                 "customers_count": 0,
                 "payments": [ $Payments ],
@@ -1210,11 +1210,11 @@
                       { "customer_tag_id": 20 }
                     ],
                     "cashier_id": 948,
-                    "deleted": false,
+                    "status": 1,
                   },
                   {
                     "id": 4739,
-                    "deleted": true,
+                    "status": 4,
                   }
                 ]
               }
@@ -1266,14 +1266,6 @@
         :markdown
           The response is same with index action, but containes only created/updated checkouts.
           The `next-url` and `timestamp` fields should be ignored.
-        
-    %h2 /checkouts/:id
-
-    :markdown
-      This action is to fetch friend's single checkout.
-      If the owner of the checkout is not your friend, your access will result in 400 error.
-    
-    %h3 GET on /checkouts/:id
 
     %h2 /customers
 
