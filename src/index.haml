@@ -18,7 +18,7 @@
   Ubiregi API provides almost full access to Ubiregi's data. Everything
   except authentication is the same with what the Ubiregi app is doing.
   (In fact, the API v3 is essentialy more powerful than API v2, which is
-  used until Ubiregi2 2.8.)
+  used by Ubiregi 2.x)
 
 %h2 Implementation Status
 
@@ -81,11 +81,10 @@
 %h2 Examples
 
 %dl
-  %dt= link_to("ubiregi-api-client-example.rb", "ubiregi-api-client-example.rb")
-  %dd 
-    A Ruby script which contains simple wrapper class of Ubiregi API, and simple app.
-    Authentication, fetching account information and menus, posting a checkout, and fetching checkouts work.
-
+  %dt= link_to("Ubiregi-API-Clients", "https://github.com/ubiregiinc/Ubiregi-API-Clients")
+  %dd
+    Collection of ubiregin api client examples.
+    We are still working for that.
 
 %h2 Five Steps to Develop Your App
 
@@ -93,7 +92,7 @@
   %li Signup to ubiregi.com
   %li Register for developer account and new application
   %li Install the application on your account
-  %li Download the #{ link_to('sample app', 'ubiregi-api-client-example.rb') }
+  %li Download the examples.
   %li Change the sample app, and it is your app now!
 
 %h2 
@@ -112,13 +111,13 @@
 %h3 Ubiregi web app is built on Rails
 
 %p
-  We use Ruby on Rails 3 to develop ubiregi.com web app. We carefully
-  described things non-rails-developer should mention about, but may be
-  insufficient.
+  We use Ruby on Rails 3 to develop ubiregi.com web app. You may find
+  something odd our api. It should be because of Rails requirements.
 
-%p
-  If you have some problem, you may need to check Rails related
-  documents.
+%p 
+  We carefully described things non-rails-developer should mention
+  about, but may be insufficient. If you have some problem, you may
+  need to check Rails related documents.
 
 %h3 JSON is used
 

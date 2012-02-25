@@ -48,7 +48,7 @@ class UbiregiClient
   #  If given, the block will be yielded with raw response converted to hash.
   # 
   def account(&block)
-    response = _get("account")
+    response = _get("accounts/current")
     yield(response) if block_given?
     response["account"]
   end
