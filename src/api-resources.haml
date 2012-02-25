@@ -7,40 +7,6 @@
 
 %h4 GET on /accounts/<em>:account_id</em>, /accounts/current
 
-:markdown
-  Download the information of current account.
-
-  <em>:account_id</em> is either an integer which specifies an ID of account, or <code>current</code>.
-  If <code>current</code> is given in request, the client's authenticated account will be in the response.
-
-.row
-  .span8
-    %h5 Response
-    %pre
-      = preserve do
-        :escaped
-          {
-            "account": $account,
-            "timestamp": "2011-11-02T09:11:34Z",
-          }
-  .span8
-    %h5 Fields
-    %dl
-      %dt account
-      %dd The account.
-      %dt timestamp
-      %dd The time in ubiregi.com server.
-
-%h4 Note
-
-:markdown
-  Accesses to /accounts/ do not expire.
-
-  Even if your account is expired, it returns the account's information.
-
-  It is allowed to access child accounts.
-  If you access your child accounts, you will receive the information of the account.
-  In other case, your request will result in 404 (not found) error.
 
 %h3#api-resources-cashiers /accounts/<em>:account_id</em>/cashiers
 

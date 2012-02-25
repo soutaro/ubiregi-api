@@ -54,3 +54,7 @@ img {
 .menu ul {
     margin: 0;
 }
+
+code.strong {
+    font-weight: bold;
+}

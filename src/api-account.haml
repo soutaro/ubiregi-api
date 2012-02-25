@@ -1,0 +1,147 @@
+%h1#object-account Account
+
+:markdown
+  `Account` object represents an Ubiregi account.
+  This is one of the most fat object such that it has most related data with the account including tables, cashiers, payment types.
+  Fetching an `Account` object should be the entory point for most API clients.
+
+  `Account` objects are readonly. There are no API to update.
+
+
+%h2#object-account-fields Fields
+
+.row
+  .span6
+    %dl
+      %dt= field "id"
+      %dd Account ID.
+      %dt= field "login", :optional
+      %dd Account's login
+      %dt= field "email", :optional
+      %dd Account's email
+      %dt= field "name"
+      %dd Account name to be displayed to users.
+      %dt= field "expire_at", :optional
+      %dd
+        Expiration data.
+        May be `null` in the case there is no expiration on subscription.
+      %dt= field "currency"
+      %dd One of <code>"JPY"</code>, <code>"USD"</code>, <code>"Unknown 2"</code>, and <code>"Unknown 3"</code>.
+      %dt= field "date_offset"
+      %dd
+        The hour date changes.
+        If this is <code>6</code>, the date changes at 6 AM, ie <code>2012-01-01T05:59:00Z</code> is December 31, 2011 (If the timezone is UTC).
+      %dt= field "timezone"
+      %dd Timezone.
+      %dt= field "receipt_title", :optional
+      %dd Receipt title.
+      %dt= field "receipt_footer", :optional
+      %dd Footer text to be printed on receipt.
+      %dt= field "receipt_logo", :optional
+      %dd Base64 encoded logo image to be printed on receipt.
+      %dt= field "menus"
+      %dd Array of IDs of <code>Menu</code>.
+      %dt= field "tables"
+      %dd Array of <code>Table</code>s.
+      %dt= field "customer_tags"
+      %dd Array of <code>CustomerTag</code>s.
+      %dt= field "payment_types"
+      %dd Array of <code>PaymentType</code>s.
+      %dt= field "cashiers"
+      %dd Array of <code>Cashier</code>s.
+      %dt= field "parents"
+      %dd Array of IDs of parent accounts.
+      %dt= field "children"
+      %dd Array of IDs of child accounts.
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "id": 123,
+            "created_at": "2011-12-31:00:00:31Z",
+            "updated_at": "2012-01-30:00:30:11Z",
+            "login": "ubiregi-cafe",
+            "email": "cafe@ubiregi.com",
+            "name": "Ubiregi Cafe",
+            "expire_at": "2011-11-13T00:00:00Z",
+            "subscription": "standard",
+            "currency": "JPY",
+            "date_offset": 6,
+            "timezone": "Asia/Tokyo",
+            "receipt_title": "RECEIPT",
+            "receipt_footer": "Footer to be printed in receipts",
+            "receipt_logo": $base64Encoded,
+            "menus": [ 8 ],
+            "tables": [ $tables ],
+            "customer_tags": [ $customer_tags ],
+            "payment_types": [ $payment_types ],
+            "cashiers": [ $cashiers ],
+            "parents": [ 100 ],
+            "children": [ 200, 124 ],
+          }
+
+%h2#get-on-accounts-current GET on /accounts/current
+
+:markdown
+  Retrieves an `Account` object of current (used for authentication) account.
+  
+%h3 Request
+.row
+  .span6
+    %pre
+      = preserve do
+        GET /accounts/current
+    
+%h3 Response
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "account": $account,
+            "timestamp": "2011-11-02T09:11:34Z",
+          }
+  .span6
+    %dl
+      %dt account
+      %dd The account.
+      %dt timestamp
+      %dd The time in ubiregi.com server.
+
+%h2#get-on-accounts-account-id GET on /accounts/<em>account_id</em>
+
+:markdown
+  Retrieves an `Account` object with *account_id*.
+  
+%h3 Request
+.row
+  .span6
+    %pre
+      = preserve do
+        GET /accounts/133
+    
+%h3 Response
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "account": $account,
+            "timestamp": "2011-11-02T09:11:34Z",
+          }
+  .span6
+    %dl
+      %dt account
+      %dd The account.
+      %dt timestamp
+      %dd The time in ubiregi.com server.
+
+%h3 Note
+
+:markdown
+  The access is only allowed to current, parent, and child accounts.
+  In other case, your request will result in 404 (not found) error.
+

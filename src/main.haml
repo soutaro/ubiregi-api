@@ -30,7 +30,13 @@
           %li Fetching Whole Collection
           %li POST Convention
 
-        %h4= link_to "Objects", "#api-objects"
+        %h4= link_to "Account", "#object-account"
+        %ul
+          %li= link_to "Fields", "#object-account-fields"
+          %li= link_to "GET on /accounts/current", "#get-on-accounts-current"
+          %li= link_to "GET on /accounts/<em>account_id</em>", "#get-on-accounts-account-id"
+
+        %h4= link_to "Table", "#object-table"
         %ul
           %li= link_to "Type Annotacions", "#api-objects-type-annotations"
           %li= link_to "Account", "#api-objects-account"

@@ -29,7 +29,13 @@
           <li>Fetching Whole Collection</li>
           <li>POST Convention</li>
         </ul>
-        <h4><a href='#api-objects'>Objects</a></h4>
+        <h4><a href='#object-account'>Account</a></h4>
+        <ul>
+          <li><a href='#object-account-fields'>Fields</a></li>
+          <li><a href='#get-on-accounts-current'>GET on /accounts/current</a></li>
+          <li><a href='#get-on-accounts-account-id'>GET on /accounts/<em>account_id</em></a></li>
+        </ul>
+        <h4><a href='#object-table'>Table</a></h4>
         <ul>
           <li><a href='#api-objects-type-annotations'>Type Annotacions</a></li>
           <li><a href='#api-objects-account'>Account</a></li>
@@ -381,6 +387,10 @@
           <p>There is no limitation on number of objects in one request, but you should take care of it.
           100 items in a request will be ok. 10,000 items in a request should cause a problem.
           We will ask you to stop posting too big request, if there are some problem.</p>
+          <h3>IDs are Universal</h3>
+          <p>There are only one scope of ID, <em>Universal</em>.</p>
+          
+          <p>If this doc says <em>ID</em>, it is an one origin integer value which uniquely determins an object on ubiregi server.</p>
           <h2 id='api-objects'>Objects</h2>
           <p>Every object has <code>created_at</code> and <code>updated_at</code> fields.</p>
           <h3 id='api-objects-type-annotations'>Type annotations</h3>
@@ -417,60 +427,111 @@
             <dt>$Time</dt>
             <dd>ISO8601 format string of a time.</dd>
           </dl>
-          <h3 id='api-objects-account'>Account</h3>
+          <h1 id='object-account'>Account</h1>
+          <p><code>Account</code> object represents an Ubiregi account.
+          This is one of the most fat object such that it has most related data with the account including tables, cashiers, payment types.
+          Fetching an <code>Account</code> object should be the entory point for most API clients.</p>
+          
+          <p><code>Account</code> objects are readonly. There are no API to update.</p>
+          <h2 id='object-account-fields'>Fields</h2>
           <div class='row'>
-            <div class='span8'>
-              <h4>Fields</h4>
+            <div class='span6'>
               <dl>
-                <dt>id :: ("current" | integer)</dt>
+                <dt>id</dt>
                 <dd>Account ID.</dd>
-                <dt>login (optional) :: string</dt>
+                <dt>login <span class='label warning'>Optional</span></dt>
                 <dd>Account's login</dd>
-                <dt>email (optional) :: string</dt>
+                <dt>email <span class='label warning'>Optional</span></dt>
                 <dd>Account's email</dd>
-                <dt>name :: string</dt>
+                <dt>name</dt>
                 <dd>Account name to be displayed to users.</dd>
-                <dt>expire_at (optional)</dt>
+                <dt>expire_at <span class='label warning'>Optional</span></dt>
                 <dd>
                   Expiration data.
                   May be `null` in the case there is no expiration on subscription.
                 </dd>
-                <dt>subscription</dt>
-                <dd>One of `trial`, `standard`, and `expired`.</dd>
                 <dt>currency</dt>
-                <dd>One of `JPY`, `USD`, `Unknown 2`, and `Unknown 3`.</dd>
+                <dd>One of <code>"JPY"</code>, <code>"USD"</code>, <code>"Unknown 2"</code>, and <code>"Unknown 3"</code>.</dd>
                 <dt>date_offset</dt>
                 <dd>
                   The hour date changes.
-                  If this is `6`, the date changes at 6 AM, ie 2012-01-01T05:59:00Z is December 31, 2011 (If the timezone is UTC).
+                  If this is <code>6</code>, the date changes at 6 AM, ie <code>2012-01-01T05:59:00Z</code> is December 31, 2011 (If the timezone is UTC).
                 </dd>
                 <dt>timezone</dt>
                 <dd>Timezone.</dd>
-                <dt>receipt_title :: string</dt>
+                <dt>receipt_title <span class='label warning'>Optional</span></dt>
                 <dd>Receipt title.</dd>
-                <dt>receipt_footer :: string</dt>
+                <dt>receipt_footer <span class='label warning'>Optional</span></dt>
                 <dd>Footer text to be printed on receipt.</dd>
-                <dt>receipt_logo</dt>
+                <dt>receipt_logo <span class='label warning'>Optional</span></dt>
                 <dd>Base64 encoded logo image to be printed on receipt.</dd>
-                <dt>menus ::  array of integer</dt>
-                <dd>Array of menu ids.</dd>
-                <dt>tables ::  array of $table</dt>
-                <dd>Array of tables.</dd>
-                <dt>customer_tags :: array of $customer_tag</dt>
-                <dd>Array of customer tags.</dd>
-                <dt>payment_types :: array of $payment_type</dt>
-                <dd>Array of payment types.</dd>
-                <dt>cashiers :: array of $cashier</dt>
-                <dd>Array of cashiers.</dd>
-                <dt>friends</dt>
-                <dd>Array of parent or child accounts.</dd>
+                <dt>menus</dt>
+                <dd>Array of IDs of <code>Menu</code>.</dd>
+                <dt>tables</dt>
+                <dd>Array of <code>Table</code>s.</dd>
+                <dt>customer_tags</dt>
+                <dd>Array of <code>CustomerTag</code>s.</dd>
+                <dt>payment_types</dt>
+                <dd>Array of <code>PaymentType</code>s.</dd>
+                <dt>cashiers</dt>
+                <dd>Array of <code>Cashier</code>s.</dd>
+                <dt>parents</dt>
+                <dd>Array of IDs of parent accounts.</dd>
+                <dt>children</dt>
+                <dd>Array of IDs of child accounts.</dd>
               </dl>
             </div>
-            <div class='span8'>
-              <h4>Example</h4>
-              <pre>{&#x000A;  &quot;id&quot;: 123,&#x000A;  &quot;login&quot;: &quot;ubiregi-cafe&quot;,&#x000A;  &quot;email&quot;: &quot;cafe@ubiregi.com&quot;,&#x000A;  &quot;name&quot;: &quot;Ubiregi Cafe&quot;,&#x000A;  &quot;expire_at&quot;: &quot;2011-11-13T00:00:00Z&quot;,&#x000A;  &quot;subscription&quot;: &quot;standard&quot;,&#x000A;  &quot;currency&quot;: &quot;JPY&quot;,&#x000A;  &quot;date_offset&quot;: 6,&#x000A;  &quot;timezone&quot;: &quot;Asia/Tokyo&quot;,&#x000A;  &quot;receipt_title&quot;: &quot;RECEIPT&quot;,&#x000A;  &quot;receipt_footer&quot;: &quot;This is footer to be printed in receipts&quot;,&#x000A;  &quot;receipt_logo&quot;: $base64Encoded,&#x000A;  &quot;menus&quot;: [ 8 ],&#x000A;  &quot;tables&quot;: [ $tables ],&#x000A;  &quot;customer_tags&quot;: [ $customer_tags ],&#x000A;  &quot;payment_types&quot;: [ $payment_types ],&#x000A;  &quot;cashiers&quot;: [ $cashiers ],&#x000A;  &quot;friends&quot;: [ $friends ],&#x000A;}</pre>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;id&quot;: 123,&#x000A;  &quot;created_at&quot;: &quot;2011-12-31:00:00:31Z&quot;,&#x000A;  &quot;updated_at&quot;: &quot;2012-01-30:00:30:11Z&quot;,&#x000A;  &quot;login&quot;: &quot;ubiregi-cafe&quot;,&#x000A;  &quot;email&quot;: &quot;cafe@ubiregi.com&quot;,&#x000A;  &quot;name&quot;: &quot;Ubiregi Cafe&quot;,&#x000A;  &quot;expire_at&quot;: &quot;2011-11-13T00:00:00Z&quot;,&#x000A;  &quot;subscription&quot;: &quot;standard&quot;,&#x000A;  &quot;currency&quot;: &quot;JPY&quot;,&#x000A;  &quot;date_offset&quot;: 6,&#x000A;  &quot;timezone&quot;: &quot;Asia/Tokyo&quot;,&#x000A;  &quot;receipt_title&quot;: &quot;RECEIPT&quot;,&#x000A;  &quot;receipt_footer&quot;: &quot;Footer to be printed in receipts&quot;,&#x000A;  &quot;receipt_logo&quot;: $base64Encoded,&#x000A;  &quot;menus&quot;: [ 8 ],&#x000A;  &quot;tables&quot;: [ $tables ],&#x000A;  &quot;customer_tags&quot;: [ $customer_tags ],&#x000A;  &quot;payment_types&quot;: [ $payment_types ],&#x000A;  &quot;cashiers&quot;: [ $cashiers ],&#x000A;  &quot;parents&quot;: [ 100 ],&#x000A;  &quot;children&quot;: [ 200, 124 ],&#x000A;}</pre>
             </div>
           </div>
+          <h2 id='get-on-accounts-current'>GET on /accounts/current</h2>
+          <p>Retrieves an <code>Account</code> object of current (used for authentication) account.</p>
+          <h3>Request</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>GET /accounts/current</pre>
+            </div>
+          </div>
+          <h3>Response</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;account&quot;: $account,&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:34Z&quot;,&#x000A;}</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>account</dt>
+                <dd>The account.</dd>
+                <dt>timestamp</dt>
+                <dd>The time in ubiregi.com server.</dd>
+              </dl>
+            </div>
+          </div>
+          <h2 id='get-on-accounts-account-id'>GET on /accounts/<em>account_id</em></h2>
+          <p>Retrieves an <code>Account</code> object with <em>account_id</em>.</p>
+          <h3>Request</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>GET /accounts/133</pre>
+            </div>
+          </div>
+          <h3>Response</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;account&quot;: $account,&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:34Z&quot;,&#x000A;}</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>account</dt>
+                <dd>The account.</dd>
+                <dt>timestamp</dt>
+                <dd>The time in ubiregi.com server.</dd>
+              </dl>
+            </div>
+          </div>
+          <h3>Note</h3>
+          <p>The access is only allowed to current, parent, and child accounts.
+          In other case, your request will result in 404 (not found) error.</p>
           <h3 id='api-objects-table'>Table</h3>
           <p><strong>Table object is deprecated.</strong>
           It is working now but will be obsoleted soon.</p>
@@ -910,33 +971,6 @@
             User accounts. Readonly.
           </p>
           <h4>GET on /accounts/<em>:account_id</em>, /accounts/current</h4>
-          <p>Download the information of current account.</p>
-          
-          <p><em>:account_id</em> is either an integer which specifies an ID of account, or <code>current</code>.
-          If <code>current</code> is given in request, the client's authenticated account will be in the response.</p>
-          <div class='row'>
-            <div class='span8'>
-              <h5>Response</h5>
-              <pre>{&#x000A;  &quot;account&quot;: $account,&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:34Z&quot;,&#x000A;}</pre>
-            </div>
-            <div class='span8'>
-              <h5>Fields</h5>
-              <dl>
-                <dt>account</dt>
-                <dd>The account.</dd>
-                <dt>timestamp</dt>
-                <dd>The time in ubiregi.com server.</dd>
-              </dl>
-            </div>
-          </div>
-          <h4>Note</h4>
-          <p>Accesses to /accounts/ do not expire.</p>
-          
-          <p>Even if your account is expired, it returns the account's information.</p>
-          
-          <p>It is allowed to access child accounts.
-          If you access your child accounts, you will receive the information of the account.
-          In other case, your request will result in 404 (not found) error.</p>
           <h3 id='api-resources-cashiers'>/accounts/<em>:account_id</em>/cashiers</h3>
           <p>Collection of cashiers defined in the user's account.</p>
           <h4>POST on /accounts/<em>:account_id</em>/cashiers</h4>

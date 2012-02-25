@@ -36,82 +36,10 @@
   %dt $Time
   %dd ISO8601 format string of a time.
 
-%h3#api-objects-account Account
-
-.row
-  .span8
-    %h4 Fields
-
-    %dl
-      %dt id :: ("current" | integer)
-      %dd Account ID.  
-      %dt login (optional) :: string
-      %dd Account's login
-      %dt email (optional) :: string
-      %dd Account's email
-      %dt name :: string
-      %dd Account name to be displayed to users.
-      %dt expire_at (optional)
-      %dd
-        Expiration data.
-        May be `null` in the case there is no expiration on subscription.
-      %dt subscription
-      %dd One of `trial`, `standard`, and `expired`.
-      %dt currency
-      %dd One of `JPY`, `USD`, `Unknown 2`, and `Unknown 3`.
-      %dt date_offset
-      %dd
-        The hour date changes.
-        If this is `6`, the date changes at 6 AM, ie 2012-01-01T05:59:00Z is December 31, 2011 (If the timezone is UTC).
-      %dt timezone
-      %dd Timezone.
-      %dt receipt_title :: string
-      %dd Receipt title.
-      %dt receipt_footer :: string
-      %dd Footer text to be printed on receipt.
-      %dt receipt_logo
-      %dd Base64 encoded logo image to be printed on receipt.
-      %dt menus ::  array of integer
-      %dd Array of menu ids.
-      %dt tables ::  array of $table
-      %dd Array of tables.
-      %dt customer_tags :: array of $customer_tag
-      %dd Array of customer tags.
-      %dt payment_types :: array of $payment_type
-      %dd Array of payment types.
-      %dt cashiers :: array of $cashier
-      %dd Array of cashiers.
-      %dt friends
-      %dd Array of parent or child accounts.
-
-  .span8
-    %h4 Example
-
-    %pre
-      = preserve do
-        :escaped
-          {
-            "id": 123,
-            "login": "ubiregi-cafe",
-            "email": "cafe@ubiregi.com",
-            "name": "Ubiregi Cafe",
-            "expire_at": "2011-11-13T00:00:00Z",
-            "subscription": "standard",
-            "currency": "JPY",
-            "date_offset": 6,
-            "timezone": "Asia/Tokyo",
-            "receipt_title": "RECEIPT",
-            "receipt_footer": "This is footer to be printed in receipts",
-            "receipt_logo": $base64Encoded,
-            "menus": [ 8 ],
-            "tables": [ $tables ],
-            "customer_tags": [ $customer_tags ],
-            "payment_types": [ $payment_types ],
-            "cashiers": [ $cashiers ],
-            "friends": [ $friends ],
-          }
+= render "api-account"
 
 %h3#api-objects-table Table
+
 
 :markdown
   **Table object is deprecated.**

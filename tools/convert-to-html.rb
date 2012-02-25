@@ -42,6 +42,27 @@ class Context
       self.pop_source
     end
   end
+
+  def readonly(x = "")
+    "#{x} <span class='label notice'>Readonly</span>"
+  end
+
+  def optional(y = "")
+    "#{y} <span class='label warning'>Optional</span>"
+  end
+
+  def field(name, *options)
+    a = name
+    b = options.map {|option|
+      case option
+      when :optional
+        "<span class='label warning'>Optional</span>"
+      when :readonly
+        "<span class='label notice'>Readonly</span>"
+      end
+    }.join(" ")
+    a + " " + b
+  end
 end
 
 ARGV.each do |file|
