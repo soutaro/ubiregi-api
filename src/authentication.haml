@@ -1,10 +1,10 @@
-%h1 Authentication
+%h1#authentication Authentication
 
 %p
   Currently we provide very simple token based authentication mechanism.
   Every installations of client have their own secret tokens which can be used for API access.
 
-%h2 Installation
+%h2#authentication-installation Installation
 
 %p
   A user will <it>install</it> apps to ubiregi.com.
@@ -38,13 +38,13 @@
   You can install/uninstall the app to your account.
   Visit #{ link_to "https://ubiregi.com/installs" } to list all applications you have installed.
 
-%h2 Authorization
+%h2#authentication-authorization Authorization
 
 %p
   There is only one authorizatioin levels, <strong>everything</strong>.
   If a user allows an app to access its data (installs the app), the app can access everything.
 
-%h1 The protocol
+%h2#authentication-the-protocol The Protocol
 
 %p
   Give HTTP the following two request headers on all requests.

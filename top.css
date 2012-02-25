@@ -1,38 +1,20 @@
-.topbar-inner h3 a{
-    padding-left: 50px;
-    background: url(images/ubiregi_topbar_logo.png) no-repeat 20px 5px;
+.title {
+    margin-top: 20px;
+    margin-bottom: 40px;
 }
 
-.panel{
-    min-width: 940px;  
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#4F200A), to(#99401D));
-    background-image: -webkit-linear-gradient(#4F200A, #99401D);
-    background-image: -moz-linear-gradient(#4F200A, #99401D);
-    background-image: -o-linear-gradient(top, #4F200A, #99401D);
-    background-image: -khtml-gradient(linear, left top, left bottom, from(#4F200A), to(#99401D));
-}
- 
-.panel .inner-panel{
-    padding-top:100px;
-    padding-bottom:20px;  
-    background:url(images/ubiregi_panel_background.png) repeat;
-}
- 
-.panel h1{
-    color:#FFF;
+.container .title h1 {
+    color:black;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     font-size:70pt;
-    text-align:center;
     font-family:Times;
     line-height:100%;
 }
  
-.panel h2{
-    color:#FFF;
-    font-weight:lighter;
+.container .title div {
+    font-weight: lighter;
+    font-size: 20px;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
-    text-align:center;
-    margin-bottom:50px;
 }
 
 img {
@@ -40,4 +22,35 @@ img {
     -webkit-box-shadow: 0 2px 10px #666;
     -moz-box-shadow: 0 2px 10px #666;
     margin: 15px;
+}
+
+.container h1 {
+    margin-top: 80px;
+    font-size: 40px;
+    line-height: 48px;
+}
+
+.container h2 {
+    font-size: 32px;
+    line-height: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.container h3 {
+    font-size: 25px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.container h4 {
+    font-size: 18px;
+}
+
+.menu li {
+    list-style: outside none;
+}
+
+.menu ul {
+    margin: 0;
 }

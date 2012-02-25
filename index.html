@@ -1,0 +1,1342 @@
+<html>
+  <head>
+    <title>«Draft» Ubiregi API</title>
+    <meta charset='utf-8' />
+    <link href='bootstrap.min.css' rel='stylesheet' />
+    <link href='top.css' rel='stylesheet' />
+  </head>
+  <body>
+    <div class='menu span4' style='background-color:#E0E0F0; position:fixed; left:50%; margin-left:-470px; height:100%; overflow-y:scroll'>
+      <div style='padding:10px'>
+        <h3><a href='#introduction'>Introduction</a></h3>
+        <ul>
+          <li><a href='#introduction-implementation-status'>Implementation Status</a></li>
+          <li><a href='#introduction-examples'>Examples</a></li>
+          <li><a href='#introduction-quick-start'>Quick Start</a></li>
+          <li><a href='#introduction-general-notes'>General Notes</a></li>
+        </ul>
+        <h3><a href='#authentication'>Authentication</a></h3>
+        <ul>
+          <li><a href='#authentication-installation'>Installation</a></li>
+          <li><a href='#authentication-authorization'>Authorization</a></li>
+          <li><a href='#authentication-the-protocol'>The Protocol</a></li>
+        </ul>
+        <h3><a href='#restful-api'>RESTful API</a></h3>
+        <h4><a href='#api-general-notes'>General Notes</a></h4>
+        <ul>
+          <li>Standard Set of APIs on Collection</li>
+          <li>Standard Index Parameters</li>
+          <li>Fetching Whole Collection</li>
+          <li>POST Convention</li>
+        </ul>
+        <h4><a href='#api-objects'>Objects</a></h4>
+        <ul>
+          <li><a href='#api-objects-type-annotations'>Type Annotacions</a></li>
+          <li><a href='#api-objects-account'>Account</a></li>
+          <li><a href='#api-objects-table'>Table</a></li>
+          <li><a href='#api-objects-customer'>Customer</a></li>
+          <li><a href='#api-objects-customer-field'>Customer Field</a></li>
+          <li><a href='#api-objects-customer-note'>Customer Note</a></li>
+          <li><a href='#api-objects-customer-tag'>Customer Tag</a></li>
+          <li><a href='#api-objects-payment-type'>Payment Type</a></li>
+          <li><a href='#api-objects-cashier'>Cashier</a></li>
+          <li><a href='#api-objects-friend'>Friend</a></li>
+          <li><a href='#api-objects-menu-item'>Menu Item</a></li>
+          <li><a href='#api-objects-category'>Category</a></li>
+          <li><a href='#api-objects-checkout'>Checkout</a></li>
+          <li><a href='#api-objects-payment'>Payment</a></li>
+          <li><a href='#api-objects-checkout-item'>Checkout Item</a></li>
+          <li><a href='#api-objects-stock-event'>Stock Event</a></li>
+        </ul>
+        <h4><a href='#api-resources'>Resources</a></h4>
+        <ul>
+          <li><a href='%h3#api-resources-accounts'>/accounts</a></li>
+          <li><a href='#api-resources-cashiers'>/accounts/<em>:account_id</em>/cashiers</a></li>
+          <li><a href='#api-resources-customer_tags'>/accounts/<em>:account_id</em>/customer_tags</a></li>
+          <li><a href='#api-resources-tables'>/accounts/<em>:account_id</em>/tables</a></li>
+          <li><a href='#api-resources-menu-items'>/menus/<em>:menu_id</em>/items</a></li>
+          <li><a href='#api-resources-menu-categories'>/menus/<em>:menu_id</em>/categories</a></li>
+          <li><a href='#api-resources-checkouts'>/accounts/<em>:account_id</em>/checkouts</a></li>
+          <li><a href='#api-resources-customers'>/customers</a></li>
+          <li><a href='#api-resources-customer-notes'>/customers/notes</a></li>
+          <li><a href='#api-resources-stock-events'>/accounts/<em>:account_id</em>/stocks/events</a></li>
+        </ul>
+        <h4>Errors</h4>
+      </div>
+    </div>
+    <div class='container'>
+      <div class='row'>
+        <div class='span12 offset4'>
+          <div class='title'>
+            <h1>Ubiregi API</h1>
+            <div>
+              Ubiregi is simple and clean yet powerful; so the API is.
+            </div>
+          </div>
+          <h1 id='introduction'>Introduction</h1>
+          <p>
+            Ubiregi API allows third parties to develop systems which interact
+            with Ubiregi data, including menus, tags, customers, and checkouts.
+          </p>
+          <p>
+            Using Ubiregi API, you can develop your own application for:
+          </p>
+          <ul>
+            <li>Editing menus with your <s>legacy</s> excellent system</li>
+            <li>Importing sales data into your <s>legacy</s> great system</li>
+            <li>Advanced sales analysis</li>
+            <li>Advanced stock control</li>
+            <li>Booking</li>
+          </ul>
+          <p>
+            and, such features essential for your or your clients' business.
+          </p>
+          <p>
+            Ubiregi API provides almost full access to Ubiregi's data. Everything
+            except authentication is the same with what the Ubiregi app is doing.
+            (In fact, the API v3 is essentialy more powerful than API v2, which is
+            used by Ubiregi 2.x)
+          </p>
+          <h2 id='introduction-implementation-status'>Implementation Status</h2>
+          <table class='condensed-table'>
+            <thead>
+              <tr>
+                <th>Resource(s)</th>
+                <th>Implementation</th>
+                <th>Documentation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>/accounts/<em>:account_id</em></th>
+                <td>Finished</td>
+                <td>Finished</td>
+              </tr>
+              <tr>
+                <th>/accounts/<em>:account_id</em>/cashiers</th>
+                <td>Finished</td>
+                <td>Finished</td>
+              </tr>
+              <tr>
+                <th>/accounts/<em>:account_id</em>/customer_tags</th>
+                <td>Finished</td>
+                <td>Finished</td>
+              </tr>
+              <tr>
+                <th>/accounts/<em>:account_id</em>/payment_types</th>
+                <td>Finished</td>
+                <td>Finished</td>
+              </tr>
+              <tr>
+                <th>/accounts/<em>:account_id</em>/tables</th>
+                <td>Not yet</td>
+                <td>Started</td>
+              </tr>
+              <tr>
+                <th>/menus/:menu_id/items</th>
+                <td>Finished</td>
+                <td>Finished</td>
+              </tr>
+              <tr>
+                <th>/menus/:menu_id/categories</th>
+                <td>Finished</td>
+                <td>Finished</td>
+              </tr>
+              <tr>
+                <th>/accounts/<em>:account_id</em>/checkouts</th>
+                <td>Not yet</td>
+                <td>Not yet</td>
+              </tr>
+              <tr>
+                <th>/checkouts/<em>:checkout_id</em></th>
+                <td>Not yet</td>
+                <td>Not yet</td>
+              </tr>
+              <tr>
+                <th>/customers</th>
+                <td>Finished</td>
+                <td>Finished</td>
+              </tr>
+              <tr>
+                <th>/customers/notes</th>
+                <td>Finished</td>
+                <td>Finished</td>
+              </tr>
+              <tr>
+                <th>/accounts/<em>:account_id</em>/stocks/events</th>
+                <td>Finished</td>
+                <td>Finished</td>
+              </tr>
+            </tbody>
+          </table>
+          <h2 id='introduction-examples'>Examples</h2>
+          <dl>
+            <dt><a href='https://github.com/ubiregiinc/Ubiregi-API-Clients'>Ubiregi-API-Clients</a></dt>
+            <dd>
+              Collection of ubiregin api client examples.
+              We are still working for that.
+            </dd>
+          </dl>
+          <h2 id='introduction-quick-start'>Quick Start</h2>
+          <ol>
+            <li>Signup to ubiregi.com</li>
+            <li>Register for developer account and new application</li>
+            <li>Install the application on your account</li>
+            <li>Download the examples.</li>
+            <li>Change the sample app, and it is your app now!</li>
+          </ol>
+          <h2 id='introduction-general-notes'>
+            General Notes
+            <small>Things every developer should know</small>
+          </h2>
+          <h4>The API is entirely HTTP-based, and RESTful</h4>
+          <p>
+            Methods to retrieve data from the Ubiregi API requires a GET
+            request. Methods to create new things requires a POST request. And to
+            update things requires a PUT request. Most methods requires a
+            particular HTTP method and will return an error if you do not make your
+            request with the correct one.
+          </p>
+          <h4>Ubiregi web app is built on Rails</h4>
+          <p>
+            We use Ruby on Rails 3 to develop ubiregi.com web app. You may find
+            something odd our api. It should be because of Rails requirements.
+          </p>
+          <p>
+            We carefully described things non-rails-developer should mention
+            about, but may be insufficient. If you have some problem, you may
+            need to check Rails related documents.
+          </p>
+          <h4>JSON is used</h4>
+          <p>
+            We use JSON for every structured data. It implies that binary data are
+            encoded with base64 and non-ascii characters are UTF8 encoded.
+          </p>
+          <h4>Use HTTPS</h4>
+          <p>
+            All requests to Ubiregi API must be HTTPS requests.
+          </p>
+          <h1 id='authentication'>Authentication</h1>
+          <p>
+            Currently we provide very simple token based authentication mechanism.
+            Every installations of client have their own secret tokens which can be used for API access.
+          </p>
+          <h2 id='authentication-installation'>Installation</h2>
+          <p>
+            A user will <it>install</it> apps to ubiregi.com.
+            Installations generate new secret tokens.
+            The user have to notify an app its secret token, and the app will be authenticated with the token.
+          </p>
+          <ul>
+            <li>User need to <it>install</it> an app to use it</li>
+            <li>Each installation have their own secret token</li>
+            <li>
+              There are no automated way to notify app its secret token
+              <br />
+              (We are planning to provide standardized mechanisms such as OAuth.)
+            </li>
+          </ul>
+          <p>
+            User may <it>uninstall</it> an app.
+            Un-installation of an app will invalidate the secret token.
+            After your app got uninstalled by the user, your app can not access the user's data.
+          </p>
+          <p>
+            The secret token is installation specific.
+            If your user uninstall your application, the token will be invalidated.
+            After your user re-install your application, new token will be generated.
+          </p>
+          <p>
+            To install your app, visit your app's install URL.
+          </p>
+          <img src="images/app_installation.png" width="90%">
+          <p>
+            You can install/uninstall the app to your account.
+            Visit <a href='https://ubiregi.com/installs'>https://ubiregi.com/installs</a> to list all applications you have installed.
+          </p>
+          <h2 id='authentication-authorization'>Authorization</h2>
+          <p>
+            There is only one authorizatioin levels, <strong>everything</strong>.
+            If a user allows an app to access its data (installs the app), the app can access everything.
+          </p>
+          <h2 id='authentication-the-protocol'>The Protocol</h2>
+          <p>
+            Give HTTP the following two request headers on all requests.
+          </p>
+          <table>
+            <tr>
+              <th width='190'><code>X-Ubiregi-Auth-Token</code></th>
+              <td>
+                Users secret token to identify user and installation.
+                This is used for authentication.
+                Both of you and users are responsible to keep it secret.
+              </td>
+            </tr>
+            <tr>
+              <th><code>X-Ubiregi-App-Secret</code></th>
+              <td>
+                To identify your app.
+                This can be used to block the app.
+                You are responsible to keep it secret.
+              </td>
+            </tr>
+          </table>
+          <p>
+            If <code>X-Ubiregi-Auth-Token</code> is invalid, your request will result in <code>401</code> (Unauthorized) status.
+          </p>
+          <p>
+            Note that there are another possibility to make your request failed.
+            <code>402</code> (Payment required) may be returned in the case the user's subscription got expired.
+            After the user renew the subscription, the status will be recovered.
+          </p>
+          <p>
+            Check the <a href='https://github.com/ubiregiinc/Ubiregi-API-Clients'>examples</a> to see how the authentication is exactly.
+          </p>
+          <h1 id='restful-api'>RESTful API</h1>
+          <h2 id='api-general-notes'>General Notes</h2>
+          <h3>Standard Set of APIs on Collection</h3>
+          <p>
+            Most resource collections provides the following set of APIs.
+          </p>
+          <ul>
+            <li>Retrieving the collection (Index)</li>
+            <li>Creating or updating items (POST)</li>
+            <li><span class="label success">Optional</span> Retrieving one item (GET)</li>
+          </ul>
+          <h3>Standard Index Parameters</h3>
+          <p>
+            Indexing actions take a set of parameters; <code>since</code>, <code>until</code>, and <code>glb</code>.
+            They are used to limit the size of the result sets.
+          </p>
+          <table>
+            <tr>
+              <th><code>since</code></th>
+              <td>Limits the result set to contain only updated items since the parameter.</td>
+            </tr>
+            <tr>
+              <th><code>until</code></th>
+              <td>Limits the result set to reject items updated since the parameter.</td>
+            </tr>
+            <tr>
+              <th><code>glb</code></th>
+              <td>Greatest lower bound of id of the result set. This is used to retrieve next batch of the collection.</td>
+            </tr>
+          </table>
+          <p>The result set can be described as follows:</p>
+          <blockquote>{ item | since ≤ item.updated_at ⋀ item.updated_at < until ⋀ glb < item.id }</blockquote>
+          <p>The items are sorted by their <code>id</code>s.</p>
+          <p>The result will be on following pattern.</p>
+          <pre>{&#x000A;  &quot;timestamp&quot;: timestamp,&#x000A;  &quot;next-url&quot;: url,&#x000A;  &quot;last-updated-at&quot;: timestamp,&#x000A;  rows: [ objects ],&#x000A;}</pre>
+          <dl>
+            <dt>timestamp</dt>
+            <dd>
+              <p>The server time.
+              This is sent for the case client local clock is incorrect.
+              If <code>until</code> parameter is specified, <code>timestamp</code> will be the requested <code>until</code>.</p>
+            </dd>
+            <dt>next-url (optional)</dt>
+            <dd>
+              The URL to retrieve next result set.
+              This will be unspecified in the case there are no more results.
+            </dd>
+            <dt>last-updated-at</dt>
+            <dd>
+              The timestamp on the time, there were last update of an object which belongs to the resource you requested.
+            </dd>
+            <dt>$rows</dt>
+            <dd>
+              <p>Array of objects.
+              The name will be different, <code>items</code> for MenuItems, <code>categories</code> for Categories, and <code>checkouts</code> for Checkouts.</p>
+            </dd>
+          </dl>
+          <h3>Fetching Whole Collection</h3>
+          <p>There are limitation on the number of objects contained in one request; this is the reason we accept <code>glb</code> parameter.
+          You might have a question that how to get the whole collection?
+          A set of requests to fetch collections can be interleaved by requests which updates objects which is contained in the collection.
+          In that case, the <code>updated_at</code> field will be updated and because of the <code>until</code> parameter included in the fetch request, the updated objects can not be fetched.</p>
+          <p><code>last-updated-at</code> field is to handle such case.
+          If there are no <code>next-url</code> field sent, which means there are no more object for the parameters you specified, check if the <code>timestamp</code> field is newer than <code>last-updated-at</code>.</p>
+          <ol>
+          <li>Send a request without <code>until</code> and <code>glb</code> parameters.</li>
+          <li>Check if the response contains <code>next-url</code> field.</li>
+          <li>If contains, fetch the <code>next-url</code> and go step 2 again.</li>
+          <li>If not contains, send a request again but with <code>since</code> = <code>timestamp</code>, and go step 2 again.</li>
+          </ol>
+          <h3>POST Convention</h3>
+          <p>
+            POST actions to collection create or update more than one items.
+            This helps to make updating many items faster.
+          </p>
+          <p>
+            The request will be like the following:
+          </p>
+          <pre>[&#x000A;  { &quot;name&quot;: &quot;new object&quot;, ... },&#x000A;  { &quot;name&quot;: &quot;another new object&quot;, ...},&#x000A;  { &quot;id&quot;: 123, &quot;name&quot;: &quot;object to be updated&quot; },&#x000A;]</pre>
+          <ul>
+          <li>If there are no <code>id</code> field in an object, it will create new item.</li>
+          <li>If there are <code>id</code> field in an object, it will update an existing item.</li>
+          </ul>
+          <p>The post action is transactional.
+          If there are an error processing an item, all creation or update of items will be canceled.
+          There will be one of <em>everything ok</em> or <em>nothing changed</em>.</p>
+          <p>There is no limitation on number of objects in one request, but you should take care of it.
+          100 items in a request will be ok. 10,000 items in a request should cause a problem.
+          We will ask you to stop posting too big request, if there are some problem.</p>
+          <h2 id='api-objects'>Objects</h2>
+          <p>Every object has <code>created_at</code> and <code>updated_at</code> fields.</p>
+          <h3 id='api-objects-type-annotations'>Type annotations</h3>
+          <dl>
+            <dt>integer</dt>
+            <dd>The value should integer.</dd>
+            <dt>number</dt>
+            <dd>The value should be number; real number or integer.</dd>
+            <dt>string</dt>
+            <dd>The value should be a string.</dd>
+            <dt>boolean</dt>
+            <dd>The value should be a boolean.</dd>
+          </dl>
+          <dl>
+            <dt>array of $type</dt>
+            <dd>array of values which type is $type.</dd>
+          </dl>
+          <dl>
+            <dt>$<em>type</em></dt>
+            <dd>Object of <em>type</em>.</dd>
+            <dt>$<em>type</em><code>s</code></dt>
+            <dd>
+              Sequence of objects of <em>type</em>.
+              Usually contents of an array.
+            </dd>
+            <dt>$base64Encoded</dt>
+            <dd>Base64 encoded string of a binary data.</dd>
+            <dt>$UUID-like-sequence</dt>
+            <dd>
+              String which is expected to be unique in the world.
+              It is UUID in the case the sequence is generated in server.
+              If it is generated by iOS, it is not an exact UUID but an extended one by Apple.
+            </dd>
+            <dt>$Time</dt>
+            <dd>ISO8601 format string of a time.</dd>
+          </dl>
+          <h3 id='api-objects-account'>Account</h3>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Fields</h4>
+              <dl>
+                <dt>id :: ("current" | integer)</dt>
+                <dd>Account ID.</dd>
+                <dt>login (optional) :: string</dt>
+                <dd>Account's login</dd>
+                <dt>email (optional) :: string</dt>
+                <dd>Account's email</dd>
+                <dt>name :: string</dt>
+                <dd>Account name to be displayed to users.</dd>
+                <dt>expire_at (optional)</dt>
+                <dd>
+                  Expiration data.
+                  May be `null` in the case there is no expiration on subscription.
+                </dd>
+                <dt>subscription</dt>
+                <dd>One of `trial`, `standard`, and `expired`.</dd>
+                <dt>currency</dt>
+                <dd>One of `JPY`, `USD`, `Unknown 2`, and `Unknown 3`.</dd>
+                <dt>date_offset</dt>
+                <dd>
+                  The hour date changes.
+                  If this is `6`, the date changes at 6 AM, ie 2012-01-01T05:59:00Z is December 31, 2011 (If the timezone is UTC).
+                </dd>
+                <dt>timezone</dt>
+                <dd>Timezone.</dd>
+                <dt>receipt_title :: string</dt>
+                <dd>Receipt title.</dd>
+                <dt>receipt_footer :: string</dt>
+                <dd>Footer text to be printed on receipt.</dd>
+                <dt>receipt_logo</dt>
+                <dd>Base64 encoded logo image to be printed on receipt.</dd>
+                <dt>menus ::  array of integer</dt>
+                <dd>Array of menu ids.</dd>
+                <dt>tables ::  array of $table</dt>
+                <dd>Array of tables.</dd>
+                <dt>customer_tags :: array of $customer_tag</dt>
+                <dd>Array of customer tags.</dd>
+                <dt>payment_types :: array of $payment_type</dt>
+                <dd>Array of payment types.</dd>
+                <dt>cashiers :: array of $cashier</dt>
+                <dd>Array of cashiers.</dd>
+                <dt>friends</dt>
+                <dd>Array of parent or child accounts.</dd>
+              </dl>
+            </div>
+            <div class='span8'>
+              <h4>Example</h4>
+              <pre>{&#x000A;  &quot;id&quot;: 123,&#x000A;  &quot;login&quot;: &quot;ubiregi-cafe&quot;,&#x000A;  &quot;email&quot;: &quot;cafe@ubiregi.com&quot;,&#x000A;  &quot;name&quot;: &quot;Ubiregi Cafe&quot;,&#x000A;  &quot;expire_at&quot;: &quot;2011-11-13T00:00:00Z&quot;,&#x000A;  &quot;subscription&quot;: &quot;standard&quot;,&#x000A;  &quot;currency&quot;: &quot;JPY&quot;,&#x000A;  &quot;date_offset&quot;: 6,&#x000A;  &quot;timezone&quot;: &quot;Asia/Tokyo&quot;,&#x000A;  &quot;receipt_title&quot;: &quot;RECEIPT&quot;,&#x000A;  &quot;receipt_footer&quot;: &quot;This is footer to be printed in receipts&quot;,&#x000A;  &quot;receipt_logo&quot;: $base64Encoded,&#x000A;  &quot;menus&quot;: [ 8 ],&#x000A;  &quot;tables&quot;: [ $tables ],&#x000A;  &quot;customer_tags&quot;: [ $customer_tags ],&#x000A;  &quot;payment_types&quot;: [ $payment_types ],&#x000A;  &quot;cashiers&quot;: [ $cashiers ],&#x000A;  &quot;friends&quot;: [ $friends ],&#x000A;}</pre>
+            </div>
+          </div>
+          <h3 id='api-objects-table'>Table</h3>
+          <p><strong>Table object is deprecated.</strong>
+          It is working now but will be obsoleted soon.</p>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Fields</h4>
+              <dl>
+                <dt>id :: integer</dt>
+                <dd>ID of the object.</dd>
+                <dt>name :: string</dt>
+                <dd>Name of the table.</dd>
+                <dt>position :: integer</dt>
+                <dd>Position of the table.</dd>
+              </dl>
+            </div>
+            <div class='span8'>
+              <h4>Example</h4>
+              <pre>{&#x000A;  &quot;id&quot;: 123,&#x000A;  &quot;name&quot;: &quot;Table 1&quot;,&#x000A;  &quot;position&quot;: 3,&#x000A;}</pre>
+            </div>
+          </div>
+          <h3 id='api-objects-customer'>Customer</h3>
+          <p>A customer object associated with an account.
+          This can be used to send/retrieve a customer information to/from an account.</p>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Fields</h4>
+              <dl>
+                <dt>id :: integer</dt>
+                <dd>ID of the object.</dd>
+                <dt>account_id :: ("current"|integer)</dt>
+                <dd>Account id which this customer is associated with.</dd>
+                <dt>account_name :: string</dt>
+                <dd>Name of the account specified by `account_id`.  <em>ReadOnly</em></dd>
+                <dt>fields_attributes [$field_attribute]</dt>
+                <dd>An array of customer field object.</dd>
+                <dt>guid</dt>
+                <dd>GUID.</dd>
+              </dl>
+            </div>
+            <div class='span8'>
+              <h4>Example</h4>
+              <pre>{&#x000A;  &quot;id&quot;: 100,&#x000A;  &quot;account_id&quot;: 2,&#x000A;  &quot;account_name&quot;: &quot;A Curry Rice Shop&quot;,&#x000A;  &quot;fields_attributes&quot;: $customer_fields,&#x000A;  &quot;guid&quot;: $UUID-like-sequence&#x000A;}</pre>
+            </div>
+          </div>
+          <h3 id='api-objects-customer-field'>Customer Field</h3>
+          <p>A customer field belongs to a customer.
+          This is mainly used to be included in a customer object.</p>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Fields</h4>
+              <dl>
+                <dt>customer_id :: integer</dt>
+                <dd>ID of customer which the field belongs to.</dd>
+                <dt>guid</dt>
+                <dd>GUID.</dd>
+                <dt>app_created_at</dt>
+                <dd>Time when the field has been created in a client app.  <em>WriteOnly</em></dd>
+                <dt>name :: string</dt>
+                <dd>
+                  Name of the field.  The value of this field is one of the followings:
+                  <dl>
+                    <dt>"customer.field.customerID"</dt>
+                    <dd>key string representing customer id.</dd>
+                    <dt>"customer.field.name"</dt>
+                    <dd>key string representing customer's name.</dd>
+                    <dt>"customer.field.ruby"</dt>
+                    <dd>key string representing customer's ruby.</dd>
+                    <dt>"customer.field.birthday"</dt>
+                    <dd>key string representing customer's birthday.</dd>
+                    <dt>"customer.field.sex"</dt>
+                    <dd>key string representing customer's sex.</dd>
+                    <dt>"customer.field.email"</dt>
+                    <dd>key string representing customer's email address.</dd>
+                    <dt>"customer.field.phone"</dt>
+                    <dd>key string representing customer's phone number.</dd>
+                    <dt>"customer.field.twitter"</dt>
+                    <dd>key string representing customer's twitter id.</dd>
+                    <dt>"customer.field.zip"</dt>
+                    <dd>key string representing customer's zip code.</dd>
+                    <dt>"customer.field.address1"</dt>
+                    <dd>key string representing customer's address (1).</dd>
+                    <dt>"customer.field.address2"</dt>
+                    <dd>key string representing customer's address (2).</dd>
+                  </dl>
+                </dd>
+                <dt>value :: string</dt>
+                <dd>Value of the field.</dd>
+              </dl>
+            </div>
+            <div class='span8'>
+              <h4>Example</h4>
+              <pre>{&#x000A;  &quot;customer_id&quot;: 1,&#x000A;  &quot;guid&quot;: $UUID-like-sequence,&#x000A;  &quot;app_created_at&quot;: &quot;2012-02-14T00:00:00Z&quot;,&#x000A;  &quot;name&quot;: &quot;customer.field.name&quot;,&#x000A;  &quot;value&quot;: &quot;Ubiregi Taro&quot;&#x000A;}</pre>
+            </div>
+          </div>
+          <h3 id='api-objects-customer-note'>Customer Note</h3>
+          <p>A customer note belongs to a customer.</p>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Fields</h4>
+              <dl>
+                <dt>id :: integer</dt>
+                <dd>ID of this object.</dd>
+                <dt>customer_id :: integer (<em>required</em>)</dt>
+                <dd>ID which thie object belongs to.</dd>
+                <dt>app_created_at (<em>required</em> and <em>WriteOnly</em>)</dt>
+                <dd>Time when the note is created in a client app</dd>
+                <dt>guid (<em>required</em>)</dt>
+                <dd>GUID</dd>
+                <dt>checkout_id :: integer</dt>
+                <dt>kind (<em>ReadOnly</em>)</dt>
+                <dt>note :: string</dt>
+                <dt>photo</dt>
+                <dt>checkout_summary</dt>
+              </dl>
+            </div>
+            <div class='span8'>
+              <h4>Example</h4>
+              <pre>{&#x000A;  &quot;id&quot;: 1,&#x000A;  &quot;customer_id&quot;: 1,&#x000A;  &quot;app_created_at&quot;: &quot;2012-02-14T00:00:00Z&quot;,&#x000A;  &quot;guid&quot;: $UUID-like-sequence,&#x000A;  &quot;checkout_id&quot;: 2,&#x000A;  &quot;kind&quot;: 2,&#x000A;  &quot;note&quot;: &quot;Memo Memo&quot;,&#x000A;  &quot;photo&quot;: $base64Encoded,&#x000A;  &quot;checkout_summary&quot;: &quot;Summary&quot;&#x000A;}</pre>
+            </div>
+          </div>
+          <h3 id='api-objects-customer-tag'>Customer Tag</h3>
+          <p>Tags to give various information on checkouts.
+          This can be used to record that <em>the customer is 20th girl</em>, <em>they came for dating</em>, and so on.</p>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Fields</h4>
+              <dl>
+                <dt>id :: integer</dt>
+                <dd>ID of the object.</dd>
+                <dt>name :: string</dt>
+                <dd>Name of the tag.</dd>
+                <dt>position (optional)</dt>
+                <dd>Position of the tag. <code>null</code> in the case the tag is deleted.</dd>
+                <dt>icon_name :: string</dt>
+                <dd>Name of icon.  <em>WriteOnly</em></dd>
+                <dt>icon</dt>
+                <dd>Icon image for the tag.  <em>ReadOnly</em></dd>
+                <dt>icon_mime :: string</dt>
+                <dd>MIME type of the icon. Usually <code>image/png</code>.  <em>ReadOnly</em></dd>
+              </dl>
+            </div>
+            <div class='span8'>
+              <h4>Example</h4>
+              <pre>{&#x000A;  &quot;id&quot;: 123,&#x000A;  &quot;name&quot;: &quot;Dating&quot;,&#x000A;  &quot;potision&quot;: null,&#x000A;  &quot;icon&quot;: $base64Encoded,&#x000A;  &quot;icon_mime&quot;: &quot;image/png&quot;,&#x000A;}</pre>
+            </div>
+          </div>
+          <h3 id='api-objects-payment-type'>PaymentType</h3>
+          <p>How the bill is payed by; cash? or credit card?</p>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Fields</h4>
+              <dl>
+                <dt>id :: integer</dt>
+                <dd>ID of the object.</dd>
+                <dt>name :: string</dt>
+                <dd>Name of the payment type.</dd>
+                <dt>position (optional)</dt>
+                <dd>
+                  <p>Position of the type. <code>null</code> in the case the payment methods is disabled.</p>
+                </dd>
+                <dt>change</dt>
+                <dd>
+                  <p><code>true</code> if customers will receive change.</p>
+                </dd>
+                <dt>kind :: string</dt>
+                <dd>
+                  <p>"CASH" | "CARD" | "OTHER"
+                  "CASH" kind payment type exists in all accounts.</p>
+                </dd>
+              </dl>
+            </div>
+            <div class='span8'>
+              <h4>Example</h4>
+              <pre>{&#x000A;  &quot;id&quot;: 111,&#x000A;  &quot;name&quot;: &quot;Credit card&quot;,&#x000A;  &quot;position&quot;: 3,&#x000A;  &quot;change&quot;: true,&#x000A;  &quot;kind&quot;: &quot;CARD&quot;,&#x000A;}</pre>
+            </div>
+          </div>
+          <h3 id='api-objects-cashier'>Cashier</h3>
+          <p>Cashier who operated the cash register.</p>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Fields</h4>
+              <dl>
+                <dt>id :: integer</dt>
+                <dd>ID of the object.</dd>
+                <dt>name :: string</dt>
+                <dd>Name of the cashier.</dd>
+                <dt>enabled :: boolean</dt>
+                <dd>
+                  <p><code>true</code> if the cashier is enabled. <code>false</code> if the cashier is deleted.</p>
+                </dd>
+                <dt>icon</dt>
+                <dd>Base 64 encoded binary data of icon.</dd>
+                <dt>icon_mime :: string</dt>
+                <dd>
+                  <p>MIME type of the icon. Usually, <code>image/png</code> or <code>image/jpeg</code>.</p>
+                </dd>
+              </dl>
+            </div>
+            <div class='span8'>
+              <h4>Example</h4>
+              <pre>{&#x000A;  &quot;id&quot;: 385,&#x000A;  &quot;name&quot;: &quot;Soutaro Matsumoto&quot;,&#x000A;  &quot;enabled&quot;: true,&#x000A;  &quot;icon&quot;: $base64Encoded,&#x000A;  &quot;icon_mime&quot;: &quot;image/png&quot;,&#x000A;}</pre>
+            </div>
+          </div>
+          <h3 id='api-objects-friend'>Friend</h3>
+          <p>Account summary information for chain branches.</p>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Fields</h4>
+              <dl>
+                <dt>id :: integer</dt>
+                <dd>ID of account.</dd>
+                <dt>name :: string</dt>
+                <dd>Name of the account.</dd>
+              </dl>
+            </div>
+            <div class='span8'>
+              <h4>Example</h4>
+              <pre>{&#x000A;  id: 199,&#x000A;  name: &quot;hogehoge&quot;,&#x000A;}</pre>
+            </div>
+          </div>
+          <h3 id='api-objects-menu-item'>Menu Item</h3>
+          <p>Item in menus, which represents one product/service you sell.</p>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Fields</h4>
+              <dl>
+                <dt>id :: int</dt>
+                <dd>ID of the object.</dd>
+                <dt>sku</dt>
+                <dd>SKU of the item.</dd>
+                <dt>name :: string</dt>
+                <dd>Name of the item.</dd>
+                <dt>barcode</dt>
+                <dd>Barcode of the item (ReadOnly).</dd>
+                <dt>price :: integer</dt>
+                <dd>Price of the item. Note that price is a string to avoid inacculate compuation using floats.</dd>
+                <dt>price_type :: string</dt>
+                <dd>
+                  <p>Note on price. One of <code>intax</code>, <code>outtax</code>, <code>percent</code>, and <code>nosales</code>.
+                  <code>intax</code> is used for normal items, such that the VAT is included in the price.
+                  <code>outtax</code> is to mark that the VAT is not included in the price.
+                  <code>percent</code> is for discounting/premiums.
+                  If "20" is the price of the item and the price_type is <code>percent</code>, The price is <em>20% of premiour</em>.
+                  <code>nosales</code> is mark that the total sales with this item is not included in sales.</p>
+                </dd>
+                <dt>vat</dt>
+                <dd>
+                  <p>Percentage of VAT. Present if <code>price_type</code> is <code>intax</code> or <code>outtax</code>.</p>
+                </dd>
+                <dt>position</dt>
+                <dd>
+                  <p>Position of the item in its category. <code>null</code> if the item is disabled.</p>
+                </dd>
+                <dt>category_id</dt>
+                <dd>
+                  <p>The category the item is belonging to. <code>null</code> if the item is disabled.</p>
+                </dd>
+              </dl>
+            </div>
+            <div class='span8'>
+              <h4>Example</h4>
+              <pre>{&#x000A;  &quot;id&quot;: 271,&#x000A;  &quot;sku&quot;: &quot;sku&quot;,&#x000A;  &quot;name&quot;: &quot;Coke&quot;,&#x000A;  &quot;price&quot;: &quot;105&quot;,&#x000A;  &quot;price_type&quot;: intax,&#x000A;  &quot;vat&quot;: 5,&#x000A;  &quot;position&quot;: 102,&#x000A;  &quot;category_id&quot;: 105,&#x000A;}</pre>
+            </div>
+          </div>
+          <h3 id='api-objects-category'>Category</h3>
+          <p>Categories are used to organize items in a menu. Categories can not be nested.</p>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Fields</h4>
+              <dl>
+                <dt>id :: integer</dt>
+                <dd>ID of the object.</dd>
+                <dt>name :: string</dt>
+                <dd>Name of the category.</dd>
+                <dt>position</dt>
+                <dd>
+                  <p>Position of the category in menu. <code>null</code> if the category is disabled.</p>
+                </dd>
+              </dl>
+            </div>
+            <div class='span8'>
+              <h4>Example</h4>
+              <pre>{&#x000A;  &quot;id&quot;: 18,&#x000A;  &quot;name&quot;: &quot;Soft Drink&quot;,&#x000A;  &quot;position&quot;: 4,&#x000A;}</pre>
+            </div>
+          </div>
+          <h3 id='api-objects-checkout'>Checkout</h3>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Fields</h4>
+              <dl>
+                <dt>id :: integer</dt>
+                <dd>ID of the object</dd>
+                <dt>guid</dt>
+                <dd>
+                  UUID of checkout.
+                  The ID is generated by clients, thus it may not be unique.
+                  This is used to prevent a checkout posted from being inserted more than one time.
+                  The pair of <code>guid</code> and <code>paid_at</code> is used to identify a checkout.
+                </dd>
+                <dt>account_id :: ("current"|integer)</dt>
+                <dd>ID of account which the checkout is belonging to.</dd>
+                <dt>price :: real</dt>
+                <dd>Server culculated total sales of the checkout.</dd>
+                <dt>change :: boolean</dt>
+                <dd>Change given to the customer.</dd>
+                <dt>status :: integer</dt>
+                <dd>Either 1(Close), 2(Open), 3(Delete), or 4(Cancel).</dd>
+                <dt>cashier_id :: integer</dt>
+                <dd>ID of the cashier who processed the checkout. May be <code>null</code> if input skipped.</dd>
+                <dt>customers_count :: integer</dt>
+                <dd>
+                  Number of customers associated with the checkout.
+                  Zero in the case ommited.
+                </dd>
+                <dt>payments</dt>
+                <dd>Array of CheckoutPayment, which describes how the checkout is got paid.</dd>
+                <dt>items</dt>
+                <dd>Array of CheckoutItem, which describes which items are sold.</dd>
+                <dt>table_ids</dt>
+                <dd>Array of ID of Table.</dd>
+                <dt>customer_tag_ids</dt>
+                <dd>Array of ID of CustomerTags.</dd>
+                <dt>modifier (obsolete)</dt>
+                <dd>Only for compatibility.</dd>
+              </dl>
+            </div>
+            <div class='span8'>
+              <h4>Example</h4>
+              <pre>{&#x000A;  &quot;id&quot;: 1,&#x000A;  &quot;guid&quot;: $UUID-like-sequence,&#x000A;  &quot;account_id&quot;: 1,&#x000A;  &quot;paid_at&quot;: &quot;2011-12-24T16:20:20Z&quot;,&#x000A;  &quot;price&quot;: &quot;385.0&quot;,&#x000A;  &quot;change&quot;: &quot;4000.0&quot;,&#x000A;  &quot;status&quot;: 4,&#x000A;  &quot;cashier_id&quot;: null,&#x000A;  &quot;customers_count&quot;: 0,&#x000A;  &quot;payments&quot;: [ $Payments ],&#x000A;  &quot;items&quot;: [ $CheckoutItems ],&#x000A;  &quot;table_ids&quot;: [ $TableIDs ],&#x000A;  &quot;customer_tag_ids&quot;: [ $CustomerTagIDs ],&#x000A;  &quot;modifier&quot;: &quot;0.0&quot;&#x000A;}</pre>
+            </div>
+          </div>
+          <h4>Notes</h4>
+          <p>
+            Fields which represents currency is represented as a string in JSON.
+            This is to avoid inacculate float representation.
+            Decimal types; like NSDecimalNumber (Objective-C) and BigDecimal(Ruby and Java); should be used for currency.
+          </p>
+          <p>
+            Change is assumed to be by cash.
+          </p>
+          <h3 id='api-objects-payment'>Payment</h3>
+          <p>
+            Pair of amount the customer paid, and method the payment maid with.
+          </p>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Fields</h4>
+              <dl>
+                <dt>id :: integer</dt>
+                <dd>ID of the object</dd>
+                <dt>payment_type_id :: integer</dt>
+                <dd>ID of payment_type</dd>
+                <dt>amount :: real</dt>
+                <dd>Amount the customer paid</dd>
+              </dl>
+            </div>
+            <div class='span8'>
+              <h4>Example</h4>
+              <pre>{&#x000A;  &quot;id&quot;: 1,&#x000A;  &quot;payment_type_id&quot;: 1,&#x000A;  &quot;amount&quot;: &quot;5000.0&quot;&#x000A;}</pre>
+            </div>
+          </div>
+          <h3 id='api-objects-checkout-item'>CheckoutItem</h3>
+          <p></p>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Fields</h4>
+              <dl>
+                <dt>id :: integer</dt>
+                <dd>ID of the object</dd>
+                <dt>menu_item_id :: integer</dt>
+                <dd>ID of the menu item</dd>
+                <dt>count</dt>
+                <dd>
+                  The number of the items the customer bought.
+                  May be negative to express a return.
+                </dd>
+                <dt>sales :: real</dt>
+                <dd>Sales amount without TAX.</dd>
+                <dt>tax :: real</dt>
+                <dd>TAX for the item.</dd>
+                <dt>discount_sales :: real</dt>
+                <dd>Sales discounted</dd>
+                <dt>discount_tax :: real</dt>
+                <dd>TAX discounted</dd>
+              </dl>
+            </div>
+            <div class='span8'>
+              <h4>Example</h4>
+              <pre>{&#x000A;  &quot;id&quot;: 1,&#x000A;  &quot;menu_item_id&quot;: 1,&#x000A;  &quot;count&quot;: 3,&#x000A;  &quot;sales&quot;: &quot;330.0&quot;,&#x000A;  &quot;tax&quot;: &quot;0.0&quot;,&#x000A;  &quot;discount_sales&quot;: &quot;0.0&quot;,&#x000A;  &quot;discount_tax&quot;: &quot;0.0&quot;&#x000A;}</pre>
+            </div>
+          </div>
+          <h4>Notes</h4>
+          <p>The price is culculated as follows: <code>sales</code> + <code>tax</code> - (<code>discount_sales</code> + <code>discount_tax</code>).</p>
+          <h3 id='api-objects-stock-event'>Stock Event</h3>
+          <p>Event object related to stock control.
+          The object is used to tell someone that stock-related event has occured.
+          Type of a stock event is either "inventory", "arrival", "shipping", or "order".</p>
+          <div class='row'>
+            <div class='span8'>
+              <h4>Fields</h4>
+              <dl>
+                <dt>id :: int</dt>
+                <dd>ID of the event.</dd>
+                <dt>menu_item_id :: int</dt>
+                <dd>ID of the menu item associated with the event.</dd>
+                <dt>app_created_at</dt>
+                <dd>Time when the event has been created in a client app.  <em>WriteOnly</em></dd>
+                <dt>inventory_at</dt>
+                <dd>Time when the inentory event has occured.  It maybe different from app_created_at.</dd>
+                <dt>event_type :: string</dt>
+                <dd>Type of the event (either "inventory", "arrival", "shipping", or "order").</dd>
+                <dt>amount :: real</dt>
+                <dd>
+                  Amount related to the event.  <em>Note that the meaning of the value of this attribute depends on `event_type`</em>.
+                  Assume that the value of amount is 55.  The meaning of this value depends on the value of `event_type` as followings:
+                  <ul>
+                    <li>"inventory" : The number of inventory specified by `menu_item_id` is 55.</li>
+                    <li>"arrival" :  55 items specified by `menu_item_id` has arrived.</li>
+                    <li>"shipping" : 55 items specified by `menu_item_id` has shipped.</li>
+                    <li>"order" : 55 items specified by `menu_item_id` has been ordered.</li>
+                  </ul>
+                </dd>
+                <dt>uuid</dt>
+                <dd>UUID associated to the event.  This is used to prevent duplicated posts.</dd>
+                <dt>body</dt>
+                <dd>An arbitrary JSON object.  The usage of the value is not decided yet.</dd>
+              </dl>
+            </div>
+            <div class='span8'>
+              <h4>Example</h4>
+              <pre>{&#x000A;  &quot;id&quot; : 1,&#x000A;  &quot;menu_item_id&quot; : 2,&#x000A;  &quot;app_created_at&quot; : &quot;2012-02-14T00:00:00Z&quot;,&#x000A;  &quot;inventory__at&quot; : &quot;2012-02-14T01:00:00Z&quot;,&#x000A;  &quot;event_type&quot; : &quot;arrival&quot;,&#x000A;  &quot;amount&quot; : 55,&#x000A;  &quot;uuid&quot; : $UUID,&#x000A;  &quot;body&quot; : { &quot;note&quot; : &quot;This object represents that 55 items specified by `menu_item_id` has arrived&quot; },&#x000A;}</pre>
+            </div>
+          </div>
+          <h2 id='api-resources'>Resources</h2>
+          <h3 id='api-resources-accounts'>/accounts</h3>
+          <p>
+            User accounts. Readonly.
+          </p>
+          <h4>GET on /accounts/<em>:account_id</em>, /accounts/current</h4>
+          <p>Download the information of current account.</p>
+          
+          <p><em>:account_id</em> is either an integer which specifies an ID of account, or <code>current</code>.
+          If <code>current</code> is given in request, the client's authenticated account will be in the response.</p>
+          <div class='row'>
+            <div class='span8'>
+              <h5>Response</h5>
+              <pre>{&#x000A;  &quot;account&quot;: $account,&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:34Z&quot;,&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <h5>Fields</h5>
+              <dl>
+                <dt>account</dt>
+                <dd>The account.</dd>
+                <dt>timestamp</dt>
+                <dd>The time in ubiregi.com server.</dd>
+              </dl>
+            </div>
+          </div>
+          <h4>Note</h4>
+          <p>Accesses to /accounts/ do not expire.</p>
+          
+          <p>Even if your account is expired, it returns the account's information.</p>
+          
+          <p>It is allowed to access child accounts.
+          If you access your child accounts, you will receive the information of the account.
+          In other case, your request will result in 404 (not found) error.</p>
+          <h3 id='api-resources-cashiers'>/accounts/<em>:account_id</em>/cashiers</h3>
+          <p>Collection of cashiers defined in the user's account.</p>
+          <h4>POST on /accounts/<em>:account_id</em>/cashiers</h4>
+          <p>Update the cashiers of an account specified by <em>:account_id</em>.
+          The child account's cashiers can be updated by parents.</p>
+          <div class='row'>
+            <div class='span8'>
+              <h5>Request</h5>
+              <pre>{&#x000A;  &quot;cashiers&quot;: [&#x000A;    {&#x000A;      &quot;name&quot;: &quot;New cashier&quot;,&#x000A;      &quot;enabled&quot;:true,&#x000A;      &quot;icon&quot;:$base64Encoded,&#x000A;    },&#x000A;    {&#x000A;      &quot;id&quot;: 1,&#x000A;      &quot;name&quot;: &quot;Updating an existing cashier&quot;,&#x000A;      &quot;enabled&quot;: false,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <h5>Fields</h5>
+              <dl>
+                <dt>id :: integer</dt>
+                <dd>
+                  ID of cashier object.
+                  If unspecified, create a new cashier object.
+                  If specified, update an existing cashier object.
+                </dd>
+                <dt>name</dt>
+                <dt>enabled</dt>
+                <dt>icon</dt>
+                <dd>
+                  Base64 encoded data of icon.
+                  If unspecified, the icon is not updated.
+                  If specified with <code>null</code>, the icon will be removed.
+                </dd>
+              </dl>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='span8'>
+              <h5>Response</h5>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:12Z&quot;,&#x000A;  &quot;cashiers&quot; : $cashiers&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <p>
+                The order of the cashier objects are preserved.
+              </p>
+              <p>
+                The update/creation is transactional.
+                There are only two cases; everything processed successfully, or nothing changed since an error found.
+              </p>
+            </div>
+          </div>
+          <h3 id='api-resources-customer_tags'>/accounts/<em>:account_id</em>/customer_tags</h3>
+          <p>Collection of customer tags defined in the account.</p>
+          <h4>POST on /accounts/<em>:account_id</em>/customer_tags</h4>
+          Update the customer_tags of an account specified by :account_id.
+          <div class='row'>
+            <div class='span8'>
+              <h5>Request</h5>
+              <pre>{&#x000A;  &quot;customer_tags&quot;: [&#x000A;    {&#x000A;      &quot;id&quot;: &quot;1&quot;,&#x000A;      &quot;name&quot;: &quot;Dating&quot;,&#x000A;      &quot;position&quot;: 10,&#x000A;      &quot;icon_name&quot;: $icon_name,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <h5>Fields</h5>
+              <dl>
+                <dt>id :: integer</dt>
+                <dd>
+                  ID of customer tag object.
+                  If unspecified, create a customer tag object.
+                  If specified, update an existing customer tag object.
+                </dd>
+                <dt>name</dt>
+                <dt>position</dt>
+                <dt>icon_name</dt>
+              </dl>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='span8'>
+              <h5>Response</h5>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:12Z&quot;,&#x000A;  &quot;customer_tags&quot; : $customer_tags&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <p>
+                The order of the customer tags objects are preserved.
+              </p>
+              <p>
+                The update/creation is transactional.
+                There are only two cases; everything processed successfully, or nothing changed since an error found.
+              </p>
+            </div>
+          </div>
+          <h3 id='api-resources-tables'>/accounts/:account_id/tables</h3>
+          <p>Collection of tables defined in the account.</p>
+          
+          <p>Tables objects are to be obsolete, and there are no update operations for <code>/tables</code>.</p>
+          <h4>GET on /accounts/:account_id/tables for indexing</h4>
+          <h3 id='api-resources-menu-items'>/menus/:menu_id/items</h3>
+          <p>Collection of items in menu specified by <code>:menu_id</code>.</p>
+          <h4>GET on /menus/:menu_id/items</h4>
+          <h4>POST on /menus/:menu_id/items</h4>
+          <p>Update/Create the menu item of the menu specified by <code>:menu_id</code> on current account.</p>
+          <div class='row'>
+            <div class='span8'>
+              <h5>Request</h5>
+              <pre>{&#x000A;  &quot;items&quot;: [&#x000A;    {&#x000A;      &quot;id&quot;: 1,&#x000A;      &quot;name&quot;: &quot;New menu item&quot;,&#x000A;      &quot;price&quot;:1000,&#x000A;      &quot;price_type&quot;:&quot;intax&quot;,&#x000A;      &quot;vat&quot;: 5,&#x000A;      &quot;position&quot;: 102,&#x000A;      &quot;category_id&quot;: 105,&#x000A;    },&#x000A;    {&#x000A;      &quot;name&quot;: &quot;Renamed menu item&quot;,&#x000A;      &quot;price&quot;:1500,&#x000A;      &quot;price_type&quot;:&quot;intax&quot;,&#x000A;      &quot;vat&quot;: 5,&#x000A;      &quot;position&quot;: 102,&#x000A;      &quot;category_id&quot;: 105,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <h5>Fields</h5>
+              <dl>
+                <dt>id</dt>
+                <dd>
+                  ID of menu item object.
+                  If unspecified, create a new menu item object.
+                  If specified, update an existing menu item object.
+                </dd>
+                <dt>name</dt>
+                <dt>price</dt>
+                <dt>price_type</dt>
+                <dd>One of "intax",  "outtax", "percent", and "nosales" can be specified.</dd>
+                <dt>vat</dt>
+                <dt>position</dt>
+                <dt>category_id</dt>
+              </dl>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='span8'>
+              <h5>Response</h5>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:12Z&quot;,&#x000A;  &quot;items&quot; : $items&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <p>
+                The order of the menu item objects are preserved.
+              </p>
+              <p>
+                The update/creation is transactional.
+                There are only two cases; everything processed successfully, or nothing changed since an error found.
+              </p>
+            </div>
+          </div>
+          <h3 id='api-resources-menu-categories'>/menus/:menu_id/categories</h3>
+          <p>Collection of categories in menu specified by <code>menu_id</code>.</p>
+          <h4>GET on /menus/:menu_id/categories</h4>
+          <h4>POST on /menus/:menu_id/categories</h4>
+          <div class='row'>
+            <div class='span8'>
+              <h5>Request</h5>
+              <pre>{&#x000A;  &quot;categories&quot;: [&#x000A;    {&#x000A;      &quot;name&quot;:&quot;New Category&quot;,&#x000A;      &quot;position&quot;:4,&#x000A;    },&#x000A;    {&#x000A;      &quot;id&quot;: 1,&#x000A;      &quot;name&quot;: &quot;Renamed Category&quot;,&#x000A;      &quot;position&quot;:4,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <h5>Fields</h5>
+              <dl>
+                <dt>id :: integer</dt>
+                <dd>
+                  ID of category object.
+                  If unspecified, create a new category object.
+                  If specified, update an existing category object.
+                </dd>
+                <dt>name</dt>
+                <dd>
+                  name of category object.
+                </dd>
+                <dt>position</dt>
+              </dl>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='span8'>
+              <h5>Response</h5>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:12Z&quot;,&#x000A;  &quot;categories&quot; : $categories&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <p>
+                The order of the category objects are preserved.
+              </p>
+              <p>
+                The update/creation is transactional.
+                There are only two cases; everything processed successfully, or nothing changed since an error found.
+              </p>
+            </div>
+          </div>
+          <h3 id='api-resources-checkouts'>/accounts/:account_id/checkouts</h3>
+          <p>Collection of checkouts of the account.</p>
+          <h4>GET on /accounts/:account_id/checkouts</h4>
+          <h5>Response</h5>
+          <div class='row'>
+            <div class='span8'>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:34Z&quot;,&#x000A;  &quot;next-url&quot;: $URL,&#x000A;  &quot;last_updated_at&quot;: &quot;2011-12-31T00:00:31Z&quot;,&#x000A;  &quot;checkouts&quot;: $checkouts,&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <p>The response follows the convention of index action.</p>
+              <h5>Fields</h5>
+              <dl>
+                <dt>checkouts</dt>
+                <dd>Checkouts.</dd>
+              </dl>
+            </div>
+          </div>
+          <h4>POST on /accounts/:account_id/checkouts</h4>
+          <h5>Request</h5>
+          <div class='row'>
+            <div class='span8'>
+              <pre>{&#x000A;  &quot;checkouts&quot;: [&#x000A;    {&#x000A;      &quot;items_attributes&quot;: [&#x000A;        {&#x000A;          &quot;menu_item_id&quot;: 123,&#x000A;          &quot;count&quot;: 1,&#x000A;          &quot;sales&quot;: &quot;100&quot;,&#x000A;          &quot;tax&quot;: &quot;5&quot;,&#x000A;          &quot;discount_sales&quot;: &quot;20&quot;,&#x000A;          &quot;discount_tax&quot;: &quot;1&quot;&#x000A;        }&#x000A;      ],&#x000A;      &quot;change&quot; : &quot;26&quot;,&#x000A;      &quot;guid&quot; : $UUID-like-sequence,&#x000A;      &quot;paid_at&quot;: $Time,&#x000A;      &quot;payments_attributes&quot;: [&#x000A;        { &quot;payment_type_id&quot;: 101, &quot;amount&quot;: &quot;100&quot; }&#x000A;      ],&#x000A;      &quot;customers_count': 1,&#x000A;      &quot;customer_taggings_attributes': [&#x000A;        { &quot;customer_tag_id&quot;: 20 }&#x000A;      ],&#x000A;      &quot;cashier_id&quot;: 948,&#x000A;      &quot;status&quot;: 1,&#x000A;    },&#x000A;    {&#x000A;      &quot;id&quot;: 4739,&#x000A;      &quot;status&quot;: 4,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <p>Request is to create/update checkouts.
+              The dictionaries of attributes of checkouts will be applied to the database.</p>
+              <p>If the dictionary does not contains <code>id</code> field, it creates new checkout.
+              If the dictionary contains <code>id</code> field, it updates the checkout specified with the ID.</p>
+              <p>Only updating <code>deleted</code> field to <code>true</code> is accepted update.
+              Other fields will be ignored.
+              Other update to <code>deleted</code> field, setting to <code>false</code> or other, will result an error.</p>
+              <h5>Fields</h5>
+              <dl>
+                <dt>items_attributes</dt>
+                <dd>
+                  The attributes of checkout items.
+                  It is same with in the definition of objects, but without `id`.
+                </dd>
+                <dt>payments_attributes</dt>
+                <dd>
+                  The attributes of checkout payments, but without `id`.
+                </dd>
+                <dt>customer_taggings_attributes</dt>
+                <dd>
+                  Hashes only contains <code>customer_tag_id</code> fields, which specifies ID of the tags given to the checkout.
+                </dd>
+                <dt>id :: integer</dt>
+                <dd>
+                  If you want to update an existing checkout, specify ID of the checkout.
+                </dd>
+              </dl>
+            </div>
+          </div>
+          <h5>Response</h5>
+          <div class='row'>
+            <div class='span8'>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:34Z&quot;,&#x000A;  &quot;next-url&quot;: $URL,&#x000A;  &quot;last_updated_at&quot;: &quot;2011-12-31T00:00:31Z&quot;,&#x000A;  &quot;checkouts&quot;: $checkouts,&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <p>The response is same with index action, but containes only created/updated checkouts.
+              The <code>next-url</code> and <code>timestamp</code> fields should be ignored.</p>
+            </div>
+          </div>
+          <h3 id='api-resources-customers'>/customers</h3>
+          <p>Collection of customers available for the account.</p>
+          <h4>GET on /customers</h4>
+          <p>Retrieve collection of all customers available for the account.</p>
+          <h4>POST on /customers</h4>
+          <p>Create/Update information of new customers available for the account.</p>
+          <div class='row'>
+            <div class='span8'>
+              <h5>Request</h5>
+              <pre>{&#x000A;  &quot;customers&quot;: [&#x000A;    {&#x000A;      &quot;account_id&quot;: 1, &#x000A;      &quot;guid&quot;: $UUID-like-sequence,&#x000A;      &quot;deleted&quot;: false,&#x000A;      &quot;fields_attributes&quot;: [&#x000A;        &quot;customer_id&quot;: 10,&#x000A;        &quot;guid&quot;: &quot;2012-02-15-abcdefg&quot;,&#x000A;        &quot;app_created_at&quot;: &quot;2012-02-14T00:00Z&quot;,&#x000A;        &quot;deleted&quot;: false,&#x000A;        &quot;name&quot;: &quot;customer.field.name&quot;,&#x000A;        &quot;value&quot;: &quot;SPJ&quot;&#x000A;      ]&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <h5>Fields</h5>
+              <dl>
+                <dt>account_id :: ("current"|integer)</dt>
+                <dt>guid</dt>
+                <dt>deleted :: boolean</dt>
+                <dt>fields_attributes</dt>
+                <dd>Array of customer field</dd>
+              </dl>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='span8'>
+              <h5>Response</h5>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2012-02-14T09:00:00Z&quot;,&#x000A;  &quot;customers&quot; : $customers&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <p>
+                The order of the customer objects are preserved.
+              </p>
+              <p>
+                The update/creation is transactional.
+                There are only two cases; everything processed successfully, or nothing changed since an error found.
+              </p>
+            </div>
+          </div>
+          <h3 id='api-resources-customer-notes'>/customers/notes</h3>
+          <p>Collection of customer notes associated with <code>/customers</code>.</p>
+          <h4>GET on /customers/notes</h4>
+          <p>Retrieve collection of customer notes of all customers available for the account.</p>
+          <h4>POST on /customers/notes</h4>
+          <p>Create/Update customer notes specified by <code>:customer_id</code> for the account.</p>
+          <div class='row'>
+            <div class='span8'>
+              <h5>Request</h5>
+              <pre>{&#x000A;  &quot;notes&quot;: [&#x000A;    {&#x000A;      &quot;id&quot;: 1,&#x000A;      &quot;customer_id&quot;: 1, &#x000A;      &quot;guid&quot;: $UUID-like-sequence,&#x000A;      &quot;app_created_at&quot;: &quot;2012-02-17T00:00Z&quot;,&#x000A;      &quot;checkout_id&quot;: 2,&#x000A;      &quot;note&quot;: &quot;Memo Memo&quot;&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+              <h5>Fields</h5>
+              <dl>
+                <dt>id :: integer</dt>
+                <dd>ID of this object.</dd>
+                <dt>customer_id :: integer (<em>required</em>)</dt>
+                <dd>ID which thie object belongs to.</dd>
+                <dd>app_created_at (<em>required</em> and <em>WriteOnly</em>)</dd>
+                <dt>Time when the note is created in a client app</dt>
+                <dt>guid (<em>required</em>)</dt>
+                <dd>GUID</dd>
+                <dt>checkout_id</dt>
+                <dt>kind (<em>ReadOnly</em>)</dt>
+                <dt>note :: string</dt>
+                <dt>photo</dt>
+                <dt>checkout_summary (<em>ReadOnly</em>)</dt>
+              </dl>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='span8'>
+              <h5>Response</h5>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2012-02-17T00:10:00Z&quot;,&#x000A;  &quot;notes&quot; : $notes&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <p>
+                The order of the customer note objects are preserved.
+              </p>
+              <p>
+                The update/creation is transactional.
+                There are only two cases; everything processed successfully, or nothing changed since an error found.
+              </p>
+            </div>
+          </div>
+          <h3 id='api-resources-stock-events'>/accounts/:account_id/stocks/events</h3>
+          <p>Collection of stocking events of the account.</p>
+          <h4>GET on /accounts/:account_id/stocks/events</h4>
+          <p>Get all stock events associated with the account specified by <code>:account_id</code>.</p>
+          <h4>POST on /accounts/:account_id/stocks/events</h4>
+          <p>Send new stock events to the account specified by <code>:account_id</code>.</p>
+          <div class='row'>
+            <div class='span8'>
+              <h5>Request</h5>
+              <pre>{&#x000A;  &quot;events&quot;: [&#x000A;    {&#x000A;      &quot;menu_item_id&quot;: 2,&#x000A;      &quot;app_created_at&quot; : &quot;2012-02-14T00:00:00Z&quot;,&#x000A;      &quot;inventory_at&quot; : &quot;2012-02-14T01:00:00Z&quot;,&#x000A;      &quot;event_type&quot; : &quot;arrival&quot;,&#x000A;      &quot;amount&quot; : 55,&#x000A;      &quot;uuid&quot; : $UUID,&#x000A;      &quot;body&quot; : { &quot;memo&quot; : &quot;Memo Memo&quot; },&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <h5>Fields</h5>
+              <dl>
+                <dt>menu_item_id :: integer</dt>
+                <dt>app_created_at (<em>WriteOnly</em>)</dt>
+                <dt>inventory_at</dt>
+                <dt>event_type :: string</dt>
+                <dd>Either "inventory",  "arrival", "shipping", or "order" can be specified.</dd>
+                <dt>amount :: real</dt>
+                <dt>uuid</dt>
+                <dt>body</dt>
+                <dd>arbitrary JSON object.</dd>
+              </dl>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='span8'>
+              <h5>Response</h5>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2012-02-14T09:00:00Z&quot;,&#x000A;  &quot;events&quot; : $events&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <p>
+                The order of the event objects are preserved.
+              </p>
+              <p>
+                The update/creation is transactional.
+                There are only two cases; everything processed successfully, or nothing changed since an error found.
+              </p>
+            </div>
+          </div>
+          <h4>POST on /accounts/:account_id/payment_types</h4>
+          <p>Change payment type of the account specified by <code>:account_id</code>.</p>
+          <div class='row'>
+            <div class='span8'>
+              <h5>Request</h5>
+              <pre>{&#x000A;  &quot;payment_types&quot;: [&#x000A;    {&#x000A;      &quot;id&quot;: 1,&#x000A;      &quot;name&quot;: &quot;Book Coupon&quot;&quot;,&#x000A;      &quot;change&quot;: true,&#x000A;      &quot;kind&quot;: &quot;OTHER&quot;&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <h5>Fields</h5>
+              <dl>
+                <dt>id :: integer</dt>
+                <dd>ID of the payment type</dd>
+                <dt>name :: string</dt>
+                <dd>Name of the payment type</dd>
+                <dt>change :: boolean</dt>
+                <dd>Whether customer will received changes or not.  If true, customer will receive change.</dd>
+                <dt>kind :: string</dt>
+                <dd>Either "CASH", "CARD", or "Other" can be specified.</dd>
+              </dl>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='span8'>
+              <h5>Response</h5>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2012-02-14T09:00:00Z&quot;,&#x000A;  &quot;payment_types&quot; : $payment_types&#x000A;}</pre>
+            </div>
+            <div class='span8'>
+              <p>
+                The order of the event objects are preserved.
+              </p>
+              <p>
+                The update/creation is transactional.
+                There are only two cases; everything processed successfully, or nothing changed since an error found.
+              </p>
+            </div>
+          </div>
+          <hr />
+          <div class='row' style='text-align:center; margin-bottom:2em'>
+            &copy; 2011 Ubiregi Inc. All rights reserved.
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

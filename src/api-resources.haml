@@ -1,0 +1,678 @@
+%h2#api-resources Resources
+
+%h3#api-resources-accounts /accounts
+
+%p
+  User accounts. Readonly.
+
+%h4 GET on /accounts/<em>:account_id</em>, /accounts/current
+
+:markdown
+  Download the information of current account.
+
+  <em>:account_id</em> is either an integer which specifies an ID of account, or <code>current</code>.
+  If <code>current</code> is given in request, the client's authenticated account will be in the response.
+
+.row
+  .span8
+    %h5 Response
+    %pre
+      = preserve do
+        :escaped
+          {
+            "account": $account,
+            "timestamp": "2011-11-02T09:11:34Z",
+          }
+  .span8
+    %h5 Fields
+    %dl
+      %dt account
+      %dd The account.
+      %dt timestamp
+      %dd The time in ubiregi.com server.
+
+%h4 Note
+
+:markdown
+  Accesses to /accounts/ do not expire.
+
+  Even if your account is expired, it returns the account's information.
+
+  It is allowed to access child accounts.
+  If you access your child accounts, you will receive the information of the account.
+  In other case, your request will result in 404 (not found) error.
+
+%h3#api-resources-cashiers /accounts/<em>:account_id</em>/cashiers
+
+:markdown
+  Collection of cashiers defined in the user's account.
+
+%h4 POST on /accounts/<em>:account_id</em>/cashiers
+
+:markdown
+  Update the cashiers of an account specified by *:account_id*.
+  The child account's cashiers can be updated by parents.
+
+.row
+  .span8
+    %h5 Request
+    %pre
+      = preserve do
+        :escaped
+          {
+            "cashiers": [
+              {
+                "name": "New cashier",
+                "enabled":true,
+                "icon":$base64Encoded,
+              },
+              {
+                "id": 1,
+                "name": "Updating an existing cashier",
+                "enabled": false,
+              }
+            ]
+          }
+  .span8
+    %h5 Fields
+
+    %dl
+      %dt id :: integer
+      %dd
+        ID of cashier object.
+        If unspecified, create a new cashier object.
+        If specified, update an existing cashier object.
+      %dt name
+      %dt enabled
+      %dt icon
+      %dd
+        Base64 encoded data of icon.
+        If unspecified, the icon is not updated.
+        If specified with <code>null</code>, the icon will be removed.
+
+.row
+  .span8
+    %h5 Response
+    %pre
+      = preserve do
+        :escaped
+          {
+            "timestamp": "2011-11-02T09:11:12Z",
+            "cashiers" : $cashiers
+          }
+  .span8
+    %p
+      The order of the cashier objects are preserved.
+
+    %p
+      The update/creation is transactional.
+      There are only two cases; everything processed successfully, or nothing changed since an error found.
+
+
+%h3#api-resources-customer_tags /accounts/<em>:account_id</em>/customer_tags
+
+:markdown
+  Collection of customer tags defined in the account.
+
+%h4 POST on /accounts/<em>:account_id</em>/customer_tags
+
+Update the customer_tags of an account specified by :account_id.
+
+.row
+  .span8
+    %h5 Request
+    %pre
+      = preserve do
+        :escaped
+          {
+            "customer_tags": [
+              {
+                "id": "1",
+                "name": "Dating",
+                "position": 10,
+                "icon_name": $icon_name,
+              }
+            ]
+          }
+  .span8
+    %h5 Fields
+
+    %dl
+      %dt id :: integer
+      %dd
+        ID of customer tag object.
+        If unspecified, create a customer tag object.
+        If specified, update an existing customer tag object.
+      %dt name
+      %dt position
+      %dt icon_name
+
+.row
+  .span8
+    %h5 Response
+    %pre
+      = preserve do
+        :escaped
+          {
+            "timestamp": "2011-11-02T09:11:12Z",
+            "customer_tags" : $customer_tags
+          }
+  .span8
+    %p
+      The order of the customer tags objects are preserved.
+
+    %p
+      The update/creation is transactional.
+      There are only two cases; everything processed successfully, or nothing changed since an error found.
+
+%h3#api-resources-tables /accounts/:account_id/tables
+
+:markdown
+  Collection of tables defined in the account.
+
+  Tables objects are to be obsolete, and there are no update operations for `/tables`.
+
+%h4 GET on /accounts/:account_id/tables for indexing
+
+%h3#api-resources-menu-items /menus/:menu_id/items
+
+:markdown
+  Collection of items in menu specified by `:menu_id`.
+
+%h4 GET on /menus/:menu_id/items
+%h4 POST on /menus/:menu_id/items
+
+:markdown
+  Update/Create the menu item of the menu specified by `:menu_id` on current account.
+
+.row
+  .span8
+    %h5 Request
+    %pre
+      = preserve do
+        :escaped
+          {
+            "items": [
+              {
+                "id": 1,
+                "name": "New menu item",
+                "price":1000,
+                "price_type":"intax",
+                "vat": 5,
+                "position": 102,
+                "category_id": 105,
+              },
+              {
+                "name": "Renamed menu item",
+                "price":1500,
+                "price_type":"intax",
+                "vat": 5,
+                "position": 102,
+                "category_id": 105,
+              }
+            ]
+          }
+  .span8
+    %h5 Fields
+
+    %dl
+      %dt id
+      %dd
+        ID of menu item object.
+        If unspecified, create a new menu item object.
+        If specified, update an existing menu item object.
+      %dt name
+      %dt price
+      %dt price_type
+      %dd One of "intax",  "outtax", "percent", and "nosales" can be specified.
+      %dt vat
+      %dt position
+      %dt category_id
+
+.row
+  .span8
+    %h5 Response
+    %pre
+      = preserve do
+        :escaped
+          {
+            "timestamp": "2011-11-02T09:11:12Z",
+            "items" : $items
+          }
+  .span8
+    %p
+      The order of the menu item objects are preserved.
+
+    %p
+      The update/creation is transactional.
+      There are only two cases; everything processed successfully, or nothing changed since an error found.
+
+%h3#api-resources-menu-categories /menus/:menu_id/categories
+
+:markdown
+  Collection of categories in menu specified by `menu_id`.
+
+%h4 GET on /menus/:menu_id/categories
+%h4 POST on /menus/:menu_id/categories
+
+.row
+  .span8
+    %h5 Request
+    %pre
+      = preserve do
+        :escaped
+          {
+            "categories": [
+              {
+                "name":"New Category",
+                "position":4,
+              },
+              {
+                "id": 1,
+                "name": "Renamed Category",
+                "position":4,
+              }
+            ]
+          }
+  .span8
+    %h5 Fields
+
+    %dl
+      %dt id :: integer
+      %dd
+        ID of category object.
+        If unspecified, create a new category object.
+        If specified, update an existing category object.
+      %dt name
+      %dd
+        name of category object.
+      %dt position
+
+.row
+  .span8
+    %h5 Response
+    %pre
+      = preserve do
+        :escaped
+          {
+            "timestamp": "2011-11-02T09:11:12Z",
+            "categories" : $categories
+          }
+  .span8
+    %p
+      The order of the category objects are preserved.
+
+    %p
+      The update/creation is transactional.
+      There are only two cases; everything processed successfully, or nothing changed since an error found.
+
+%h3#api-resources-checkouts /accounts/:account_id/checkouts
+
+:markdown
+  Collection of checkouts of the account.
+
+%h4 GET on /accounts/:account_id/checkouts
+
+%h5 Response
+.row
+  .span8
+    %pre
+      = preserve do
+        :escaped
+          {
+            "timestamp": "2011-11-02T09:11:34Z",
+            "next-url": $URL,
+            "last_updated_at": "2011-12-31T00:00:31Z",
+            "checkouts": $checkouts,
+          }
+  .span8
+    :markdown
+      The response follows the convention of index action.
+
+    %h5 Fields
+
+    %dl
+      %dt checkouts
+      %dd Checkouts.
+
+%h4 POST on /accounts/:account_id/checkouts
+
+%h5 Request
+.row
+  .span8
+    %pre
+      = preserve do
+        :escaped
+          {
+            "checkouts": [
+              {
+                "items_attributes": [
+                  {
+                    "menu_item_id": 123,
+                    "count": 1,
+                    "sales": "100",
+                    "tax": "5",
+                    "discount_sales": "20",
+                    "discount_tax": "1"
+                  }
+                ],
+                "change" : "26",
+                "guid" : $UUID-like-sequence,
+                "paid_at": $Time,
+                "payments_attributes": [
+                  { "payment_type_id": 101, "amount": "100" }
+                ],
+                "customers_count': 1,
+                "customer_taggings_attributes': [
+                  { "customer_tag_id": 20 }
+                ],
+                "cashier_id": 948,
+                "status": 1,
+              },
+              {
+                "id": 4739,
+                "status": 4,
+              }
+            ]
+          }
+  .span8
+    :markdown
+      Request is to create/update checkouts.
+      The dictionaries of attributes of checkouts will be applied to the database.
+
+    :markdown
+      If the dictionary does not contains `id` field, it creates new checkout.
+      If the dictionary contains `id` field, it updates the checkout specified with the ID.
+
+    :markdown
+      Only updating `deleted` field to `true` is accepted update.
+      Other fields will be ignored.
+      Other update to `deleted` field, setting to `false` or other, will result an error.
+
+    %h5 Fields
+
+    %dl
+      %dt items_attributes
+      %dd
+        The attributes of checkout items.
+        It is same with in the definition of objects, but without `id`.
+      %dt payments_attributes
+      %dd
+        The attributes of checkout payments, but without `id`.
+      %dt customer_taggings_attributes
+      %dd
+        Hashes only contains <code>customer_tag_id</code> fields, which specifies ID of the tags given to the checkout.
+      %dt id :: integer
+      %dd
+        If you want to update an existing checkout, specify ID of the checkout.
+
+%h5 Response
+.row
+  .span8
+    %pre
+      = preserve do
+        :escaped
+
+          {
+            "timestamp": "2011-11-02T09:11:34Z",
+            "next-url": $URL,
+            "last_updated_at": "2011-12-31T00:00:31Z",
+            "checkouts": $checkouts,
+          }
+  .span8
+    :markdown
+      The response is same with index action, but containes only created/updated checkouts.
+      The `next-url` and `timestamp` fields should be ignored.
+
+%h3#api-resources-customers /customers
+
+:markdown
+  Collection of customers available for the account.
+
+%h4 GET on /customers
+
+:markdown
+
+  Retrieve collection of all customers available for the account.
+
+%h4 POST on /customers
+
+:markdown
+
+  Create/Update information of new customers available for the account.
+
+.row
+  .span8
+    %h5 Request
+    %pre
+      = preserve do
+        :escaped
+          {
+            "customers": [
+              {
+                "account_id": 1, 
+                "guid": $UUID-like-sequence,
+                "deleted": false,
+                "fields_attributes": [
+                  "customer_id": 10,
+                  "guid": "2012-02-15-abcdefg",
+                  "app_created_at": "2012-02-14T00:00Z",
+                  "deleted": false,
+                  "name": "customer.field.name",
+                  "value": "SPJ"
+                ]
+              }
+            ]
+          }
+  .span8
+    %h5 Fields
+
+    %dl
+      %dt account_id :: ("current"|integer)
+      %dt guid
+      %dt deleted :: boolean
+      %dt fields_attributes
+      %dd Array of customer field
+
+.row
+  .span8
+    %h5 Response
+    %pre
+      = preserve do
+        :escaped
+          {
+            "timestamp": "2012-02-14T09:00:00Z",
+            "customers" : $customers
+          }
+  .span8
+    %p
+      The order of the customer objects are preserved.
+
+    %p
+      The update/creation is transactional.
+      There are only two cases; everything processed successfully, or nothing changed since an error found.
+
+%h3#api-resources-customer-notes /customers/notes
+
+:markdown
+  Collection of customer notes associated with `/customers`.
+
+%h4 GET on /customers/notes
+
+:markdown
+  Retrieve collection of customer notes of all customers available for the account.
+
+%h4 POST on /customers/notes
+
+:markdown
+  Create/Update customer notes specified by `:customer_id` for the account.
+
+.row
+  .span8
+    %h5 Request
+    %pre
+      = preserve do
+        :escaped
+          {
+            "notes": [
+              {
+                "id": 1,
+                "customer_id": 1, 
+                "guid": $UUID-like-sequence,
+                "app_created_at": "2012-02-17T00:00Z",
+                "checkout_id": 2,
+                "note": "Memo Memo"
+              }
+            ]
+          }
+    %h5 Fields
+    %dl
+      %dt id :: integer
+      %dd ID of this object.
+      %dt customer_id :: integer (<em>required</em>)
+      %dd ID which thie object belongs to.
+      %dd app_created_at (<em>required</em> and <em>WriteOnly</em>)
+      %dt Time when the note is created in a client app
+      %dt guid (<em>required</em>)
+      %dd GUID
+      %dt checkout_id
+      %dt kind (<em>ReadOnly</em>)
+      %dt note :: string
+      %dt photo
+      %dt checkout_summary (<em>ReadOnly</em>)
+
+.row
+  .span8
+    %h5 Response
+    %pre
+      = preserve do
+        :escaped
+          {
+            "timestamp": "2012-02-17T00:10:00Z",
+            "notes" : $notes
+          }
+  .span8
+    %p
+      The order of the customer note objects are preserved.
+
+    %p
+      The update/creation is transactional.
+      There are only two cases; everything processed successfully, or nothing changed since an error found.
+
+
+%h3#api-resources-stock-events /accounts/:account_id/stocks/events
+
+:markdown
+  Collection of stocking events of the account.
+
+%h4 GET on /accounts/:account_id/stocks/events
+:markdown
+  Get all stock events associated with the account specified by `:account_id`.
+
+%h4 POST on /accounts/:account_id/stocks/events
+
+:markdown
+  Send new stock events to the account specified by `:account_id`.
+
+.row
+  .span8
+    %h5 Request
+    %pre
+      = preserve do
+        :escaped
+          {
+            "events": [
+              {
+                "menu_item_id": 2,
+                "app_created_at" : "2012-02-14T00:00:00Z",
+                "inventory_at" : "2012-02-14T01:00:00Z",
+                "event_type" : "arrival",
+                "amount" : 55,
+                "uuid" : $UUID,
+                "body" : { "memo" : "Memo Memo" },
+              }
+            ]
+          }
+  .span8
+    %h5 Fields
+
+    %dl
+      %dt menu_item_id :: integer
+      %dt app_created_at (<em>WriteOnly</em>)
+      %dt inventory_at
+      %dt event_type :: string
+      %dd Either "inventory",  "arrival", "shipping", or "order" can be specified.
+      %dt amount :: real
+      %dt uuid
+      %dt body
+      %dd arbitrary JSON object.
+
+.row
+  .span8
+    %h5 Response
+    %pre
+      = preserve do
+        :escaped
+          {
+            "timestamp": "2012-02-14T09:00:00Z",
+            "events" : $events
+          }
+  .span8
+    %p
+      The order of the event objects are preserved.
+
+    %p
+      The update/creation is transactional.
+      There are only two cases; everything processed successfully, or nothing changed since an error found.
+
+%h4 POST on /accounts/:account_id/payment_types
+
+:markdown
+  Change payment type of the account specified by `:account_id`.
+
+.row
+  .span8
+    %h5 Request
+    %pre
+      = preserve do
+        :escaped
+          {
+            "payment_types": [
+              {
+                "id": 1,
+                "name": "Book Coupon"",
+                "change": true,
+                "kind": "OTHER"
+              }
+            ]
+          }
+  .span8
+    %h5 Fields
+
+    %dl
+      %dt id :: integer
+      %dd ID of the payment type
+      %dt name :: string
+      %dd Name of the payment type
+      %dt change :: boolean
+      %dd Whether customer will received changes or not.  If true, customer will receive change.
+      %dt kind :: string
+      %dd Either "CASH", "CARD", or "Other" can be specified.
+
+.row
+  .span8
+    %h5 Response
+    %pre
+      = preserve do
+        :escaped
+          {
+            "timestamp": "2012-02-14T09:00:00Z",
+            "payment_types" : $payment_types
+          }
+  .span8
+    %p
+      The order of the event objects are preserved.
+
+    %p
+      The update/creation is transactional.
+      There are only two cases; everything processed successfully, or nothing changed since an error found.

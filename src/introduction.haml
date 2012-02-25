@@ -1,0 +1,133 @@
+%h1#introduction Introduction
+
+%p
+  Ubiregi API allows third parties to develop systems which interact
+  with Ubiregi data, including menus, tags, customers, and checkouts.
+%p
+  Using Ubiregi API, you can develop your own application for:
+
+%ul
+  %li Editing menus with your <s>legacy</s> excellent system
+  %li Importing sales data into your <s>legacy</s> great system
+  %li Advanced sales analysis
+  %li Advanced stock control
+  %li Booking
+
+%p
+  and, such features essential for your or your clients' business.
+
+%p
+  Ubiregi API provides almost full access to Ubiregi's data. Everything
+  except authentication is the same with what the Ubiregi app is doing.
+  (In fact, the API v3 is essentialy more powerful than API v2, which is
+  used by Ubiregi 2.x)
+
+%h2#introduction-implementation-status Implementation Status
+
+%table.condensed-table
+  %thead
+    %tr
+      %th Resource(s)
+      %th Implementation
+      %th Documentation
+  %tbody
+    %tr
+      %th /accounts/<em>:account_id</em>
+      %td Finished
+      %td Finished
+    %tr
+      %th /accounts/<em>:account_id</em>/cashiers
+      %td Finished
+      %td Finished
+    %tr
+      %th /accounts/<em>:account_id</em>/customer_tags
+      %td Finished
+      %td Finished
+    %tr
+      %th /accounts/<em>:account_id</em>/payment_types
+      %td Finished
+      %td Finished
+    %tr
+      %th /accounts/<em>:account_id</em>/tables
+      %td Not yet
+      %td Started
+    %tr
+      %th /menus/:menu_id/items
+      %td Finished
+      %td Finished
+    %tr
+      %th /menus/:menu_id/categories
+      %td Finished
+      %td Finished
+    %tr
+      %th /accounts/<em>:account_id</em>/checkouts
+      %td Not yet
+      %td Not yet
+    %tr
+      %th /checkouts/<em>:checkout_id</em>
+      %td Not yet
+      %td Not yet
+    %tr
+      %th /customers
+      %td Finished
+      %td Finished
+    %tr
+      %th /customers/notes
+      %td Finished
+      %td Finished
+    %tr
+      %th /accounts/<em>:account_id</em>/stocks/events
+      %td Finished
+      %td Finished
+
+%h2#introduction-examples Examples
+
+%dl
+  %dt= link_to("Ubiregi-API-Clients", "https://github.com/ubiregiinc/Ubiregi-API-Clients")
+  %dd
+    Collection of ubiregin api client examples.
+    We are still working for that.
+
+%h2#introduction-quick-start Quick Start
+
+%ol
+  %li Signup to ubiregi.com
+  %li Register for developer account and new application
+  %li Install the application on your account
+  %li Download the examples.
+  %li Change the sample app, and it is your app now!
+
+%h2#introduction-general-notes
+  General Notes
+  %small Things every developer should know
+
+%h4 The API is entirely HTTP-based, and RESTful
+
+%p
+  Methods to retrieve data from the Ubiregi API requires a GET
+  request. Methods to create new things requires a POST request. And to
+  update things requires a PUT request. Most methods requires a
+  particular HTTP method and will return an error if you do not make your
+  request with the correct one.
+
+%h4 Ubiregi web app is built on Rails
+
+%p
+  We use Ruby on Rails 3 to develop ubiregi.com web app. You may find
+  something odd our api. It should be because of Rails requirements.
+
+%p 
+  We carefully described things non-rails-developer should mention
+  about, but may be insufficient. If you have some problem, you may
+  need to check Rails related documents.
+
+%h4 JSON is used
+
+%p
+  We use JSON for every structured data. It implies that binary data are
+  encoded with base64 and non-ascii characters are UTF8 encoded.
+
+%h4 Use HTTPS
+
+%p 
+  All requests to Ubiregi API must be HTTPS requests.
