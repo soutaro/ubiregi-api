@@ -1,5 +1,5 @@
-index.html:
-	ruby tools/convert-to-html.rb 
+index.html: src/*.haml
+	ruby tools/convert-to-html.rb src/main.haml > index.html
 
 clean:
 	rm *.html
