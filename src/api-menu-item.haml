@@ -1,0 +1,150 @@
+%h1#object-menu-item MenuItem
+
+:markdown
+  Item in menus, which represents one product/service you sell.
+
+%h2#object-menu-item-fields Fields
+
+.row
+  .span6
+    %dl
+      %dt= field "id"
+      %dd ID of the object.
+      %dt= field "sku"
+      %dd SKU of the item.
+      %dt= field "name"
+      %dd Name of the item.
+      %dt= field "barcode"
+      %dd Barcode of the item.
+      %dt= field "price_type"
+      %dd
+        Note on price. One of <code>"intax"</code>, <code>"outtax"</code>, <code>"percent"</code>, and <code>"nosales"</code>.
+        <code>"intax"</code> is used for normal items, such that the VAT is included in the price.
+        <code>"outtax"</code> is to mark that the VAT is not included in the price.
+        <code>"percent"</code> is for discounting/premiums.
+        If <code>"20"</code> is the price of the item and the price_type is <code>"percent"</code>, The price is <em>20% of premiour</em>.
+        <code>"nosales"</code> is mark that the total sales with this item is not included in sales.
+      %dt= field "price"
+      %dd Price of the item. <strong>Note that price is a string</strong> to avoid inacculate compuation using floats.
+      %dt= field "vat"
+      %dd
+        Percentage of VAT in integer. Present if <code>price_type</code> is <code>"intax"</code> or <code>"outtax"</code>.
+      %dt= field "position"
+      %dd
+        Position of the item in its category. <code>null</code> if the item is disabled.
+      %dt= field "category_id"
+      %dd
+        The category the item is belonging to. <code>null</code> if the item is disabled.
+
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "id": 271,
+            "sku": "sku",
+            "name": "Coke",
+            "price_type": "intax",
+            "price": "105",
+            "vat": 5,
+            "position": 102,
+            "category_id": 105,
+          }
+
+%h2#get-on-menus-menu-id-items GET on /menus/<em>menu_id</em>/items
+
+:markdown
+  Retrieves the `MenuItem`s defined in menu specified by *menu_id*.
+
+%h3 Request
+
+.row
+  .span6
+    %pre
+      = preserve do
+        GET /menus/13/items?since=2011-01-01T18:00:13Z
+  .span6
+    %dl
+      %dt= field "since"
+      %dt= field "until"
+      %dt= field "glb"
+
+%h3 Response
+
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "timestamp": "2012-01-03T03:11:03Z",
+            "next-url": "https://ubiregi.com/api/3/menus/13/items?since=2011-01-01T18:00:13Z&until=2011-01-03T03:11:03Z&glb=13476",
+            "last-updated-at": "2012-01-02T21:14:08Z",
+            "items": [ $menu_items ],
+          }
+  .span6
+    %dl
+      %dt= field "timestamp"
+      %dt= field "next-url"
+      %dt= field "last-updated-at"
+      %dt= field "items"
+
+%h2#post-on-menus-menu-id-items POST on /menus/<em>menu_id</em>/items
+
+:markdown
+  Update/Create the menu item of the menu specified by `:menu_id`.
+
+%h3 Request
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "items": [
+              {
+                "name": "New menu item",
+                "price_type":"intax",
+                "price": "1000",
+                "vat": 5,
+                "position": 102,
+                "category_id": 105,
+              },
+              {
+                "id": 1022,
+                "name": "Renamed menu item",
+                "price_type":"percentage",
+                "price": "1500",
+                "position": 103,
+              }
+            ]
+          }
+  .span6
+    %dl
+      %dt= field "items"
+      %dd
+        Array of <code>MenuItem</code> objects to be updated/created.
+        %dl
+          %dt id
+          %dt name
+          %dt price
+          %dt price_type
+          %dt vat
+          %dt position
+          %dt category_id
+
+%h3 Response
+
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "timestamp": "2011-11-02T09:11:12Z",
+            "items" : $items
+          }
+  .span6
+    %dl
+      %dt= field "timestamp"
+      %dt= field "items"

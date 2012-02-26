@@ -41,6 +41,7 @@
 = render "api-customer-tag"
 = render "api-cashier"
 = render "api-payment-type"
+= render "api-menu-item"
 
 %h3#api-objects-customer Customer
 
@@ -203,64 +204,6 @@
             name: "hogehoge",
           }
 
-%h3#api-objects-menu-item Menu Item
-
-:markdown
-  Item in menus, which represents one product/service you sell.
-
-.row
-  .span8
-    %h4 Fields
-
-    %dl
-      %dt id :: int
-      %dd ID of the object.
-      %dt sku
-      %dd SKU of the item.
-      %dt name :: string
-      %dd Name of the item.
-      %dt barcode
-      %dd Barcode of the item (ReadOnly).
-      %dt price :: integer
-      %dd Price of the item. Note that price is a string to avoid inacculate compuation using floats.
-      %dt price_type :: string
-      %dd
-        :markdown
-          Note on price. One of `intax`, `outtax`, `percent`, and `nosales`.
-          `intax` is used for normal items, such that the VAT is included in the price.
-          `outtax` is to mark that the VAT is not included in the price.
-          `percent` is for discounting/premiums.
-          If "20" is the price of the item and the price_type is `percent`, The price is *20% of premiour*.
-          `nosales` is mark that the total sales with this item is not included in sales.
-      %dt vat
-      %dd
-        :markdown
-          Percentage of VAT. Present if `price_type` is `intax` or `outtax`.
-      %dt position
-      %dd
-        :markdown
-          Position of the item in its category. `null` if the item is disabled.
-      %dt category_id
-      %dd
-        :markdown
-          The category the item is belonging to. `null` if the item is disabled.
-
-  .span8
-    %h4 Example
-
-    %pre
-      = preserve do
-        :escaped
-          {
-            "id": 271,
-            "sku": "sku",
-            "name": "Coke",
-            "price": "105",
-            "price_type": intax,
-            "vat": 5,
-            "position": 102,
-            "category_id": 105,
-          }
 
 %h3#api-objects-category Category
 

@@ -53,6 +53,12 @@
           <li><a href='#object-payment-type-fields'>Fields</a></li>
           <li><a href='#post-on-accounts-account-id-payment-types'>POST on /accounts/<em>account_id</em>/payment_types</a></li>
         </ul>
+        <h4><a href='#object-menu-item'>MenuItem</a></h4>
+        <ul>
+          <li><a href='#object-menu-item-fields'>Fields</a></li>
+          <li><a href='#get-on-menus-menu-id-items'>GET on /menus/<em>menu_id</em>/items</a></li>
+          <li><a href='#post-on-menus-menu-id-items'>POST on /menus/<em>menu_id</em>/items</a></li>
+        </ul>
         <h4>hogehogehoge</h4>
         <ul>
           <li><a href='#api-objects-type-annotations'>Type Annotacions</a></li>
@@ -771,6 +777,115 @@
               </dl>
             </div>
           </div>
+          <h1 id='object-menu-item'>MenuItem</h1>
+          <p>Item in menus, which represents one product/service you sell.</p>
+          <h2 id='object-menu-item-fields'>Fields</h2>
+          <div class='row'>
+            <div class='span6'>
+              <dl>
+                <dt>id</dt>
+                <dd>ID of the object.</dd>
+                <dt>sku</dt>
+                <dd>SKU of the item.</dd>
+                <dt>name</dt>
+                <dd>Name of the item.</dd>
+                <dt>barcode</dt>
+                <dd>Barcode of the item.</dd>
+                <dt>price_type</dt>
+                <dd>
+                  Note on price. One of <code>"intax"</code>, <code>"outtax"</code>, <code>"percent"</code>, and <code>"nosales"</code>.
+                  <code>"intax"</code> is used for normal items, such that the VAT is included in the price.
+                  <code>"outtax"</code> is to mark that the VAT is not included in the price.
+                  <code>"percent"</code> is for discounting/premiums.
+                  If <code>"20"</code> is the price of the item and the price_type is <code>"percent"</code>, The price is <em>20% of premiour</em>.
+                  <code>"nosales"</code> is mark that the total sales with this item is not included in sales.
+                </dd>
+                <dt>price</dt>
+                <dd>Price of the item. <strong>Note that price is a string</strong> to avoid inacculate compuation using floats.</dd>
+                <dt>vat</dt>
+                <dd>
+                  Percentage of VAT in integer. Present if <code>price_type</code> is <code>"intax"</code> or <code>"outtax"</code>.
+                </dd>
+                <dt>position</dt>
+                <dd>
+                  Position of the item in its category. <code>null</code> if the item is disabled.
+                </dd>
+                <dt>category_id</dt>
+                <dd>
+                  The category the item is belonging to. <code>null</code> if the item is disabled.
+                </dd>
+              </dl>
+            </div>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;id&quot;: 271,&#x000A;  &quot;sku&quot;: &quot;sku&quot;,&#x000A;  &quot;name&quot;: &quot;Coke&quot;,&#x000A;  &quot;price_type&quot;: &quot;intax&quot;,&#x000A;  &quot;price&quot;: &quot;105&quot;,&#x000A;  &quot;vat&quot;: 5,&#x000A;  &quot;position&quot;: 102,&#x000A;  &quot;category_id&quot;: 105,&#x000A;}</pre>
+            </div>
+          </div>
+          <h2 id='get-on-menus-menu-id-items'>GET on /menus/<em>menu_id</em>/items</h2>
+          <p>Retrieves the <code>MenuItem</code>s defined in menu specified by <em>menu_id</em>.</p>
+          <h3>Request</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>GET /menus/13/items?since=2011-01-01T18:00:13Z</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>since</dt>
+                <dt>until</dt>
+                <dt>glb</dt>
+              </dl>
+            </div>
+          </div>
+          <h3>Response</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2012-01-03T03:11:03Z&quot;,&#x000A;  &quot;next-url&quot;: &quot;https://ubiregi.com/api/3/menus/13/items?since=2011-01-01T18:00:13Z&amp;until=2011-01-03T03:11:03Z&amp;glb=13476&quot;,&#x000A;  &quot;last-updated-at&quot;: &quot;2012-01-02T21:14:08Z&quot;,&#x000A;  &quot;items&quot;: [ $menu_items ],&#x000A;}</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>timestamp</dt>
+                <dt>next-url</dt>
+                <dt>last-updated-at</dt>
+                <dt>items</dt>
+              </dl>
+            </div>
+          </div>
+          <h2 id='post-on-menus-menu-id-items'>POST on /menus/<em>menu_id</em>/items</h2>
+          <p>Update/Create the menu item of the menu specified by <code>:menu_id</code>.</p>
+          <h3>Request</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;items&quot;: [&#x000A;    {&#x000A;      &quot;name&quot;: &quot;New menu item&quot;,&#x000A;      &quot;price_type&quot;:&quot;intax&quot;,&#x000A;      &quot;price&quot;: &quot;1000&quot;,&#x000A;      &quot;vat&quot;: 5,&#x000A;      &quot;position&quot;: 102,&#x000A;      &quot;category_id&quot;: 105,&#x000A;    },&#x000A;    {&#x000A;      &quot;id&quot;: 1022,&#x000A;      &quot;name&quot;: &quot;Renamed menu item&quot;,&#x000A;      &quot;price_type&quot;:&quot;percentage&quot;,&#x000A;      &quot;price&quot;: &quot;1500&quot;,&#x000A;      &quot;position&quot;: 103,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>items</dt>
+                <dd>
+                  Array of <code>MenuItem</code> objects to be updated/created.
+                  <dl>
+                    <dt>id</dt>
+                    <dt>name</dt>
+                    <dt>price</dt>
+                    <dt>price_type</dt>
+                    <dt>vat</dt>
+                    <dt>position</dt>
+                    <dt>category_id</dt>
+                  </dl>
+                </dd>
+              </dl>
+            </div>
+          </div>
+          <h3>Response</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:12Z&quot;,&#x000A;  &quot;items&quot; : $items&#x000A;}</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>timestamp</dt>
+                <dt>items</dt>
+              </dl>
+            </div>
+          </div>
           <h3 id='api-objects-customer'>Customer</h3>
           <p>A customer object associated with an account.
           This can be used to send/retrieve a customer information to/from an account.</p>
@@ -886,50 +1001,6 @@
             <div class='span8'>
               <h4>Example</h4>
               <pre>{&#x000A;  id: 199,&#x000A;  name: &quot;hogehoge&quot;,&#x000A;}</pre>
-            </div>
-          </div>
-          <h3 id='api-objects-menu-item'>Menu Item</h3>
-          <p>Item in menus, which represents one product/service you sell.</p>
-          <div class='row'>
-            <div class='span8'>
-              <h4>Fields</h4>
-              <dl>
-                <dt>id :: int</dt>
-                <dd>ID of the object.</dd>
-                <dt>sku</dt>
-                <dd>SKU of the item.</dd>
-                <dt>name :: string</dt>
-                <dd>Name of the item.</dd>
-                <dt>barcode</dt>
-                <dd>Barcode of the item (ReadOnly).</dd>
-                <dt>price :: integer</dt>
-                <dd>Price of the item. Note that price is a string to avoid inacculate compuation using floats.</dd>
-                <dt>price_type :: string</dt>
-                <dd>
-                  <p>Note on price. One of <code>intax</code>, <code>outtax</code>, <code>percent</code>, and <code>nosales</code>.
-                  <code>intax</code> is used for normal items, such that the VAT is included in the price.
-                  <code>outtax</code> is to mark that the VAT is not included in the price.
-                  <code>percent</code> is for discounting/premiums.
-                  If "20" is the price of the item and the price_type is <code>percent</code>, The price is <em>20% of premiour</em>.
-                  <code>nosales</code> is mark that the total sales with this item is not included in sales.</p>
-                </dd>
-                <dt>vat</dt>
-                <dd>
-                  <p>Percentage of VAT. Present if <code>price_type</code> is <code>intax</code> or <code>outtax</code>.</p>
-                </dd>
-                <dt>position</dt>
-                <dd>
-                  <p>Position of the item in its category. <code>null</code> if the item is disabled.</p>
-                </dd>
-                <dt>category_id</dt>
-                <dd>
-                  <p>The category the item is belonging to. <code>null</code> if the item is disabled.</p>
-                </dd>
-              </dl>
-            </div>
-            <div class='span8'>
-              <h4>Example</h4>
-              <pre>{&#x000A;  &quot;id&quot;: 271,&#x000A;  &quot;sku&quot;: &quot;sku&quot;,&#x000A;  &quot;name&quot;: &quot;Coke&quot;,&#x000A;  &quot;price&quot;: &quot;105&quot;,&#x000A;  &quot;price_type&quot;: intax,&#x000A;  &quot;vat&quot;: 5,&#x000A;  &quot;position&quot;: 102,&#x000A;  &quot;category_id&quot;: 105,&#x000A;}</pre>
             </div>
           </div>
           <h3 id='api-objects-category'>Category</h3>
@@ -1118,48 +1189,6 @@
           <h4>GET on /accounts/:account_id/tables for indexing</h4>
           <h3 id='api-resources-menu-items'>/menus/:menu_id/items</h3>
           <p>Collection of items in menu specified by <code>:menu_id</code>.</p>
-          <h4>GET on /menus/:menu_id/items</h4>
-          <h4>POST on /menus/:menu_id/items</h4>
-          <p>Update/Create the menu item of the menu specified by <code>:menu_id</code> on current account.</p>
-          <div class='row'>
-            <div class='span8'>
-              <h5>Request</h5>
-              <pre>{&#x000A;  &quot;items&quot;: [&#x000A;    {&#x000A;      &quot;id&quot;: 1,&#x000A;      &quot;name&quot;: &quot;New menu item&quot;,&#x000A;      &quot;price&quot;:1000,&#x000A;      &quot;price_type&quot;:&quot;intax&quot;,&#x000A;      &quot;vat&quot;: 5,&#x000A;      &quot;position&quot;: 102,&#x000A;      &quot;category_id&quot;: 105,&#x000A;    },&#x000A;    {&#x000A;      &quot;name&quot;: &quot;Renamed menu item&quot;,&#x000A;      &quot;price&quot;:1500,&#x000A;      &quot;price_type&quot;:&quot;intax&quot;,&#x000A;      &quot;vat&quot;: 5,&#x000A;      &quot;position&quot;: 102,&#x000A;      &quot;category_id&quot;: 105,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
-            </div>
-            <div class='span8'>
-              <h5>Fields</h5>
-              <dl>
-                <dt>id</dt>
-                <dd>
-                  ID of menu item object.
-                  If unspecified, create a new menu item object.
-                  If specified, update an existing menu item object.
-                </dd>
-                <dt>name</dt>
-                <dt>price</dt>
-                <dt>price_type</dt>
-                <dd>One of "intax",  "outtax", "percent", and "nosales" can be specified.</dd>
-                <dt>vat</dt>
-                <dt>position</dt>
-                <dt>category_id</dt>
-              </dl>
-            </div>
-          </div>
-          <div class='row'>
-            <div class='span8'>
-              <h5>Response</h5>
-              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:12Z&quot;,&#x000A;  &quot;items&quot; : $items&#x000A;}</pre>
-            </div>
-            <div class='span8'>
-              <p>
-                The order of the menu item objects are preserved.
-              </p>
-              <p>
-                The update/creation is transactional.
-                There are only two cases; everything processed successfully, or nothing changed since an error found.
-              </p>
-            </div>
-          </div>
           <h3 id='api-resources-menu-categories'>/menus/:menu_id/categories</h3>
           <p>Collection of categories in menu specified by <code>menu_id</code>.</p>
           <h4>GET on /menus/:menu_id/categories</h4>
