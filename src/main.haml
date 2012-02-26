@@ -33,17 +33,22 @@
         %h4= link_to "Account", "#object-account"
         %ul
           %li= link_to "Fields", "#object-account-fields"
-          %li= link_to "GET on /accounts/current", "#get-on-accounts-current"
           %li= link_to "GET on /accounts/<em>account_id</em>", "#get-on-accounts-account-id"
 
         %h4= link_to "Table", "#object-table"
         %ul
+          %li= link_to "Fields", "#object-table-fields"
+
+        %h4= link_to "CustomerTag", "#object-customer-tag"
+        %ul
+          %li= link_to "Fields", "#object-customer-tag-fields"
+          %li= link_to "POST on /accounts/<em>account_id</em>/customer_tags", "#post-on-accounts-account-id-customer-tags"
+        
+        %h4 hogehogehoge
+        %ul
           %li= link_to "Type Annotacions", "#api-objects-type-annotations"
           %li= link_to "Account", "#api-objects-account"
           %li= link_to "Table", "#api-objects-table"
-          %li= link_to "Customer", "#api-objects-customer"
-          %li= link_to "Customer Field", "#api-objects-customer-field"
-          %li= link_to "Customer Note", "#api-objects-customer-note"
           %li= link_to "Customer Tag", "#api-objects-customer-tag"
           %li= link_to "Payment Type", "#api-objects-payment-type"
           %li= link_to "Cashier", "#api-objects-cashier"
@@ -54,6 +59,9 @@
           %li= link_to "Payment", "#api-objects-payment"
           %li= link_to "Checkout Item", "#api-objects-checkout-item"
           %li= link_to "Stock Event", "#api-objects-stock-event"
+          %li= link_to "Customer", "#api-objects-customer"
+          %li= link_to "Customer Field", "#api-objects-customer-field"
+          %li= link_to "Customer Note", "#api-objects-customer-note"
 
         %h4= link_to "Resources", "#api-resources"
         %ul

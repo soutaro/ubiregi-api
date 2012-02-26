@@ -37,36 +37,8 @@
   %dd ISO8601 format string of a time.
 
 = render "api-account"
-
-%h3#api-objects-table Table
-
-
-:markdown
-  **Table object is deprecated.**
-  It is working now but will be obsoleted soon.
-
-.row
-  .span8
-    %h4 Fields
-
-    %dl
-      %dt id :: integer
-      %dd ID of the object.
-      %dt name :: string
-      %dd Name of the table.
-      %dt position :: integer
-      %dd Position of the table.
-  .span8
-    %h4 Example
-
-    %pre
-      = preserve do
-        :escaped
-          {
-            "id": 123,
-            "name": "Table 1",
-            "position": 3,
-          }
+= render "api-table"
+= render "api-customer-tag"
 
 %h3#api-objects-customer Customer
 
@@ -201,43 +173,6 @@
             "note": "Memo Memo",
             "photo": $base64Encoded,
             "checkout_summary": "Summary"
-          }
-
-%h3#api-objects-customer-tag Customer Tag
-
-:markdown
-  Tags to give various information on checkouts.
-  This can be used to record that *the customer is 20th girl*, *they came for dating*, and so on.
-
-.row
-  .span8
-    %h4 Fields
-
-    %dl
-      %dt id :: integer
-      %dd ID of the object.
-      %dt name :: string
-      %dd Name of the tag.
-      %dt position (optional)
-      %dd Position of the tag. <code>null</code> in the case the tag is deleted.
-      %dt icon_name :: string
-      %dd Name of icon.  <em>WriteOnly</em>
-      %dt icon 
-      %dd Icon image for the tag.  <em>ReadOnly</em>
-      %dt icon_mime :: string
-      %dd MIME type of the icon. Usually <code>image/png</code>.  <em>ReadOnly</em>
-  .span8
-    %h4 Example
-
-    %pre
-      = preserve do
-        :escaped
-          {
-            "id": 123,
-            "name": "Dating",
-            "potision": null,
-            "icon": $base64Encoded,
-            "icon_mime": "image/png",
           }
 
 %h3#api-objects-payment-type PaymentType

@@ -1,0 +1,106 @@
+%h1#object-customer-tag CustomerTag
+
+:markdown
+  Tags to give various information on checkouts.
+  This can be used to record that *the customer is 20th girl*, *they came for dating*, and so on.
+
+%h2#object-customer-tag-fields Fields
+
+.row
+  .span6
+    %dl
+      %dt= field "id"
+      %dd ID of the object.
+      %dt= field "name"
+      %dd Name of the tag.
+      %dt= field "position", :optional
+      %dd
+        Position of the tag. <code>null</code> in the case the tag is inactive.
+        The interpretation depends on client, however the value should be from 1 to 12.
+        There is no validation on ubiregi.com server on the uniqueness of <code>position</code>.
+      %dt= field "icon_name", :writeonly
+      %dd Name of icon.
+      %dt= field "icon", :readonly
+      %dd Icon image for the tag.
+      %dt= field "icon_mime", :readonly
+      %dd MIME type of the icon. Usually <code>image/png</code>.
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "id": 123,
+            "name": "Dating",
+            "potision": null,
+            "icon": $base64Encoded,
+            "icon_mime": "image/png",
+          }
+
+%h3 Setting an Icon
+
+:markdown
+  Icons can be set through `icon_name` attribute.
+  The value of `icon_name` should be one of the following list.
+
+  *** FIXME ***
+
+  Icons are sent from server as its binary image in Base64 encoded form.
+
+  Thus, `icon_name` is a *writeonly* attribute and `icon` and `icon_mime` are *readonly* attributes.
+
+%h2#post-on-accounts-account-id-customer-tags POST on /accounts/<em>account_id</em>/customer_tags
+
+:markdown
+  Update the customer_tags of an account specified by *account_id*.
+
+%h3 Request
+
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "customer_tags": [
+              {
+                "name": "Dating",
+                "position": 10,
+                "icon_name": "F1",
+              },
+              {
+                "id": 31,
+                "position": null,
+              }
+            ]
+          }
+  .span6
+    %dl
+      %dt= field "customer_tags"
+      %dd
+        Collection of <code>CustomerTag</code> objects.
+        %dl
+          %dt= field "id"
+          %dt= field "name"
+          %dt= field "position"
+          %dt= field "icon_name"
+          
+
+%h3 Response
+
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "timestamp": "2011-11-02T09:11:12Z",
+            "customer_tags" : $customer_tags
+          }
+  .span6
+    %dl
+      %dt= field "timestamp"
+      %dt= field "customer_tags"
+      %dd
+        Collection of updated/created customer tags.
+        Client app should refresh account information to make sure there are no more <code>CustomerTag</code>s defined.
+      

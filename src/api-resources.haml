@@ -80,56 +80,6 @@
 :markdown
   Collection of customer tags defined in the account.
 
-%h4 POST on /accounts/<em>:account_id</em>/customer_tags
-
-Update the customer_tags of an account specified by :account_id.
-
-.row
-  .span8
-    %h5 Request
-    %pre
-      = preserve do
-        :escaped
-          {
-            "customer_tags": [
-              {
-                "id": "1",
-                "name": "Dating",
-                "position": 10,
-                "icon_name": $icon_name,
-              }
-            ]
-          }
-  .span8
-    %h5 Fields
-
-    %dl
-      %dt id :: integer
-      %dd
-        ID of customer tag object.
-        If unspecified, create a customer tag object.
-        If specified, update an existing customer tag object.
-      %dt name
-      %dt position
-      %dt icon_name
-
-.row
-  .span8
-    %h5 Response
-    %pre
-      = preserve do
-        :escaped
-          {
-            "timestamp": "2011-11-02T09:11:12Z",
-            "customer_tags" : $customer_tags
-          }
-  .span8
-    %p
-      The order of the customer tags objects are preserved.
-
-    %p
-      The update/creation is transactional.
-      There are only two cases; everything processed successfully, or nothing changed since an error found.
 
 %h3#api-resources-tables /accounts/:account_id/tables
 

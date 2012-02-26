@@ -32,17 +32,22 @@
         <h4><a href='#object-account'>Account</a></h4>
         <ul>
           <li><a href='#object-account-fields'>Fields</a></li>
-          <li><a href='#get-on-accounts-current'>GET on /accounts/current</a></li>
           <li><a href='#get-on-accounts-account-id'>GET on /accounts/<em>account_id</em></a></li>
         </ul>
         <h4><a href='#object-table'>Table</a></h4>
         <ul>
+          <li><a href='#object-table-fields'>Fields</a></li>
+        </ul>
+        <h4><a href='#object-customer-tag'>CustomerTag</a></h4>
+        <ul>
+          <li><a href='#object-customer-tag-fields'>Fields</a></li>
+          <li><a href='#post-on-accounts-account-id-customer-tags'>POST on /accounts/<em>account_id</em>/customer_tags</a></li>
+        </ul>
+        <h4>hogehogehoge</h4>
+        <ul>
           <li><a href='#api-objects-type-annotations'>Type Annotacions</a></li>
           <li><a href='#api-objects-account'>Account</a></li>
           <li><a href='#api-objects-table'>Table</a></li>
-          <li><a href='#api-objects-customer'>Customer</a></li>
-          <li><a href='#api-objects-customer-field'>Customer Field</a></li>
-          <li><a href='#api-objects-customer-note'>Customer Note</a></li>
           <li><a href='#api-objects-customer-tag'>Customer Tag</a></li>
           <li><a href='#api-objects-payment-type'>Payment Type</a></li>
           <li><a href='#api-objects-cashier'>Cashier</a></li>
@@ -53,6 +58,9 @@
           <li><a href='#api-objects-payment'>Payment</a></li>
           <li><a href='#api-objects-checkout-item'>Checkout Item</a></li>
           <li><a href='#api-objects-stock-event'>Stock Event</a></li>
+          <li><a href='#api-objects-customer'>Customer</a></li>
+          <li><a href='#api-objects-customer-field'>Customer Field</a></li>
+          <li><a href='#api-objects-customer-note'>Customer Note</a></li>
         </ul>
         <h4><a href='#api-resources'>Resources</a></h4>
         <ul>
@@ -485,34 +493,15 @@
               <pre>{&#x000A;  &quot;id&quot;: 123,&#x000A;  &quot;created_at&quot;: &quot;2011-12-31:00:00:31Z&quot;,&#x000A;  &quot;updated_at&quot;: &quot;2012-01-30:00:30:11Z&quot;,&#x000A;  &quot;login&quot;: &quot;ubiregi-cafe&quot;,&#x000A;  &quot;email&quot;: &quot;cafe@ubiregi.com&quot;,&#x000A;  &quot;name&quot;: &quot;Ubiregi Cafe&quot;,&#x000A;  &quot;expire_at&quot;: &quot;2011-11-13T00:00:00Z&quot;,&#x000A;  &quot;subscription&quot;: &quot;standard&quot;,&#x000A;  &quot;currency&quot;: &quot;JPY&quot;,&#x000A;  &quot;date_offset&quot;: 6,&#x000A;  &quot;timezone&quot;: &quot;Asia/Tokyo&quot;,&#x000A;  &quot;receipt_title&quot;: &quot;RECEIPT&quot;,&#x000A;  &quot;receipt_footer&quot;: &quot;Footer to be printed in receipts&quot;,&#x000A;  &quot;receipt_logo&quot;: $base64Encoded,&#x000A;  &quot;menus&quot;: [ 8 ],&#x000A;  &quot;tables&quot;: [ $tables ],&#x000A;  &quot;customer_tags&quot;: [ $customer_tags ],&#x000A;  &quot;payment_types&quot;: [ $payment_types ],&#x000A;  &quot;cashiers&quot;: [ $cashiers ],&#x000A;  &quot;parents&quot;: [ 100 ],&#x000A;  &quot;children&quot;: [ 200, 124 ],&#x000A;}</pre>
             </div>
           </div>
-          <h2 id='get-on-accounts-current'>GET on /accounts/current</h2>
-          <p>Retrieves an <code>Account</code> object of current (used for authentication) account.</p>
-          <h3>Request</h3>
-          <div class='row'>
-            <div class='span6'>
-              <pre>GET /accounts/current</pre>
-            </div>
-          </div>
-          <h3>Response</h3>
-          <div class='row'>
-            <div class='span6'>
-              <pre>{&#x000A;  &quot;account&quot;: $account,&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:34Z&quot;,&#x000A;}</pre>
-            </div>
-            <div class='span6'>
-              <dl>
-                <dt>account</dt>
-                <dd>The account.</dd>
-                <dt>timestamp</dt>
-                <dd>The time in ubiregi.com server.</dd>
-              </dl>
-            </div>
-          </div>
           <h2 id='get-on-accounts-account-id'>GET on /accounts/<em>account_id</em></h2>
           <p>Retrieves an <code>Account</code> object with <em>account_id</em>.</p>
+          
+          <p><em>account_id</em> can be either the ID of account or an string <code>"current"</code>.
+          If <code>"current"</code> is specified, it is understood as the ID of current account.</p>
           <h3>Request</h3>
           <div class='row'>
             <div class='span6'>
-              <pre>GET /accounts/133</pre>
+              <pre>GET /accounts/133&#x000A;GET /accounts/current</pre>
             </div>
           </div>
           <h3>Response</h3>
@@ -532,24 +521,112 @@
           <h3>Note</h3>
           <p>The access is only allowed to current, parent, and child accounts.
           In other case, your request will result in 404 (not found) error.</p>
-          <h3 id='api-objects-table'>Table</h3>
-          <p><strong>Table object is deprecated.</strong>
+          <h1 id='object-table'>Table</h1>
+          <p><strong><code>Table</code> object is deprecated.</strong>
           It is working now but will be obsoleted soon.</p>
+          
+          <p><code>Table</code> objects represent tables.
+          Table is special mark for restaurants tables.
+          However, it will be deprecated soon.
+          Using <code>CustomerTag</code> instead of <code>Table</code> is encouraged.</p>
+          
+          <p>Since it will soom be deprecated, there are no API to update.
+          The only way to edit <code>Table</code> is logging in to the Ubiregi web app.</p>
+          
+          <p>Retrieving <code>Table</code>s can be done through <code>Account</code> objects.</p>
+          <h2 id='object-table-fields'>Fields</h2>
           <div class='row'>
-            <div class='span8'>
-              <h4>Fields</h4>
+            <div class='span6'>
               <dl>
-                <dt>id :: integer</dt>
+                <dt>id</dt>
                 <dd>ID of the object.</dd>
-                <dt>name :: string</dt>
+                <dt>name</dt>
                 <dd>Name of the table.</dd>
-                <dt>position :: integer</dt>
-                <dd>Position of the table.</dd>
+                <dt>position</dt>
+                <dd>
+                  An integer which represents the position of the table.
+                  The interpretation depends on the client applications.
+                </dd>
               </dl>
             </div>
-            <div class='span8'>
-              <h4>Example</h4>
+            <div class='span6'>
               <pre>{&#x000A;  &quot;id&quot;: 123,&#x000A;  &quot;name&quot;: &quot;Table 1&quot;,&#x000A;  &quot;position&quot;: 3,&#x000A;}</pre>
+            </div>
+          </div>
+          <h1 id='object-customer-tag'>CustomerTag</h1>
+          <p>Tags to give various information on checkouts.
+          This can be used to record that <em>the customer is 20th girl</em>, <em>they came for dating</em>, and so on.</p>
+          <h2 id='object-customer-tag-fields'>Fields</h2>
+          <div class='row'>
+            <div class='span6'>
+              <dl>
+                <dt>id</dt>
+                <dd>ID of the object.</dd>
+                <dt>name</dt>
+                <dd>Name of the tag.</dd>
+                <dt>position <span class='label warning'>Optional</span></dt>
+                <dd>
+                  Position of the tag. <code>null</code> in the case the tag is inactive.
+                  The interpretation depends on client, however the value should be from 1 to 12.
+                  There is no validation on ubiregi.com server on the uniqueness of <code>position</code>.
+                </dd>
+                <dt>icon_name <span class='label success'>Writeonly</span></dt>
+                <dd>Name of icon.</dd>
+                <dt>icon <span class='label notice'>Readonly</span></dt>
+                <dd>Icon image for the tag.</dd>
+                <dt>icon_mime <span class='label notice'>Readonly</span></dt>
+                <dd>MIME type of the icon. Usually <code>image/png</code>.</dd>
+              </dl>
+            </div>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;id&quot;: 123,&#x000A;  &quot;name&quot;: &quot;Dating&quot;,&#x000A;  &quot;potision&quot;: null,&#x000A;  &quot;icon&quot;: $base64Encoded,&#x000A;  &quot;icon_mime&quot;: &quot;image/png&quot;,&#x000A;}</pre>
+            </div>
+          </div>
+          <h3>Setting an Icon</h3>
+          <p>Icons can be set through <code>icon_name</code> attribute.
+          The value of <code>icon_name</code> should be one of the following list.</p>
+          
+          <p><strong><em> FIXME </em></strong></p>
+          
+          <p>Icons are sent from server as its binary image in Base64 encoded form.</p>
+          
+          <p>Thus, <code>icon_name</code> is a <em>writeonly</em> attribute and <code>icon</code> and <code>icon_mime</code> are <em>readonly</em> attributes.</p>
+          <h2 id='post-on-accounts-account-id-customer-tags'>POST on /accounts/<em>account_id</em>/customer_tags</h2>
+          <p>Update the customer_tags of an account specified by <em>account_id</em>.</p>
+          <h3>Request</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;customer_tags&quot;: [&#x000A;    {&#x000A;      &quot;name&quot;: &quot;Dating&quot;,&#x000A;      &quot;position&quot;: 10,&#x000A;      &quot;icon_name&quot;: &quot;F1&quot;,&#x000A;    },&#x000A;    {&#x000A;      &quot;id&quot;: 31,&#x000A;      &quot;position&quot;: null,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>customer_tags</dt>
+                <dd>
+                  Collection of <code>CustomerTag</code> objects.
+                  <dl>
+                    <dt>id</dt>
+                    <dt>name</dt>
+                    <dt>position</dt>
+                    <dt>icon_name</dt>
+                  </dl>
+                </dd>
+              </dl>
+            </div>
+          </div>
+          <h3>Response</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:12Z&quot;,&#x000A;  &quot;customer_tags&quot; : $customer_tags&#x000A;}</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>timestamp</dt>
+                <dt>customer_tags</dt>
+                <dd>
+                  Collection of updated/created customer tags.
+                  Client app should refresh account information to make sure there are no more <code>CustomerTag</code>s defined.
+                </dd>
+              </dl>
             </div>
           </div>
           <h3 id='api-objects-customer'>Customer</h3>
@@ -650,32 +727,6 @@
             <div class='span8'>
               <h4>Example</h4>
               <pre>{&#x000A;  &quot;id&quot;: 1,&#x000A;  &quot;customer_id&quot;: 1,&#x000A;  &quot;app_created_at&quot;: &quot;2012-02-14T00:00:00Z&quot;,&#x000A;  &quot;guid&quot;: $UUID-like-sequence,&#x000A;  &quot;checkout_id&quot;: 2,&#x000A;  &quot;kind&quot;: 2,&#x000A;  &quot;note&quot;: &quot;Memo Memo&quot;,&#x000A;  &quot;photo&quot;: $base64Encoded,&#x000A;  &quot;checkout_summary&quot;: &quot;Summary&quot;&#x000A;}</pre>
-            </div>
-          </div>
-          <h3 id='api-objects-customer-tag'>Customer Tag</h3>
-          <p>Tags to give various information on checkouts.
-          This can be used to record that <em>the customer is 20th girl</em>, <em>they came for dating</em>, and so on.</p>
-          <div class='row'>
-            <div class='span8'>
-              <h4>Fields</h4>
-              <dl>
-                <dt>id :: integer</dt>
-                <dd>ID of the object.</dd>
-                <dt>name :: string</dt>
-                <dd>Name of the tag.</dd>
-                <dt>position (optional)</dt>
-                <dd>Position of the tag. <code>null</code> in the case the tag is deleted.</dd>
-                <dt>icon_name :: string</dt>
-                <dd>Name of icon.  <em>WriteOnly</em></dd>
-                <dt>icon</dt>
-                <dd>Icon image for the tag.  <em>ReadOnly</em></dd>
-                <dt>icon_mime :: string</dt>
-                <dd>MIME type of the icon. Usually <code>image/png</code>.  <em>ReadOnly</em></dd>
-              </dl>
-            </div>
-            <div class='span8'>
-              <h4>Example</h4>
-              <pre>{&#x000A;  &quot;id&quot;: 123,&#x000A;  &quot;name&quot;: &quot;Dating&quot;,&#x000A;  &quot;potision&quot;: null,&#x000A;  &quot;icon&quot;: $base64Encoded,&#x000A;  &quot;icon_mime&quot;: &quot;image/png&quot;,&#x000A;}</pre>
             </div>
           </div>
           <h3 id='api-objects-payment-type'>PaymentType</h3>
@@ -1018,43 +1069,6 @@
           </div>
           <h3 id='api-resources-customer_tags'>/accounts/<em>:account_id</em>/customer_tags</h3>
           <p>Collection of customer tags defined in the account.</p>
-          <h4>POST on /accounts/<em>:account_id</em>/customer_tags</h4>
-          Update the customer_tags of an account specified by :account_id.
-          <div class='row'>
-            <div class='span8'>
-              <h5>Request</h5>
-              <pre>{&#x000A;  &quot;customer_tags&quot;: [&#x000A;    {&#x000A;      &quot;id&quot;: &quot;1&quot;,&#x000A;      &quot;name&quot;: &quot;Dating&quot;,&#x000A;      &quot;position&quot;: 10,&#x000A;      &quot;icon_name&quot;: $icon_name,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
-            </div>
-            <div class='span8'>
-              <h5>Fields</h5>
-              <dl>
-                <dt>id :: integer</dt>
-                <dd>
-                  ID of customer tag object.
-                  If unspecified, create a customer tag object.
-                  If specified, update an existing customer tag object.
-                </dd>
-                <dt>name</dt>
-                <dt>position</dt>
-                <dt>icon_name</dt>
-              </dl>
-            </div>
-          </div>
-          <div class='row'>
-            <div class='span8'>
-              <h5>Response</h5>
-              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:12Z&quot;,&#x000A;  &quot;customer_tags&quot; : $customer_tags&#x000A;}</pre>
-            </div>
-            <div class='span8'>
-              <p>
-                The order of the customer tags objects are preserved.
-              </p>
-              <p>
-                The update/creation is transactional.
-                There are only two cases; everything processed successfully, or nothing changed since an error found.
-              </p>
-            </div>
-          </div>
           <h3 id='api-resources-tables'>/accounts/:account_id/tables</h3>
           <p>Collection of tables defined in the account.</p>
           

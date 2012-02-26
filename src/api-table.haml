@@ -1,0 +1,39 @@
+%h1#object-table Table
+
+:markdown
+  **`Table` object is deprecated.**
+  It is working now but will be obsoleted soon.
+  
+  `Table` objects represent tables.
+  Table is special mark for restaurants tables.
+  However, it will be deprecated soon.
+  Using `CustomerTag` instead of `Table` is encouraged.
+  
+  Since it will soom be deprecated, there are no API to update.
+  The only way to edit `Table` is logging in to the Ubiregi web app.
+
+  Retrieving `Table`s can be done through `Account` objects.
+
+%h2#object-table-fields Fields
+
+.row
+  .span6
+    %dl
+      %dt id
+      %dd ID of the object.
+      %dt name
+      %dd Name of the table.
+      %dt position
+      %dd
+        An integer which represents the position of the table.
+        The interpretation depends on the client applications.
+        
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "id": 123,
+            "name": "Table 1",
+            "position": 3,
+          }

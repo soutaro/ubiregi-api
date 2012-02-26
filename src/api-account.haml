@@ -81,39 +81,13 @@
             "children": [ 200, 124 ],
           }
 
-%h2#get-on-accounts-current GET on /accounts/current
-
-:markdown
-  Retrieves an `Account` object of current (used for authentication) account.
-  
-%h3 Request
-.row
-  .span6
-    %pre
-      = preserve do
-        GET /accounts/current
-    
-%h3 Response
-.row
-  .span6
-    %pre
-      = preserve do
-        :escaped
-          {
-            "account": $account,
-            "timestamp": "2011-11-02T09:11:34Z",
-          }
-  .span6
-    %dl
-      %dt account
-      %dd The account.
-      %dt timestamp
-      %dd The time in ubiregi.com server.
-
 %h2#get-on-accounts-account-id GET on /accounts/<em>account_id</em>
 
 :markdown
   Retrieves an `Account` object with *account_id*.
+  
+  *account_id* can be either the ID of account or an string `"current"`.
+  If `"current"` is specified, it is understood as the ID of current account.
   
 %h3 Request
 .row
@@ -121,6 +95,7 @@
     %pre
       = preserve do
         GET /accounts/133
+        GET /accounts/current
     
 %h3 Response
 .row
