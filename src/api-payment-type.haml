@@ -1,0 +1,88 @@
+%h1#object-payment-type PaymentType
+
+:markdown
+  `PaymentType` represents how the bill is payed by; cash? or credit card?
+
+%h2#object-payment-type-fields Fields
+
+.row
+  .span6
+    %dl
+      %dt= field "id"
+      %dd ID of the object.
+      %dt= field "name"
+      %dd Name of the payment type.
+      %dt= field "position", :optional
+      %dd
+        Position of the type. <code>null</code> in the case the payment methods is disabled.
+      %dt= field "change"
+      %dd
+        <code>true</code> if customers will receive change.
+      %dt= field "kind"
+      %dd
+        One of <code>"CASH"</code>, <code>"CARD"</code>, or <code>"OTHER"</code>.
+        <code>"CASH"</code> kind payment type exists in all accounts.
+
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "id": 111,
+            "name": "Credit card",
+            "position": 3,
+            "change": true,
+            "kind": "CARD",
+          }
+
+
+%h2#post-on-accounts-account-id-payment-types POST on /accounts/<em>account_id</em>/payment_types
+
+:markdown
+  Change payment type of the account specified by `:account_id`.
+
+%h3 Request
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "payment_types": [
+              {
+                "name": "Book Coupon",
+                "change": true,
+                "kind": "OTHER"
+              },
+              {
+                "id": 123,
+                "change": false,
+              }
+            ]
+          }
+  .span6
+    %dl
+      %dt= field "payment_types"
+      %dd
+        Array of <code>PaymentType</code> objects to update/create.
+        %dl
+          %dt= field "id"
+          %dt= field "name"
+          %dt= field "change"
+          %dt= field "kind"
+
+%h3 Response
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "timestamp": "2012-02-14T09:00:00Z",
+            "payment_types" : $payment_types
+          }
+  .span6
+    %dl
+      %dt= field "timestamp"
+      %dt= field "payment_types"
+        

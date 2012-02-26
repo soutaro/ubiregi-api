@@ -1,0 +1,90 @@
+%h1#object-cashier Cashier
+
+:markdown
+  `Cashier` object represents the person who operated the cash register.
+
+%h2#object-cashier-fields Fields
+
+.row
+  .span6
+    %dl
+      %dt= field "id"
+      %dd ID of the object.
+      %dt= field "name"
+      %dd Name of the cashier.
+      %dt= field "enabled"
+      %dd <code>true</code> if the cashier is enabled. <code>false</code> if the cashier is disabled.
+      %dt= field "icon"
+      %dd Base64 encoded binary data of icon.
+      %dt= field "icon_mime", :readonly
+      %dd MIME type of the icon. Usually, <code>"image/png"</code> or <code>"image/jpeg"</code>.
+
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "id": 385,
+            "name": "Soutaro Matsumoto",
+            "enabled": true,
+            "icon": $base64Encoded,
+            "icon_mime": "image/png",
+          }
+%h2#post-on-accounts-account-id-cashiers POST on /accounts/<em>account_id</em>/cashiers
+
+:markdown
+  Update the cashiers of an account specified by *:account_id*.
+  The child account's cashiers can be updated by parents.
+
+%h3 Request
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "cashiers": [
+              {
+                "name": "New cashier",
+                "enabled":true,
+                "icon":$base64Encoded,
+              },
+              {
+                "id": 1,
+                "enabled": false,
+              }
+            ]
+          }
+  .span6
+    %dl
+      %dt= field "cashiers"
+      %dd
+        Array of <code>Cashier</code> objects to be updated/created.
+        %dl
+          %dt= field "id"
+          %dt= field "name"
+          %dt= field "enabled"
+          %dt= field "icon"
+          %dd
+            Base64 encoded data of icon.
+            If unspecified, the icon is not updated.
+            If specified with <code>null</code>, the icon will be removed.
+
+%h3 Response
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "timestamp": "2011-11-02T09:11:12Z",
+            "cashiers" : $cashiers
+          }
+  .span6
+    %dl
+      %dt= field "timestamp"
+      %dt= field "cashiers"
+      %dd
+        Array of updated/created <code>Cashier</code>s.
+
+

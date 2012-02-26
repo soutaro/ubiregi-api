@@ -39,6 +39,8 @@
 = render "api-account"
 = render "api-table"
 = render "api-customer-tag"
+= render "api-cashier"
+= render "api-payment-type"
 
 %h3#api-objects-customer Customer
 
@@ -175,85 +177,6 @@
             "checkout_summary": "Summary"
           }
 
-%h3#api-objects-payment-type PaymentType
-
-:markdown
-  How the bill is payed by; cash? or credit card?
-
-.row
-  .span8
-    %h4 Fields
-
-    %dl
-      %dt id :: integer
-      %dd ID of the object.
-      %dt name :: string
-      %dd Name of the payment type.
-      %dt position (optional)
-      %dd
-        :markdown
-          Position of the type. `null` in the case the payment methods is disabled.
-      %dt change
-      %dd
-        :markdown
-          `true` if customers will receive change.
-      %dt kind :: string
-      %dd
-        :markdown
-          "CASH" | "CARD" | "OTHER"
-          "CASH" kind payment type exists in all accounts.
-
-  .span8
-    %h4 Example
-    %pre
-      = preserve do
-        :escaped
-          {
-            "id": 111,
-            "name": "Credit card",
-            "position": 3,
-            "change": true,
-            "kind": "CARD",
-          }
-
-%h3#api-objects-cashier Cashier
-
-:markdown
-  Cashier who operated the cash register.
-
-.row
-  .span8
-    %h4 Fields
-
-    %dl
-      %dt id :: integer
-      %dd ID of the object.
-      %dt name :: string
-      %dd Name of the cashier.
-      %dt enabled :: boolean
-      %dd
-        :markdown
-          `true` if the cashier is enabled. `false` if the cashier is deleted.
-      %dt icon
-      %dd Base 64 encoded binary data of icon.
-      %dt icon_mime :: string
-      %dd
-        :markdown
-          MIME type of the icon. Usually, `image/png` or `image/jpeg`.
-
-  .span8
-    %h4 Example
-
-    %pre
-      = preserve do
-        :escaped
-          {
-            "id": 385,
-            "name": "Soutaro Matsumoto",
-            "enabled": true,
-            "icon": $base64Encoded,
-            "icon_mime": "image/png",
-          }
 
 %h3#api-objects-friend Friend
 

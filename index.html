@@ -43,6 +43,16 @@
           <li><a href='#object-customer-tag-fields'>Fields</a></li>
           <li><a href='#post-on-accounts-account-id-customer-tags'>POST on /accounts/<em>account_id</em>/customer_tags</a></li>
         </ul>
+        <h4><a href='#object-cashier'>Cashier</a></h4>
+        <ul>
+          <li><a href='#object-cashier-fields'>Fields</a></li>
+          <li><a href='#post-on-accounts-account-id-cashiers'>POST on /accounts/<em>account_id</em>/cashiers</a></li>
+        </ul>
+        <h4><a href='#object-payment-type'>PaymentType</a></h4>
+        <ul>
+          <li><a href='#object-payment-type-fields'>Fields</a></li>
+          <li><a href='#post-on-accounts-account-id-payment-types'>POST on /accounts/<em>account_id</em>/payment_types</a></li>
+        </ul>
         <h4>hogehogehoge</h4>
         <ul>
           <li><a href='#api-objects-type-annotations'>Type Annotacions</a></li>
@@ -203,7 +213,7 @@
             General Notes
             <small>Things every developer should know</small>
           </h2>
-          <h4>The API is entirely HTTP-based, and RESTful</h4>
+          <h4>The API is Entirely HTTP-based, and Almost RESTful</h4>
           <p>
             Methods to retrieve data from the Ubiregi API requires a GET
             request. Methods to create new things requires a POST request. And to
@@ -211,7 +221,11 @@
             particular HTTP method and will return an error if you do not make your
             request with the correct one.
           </p>
-          <h4>Ubiregi web app is built on Rails</h4>
+          <p>
+            The API is almost RESTful.
+            Every operations are update of attributes of resouces.
+          </p>
+          <h4>Ubiregi Web App is Built on Rails</h4>
           <p>
             We use Ruby on Rails 3 to develop ubiregi.com web app. You may find
             something odd our api. It should be because of Rails requirements.
@@ -221,7 +235,7 @@
             about, but may be insufficient. If you have some problem, you may
             need to check Rails related documents.
           </p>
-          <h4>JSON is used</h4>
+          <h4>JSON is Used</h4>
           <p>
             We use JSON for every structured data. It implies that binary data are
             encoded with base64 and non-ascii characters are UTF8 encoded.
@@ -629,6 +643,134 @@
               </dl>
             </div>
           </div>
+          <h1 id='object-cashier'>Cashier</h1>
+          <p><code>Cashier</code> object represents the person who operated the cash register.</p>
+          <h2 id='object-cashier-fields'>Fields</h2>
+          <div class='row'>
+            <div class='span6'>
+              <dl>
+                <dt>id</dt>
+                <dd>ID of the object.</dd>
+                <dt>name</dt>
+                <dd>Name of the cashier.</dd>
+                <dt>enabled</dt>
+                <dd><code>true</code> if the cashier is enabled. <code>false</code> if the cashier is disabled.</dd>
+                <dt>icon</dt>
+                <dd>Base64 encoded binary data of icon.</dd>
+                <dt>icon_mime <span class='label notice'>Readonly</span></dt>
+                <dd>MIME type of the icon. Usually, <code>"image/png"</code> or <code>"image/jpeg"</code>.</dd>
+              </dl>
+            </div>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;id&quot;: 385,&#x000A;  &quot;name&quot;: &quot;Soutaro Matsumoto&quot;,&#x000A;  &quot;enabled&quot;: true,&#x000A;  &quot;icon&quot;: $base64Encoded,&#x000A;  &quot;icon_mime&quot;: &quot;image/png&quot;,&#x000A;}</pre>
+            </div>
+          </div>
+          <h2 id='post-on-accounts-account-id-cashiers'>POST on /accounts/<em>account_id</em>/cashiers</h2>
+          <p>Update the cashiers of an account specified by <em>:account_id</em>.
+          The child account's cashiers can be updated by parents.</p>
+          <h3>Request</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;cashiers&quot;: [&#x000A;    {&#x000A;      &quot;name&quot;: &quot;New cashier&quot;,&#x000A;      &quot;enabled&quot;:true,&#x000A;      &quot;icon&quot;:$base64Encoded,&#x000A;    },&#x000A;    {&#x000A;      &quot;id&quot;: 1,&#x000A;      &quot;enabled&quot;: false,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>cashiers</dt>
+                <dd>
+                  Array of <code>Cashier</code> objects to be updated/created.
+                  <dl>
+                    <dt>id</dt>
+                    <dt>name</dt>
+                    <dt>enabled</dt>
+                    <dt>icon</dt>
+                    <dd>
+                      Base64 encoded data of icon.
+                      If unspecified, the icon is not updated.
+                      If specified with <code>null</code>, the icon will be removed.
+                    </dd>
+                  </dl>
+                </dd>
+              </dl>
+            </div>
+          </div>
+          <h3>Response</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:12Z&quot;,&#x000A;  &quot;cashiers&quot; : $cashiers&#x000A;}</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>timestamp</dt>
+                <dt>cashiers</dt>
+                <dd>
+                  Array of updated/created <code>Cashier</code>s.
+                </dd>
+              </dl>
+            </div>
+          </div>
+          <h1 id='object-payment-type'>PaymentType</h1>
+          <p><code>PaymentType</code> represents how the bill is payed by; cash? or credit card?</p>
+          <h2 id='object-payment-type-fields'>Fields</h2>
+          <div class='row'>
+            <div class='span6'>
+              <dl>
+                <dt>id</dt>
+                <dd>ID of the object.</dd>
+                <dt>name</dt>
+                <dd>Name of the payment type.</dd>
+                <dt>position <span class='label warning'>Optional</span></dt>
+                <dd>
+                  Position of the type. <code>null</code> in the case the payment methods is disabled.
+                </dd>
+                <dt>change</dt>
+                <dd>
+                  <code>true</code> if customers will receive change.
+                </dd>
+                <dt>kind</dt>
+                <dd>
+                  One of <code>"CASH"</code>, <code>"CARD"</code>, or <code>"OTHER"</code>.
+                  <code>"CASH"</code> kind payment type exists in all accounts.
+                </dd>
+              </dl>
+            </div>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;id&quot;: 111,&#x000A;  &quot;name&quot;: &quot;Credit card&quot;,&#x000A;  &quot;position&quot;: 3,&#x000A;  &quot;change&quot;: true,&#x000A;  &quot;kind&quot;: &quot;CARD&quot;,&#x000A;}</pre>
+            </div>
+          </div>
+          <h2 id='post-on-accounts-account-id-payment-types'>POST on /accounts/<em>account_id</em>/payment_types</h2>
+          <p>Change payment type of the account specified by <code>:account_id</code>.</p>
+          <h3>Request</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;payment_types&quot;: [&#x000A;    {&#x000A;      &quot;name&quot;: &quot;Book Coupon&quot;,&#x000A;      &quot;change&quot;: true,&#x000A;      &quot;kind&quot;: &quot;OTHER&quot;&#x000A;    },&#x000A;    {&#x000A;      &quot;id&quot;: 123,&#x000A;      &quot;change&quot;: false,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>payment_types</dt>
+                <dd>
+                  Array of <code>PaymentType</code> objects to update/create.
+                  <dl>
+                    <dt>id</dt>
+                    <dt>name</dt>
+                    <dt>change</dt>
+                    <dt>kind</dt>
+                  </dl>
+                </dd>
+              </dl>
+            </div>
+          </div>
+          <h3>Response</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2012-02-14T09:00:00Z&quot;,&#x000A;  &quot;payment_types&quot; : $payment_types&#x000A;}</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>timestamp</dt>
+                <dt>payment_types</dt>
+              </dl>
+            </div>
+          </div>
           <h3 id='api-objects-customer'>Customer</h3>
           <p>A customer object associated with an account.
           This can be used to send/retrieve a customer information to/from an account.</p>
@@ -727,63 +869,6 @@
             <div class='span8'>
               <h4>Example</h4>
               <pre>{&#x000A;  &quot;id&quot;: 1,&#x000A;  &quot;customer_id&quot;: 1,&#x000A;  &quot;app_created_at&quot;: &quot;2012-02-14T00:00:00Z&quot;,&#x000A;  &quot;guid&quot;: $UUID-like-sequence,&#x000A;  &quot;checkout_id&quot;: 2,&#x000A;  &quot;kind&quot;: 2,&#x000A;  &quot;note&quot;: &quot;Memo Memo&quot;,&#x000A;  &quot;photo&quot;: $base64Encoded,&#x000A;  &quot;checkout_summary&quot;: &quot;Summary&quot;&#x000A;}</pre>
-            </div>
-          </div>
-          <h3 id='api-objects-payment-type'>PaymentType</h3>
-          <p>How the bill is payed by; cash? or credit card?</p>
-          <div class='row'>
-            <div class='span8'>
-              <h4>Fields</h4>
-              <dl>
-                <dt>id :: integer</dt>
-                <dd>ID of the object.</dd>
-                <dt>name :: string</dt>
-                <dd>Name of the payment type.</dd>
-                <dt>position (optional)</dt>
-                <dd>
-                  <p>Position of the type. <code>null</code> in the case the payment methods is disabled.</p>
-                </dd>
-                <dt>change</dt>
-                <dd>
-                  <p><code>true</code> if customers will receive change.</p>
-                </dd>
-                <dt>kind :: string</dt>
-                <dd>
-                  <p>"CASH" | "CARD" | "OTHER"
-                  "CASH" kind payment type exists in all accounts.</p>
-                </dd>
-              </dl>
-            </div>
-            <div class='span8'>
-              <h4>Example</h4>
-              <pre>{&#x000A;  &quot;id&quot;: 111,&#x000A;  &quot;name&quot;: &quot;Credit card&quot;,&#x000A;  &quot;position&quot;: 3,&#x000A;  &quot;change&quot;: true,&#x000A;  &quot;kind&quot;: &quot;CARD&quot;,&#x000A;}</pre>
-            </div>
-          </div>
-          <h3 id='api-objects-cashier'>Cashier</h3>
-          <p>Cashier who operated the cash register.</p>
-          <div class='row'>
-            <div class='span8'>
-              <h4>Fields</h4>
-              <dl>
-                <dt>id :: integer</dt>
-                <dd>ID of the object.</dd>
-                <dt>name :: string</dt>
-                <dd>Name of the cashier.</dd>
-                <dt>enabled :: boolean</dt>
-                <dd>
-                  <p><code>true</code> if the cashier is enabled. <code>false</code> if the cashier is deleted.</p>
-                </dd>
-                <dt>icon</dt>
-                <dd>Base 64 encoded binary data of icon.</dd>
-                <dt>icon_mime :: string</dt>
-                <dd>
-                  <p>MIME type of the icon. Usually, <code>image/png</code> or <code>image/jpeg</code>.</p>
-                </dd>
-              </dl>
-            </div>
-            <div class='span8'>
-              <h4>Example</h4>
-              <pre>{&#x000A;  &quot;id&quot;: 385,&#x000A;  &quot;name&quot;: &quot;Soutaro Matsumoto&quot;,&#x000A;  &quot;enabled&quot;: true,&#x000A;  &quot;icon&quot;: $base64Encoded,&#x000A;  &quot;icon_mime&quot;: &quot;image/png&quot;,&#x000A;}</pre>
             </div>
           </div>
           <h3 id='api-objects-friend'>Friend</h3>
@@ -1024,49 +1109,6 @@
           <h4>GET on /accounts/<em>:account_id</em>, /accounts/current</h4>
           <h3 id='api-resources-cashiers'>/accounts/<em>:account_id</em>/cashiers</h3>
           <p>Collection of cashiers defined in the user's account.</p>
-          <h4>POST on /accounts/<em>:account_id</em>/cashiers</h4>
-          <p>Update the cashiers of an account specified by <em>:account_id</em>.
-          The child account's cashiers can be updated by parents.</p>
-          <div class='row'>
-            <div class='span8'>
-              <h5>Request</h5>
-              <pre>{&#x000A;  &quot;cashiers&quot;: [&#x000A;    {&#x000A;      &quot;name&quot;: &quot;New cashier&quot;,&#x000A;      &quot;enabled&quot;:true,&#x000A;      &quot;icon&quot;:$base64Encoded,&#x000A;    },&#x000A;    {&#x000A;      &quot;id&quot;: 1,&#x000A;      &quot;name&quot;: &quot;Updating an existing cashier&quot;,&#x000A;      &quot;enabled&quot;: false,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
-            </div>
-            <div class='span8'>
-              <h5>Fields</h5>
-              <dl>
-                <dt>id :: integer</dt>
-                <dd>
-                  ID of cashier object.
-                  If unspecified, create a new cashier object.
-                  If specified, update an existing cashier object.
-                </dd>
-                <dt>name</dt>
-                <dt>enabled</dt>
-                <dt>icon</dt>
-                <dd>
-                  Base64 encoded data of icon.
-                  If unspecified, the icon is not updated.
-                  If specified with <code>null</code>, the icon will be removed.
-                </dd>
-              </dl>
-            </div>
-          </div>
-          <div class='row'>
-            <div class='span8'>
-              <h5>Response</h5>
-              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:12Z&quot;,&#x000A;  &quot;cashiers&quot; : $cashiers&#x000A;}</pre>
-            </div>
-            <div class='span8'>
-              <p>
-                The order of the cashier objects are preserved.
-              </p>
-              <p>
-                The update/creation is transactional.
-                There are only two cases; everything processed successfully, or nothing changed since an error found.
-              </p>
-            </div>
-          </div>
           <h3 id='api-resources-customer_tags'>/accounts/<em>:account_id</em>/customer_tags</h3>
           <p>Collection of customer tags defined in the account.</p>
           <h3 id='api-resources-tables'>/accounts/:account_id/tables</h3>
@@ -1332,42 +1374,6 @@
             <div class='span8'>
               <h5>Response</h5>
               <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2012-02-14T09:00:00Z&quot;,&#x000A;  &quot;events&quot; : $events&#x000A;}</pre>
-            </div>
-            <div class='span8'>
-              <p>
-                The order of the event objects are preserved.
-              </p>
-              <p>
-                The update/creation is transactional.
-                There are only two cases; everything processed successfully, or nothing changed since an error found.
-              </p>
-            </div>
-          </div>
-          <h4>POST on /accounts/:account_id/payment_types</h4>
-          <p>Change payment type of the account specified by <code>:account_id</code>.</p>
-          <div class='row'>
-            <div class='span8'>
-              <h5>Request</h5>
-              <pre>{&#x000A;  &quot;payment_types&quot;: [&#x000A;    {&#x000A;      &quot;id&quot;: 1,&#x000A;      &quot;name&quot;: &quot;Book Coupon&quot;&quot;,&#x000A;      &quot;change&quot;: true,&#x000A;      &quot;kind&quot;: &quot;OTHER&quot;&#x000A;    }&#x000A;  ]&#x000A;}</pre>
-            </div>
-            <div class='span8'>
-              <h5>Fields</h5>
-              <dl>
-                <dt>id :: integer</dt>
-                <dd>ID of the payment type</dd>
-                <dt>name :: string</dt>
-                <dd>Name of the payment type</dd>
-                <dt>change :: boolean</dt>
-                <dd>Whether customer will received changes or not.  If true, customer will receive change.</dd>
-                <dt>kind :: string</dt>
-                <dd>Either "CASH", "CARD", or "Other" can be specified.</dd>
-              </dl>
-            </div>
-          </div>
-          <div class='row'>
-            <div class='span8'>
-              <h5>Response</h5>
-              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2012-02-14T09:00:00Z&quot;,&#x000A;  &quot;payment_types&quot; : $payment_types&#x000A;}</pre>
             </div>
             <div class='span8'>
               <p>
