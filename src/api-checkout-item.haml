@@ -1,0 +1,50 @@
+%h1#object-checkout-item CheckoutItem
+
+:markdown
+  `CheckoutItem` object represents each sold menu item in a checkout.
+  It records how many the item sold and the price.
+
+%h2#object-checkout-item-fields Fields
+
+.row
+  .span6
+    %dl
+      %dt= field "id", :readonly
+      %dd ID of the object
+      %dt= field "menu_item_id"
+      %dd ID of the menu item
+      %dt= field "count"
+      %dd 
+        The number of the items the customer bought.
+        May be negative to express a return.
+      %dt= field "sales"
+      %dd Sales amount without TAX.
+      %dt= field "tax"
+      %dd TAX for the item.
+      %dt= field "discount_sales"
+      %dd Sales discounted
+      %dt= field "discount_tax"
+      %dd TAX discounted
+
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "id": 1,
+            "menu_item_id": 1,
+            "count": 3,
+            "sales": "330.0",
+            "tax": "0.0",
+            "discount_sales": "0.0",
+            "discount_tax": "0.0"
+          }
+
+%h3 Notes
+
+:markdown
+  Make sure the amounts of currency; `sales`, `tax`, `discount_sales`, and `discount_tax`; are represented as a string, not a number.
+  The price is culculated as follows: `sales` + `tax` - (`discount_sales` + `discount_tax`).
+  
+  
+
