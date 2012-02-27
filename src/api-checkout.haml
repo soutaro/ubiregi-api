@@ -53,7 +53,7 @@
         :escaped
           {
             "id": 1,
-            "guid": $UUID-like-sequence,
+            "guid": "8928309238-d987aerkeh-9847tdfkzhg4",
             "account_id": 1,
             "paid_at": "2011-12-24T16:20:20Z",
             "price": "385.0",
@@ -63,12 +63,12 @@
             "customers_count": 0,
             "payments": [ $Payments ],
             "items": [ $CheckoutItems ],
-            "table_ids": [ $TableIDs ],
-            "customer_tag_ids": [ $CustomerTagIDs ],
+            "table_ids": [ 99, 8 ],
+            "customer_tag_ids": [ 10, 1003 ],
             "modifier": "0.0"
           }
 
-%h2 GET on /accounts/<em>account_id</em>/checkouts
+%h2#get-on-accounts-account-id-checkouts GET on /accounts/<em>account_id</em>/checkouts
 
 :markdown
   Retrieves the checkouts of the account which specified with *account_id*.
@@ -110,7 +110,7 @@
       %dt= field "checkouts"
       %dd Array of <code>Checkout</code>s for the request.
 
-%h2 POST on /accounts/<em>account_id</em>/checkouts
+%h2#post-on-accounts-account-id-checkouts POST on /accounts/<em>account_id</em>/checkouts
 
 :markdown
   Create/update checkout of account with `account_id`.
@@ -129,7 +129,7 @@
           {
             "checkouts": [
               {
-                "items_attributes": [
+                "items": [
                   {
                     "menu_item_id": 123,
                     "count": 1,
@@ -142,13 +142,11 @@
                 "change" : "26",
                 "guid" : $UUID-like-sequence,
                 "paid_at": $Time,
-                "payments_attributes": [
+                "payments": [
                   { "payment_type_id": 101, "amount": "100" }
                 ],
                 "customers_count': 1,
-                "customer_taggings_attributes': [
-                  { "customer_tag_id": 20 }
-                ],
+                "customer_tag_ids': [ 20 ],
                 "cashier_id": 948,
                 "status": "Open",
               },
@@ -170,9 +168,9 @@
           %dt= field "status"
           %dt= field "cashier_id"
           %dt= field "customers_count"
-          %dt= field "payments_attributes"
+          %dt= field "payments"
           %dd Array of <code>CheckoutPayment</code>s.
-          %dt= field "items_attributes"
+          %dt= field "items"
           %dd Array of <code>CheckoutItem</code>s.
           %dt= field "table_ids"
           %dd
@@ -185,7 +183,7 @@
       There are validations on creating checkout objects.
       It should be good practice to send all attributes when creating new checkout.
 
-%h4 Updating items_attributes and payments_attributes
+%h4 Updating items and payments
 
 .row
   .span6
@@ -196,7 +194,7 @@
             "checkouts": [
               {
                 "id": 123
-                "payments_attributes": [
+                "payments": [
                   {
                     "payment_type_id": 13,
                     "amount": "1032",
@@ -206,30 +204,25 @@
                     "amount": "809",
                   },
                 ],
-                "items_attributes": [
-                  {
-                    "id": 3314,
-                    "_destroy": true,
-                  }
-                ]
+                "items": []
               },
             ]
           }
   .span6
     %h5 Creating an Object
     :markdown
-      Include `*_attributes` an object without `id`.
-      The first `payments_attributes` object is creating an `CheckoutPayment`.
+      Include an object without `id`.
+      The first `payments` object is creating an `CheckoutPayment`.
       
     %h5 Updating an Object
     :markdown
-      Include `*_attributes` an object with `id` and updating attributes.
-      The second `payments_attributes` object is updating `amount` of a `CheckoutPayment` with its ID is 3112.
+      Include an object with `id` and updating attributes.
+      The second `payments` object is updating `amount` of a `CheckoutPayment` with its ID is 3112.
   
     %h5 Deleting an Object
     :markdown
-      Include `*_attributes` an object with `_destroy` attribute.
-      The object in `items_attributes` is deleting `CheckoutItem` with its ID is 3314.
+      Objects which is not included in the array are deleted.
+      All objects in `items` will be deleted.
       
 %h3 Response
 .row

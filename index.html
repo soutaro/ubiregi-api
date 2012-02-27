@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>«Draft» Ubiregi API</title>
+    <title>[Draft] Ubiregi API</title>
     <meta charset='utf-8' />
     <link href='bootstrap.min.css' rel='stylesheet' />
     <link href='top.css' rel='stylesheet' />
@@ -58,6 +58,12 @@
           <li><a href='#object-menu-item-fields'>Fields</a></li>
           <li><a href='#get-on-menus-menu-id-items'>GET on /menus/<em>menu_id</em>/items</a></li>
           <li><a href='#post-on-menus-menu-id-items'>POST on /menus/<em>menu_id</em>/items</a></li>
+        </ul>
+        <h4><a href='#object-checkout'>Checkout</a></h4>
+        <ul>
+          <li><a href='#object-checkout-fields'>Fields</a></li>
+          <li><a href='#get-on-accounts-account-id-checkouts'>GET on /accounts/<em>account_id</em>/checkouts</a></li>
+          <li><a href='#post-on-accounts-account-id-checkouts'>POST on /accounts/<em>account_id</em>/checkouts</a></li>
         </ul>
         <h4>Errors</h4>
       </div>
@@ -904,10 +910,10 @@
               </dl>
             </div>
             <div class='span6'>
-              <pre>{&#x000A;  &quot;id&quot;: 1,&#x000A;  &quot;guid&quot;: $UUID-like-sequence,&#x000A;  &quot;account_id&quot;: 1,&#x000A;  &quot;paid_at&quot;: &quot;2011-12-24T16:20:20Z&quot;,&#x000A;  &quot;price&quot;: &quot;385.0&quot;,&#x000A;  &quot;change&quot;: &quot;4000.0&quot;,&#x000A;  &quot;status&quot;: &quot;close&quot;,&#x000A;  &quot;cashier_id&quot;: null,&#x000A;  &quot;customers_count&quot;: 0,&#x000A;  &quot;payments&quot;: [ $Payments ],&#x000A;  &quot;items&quot;: [ $CheckoutItems ],&#x000A;  &quot;table_ids&quot;: [ $TableIDs ],&#x000A;  &quot;customer_tag_ids&quot;: [ $CustomerTagIDs ],&#x000A;  &quot;modifier&quot;: &quot;0.0&quot;&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;id&quot;: 1,&#x000A;  &quot;guid&quot;: &quot;8928309238-d987aerkeh-9847tdfkzhg4&quot;,&#x000A;  &quot;account_id&quot;: 1,&#x000A;  &quot;paid_at&quot;: &quot;2011-12-24T16:20:20Z&quot;,&#x000A;  &quot;price&quot;: &quot;385.0&quot;,&#x000A;  &quot;change&quot;: &quot;4000.0&quot;,&#x000A;  &quot;status&quot;: &quot;close&quot;,&#x000A;  &quot;cashier_id&quot;: null,&#x000A;  &quot;customers_count&quot;: 0,&#x000A;  &quot;payments&quot;: [ $Payments ],&#x000A;  &quot;items&quot;: [ $CheckoutItems ],&#x000A;  &quot;table_ids&quot;: [ 99, 8 ],&#x000A;  &quot;customer_tag_ids&quot;: [ 10, 1003 ],&#x000A;  &quot;modifier&quot;: &quot;0.0&quot;&#x000A;}</pre>
             </div>
           </div>
-          <h2>GET on /accounts/<em>account_id</em>/checkouts</h2>
+          <h2 id='get-on-accounts-account-id-checkouts'>GET on /accounts/<em>account_id</em>/checkouts</h2>
           <p>Retrieves the checkouts of the account which specified with <em>account_id</em>.
           The account should be one of current account, parent, children, or siblings.
           In other case, the request will result in <code>404</code> not found.</p>
@@ -939,7 +945,7 @@
               </dl>
             </div>
           </div>
-          <h2>POST on /accounts/<em>account_id</em>/checkouts</h2>
+          <h2 id='post-on-accounts-account-id-checkouts'>POST on /accounts/<em>account_id</em>/checkouts</h2>
           <p>Create/update checkout of account with <code>account_id</code>.</p>
           
           <p>Checkouts of current account and its child accounts are writable.
@@ -947,7 +953,7 @@
           <h3>Request</h3>
           <div class='row'>
             <div class='span6'>
-              <pre>{&#x000A;  &quot;checkouts&quot;: [&#x000A;    {&#x000A;      &quot;items_attributes&quot;: [&#x000A;        {&#x000A;          &quot;menu_item_id&quot;: 123,&#x000A;          &quot;count&quot;: 1,&#x000A;          &quot;sales&quot;: &quot;100&quot;,&#x000A;          &quot;tax&quot;: &quot;5&quot;,&#x000A;          &quot;discount_sales&quot;: &quot;20&quot;,&#x000A;          &quot;discount_tax&quot;: &quot;1&quot;&#x000A;        }&#x000A;      ],&#x000A;      &quot;change&quot; : &quot;26&quot;,&#x000A;      &quot;guid&quot; : $UUID-like-sequence,&#x000A;      &quot;paid_at&quot;: $Time,&#x000A;      &quot;payments_attributes&quot;: [&#x000A;        { &quot;payment_type_id&quot;: 101, &quot;amount&quot;: &quot;100&quot; }&#x000A;      ],&#x000A;      &quot;customers_count': 1,&#x000A;      &quot;customer_taggings_attributes': [&#x000A;        { &quot;customer_tag_id&quot;: 20 }&#x000A;      ],&#x000A;      &quot;cashier_id&quot;: 948,&#x000A;      &quot;status&quot;: &quot;Open&quot;,&#x000A;    },&#x000A;    {&#x000A;      &quot;id&quot;: 4739,&#x000A;      &quot;status&quot;: &quot;Close&quot;,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;checkouts&quot;: [&#x000A;    {&#x000A;      &quot;items&quot;: [&#x000A;        {&#x000A;          &quot;menu_item_id&quot;: 123,&#x000A;          &quot;count&quot;: 1,&#x000A;          &quot;sales&quot;: &quot;100&quot;,&#x000A;          &quot;tax&quot;: &quot;5&quot;,&#x000A;          &quot;discount_sales&quot;: &quot;20&quot;,&#x000A;          &quot;discount_tax&quot;: &quot;1&quot;&#x000A;        }&#x000A;      ],&#x000A;      &quot;change&quot; : &quot;26&quot;,&#x000A;      &quot;guid&quot; : $UUID-like-sequence,&#x000A;      &quot;paid_at&quot;: $Time,&#x000A;      &quot;payments&quot;: [&#x000A;        { &quot;payment_type_id&quot;: 101, &quot;amount&quot;: &quot;100&quot; }&#x000A;      ],&#x000A;      &quot;customers_count': 1,&#x000A;      &quot;customer_tag_ids': [ 20 ],&#x000A;      &quot;cashier_id&quot;: 948,&#x000A;      &quot;status&quot;: &quot;Open&quot;,&#x000A;    },&#x000A;    {&#x000A;      &quot;id&quot;: 4739,&#x000A;      &quot;status&quot;: &quot;Close&quot;,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
             </div>
             <div class='span6'>
               <dl>
@@ -961,9 +967,9 @@
                     <dt>status</dt>
                     <dt>cashier_id</dt>
                     <dt>customers_count</dt>
-                    <dt>payments_attributes</dt>
+                    <dt>payments</dt>
                     <dd>Array of <code>CheckoutPayment</code>s.</dd>
-                    <dt>items_attributes</dt>
+                    <dt>items</dt>
                     <dd>Array of <code>CheckoutItem</code>s.</dd>
                     <dt>table_ids</dt>
                     <dd>
@@ -980,21 +986,21 @@
               It should be good practice to send all attributes when creating new checkout.</p>
             </div>
           </div>
-          <h4>Updating items_attributes and payments_attributes</h4>
+          <h4>Updating items and payments</h4>
           <div class='row'>
             <div class='span6'>
-              <pre>{&#x000A;  &quot;checkouts&quot;: [&#x000A;    {&#x000A;      &quot;id&quot;: 123&#x000A;      &quot;payments_attributes&quot;: [&#x000A;        {&#x000A;          &quot;payment_type_id&quot;: 13,&#x000A;          &quot;amount&quot;: &quot;1032&quot;,&#x000A;        },&#x000A;        {&#x000A;          &quot;id&quot;: 3112,&#x000A;          &quot;amount&quot;: &quot;809&quot;,&#x000A;        },&#x000A;      ],&#x000A;      &quot;items_attributes&quot;: [&#x000A;        {&#x000A;          &quot;id&quot;: 3314,&#x000A;          &quot;_destroy&quot;: true,&#x000A;        }&#x000A;      ]&#x000A;    },&#x000A;  ]&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;checkouts&quot;: [&#x000A;    {&#x000A;      &quot;id&quot;: 123&#x000A;      &quot;payments&quot;: [&#x000A;        {&#x000A;          &quot;payment_type_id&quot;: 13,&#x000A;          &quot;amount&quot;: &quot;1032&quot;,&#x000A;        },&#x000A;        {&#x000A;          &quot;id&quot;: 3112,&#x000A;          &quot;amount&quot;: &quot;809&quot;,&#x000A;        },&#x000A;      ],&#x000A;      &quot;items&quot;: []&#x000A;    },&#x000A;  ]&#x000A;}</pre>
             </div>
             <div class='span6'>
               <h5>Creating an Object</h5>
-              <p>Include <code>*_attributes</code> an object without <code>id</code>.
-              The first <code>payments_attributes</code> object is creating an <code>CheckoutPayment</code>.</p>
+              <p>Include an object without <code>id</code>.
+              The first <code>payments</code> object is creating an <code>CheckoutPayment</code>.</p>
               <h5>Updating an Object</h5>
-              <p>Include <code>*_attributes</code> an object with <code>id</code> and updating attributes.
-              The second <code>payments_attributes</code> object is updating <code>amount</code> of a <code>CheckoutPayment</code> with its ID is 3112.</p>
+              <p>Include an object with <code>id</code> and updating attributes.
+              The second <code>payments</code> object is updating <code>amount</code> of a <code>CheckoutPayment</code> with its ID is 3112.</p>
               <h5>Deleting an Object</h5>
-              <p>Include <code>*_attributes</code> an object with <code>_destroy</code> attribute.
-              The object in <code>items_attributes</code> is deleting <code>CheckoutItem</code> with its ID is 3314.</p>
+              <p>Objects which is not included in the array are deleted.
+              All objects in <code>items</code> will be deleted.</p>
             </div>
           </div>
           <h3>Response</h3>

@@ -1,6 +1,6 @@
 %html
   %head
-    %title «Draft» Ubiregi API
+    %title [Draft] Ubiregi API
     %meta{ :charset => "utf-8" }
     %link{ :rel => "stylesheet", :href => "bootstrap.min.css" }
     %link{ :rel => "stylesheet", :href => "top.css" }
@@ -59,6 +59,12 @@
           %li= link_to "Fields", "#object-menu-item-fields"
           %li= link_to "GET on /menus/<em>menu_id</em>/items", "#get-on-menus-menu-id-items"
           %li= link_to "POST on /menus/<em>menu_id</em>/items", "#post-on-menus-menu-id-items"
+
+        %h4= link_to "Checkout", "#object-checkout"
+        %ul
+          %li= link_to "Fields", "#object-checkout-fields"
+          %li= link_to "GET on /accounts/<em>account_id</em>/checkouts", "#get-on-accounts-account-id-checkouts"
+          %li= link_to "POST on /accounts/<em>account_id</em>/checkouts", "#post-on-accounts-account-id-checkouts"
         
         %h4 Errors
       
