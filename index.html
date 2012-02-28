@@ -93,7 +93,7 @@
           <li><a href='#get-on-accounts-account-id-stocks-events'>GET on /accounts/<em>account_id</em>/stocks/events</a></li>
           <li><a href='#post-on-accounts-account-id-stocks-events'>POST on /accounts/<em>account_id</em>/stocks/events</a></li>
         </ul>
-        <h4><a href='#api-general-notes'>General Notes</a></h4>
+        <h4><a href='#api-notes'>API Notes</a></h4>
         <hr />
         <h3>Errors</h3>
         <hr />
@@ -783,9 +783,9 @@
           <div class='row'>
             <div class='span6'>
               <dl>
-                <dt>id</dt>
+                <dt>id <span class='label important'>Readonly</span> <span class='label notice'>immutable</span></dt>
                 <dd>ID of the object.</dd>
-                <dt>sku</dt>
+                <dt>sku <span class='label notice'>immutable</span></dt>
                 <dd>SKU of the item.</dd>
                 <dt>name</dt>
                 <dd>Name of the item.</dd>
@@ -814,10 +814,22 @@
                 <dd>
                   The category the item is belonging to. <code>null</code> if the item is disabled.
                 </dd>
+                <dt>stock <span class='label important'>Readonly</span></dt>
+                <dd>
+                  The stocks with respect to <code>StockEvent</code>s.
+                </dd>
+                <dt>last_inventory_at <span class='label important'>Readonly</span></dt>
+                <dd>
+                  The time at which the most recent inventory was made according to <code>StockEvent</code>s.
+                </dd>
+                <dt>incoming_stock <span class='label important'>Readonly</span></dt>
+                <dd>
+                  The number of the item which was ordered but not yet arrived.
+                </dd>
               </dl>
             </div>
             <div class='span6'>
-              <pre>{&#x000A;  &quot;id&quot;: 271,&#x000A;  &quot;sku&quot;: &quot;sku&quot;,&#x000A;  &quot;name&quot;: &quot;Coke&quot;,&#x000A;  &quot;price_type&quot;: &quot;intax&quot;,&#x000A;  &quot;price&quot;: &quot;105&quot;,&#x000A;  &quot;vat&quot;: 5,&#x000A;  &quot;position&quot;: 102,&#x000A;  &quot;category_id&quot;: 105,&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;id&quot;: 271,&#x000A;  &quot;sku&quot;: &quot;sku&quot;,&#x000A;  &quot;name&quot;: &quot;Coke&quot;,&#x000A;  &quot;price_type&quot;: &quot;intax&quot;,&#x000A;  &quot;price&quot;: &quot;105&quot;,&#x000A;  &quot;vat&quot;: 5,&#x000A;  &quot;position&quot;: 102,&#x000A;  &quot;category_id&quot;: 105,&#x000A;  &quot;stock&quot;: 103,&#x000A;  &quot;last_inventory_at&quot;: &quot;2012-02-13T14:00:31Z&quot;,&#x000A;  &quot;incoming_stock&quot;: 13,&#x000A;}</pre>
             </div>
           </div>
           <h2 id='get-on-menus-menu-id-items'>GET on /menus/<em>menu_id</em>/items</h2>
@@ -1503,11 +1515,23 @@
             </div>
           </div>
           <hr />
-          <h2 id='api-general-notes'>General Notes</h2>
-          <h3>IDs are Universal</h3>
+          <h1 id='api-notes'>API Notes</h1>
+          <h2>IDs are Universal</h2>
           <p>There are only one scope of ID, <em>Universal</em>.</p>
           
           <p>If this doc says <em>ID</em>, it is an one origin integer value which uniquely determins an object on ubiregi server.</p>
+          <h2>Special Fields</h2>
+          <p>Most objects have special fields, <code>created_at</code> and <code>updated_at</code>.</p>
+          <dl>
+            <dt>created_at <span class='label important'>Readonly</span></dt>
+            <dd>
+              Server time at which the object is created.
+            </dd>
+            <dt>updated_at <span class='label important'>Readonly</span></dt>
+            <dd>
+              Server time at which the object is updated.
+            </dd>
+          </dl>
           <hr />
         </div>
       </div>

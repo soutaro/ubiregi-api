@@ -1,8 +1,22 @@
-%h2#api-general-notes General Notes
+%h1#api-notes API Notes
 
-%h3 IDs are Universal
+%h2 IDs are Universal
 
 :markdown
   There are only one scope of ID, *Universal*.
   
   If this doc says *ID*, it is an one origin integer value which uniquely determins an object on ubiregi server.
+
+%h2 Special Fields
+
+:markdown
+  Most objects have special fields, `created_at` and `updated_at`.
+
+%dl
+  %dt= field "created_at", :readonly
+  %dd
+    Server time at which the object is created.
+  %dt= field "updated_at", :readonly
+  %dd
+    Server time at which the object is updated.
+  

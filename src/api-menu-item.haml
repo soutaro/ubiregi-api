@@ -8,9 +8,9 @@
 .row
   .span6
     %dl
-      %dt= field "id"
+      %dt= field "id", :readonly, :immutable
       %dd ID of the object.
-      %dt= field "sku"
+      %dt= field "sku", :immutable
       %dd SKU of the item.
       %dt= field "name"
       %dd Name of the item.
@@ -35,6 +35,15 @@
       %dt= field "category_id"
       %dd
         The category the item is belonging to. <code>null</code> if the item is disabled.
+      %dt= field "stock", :readonly
+      %dd
+        The stocks with respect to <code>StockEvent</code>s.
+      %dt= field "last_inventory_at", :readonly
+      %dd
+        The time at which the most recent inventory was made according to <code>StockEvent</code>s.
+      %dt= field "incoming_stock", :readonly
+      %dd
+        The number of the item which was ordered but not yet arrived.
 
   .span6
     %pre
@@ -49,6 +58,9 @@
             "vat": 5,
             "position": 102,
             "category_id": 105,
+            "stock": 103,
+            "last_inventory_at": "2012-02-13T14:00:31Z",
+            "incoming_stock": 13,
           }
 
 %h2#get-on-menus-menu-id-items GET on /menus/<em>menu_id</em>/items
