@@ -1,0 +1,31 @@
+%h1#object-checkout-payment CheckoutPayment
+
+:markdown
+  Pair of amount the customer paid, and method the payment maid with.
+
+%h2#object-checkout-payment-fields Fields
+
+.row
+  .span6
+    %dl
+      %dt= field "id", :readonly
+      %dd ID of the object
+      %dt= "payment_type_id"
+      %dd ID of <code>PaymentType</code>
+      %dt= "amount"
+      %dd An string which represents the amount customer paid
+
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "id": 1,
+            "payment_type_id": 1,
+            "amount": "5000.0"
+          }
+
+%h3 Notes
+
+:markdown
+  Make sure `amount` value is a string.

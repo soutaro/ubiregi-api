@@ -45,6 +45,7 @@
 
 = render "api-checkout"
 = render "api-checkout-item"
+= render "api-checkout-payment"
 
 %h3#api-objects-customer Customer
 
@@ -237,35 +238,6 @@
             "position": 4,
           }
 
-
-%h3#api-objects-payment Payment
-
-%p
-  Pair of amount the customer paid, and method the payment maid with.
-
-.row
-  .span8
-    %h4 Fields
-
-    %dl
-      %dt id :: integer
-      %dd ID of the object
-      %dt payment_type_id :: integer
-      %dd ID of payment_type
-      %dt amount :: real
-      %dd Amount the customer paid
-
-  .span8
-    %h4 Example
-
-    %pre
-      = preserve do
-        :escaped
-          {
-            "id": 1,
-            "payment_type_id": 1,
-            "amount": "5000.0"
-          }
 
 %h3#api-objects-stock-event Stock Event
 

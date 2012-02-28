@@ -69,6 +69,10 @@
         <ul>
           <li><a href='#object-checkout-item-fields'>Fields</a></li>
         </ul>
+        <h4><a href='#object-checkout-payment'>CheckoutPayment</a></h4>
+        <ul>
+          <li><a href='#object-checkout-payment-fields'>Fields</a></li>
+        </ul>
         <h4>Errors</h4>
       </div>
     </div>
@@ -1052,6 +1056,26 @@
           <h3>Notes</h3>
           <p>Make sure the amounts of currency; <code>sales</code>, <code>tax</code>, <code>discount_sales</code>, and <code>discount_tax</code>; are represented as a string, not a number.
           The price is culculated as follows: <code>sales</code> + <code>tax</code> - (<code>discount_sales</code> + <code>discount_tax</code>).</p>
+          <h1 id='object-checkout-payment'>CheckoutPayment</h1>
+          <p>Pair of amount the customer paid, and method the payment maid with.</p>
+          <h2 id='object-checkout-payment-fields'>Fields</h2>
+          <div class='row'>
+            <div class='span6'>
+              <dl>
+                <dt>id <span class='label notice'>Readonly</span></dt>
+                <dd>ID of the object</dd>
+                <dt>payment_type_id</dt>
+                <dd>ID of <code>PaymentType</code></dd>
+                <dt>amount</dt>
+                <dd>An string which represents the amount customer paid</dd>
+              </dl>
+            </div>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;id&quot;: 1,&#x000A;  &quot;payment_type_id&quot;: 1,&#x000A;  &quot;amount&quot;: &quot;5000.0&quot;&#x000A;}</pre>
+            </div>
+          </div>
+          <h3>Notes</h3>
+          <p>Make sure <code>amount</code> value is a string.</p>
           <h3 id='api-objects-customer'>Customer</h3>
           <p>A customer object associated with an account.
           This can be used to send/retrieve a customer information to/from an account.</p>
@@ -1188,27 +1212,6 @@
             <div class='span8'>
               <h4>Example</h4>
               <pre>{&#x000A;  &quot;id&quot;: 18,&#x000A;  &quot;name&quot;: &quot;Soft Drink&quot;,&#x000A;  &quot;position&quot;: 4,&#x000A;}</pre>
-            </div>
-          </div>
-          <h3 id='api-objects-payment'>Payment</h3>
-          <p>
-            Pair of amount the customer paid, and method the payment maid with.
-          </p>
-          <div class='row'>
-            <div class='span8'>
-              <h4>Fields</h4>
-              <dl>
-                <dt>id :: integer</dt>
-                <dd>ID of the object</dd>
-                <dt>payment_type_id :: integer</dt>
-                <dd>ID of payment_type</dd>
-                <dt>amount :: real</dt>
-                <dd>Amount the customer paid</dd>
-              </dl>
-            </div>
-            <div class='span8'>
-              <h4>Example</h4>
-              <pre>{&#x000A;  &quot;id&quot;: 1,&#x000A;  &quot;payment_type_id&quot;: 1,&#x000A;  &quot;amount&quot;: &quot;5000.0&quot;&#x000A;}</pre>
             </div>
           </div>
           <h3 id='api-objects-stock-event'>Stock Event</h3>
