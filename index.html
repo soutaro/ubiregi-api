@@ -337,20 +337,18 @@
           </p>
           <hr />
           <h1 id='notations'>Notations</h1>
-          <dl>
-            <dt>integer</dt>
-            <dd>The value should integer.</dd>
-            <dt>number</dt>
-            <dd>The value should be number; real number or integer.</dd>
-            <dt>string</dt>
-            <dd>The value should be a string.</dd>
-            <dt>boolean</dt>
-            <dd>The value should be a boolean.</dd>
-          </dl>
-          <dl>
-            <dt>array of $type</dt>
-            <dd>array of values which type is $type.</dd>
-          </dl>
+          <h2>Field Attributes</h2>
+          <p>The field definition may have following attributes:</p>
+          <span class='label'>readonly</span>
+          <p>Calculation of the value of the field is a task of server.
+          Client can not set the value.</p>
+          <span class='label'>writeonly</span>
+          <p>The server never send the value of the attribute.</p>
+          <span class='label'>immutable</span>
+          <p>The client may post the value on creating a object,
+          but it can not update the value once the object is created.</p>
+          <h2>Meta Variables</h2>
+          <p>We use the following meta variables in the JSON examples.</p>
           <dl>
             <dt>$<em>type</em></dt>
             <dd>Object of <em>type</em>.</dd>

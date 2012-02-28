@@ -1,18 +1,28 @@
 %h1#notations Notations
 
-%dl
-  %dt integer
-  %dd The value should integer.
-  %dt number
-  %dd The value should be number; real number or integer.
-  %dt string
-  %dd The value should be a string.
-  %dt boolean
-  %dd The value should be a boolean.
+%h2 Field Attributes
 
-%dl
-  %dt array of $type
-  %dd array of values which type is $type.
+:markdown
+  The field definition may have following attributes:
+
+%span.label readonly
+:markdown
+  Calculation of the value of the field is a task of server.
+  Client can not set the value.
+
+%span.label writeonly
+:markdown
+  The server never send the value of the attribute.
+
+%span.label immutable
+:markdown
+  The client may post the value on creating a object,
+  but it can not update the value once the object is created.
+
+%h2 Meta Variables
+
+:markdown
+  We use the following meta variables in the JSON examples.
 
 %dl
   %dt $<em>type</em>
