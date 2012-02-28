@@ -1,0 +1,154 @@
+%h1#object-stock-event Stock Event
+
+:markdown
+  Event object related to stock control.
+  The object is used to tell someone that stock-related event has occured.
+  Type of a stock event is either "inventory", "arrival", "shipping", or "order".
+
+%h2#object-stock-event-fields Fields
+
+.row
+  .span6
+    %dl
+      %dt= field "id", :readonly, :immutable
+      %dd ID of the event.
+      %dt= field "menu_item_id", :immutable
+      %dd ID of the menu item associated with the event.
+      %dt= field " app_created_at", :writeonly, :immutable
+      %dd Time when the event has been created in a client app.
+      %dt= field "inventory_at", :immutable
+      %dd Time when the inentory event has occured.  It maybe different from <code>app_created_at</code>.
+      %dt= field "event_type", :immutable
+      %dd Type of the event. One of <code>"inventory"</code>, <code>"arrival"</code>, <code>"shipping"</code>, and <code>"order"</code>.
+      %dt= field "amount", :immutable
+      %dd An integer which represents amount of the event
+      %dt= field "uuid", :immutable
+      %dd UUID associated to the event.  This is used to prevent duplicated posts.
+      %dt= field "body", :immutable
+      %dd An arbitrary JSON object.  The usage of the value is not decided yet.
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "id" : 1,
+            "menu_item_id" : 2,
+            "app_created_at" : "2012-02-14T00:00:00Z",
+            "inventory__at" : "2012-02-14T01:00:00Z",
+            "event_type" : "arrival",
+            "amount" : 55,
+            "uuid" : $UUID-like-sequence,
+            "body" : { "note" : "This object represents that 55 items specified by `menu_item_id` has arrived" },
+          }
+
+%h3 Amount of an Event
+
+:markdown
+  The interpretation of `amount` depends on the event's `event_type`.
+
+  Assume there is a `StockEvent` object with `amount = 55`.
+  It says the following facts depending on `event_type`:
+
+%dl
+  %dt "inventory"
+  %dd The current stock of the menu is 55.
+  %dt "arrival"
+  %dd The number of the items arrived is 55.
+  %dt "shipping"
+  %dd The number of the item shipped is 55.
+  %dt "order"
+  %dd The number of the item someone ordered is 55.
+
+
+%h2#get-on-accounts-account-id-stocks-events GET on /accounts/<em>account_id</em>/stocks/events
+
+%h3 Request
+
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          GET /accounts/current/stocks/events?since=...
+  .span6
+    %dl
+      %dt= field "since"
+      %dt= field "until"
+      %dt= field "glb"
+
+%h3 Response
+
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "timestamp": "2011-11-02T09:11:34Z",
+            "next-url": "https://ubiregi.com/api/3/accounts/1032/stocks/events?since=.....",
+            "last_updated_at": "2011-12-31T00:00:31Z",
+            "events": [ $stock_events ],
+          }
+  .span6
+    %dl
+      %dt= field "timestamp"
+      %dt= field "next-url"
+      %dt= field "last_updated_at"
+      %dt= field "events"
+
+%h2#post-on-accounts-account-id-stock-events POST on /accounts/<em>account_id</em>/stocks/events
+
+:markdown
+  Create `StockEvent` objects of `Account` specified by *account_id*.
+  Since there is no mutable field in `StockEvent`, it is impossible to *update*.
+
+%h3 Request
+
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "events": [
+              {
+                "menu_item_id" : 21,
+                "app_created_at" : "2012-02-14T00:00:00Z",
+                "inventory__at" : "2012-02-14T01:00:00Z",
+                "event_type" : "arrival",
+                "amount" : 55,
+                "uuid" : $UUID-like-sequence,
+                "body" : {
+                  "author": "Soutaro Matsumoto",
+                },
+              }
+            ]
+          }
+  .span6
+    %dl
+      %dt= field "events"
+      %dd
+        Array of <code>StockEvents</code> objects which will be created.
+        %dl
+          %dt= field "menu_item_id"
+          %dt= field "app_created_at"
+          %dt= field "inventory"
+          %dt= field "event_type"
+          %dt= field "amount"
+          %dt= field "uuid"
+          %dt= field "body"
+
+%h3 Response
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "timestamp": "2012-02-14T09:00:00Z",
+            "events" : [ $stock_events ]
+          }
+  .span6
+    %dl
+      %dt= field "timestamp"
+      %dt= field "notes"

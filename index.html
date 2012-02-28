@@ -8,6 +8,7 @@
   <body>
     <div class='menu span4' style='background-color:#E0E0F0; position:fixed; left:50%; margin-left:-470px; height:100%; overflow-y:scroll'>
       <div style='padding:10px'>
+        <h1>Ubiregi API</h1>
         <h3><a href='#introduction'>Introduction</a></h3>
         <ul>
           <li><a href='#introduction-implementation-status'>Implementation Status</a></li>
@@ -15,81 +16,89 @@
           <li><a href='#introduction-quick-start'>Quick Start</a></li>
           <li><a href='#introduction-general-notes'>General Notes</a></li>
         </ul>
+        <hr />
         <h3><a href='#authentication'>Authentication</a></h3>
         <ul>
           <li><a href='#authentication-installation'>Installation</a></li>
           <li><a href='#authentication-authorization'>Authorization</a></li>
           <li><a href='#authentication-the-protocol'>The Protocol</a></li>
         </ul>
-        <h3><a href='#restful-api'>RESTful API</a></h3>
-        <h4><a href='#api-general-notes'>General Notes</a></h4>
+        <hr />
+        <h3><a href='#api-general-notes'>General Notes</a></h3>
         <ul>
           <li>Standard Set of APIs on Collection</li>
           <li>Standard Index Parameters</li>
           <li>Fetching Whole Collection</li>
           <li>POST Convention</li>
         </ul>
-        <h4><a href='#object-account'>Account</a></h4>
+        <h3><a href='#object-account'>Account</a></h3>
         <ul>
           <li><a href='#object-account-fields'>Fields</a></li>
           <li><a href='#get-on-accounts-account-id'>GET on /accounts/<em>account_id</em></a></li>
         </ul>
-        <h4><a href='#object-table'>Table</a></h4>
+        <h3><a href='#object-table'>Table</a></h3>
         <ul>
           <li><a href='#object-table-fields'>Fields</a></li>
         </ul>
-        <h4><a href='#object-customer-tag'>CustomerTag</a></h4>
+        <h3><a href='#object-customer-tag'>CustomerTag</a></h3>
         <ul>
           <li><a href='#object-customer-tag-fields'>Fields</a></li>
           <li><a href='#post-on-accounts-account-id-customer-tags'>POST on /accounts/<em>account_id</em>/customer_tags</a></li>
         </ul>
-        <h4><a href='#object-cashier'>Cashier</a></h4>
+        <h3><a href='#object-cashier'>Cashier</a></h3>
         <ul>
           <li><a href='#object-cashier-fields'>Fields</a></li>
           <li><a href='#post-on-accounts-account-id-cashiers'>POST on /accounts/<em>account_id</em>/cashiers</a></li>
         </ul>
-        <h4><a href='#object-payment-type'>PaymentType</a></h4>
+        <h3><a href='#object-payment-type'>PaymentType</a></h3>
         <ul>
           <li><a href='#object-payment-type-fields'>Fields</a></li>
           <li><a href='#post-on-accounts-account-id-payment-types'>POST on /accounts/<em>account_id</em>/payment_types</a></li>
         </ul>
-        <h4><a href='#object-menu-item'>MenuItem</a></h4>
+        <h3><a href='#object-menu-item'>MenuItem</a></h3>
         <ul>
           <li><a href='#object-menu-item-fields'>Fields</a></li>
           <li><a href='#get-on-menus-menu-id-items'>GET on /menus/<em>menu_id</em>/items</a></li>
           <li><a href='#post-on-menus-menu-id-items'>POST on /menus/<em>menu_id</em>/items</a></li>
         </ul>
-        <h4><a href='#object-checkout'>Checkout</a></h4>
+        <h3><a href='#object-checkout'>Checkout</a></h3>
         <ul>
           <li><a href='#object-checkout-fields'>Fields</a></li>
           <li><a href='#get-on-accounts-account-id-checkouts'>GET on /accounts/<em>account_id</em>/checkouts</a></li>
           <li><a href='#post-on-accounts-account-id-checkouts'>POST on /accounts/<em>account_id</em>/checkouts</a></li>
         </ul>
-        <h4><a href='#object-checkout-item'>CheckoutItem</a></h4>
+        <h3><a href='#object-checkout-item'>CheckoutItem</a></h3>
         <ul>
           <li><a href='#object-checkout-item-fields'>Fields</a></li>
         </ul>
-        <h4><a href='#object-checkout-payment'>CheckoutPayment</a></h4>
+        <h3><a href='#object-checkout-payment'>CheckoutPayment</a></h3>
         <ul>
           <li><a href='#object-checkout-payment-fields'>Fields</a></li>
         </ul>
-        <h4><a href='#object-customer'>Customer</a></h4>
+        <h3><a href='#object-customer'>Customer</a></h3>
         <ul>
           <li><a href='#object-customer-fields'>Fields</a></li>
           <li><a href='#get-on-customers'>GET on /customers</a></li>
           <li><a href='#post-on-customers'>POST on /customers</a></li>
         </ul>
-        <h4><a href='#object-customer-field'>CustomerField</a></h4>
+        <h3><a href='#object-customer-field'>CustomerField</a></h3>
         <ul>
           <li><a href='#object-customer-field-fields'>Fields</a></li>
         </ul>
-        <h4><a href='#object-customer-note'>CustomerNote</a></h4>
+        <h3><a href='#object-customer-note'>CustomerNote</a></h3>
         <ul>
           <li><a href='#object-customer-note-fields'>Fields</a></li>
           <li><a href='#get-on-customers-notes'>GET on /customers/notes</a></li>
           <li><a href='#post-on-customers-notes'>POST on /customers/notes</a></li>
         </ul>
-        <h4>Errors</h4>
+        <h3><a href='#object-stock-event'>StockEvent</a></h3>
+        <ul>
+          <li><a href='#object-stock-event-fields'>Fields</a></li>
+          <li><a href='#get-on-accounts-account-id-stocks-events'>GET on /accounts/<em>account_id</em>/stocks/events</a></li>
+          <li><a href='#post-on-accounts-account-id-stocks-events'>POST on /accounts/<em>account_id</em>/stocks/events</a></li>
+        </ul>
+        <hr />
+        <h3>Errors</h3>
       </div>
     </div>
     <div class='container'>
@@ -1389,21 +1398,115 @@
               </dl>
             </div>
           </div>
-          <h3 id='api-objects-friend'>Friend</h3>
-          <p>Account summary information for chain branches.</p>
+          <h1 id='object-stock-event'>Stock Event</h1>
+          <p>Event object related to stock control.
+          The object is used to tell someone that stock-related event has occured.
+          Type of a stock event is either "inventory", "arrival", "shipping", or "order".</p>
+          <h2 id='object-stock-event-fields'>Fields</h2>
           <div class='row'>
-            <div class='span8'>
-              <h4>Fields</h4>
+            <div class='span6'>
               <dl>
-                <dt>id :: integer</dt>
-                <dd>ID of account.</dd>
-                <dt>name :: string</dt>
-                <dd>Name of the account.</dd>
+                <dt>id <span class='label important'>Readonly</span> <span class='label notice'>immutable</span></dt>
+                <dd>ID of the event.</dd>
+                <dt>menu_item_id <span class='label notice'>immutable</span></dt>
+                <dd>ID of the menu item associated with the event.</dd>
+                <dt> app_created_at <span class='label success'>Writeonly</span> <span class='label notice'>immutable</span></dt>
+                <dd>Time when the event has been created in a client app.</dd>
+                <dt>inventory_at <span class='label notice'>immutable</span></dt>
+                <dd>Time when the inentory event has occured.  It maybe different from <code>app_created_at</code>.</dd>
+                <dt>event_type <span class='label notice'>immutable</span></dt>
+                <dd>Type of the event. One of <code>"inventory"</code>, <code>"arrival"</code>, <code>"shipping"</code>, and <code>"order"</code>.</dd>
+                <dt>amount <span class='label notice'>immutable</span></dt>
+                <dd>An integer which represents amount of the event</dd>
+                <dt>uuid <span class='label notice'>immutable</span></dt>
+                <dd>UUID associated to the event.  This is used to prevent duplicated posts.</dd>
+                <dt>body <span class='label notice'>immutable</span></dt>
+                <dd>An arbitrary JSON object.  The usage of the value is not decided yet.</dd>
               </dl>
             </div>
-            <div class='span8'>
-              <h4>Example</h4>
-              <pre>{&#x000A;  id: 199,&#x000A;  name: &quot;hogehoge&quot;,&#x000A;}</pre>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;id&quot; : 1,&#x000A;  &quot;menu_item_id&quot; : 2,&#x000A;  &quot;app_created_at&quot; : &quot;2012-02-14T00:00:00Z&quot;,&#x000A;  &quot;inventory__at&quot; : &quot;2012-02-14T01:00:00Z&quot;,&#x000A;  &quot;event_type&quot; : &quot;arrival&quot;,&#x000A;  &quot;amount&quot; : 55,&#x000A;  &quot;uuid&quot; : $UUID-like-sequence,&#x000A;  &quot;body&quot; : { &quot;note&quot; : &quot;This object represents that 55 items specified by `menu_item_id` has arrived&quot; },&#x000A;}</pre>
+            </div>
+          </div>
+          <h3>Amount of an Event</h3>
+          <p>The interpretation of <code>amount</code> depends on the event's <code>event_type</code>.</p>
+          
+          <p>Assume there is a <code>StockEvent</code> object with <code>amount = 55</code>.
+          It says the following facts depending on <code>event_type</code>:</p>
+          <dl>
+            <dt>"inventory"</dt>
+            <dd>The current stock of the menu is 55.</dd>
+            <dt>"arrival"</dt>
+            <dd>The number of the items arrived is 55.</dd>
+            <dt>"shipping"</dt>
+            <dd>The number of the item shipped is 55.</dd>
+            <dt>"order"</dt>
+            <dd>The number of the item someone ordered is 55.</dd>
+          </dl>
+          <h2 id='get-on-accounts-account-id-stocks-events'>GET on /accounts/<em>account_id</em>/stocks/events</h2>
+          <h3>Request</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>GET /accounts/current/stocks/events?since=...</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>since</dt>
+                <dt>until</dt>
+                <dt>glb</dt>
+              </dl>
+            </div>
+          </div>
+          <h3>Response</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:34Z&quot;,&#x000A;  &quot;next-url&quot;: &quot;https://ubiregi.com/api/3/accounts/1032/stocks/events?since=.....&quot;,&#x000A;  &quot;last_updated_at&quot;: &quot;2011-12-31T00:00:31Z&quot;,&#x000A;  &quot;events&quot;: [ $stock_events ],&#x000A;}</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>timestamp</dt>
+                <dt>next-url</dt>
+                <dt>last_updated_at</dt>
+                <dt>events</dt>
+              </dl>
+            </div>
+          </div>
+          <h2 id='post-on-accounts-account-id-stock-events'>POST on /accounts/<em>account_id</em>/stocks/events</h2>
+          <p>Create <code>StockEvent</code> objects of <code>Account</code> specified by <em>account_id</em>.
+          Since there is no mutable field in <code>StockEvent</code>, it is impossible to <em>update</em>.</p>
+          <h3>Request</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;events&quot;: [&#x000A;    {&#x000A;      &quot;menu_item_id&quot; : 21,&#x000A;      &quot;app_created_at&quot; : &quot;2012-02-14T00:00:00Z&quot;,&#x000A;      &quot;inventory__at&quot; : &quot;2012-02-14T01:00:00Z&quot;,&#x000A;      &quot;event_type&quot; : &quot;arrival&quot;,&#x000A;      &quot;amount&quot; : 55,&#x000A;      &quot;uuid&quot; : $UUID-like-sequence,&#x000A;      &quot;body&quot; : {&#x000A;        &quot;author&quot;: &quot;Soutaro Matsumoto&quot;,&#x000A;      },&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>events</dt>
+                <dd>
+                  Array of <code>StockEvents</code> objects which will be created.
+                  <dl>
+                    <dt>menu_item_id</dt>
+                    <dt>app_created_at</dt>
+                    <dt>inventory</dt>
+                    <dt>event_type</dt>
+                    <dt>amount</dt>
+                    <dt>uuid</dt>
+                    <dt>body</dt>
+                  </dl>
+                </dd>
+              </dl>
+            </div>
+          </div>
+          <h3>Response</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2012-02-14T09:00:00Z&quot;,&#x000A;  &quot;events&quot; : [ $stock_events ]&#x000A;}</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>timestamp</dt>
+                <dt>notes</dt>
+              </dl>
             </div>
           </div>
           <h3 id='api-objects-category'>Category</h3>
@@ -1425,46 +1528,6 @@
             <div class='span8'>
               <h4>Example</h4>
               <pre>{&#x000A;  &quot;id&quot;: 18,&#x000A;  &quot;name&quot;: &quot;Soft Drink&quot;,&#x000A;  &quot;position&quot;: 4,&#x000A;}</pre>
-            </div>
-          </div>
-          <h3 id='api-objects-stock-event'>Stock Event</h3>
-          <p>Event object related to stock control.
-          The object is used to tell someone that stock-related event has occured.
-          Type of a stock event is either "inventory", "arrival", "shipping", or "order".</p>
-          <div class='row'>
-            <div class='span8'>
-              <h4>Fields</h4>
-              <dl>
-                <dt>id :: int</dt>
-                <dd>ID of the event.</dd>
-                <dt>menu_item_id :: int</dt>
-                <dd>ID of the menu item associated with the event.</dd>
-                <dt>app_created_at</dt>
-                <dd>Time when the event has been created in a client app.  <em>WriteOnly</em></dd>
-                <dt>inventory_at</dt>
-                <dd>Time when the inentory event has occured.  It maybe different from app_created_at.</dd>
-                <dt>event_type :: string</dt>
-                <dd>Type of the event (either "inventory", "arrival", "shipping", or "order").</dd>
-                <dt>amount :: real</dt>
-                <dd>
-                  Amount related to the event.  <em>Note that the meaning of the value of this attribute depends on `event_type`</em>.
-                  Assume that the value of amount is 55.  The meaning of this value depends on the value of `event_type` as followings:
-                  <ul>
-                    <li>"inventory" : The number of inventory specified by `menu_item_id` is 55.</li>
-                    <li>"arrival" :  55 items specified by `menu_item_id` has arrived.</li>
-                    <li>"shipping" : 55 items specified by `menu_item_id` has shipped.</li>
-                    <li>"order" : 55 items specified by `menu_item_id` has been ordered.</li>
-                  </ul>
-                </dd>
-                <dt>uuid</dt>
-                <dd>UUID associated to the event.  This is used to prevent duplicated posts.</dd>
-                <dt>body</dt>
-                <dd>An arbitrary JSON object.  The usage of the value is not decided yet.</dd>
-              </dl>
-            </div>
-            <div class='span8'>
-              <h4>Example</h4>
-              <pre>{&#x000A;  &quot;id&quot; : 1,&#x000A;  &quot;menu_item_id&quot; : 2,&#x000A;  &quot;app_created_at&quot; : &quot;2012-02-14T00:00:00Z&quot;,&#x000A;  &quot;inventory__at&quot; : &quot;2012-02-14T01:00:00Z&quot;,&#x000A;  &quot;event_type&quot; : &quot;arrival&quot;,&#x000A;  &quot;amount&quot; : 55,&#x000A;  &quot;uuid&quot; : $UUID,&#x000A;  &quot;body&quot; : { &quot;note&quot; : &quot;This object represents that 55 items specified by `menu_item_id` has arrived&quot; },&#x000A;}</pre>
             </div>
           </div>
           <h2 id='api-resources'>Resources</h2>
