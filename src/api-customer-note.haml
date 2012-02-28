@@ -3,27 +3,33 @@
 :markdown
   A customer note belongs to a customer.
 
+%h2#object-customer-note-fields Fields
+
 .row
-  .span8
-    %h4 Fields
-
+  .span6
     %dl
-      %dt id :: integer
+      %dt= field "id", :readonly, :immutable
       %dd ID of this object.
-      %dt customer_id :: integer (<em>required</em>)
+      %dt= field "customer_id", :immutable
       %dd ID which thie object belongs to.
-      %dt app_created_at (<em>required</em> and <em>WriteOnly</em>)
+      %dt= field "app_created_at", :writeonly, :immutable
       %dd Time when the note is created in a client app
-      %dt guid (<em>required</em>)
+      %dt= field "guid", :immutable
       %dd GUID
-      %dt checkout_id :: integer
-      %dt kind (<em>ReadOnly</em>)
-      %dt note :: string
-      %dt photo
-      %dt checkout_summary
-  .span8
-    %h4 Example
-
+      %dt= field "checkout_id", :immutable
+      %dd ID of <code>Checkout</code> object, which the note is associated with.
+      %dt= field "kind"
+      %dd
+        <code>"icon"</code> or <code>null</code>.
+        <code>"icon"</code> in the case the <code>photo</code> is icon of the customer.
+      %dt= field "note"
+      %dd Comment.
+      %dt= field "photo"
+      %dd
+        Base64 encoded photo data, resized to 256px x 256px (for thumbnail).
+      %dt= field "photo_url", :readonly
+      %dd URL of full size photo. May be absent. (we are working for this.)
+  .span6
     %pre
       = preserve do
         :escaped
@@ -33,9 +39,122 @@
             "app_created_at": "2012-02-14T00:00:00Z",
             "guid": $UUID-like-sequence,
             "checkout_id": 2,
-            "kind": 2,
+            "kind": "icon",
             "note": "Memo Memo",
             "photo": $base64Encoded,
             "checkout_summary": "Summary"
           }
 
+%h3 Note on Photo
+
+:markdown
+  **Writing Photo** &nbsp;&nbsp;
+  When you are uploading `CustomerNote`, `photo` data is expected to be *full size* photo data.
+  
+  **Reading Photo** &nbsp;&nbsp;
+  When you are downloading `CustomerNote`, `photo` attribute is *thumbnail* generated in ubiregi.com server.
+  The thumbnail is 256px x 256px size, JPEG data.
+  The size should be convinient for many cases in your app to show a thumbnail to users.
+  In the case you really need full size data, access the `photo_url` and download it.
+
+
+%h2#get-on-customers-notes GET on /customers/notes
+
+%h3 Request
+
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          GET /customers/notes?since=...
+  .span6
+    %dl
+      %dt= field "since"
+      %dt= field "until"
+      %dt= field "glb"
+
+%h3 Response
+
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "timestamp": "2011-11-02T09:11:34Z",
+            "next-url": "https://ubiregi.com/api/3/customers?since=.....",
+            "last_updated_at": "2011-12-31T00:00:31Z",
+            "notes": [ $customer_notes ],
+          }
+  .span6
+    %dl
+      %dt= field "timestamp"
+      %dt= field "next-url"
+      %dt= field "last_updated_at"
+      %dt= field "notes"
+    
+%h3 Available CustomerNotes
+
+:markdown
+  A `CustomerNote` is available only if the note is associated with available `Customer`.
+
+%h2#post-on-customers-notes POST on /customers/notes
+
+:markdown
+  Create a `CustomerNote` objects, or update `CustomerNote` objects available for current account.
+
+%h3 Request
+
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "notes": [
+              {
+                "id": 1,
+                "customer_id": 1,
+                "app_created_at": "2012-02-14T00:00:00Z",
+                "guid": $UUID-like-sequence,
+                "checkout_id": 2,
+                "kind": "icon",
+                "note": "Memo Memo",
+                "photo": $base64Encoded,
+                "checkout_summary": "Summary"
+              }
+            ]
+          }
+  .span6
+    %dl
+      %dt= field "notes"
+      %dd
+        Array of <code>CustomerNote</code> objects which will be updated/created.
+        %dl
+          %dt= field "id"
+          %dt= field "customer_id"
+          %dd <code>Customer</code> for the <code>customer_id</code> should be available from current account.
+          %dt= field "app_created_at"
+          %dt= field "guid"
+          %dt= field "checkout_id"
+          %dd Should be ID of <code>Checkout</code> of current account.
+          %dt= field "kind"
+          %dt= field "note"
+          %dt= "photo"
+          %dt= field "checkout_summary"
+
+%h3 Response
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "timestamp": "2012-02-14T09:00:00Z",
+            "notes" : [ $customer_notes ]
+          }
+  .span6
+    %dl
+      %dt= field "timestamp"
+      %dt= field "notes"

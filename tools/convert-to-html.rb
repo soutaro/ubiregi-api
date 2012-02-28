@@ -62,9 +62,11 @@ class Context
       when :optional
         "<span class='label warning'>Optional</span>"
       when :readonly
-        "<span class='label notice'>Readonly</span>"
+        "<span class='label important'>Readonly</span>"
       when :writeonly
         "<span class='label success'>Writeonly</span>"
+      when :immutable
+        "<span class='label notice'>immutable</span>"
       end
     }.join(" ")
     a + " " + b

@@ -83,6 +83,12 @@
         <ul>
           <li><a href='#object-customer-field-fields'>Fields</a></li>
         </ul>
+        <h4><a href='#object-customer-note'>CustomerNote</a></h4>
+        <ul>
+          <li><a href='#object-customer-note-fields'>Fields</a></li>
+          <li><a href='#get-on-customers-notes'>GET on /customers/notes</a></li>
+          <li><a href='#post-on-customers-notes'>POST on /customers/notes</a></li>
+        </ul>
         <h4>Errors</h4>
       </div>
     </div>
@@ -584,9 +590,9 @@
                 </dd>
                 <dt>icon_name <span class='label success'>Writeonly</span></dt>
                 <dd>Name of icon.</dd>
-                <dt>icon <span class='label notice'>Readonly</span></dt>
+                <dt>icon <span class='label important'>Readonly</span></dt>
                 <dd>Icon image for the tag.</dd>
-                <dt>icon_mime <span class='label notice'>Readonly</span></dt>
+                <dt>icon_mime <span class='label important'>Readonly</span></dt>
                 <dd>MIME type of the icon. Usually <code>image/png</code>.</dd>
               </dl>
             </div>
@@ -655,7 +661,7 @@
                 <dd><code>true</code> if the cashier is enabled. <code>false</code> if the cashier is disabled.</dd>
                 <dt>icon</dt>
                 <dd>Base64 encoded binary data of icon.</dd>
-                <dt>icon_mime <span class='label notice'>Readonly</span></dt>
+                <dt>icon_mime <span class='label important'>Readonly</span></dt>
                 <dd>MIME type of the icon. Usually, <code>"image/png"</code> or <code>"image/jpeg"</code>.</dd>
               </dl>
             </div>
@@ -884,7 +890,7 @@
           <div class='row'>
             <div class='span6'>
               <dl>
-                <dt>id <span class='label notice'>Readonly</span></dt>
+                <dt>id <span class='label important'>Readonly</span></dt>
                 <dd>ID of the object</dd>
                 <dt>guid</dt>
                 <dd>
@@ -895,7 +901,7 @@
                 </dd>
                 <dt>account_id</dt>
                 <dd>ID of account which the checkout is belonging to.</dd>
-                <dt>price <span class='label notice'>Readonly</span></dt>
+                <dt>price <span class='label important'>Readonly</span></dt>
                 <dd><strong>A string</strong> which represents server's culculated total sales of the checkout.</dd>
                 <dt>change</dt>
                 <dd><strong>A string</strong> which represents change given to the customer.</dd>
@@ -923,7 +929,7 @@
                 <dd>Array of ID of <code>Table</code>.</dd>
                 <dt>customer_tag_ids</dt>
                 <dd>Array of ID of <code>CustomerTags</code>.</dd>
-                <dt>modifier <span class='label notice'>Readonly</span> <span class='label warning'>Optional</span></dt>
+                <dt>modifier <span class='label important'>Readonly</span> <span class='label warning'>Optional</span></dt>
                 <dd>Only for compatibility.</dd>
               </dl>
             </div>
@@ -1040,7 +1046,7 @@
           <div class='row'>
             <div class='span6'>
               <dl>
-                <dt>id <span class='label notice'>Readonly</span></dt>
+                <dt>id <span class='label important'>Readonly</span></dt>
                 <dd>ID of the object</dd>
                 <dt>menu_item_id</dt>
                 <dd>ID of the menu item</dd>
@@ -1072,7 +1078,7 @@
           <div class='row'>
             <div class='span6'>
               <dl>
-                <dt>id <span class='label notice'>Readonly</span></dt>
+                <dt>id <span class='label important'>Readonly</span></dt>
                 <dd>ID of the object</dd>
                 <dt>payment_type_id</dt>
                 <dd>ID of <code>PaymentType</code></dd>
@@ -1092,7 +1098,7 @@
           <div class='row'>
             <div class='span6'>
               <dl>
-                <dt>id <span class='label notice'>Readonly</span></dt>
+                <dt>id <span class='label important'>Readonly</span></dt>
                 <dd>ID of the object</dd>
                 <dt>account_id</dt>
                 <dd>ID of account which this customer is associated with</dd>
@@ -1194,7 +1200,7 @@
           <div class='row'>
             <div class='span6'>
               <dl>
-                <dt>id <span class='label notice'>Readonly</span></dt>
+                <dt>id <span class='label important'>Readonly</span></dt>
                 <dd>ID of the object.</dd>
                 <dt>customer_id</dt>
                 <dd>ID of customer which the field belongs to.</dd>
@@ -1270,28 +1276,117 @@
           user can choose one, and then delete the other. This is safe.</p>
           <h1 id='object-customer-note'>CustomerNote</h1>
           <p>A customer note belongs to a customer.</p>
+          <h2 id='object-customer-note-fields'>Fields</h2>
           <div class='row'>
-            <div class='span8'>
-              <h4>Fields</h4>
+            <div class='span6'>
               <dl>
-                <dt>id :: integer</dt>
+                <dt>id <span class='label important'>Readonly</span> <span class='label notice'>immutable</span></dt>
                 <dd>ID of this object.</dd>
-                <dt>customer_id :: integer (<em>required</em>)</dt>
+                <dt>customer_id <span class='label notice'>immutable</span></dt>
                 <dd>ID which thie object belongs to.</dd>
-                <dt>app_created_at (<em>required</em> and <em>WriteOnly</em>)</dt>
+                <dt>app_created_at <span class='label success'>Writeonly</span> <span class='label notice'>immutable</span></dt>
                 <dd>Time when the note is created in a client app</dd>
-                <dt>guid (<em>required</em>)</dt>
+                <dt>guid <span class='label notice'>immutable</span></dt>
                 <dd>GUID</dd>
-                <dt>checkout_id :: integer</dt>
-                <dt>kind (<em>ReadOnly</em>)</dt>
-                <dt>note :: string</dt>
+                <dt>checkout_id <span class='label notice'>immutable</span></dt>
+                <dd>ID of <code>Checkout</code> object, which the note is associated with.</dd>
+                <dt>kind</dt>
+                <dd>
+                  <code>"icon"</code> or <code>null</code>.
+                  <code>"icon"</code> in the case the <code>photo</code> is icon of the customer.
+                </dd>
+                <dt>note</dt>
+                <dd>Comment.</dd>
                 <dt>photo</dt>
-                <dt>checkout_summary</dt>
+                <dd>
+                  Base64 encoded photo data, resized to 256px x 256px (for thumbnail).
+                </dd>
+                <dt>photo_url <span class='label important'>Readonly</span></dt>
+                <dd>URL of full size photo. May be absent. (we are working for this.)</dd>
               </dl>
             </div>
-            <div class='span8'>
-              <h4>Example</h4>
-              <pre>{&#x000A;  &quot;id&quot;: 1,&#x000A;  &quot;customer_id&quot;: 1,&#x000A;  &quot;app_created_at&quot;: &quot;2012-02-14T00:00:00Z&quot;,&#x000A;  &quot;guid&quot;: $UUID-like-sequence,&#x000A;  &quot;checkout_id&quot;: 2,&#x000A;  &quot;kind&quot;: 2,&#x000A;  &quot;note&quot;: &quot;Memo Memo&quot;,&#x000A;  &quot;photo&quot;: $base64Encoded,&#x000A;  &quot;checkout_summary&quot;: &quot;Summary&quot;&#x000A;}</pre>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;id&quot;: 1,&#x000A;  &quot;customer_id&quot;: 1,&#x000A;  &quot;app_created_at&quot;: &quot;2012-02-14T00:00:00Z&quot;,&#x000A;  &quot;guid&quot;: $UUID-like-sequence,&#x000A;  &quot;checkout_id&quot;: 2,&#x000A;  &quot;kind&quot;: &quot;icon&quot;,&#x000A;  &quot;note&quot;: &quot;Memo Memo&quot;,&#x000A;  &quot;photo&quot;: $base64Encoded,&#x000A;  &quot;checkout_summary&quot;: &quot;Summary&quot;&#x000A;}</pre>
+            </div>
+          </div>
+          <h3>Note on Photo</h3>
+          <p><strong>Writing Photo</strong> &nbsp;&nbsp;
+          When you are uploading <code>CustomerNote</code>, <code>photo</code> data is expected to be <em>full size</em> photo data.</p>
+          
+          <p><strong>Reading Photo</strong> &nbsp;&nbsp;
+          When you are downloading <code>CustomerNote</code>, <code>photo</code> attribute is <em>thumbnail</em> generated in ubiregi.com server.
+          The thumbnail is 256px x 256px size, JPEG data.
+          The size should be convinient for many cases in your app to show a thumbnail to users.
+          In the case you really need full size data, access the <code>photo_url</code> and download it.</p>
+          <h2 id='get-on-customers-notes'>GET on /customers/notes</h2>
+          <h3>Request</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>GET /customers/notes?since=...</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>since</dt>
+                <dt>until</dt>
+                <dt>glb</dt>
+              </dl>
+            </div>
+          </div>
+          <h3>Response</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:34Z&quot;,&#x000A;  &quot;next-url&quot;: &quot;https://ubiregi.com/api/3/customers?since=.....&quot;,&#x000A;  &quot;last_updated_at&quot;: &quot;2011-12-31T00:00:31Z&quot;,&#x000A;  &quot;notes&quot;: [ $customer_notes ],&#x000A;}</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>timestamp</dt>
+                <dt>next-url</dt>
+                <dt>last_updated_at</dt>
+                <dt>notes</dt>
+              </dl>
+            </div>
+          </div>
+          <h3>Available CustomerNotes</h3>
+          <p>A <code>CustomerNote</code> is available only if the note is associated with available <code>Customer</code>.</p>
+          <h2 id='post-on-customers-notes'>POST on /customers/notes</h2>
+          <p>Create a <code>CustomerNote</code> objects, or update <code>CustomerNote</code> objects available for current account.</p>
+          <h3>Request</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;notes&quot;: [&#x000A;    {&#x000A;      &quot;id&quot;: 1,&#x000A;      &quot;customer_id&quot;: 1,&#x000A;      &quot;app_created_at&quot;: &quot;2012-02-14T00:00:00Z&quot;,&#x000A;      &quot;guid&quot;: $UUID-like-sequence,&#x000A;      &quot;checkout_id&quot;: 2,&#x000A;      &quot;kind&quot;: &quot;icon&quot;,&#x000A;      &quot;note&quot;: &quot;Memo Memo&quot;,&#x000A;      &quot;photo&quot;: $base64Encoded,&#x000A;      &quot;checkout_summary&quot;: &quot;Summary&quot;&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>notes</dt>
+                <dd>
+                  Array of <code>CustomerNote</code> objects which will be updated/created.
+                  <dl>
+                    <dt>id</dt>
+                    <dt>customer_id</dt>
+                    <dd><code>Customer</code> for the <code>customer_id</code> should be available from current account.</dd>
+                    <dt>app_created_at</dt>
+                    <dt>guid</dt>
+                    <dt>checkout_id</dt>
+                    <dd>Should be ID of <code>Checkout</code> of current account.</dd>
+                    <dt>kind</dt>
+                    <dt>note</dt>
+                    <dt>photo</dt>
+                    <dt>checkout_summary</dt>
+                  </dl>
+                </dd>
+              </dl>
+            </div>
+          </div>
+          <h3>Response</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2012-02-14T09:00:00Z&quot;,&#x000A;  &quot;notes&quot; : [ $customer_notes ]&#x000A;}</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>timestamp</dt>
+                <dt>notes</dt>
+              </dl>
             </div>
           </div>
           <h3 id='api-objects-friend'>Friend</h3>
