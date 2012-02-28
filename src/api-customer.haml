@@ -1,0 +1,141 @@
+%h1#object-customer Customer
+
+:markdown
+  `Customer` object represents a customer, which can be used in Customer Relation Management.
+
+%h2#object-customer-fields Fields
+
+.row
+  .span6
+    %dl
+      %dt= field "id", :readonly
+      %dd ID of the object
+      %dt= field "account_id"
+      %dd ID of account which this customer is associated with
+      %dt= field "account_name", :readonly
+      %dd Name of the account specified by <code>account_id</code>
+      %dt= field "fields"
+      %dd Array of <code>CustomerField</code> object
+      %dt= field "guid"
+      %dd
+        An GUID which uniquely identifies the customer.
+        The GUID is generated in client side, a client should be careful to read it unique.
+      %dt= field "deleted"
+      %dd <code>true</code> if and only if the customer is deleted.
+
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "id": 100,
+            "account_id": 2,
+            "account_name": "A Curry Rice Shop",
+            "fields_attributes": [ $customer_fields ],
+            "guid": $UUID-like-sequence,
+            "deleted": true,
+          }
+
+%h2#get-on-customers GET on /customers
+
+:markdown
+  Retrieve collection of customers available for the account.
+
+%h3 Request
+
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          GET /customers?since=...
+  .span6
+    %dl
+      %dt= field "since"
+      %dt= field "until"
+      %dt= field "glb"
+
+%h3 Response
+
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "timestamp": "2011-11-02T09:11:34Z",
+            "next-url": "https://ubiregi.com/api/3/customers?since=.....",
+            "last_updated_at": "2011-12-31T00:00:31Z",
+            "customers": [ $customers ],
+          }
+  .span6
+    %dl
+      %dt= field "timestamp"
+      %dt= field "next-url"
+      %dt= field "last_updated_at"
+      %dt= field "customers"
+    
+%h3 Available Customers
+
+:markdown
+  An customer is available only if the customer is associated with one of the following:
+
+  1. Current account's parents
+  2. Current account's children
+  3. Current account's siblings
+
+= image_tag "available-customers.png"
+
+:markdown
+  The circles represent accounts and gray arrows represents parent-child associations.
+  Accounts covered with purple background are accessible accounts, so that their accounts
+  are available to current account (the red one).
+
+%h2#post-on-customers POST on /customers
+
+:markdown
+  Create an `Customer` objects, or update `Customer` objects available for current account.
+
+%h3 Request
+
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "customers": [
+              {
+                "account_id": 1, 
+                "guid": $UUID-like-sequence,
+                "deleted": false,
+                "fields": [ $customer_fields ],
+              }
+            ]
+          }
+  .span6
+    %dl
+      %dt= field "customers"
+      %dd
+        Array of <code>Customer</code> objects which will be updated/created.
+        %dl
+          %dt= field "account_id"
+          %dt= field "guid"
+          %dt= field "deleted"
+          %dt= field "fields"
+          %dd Array of <code>CustomerField</code>s.
+
+%h3 Response
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "timestamp": "2012-02-14T09:00:00Z",
+            "customers" : [ $customers ]
+          }
+  .span6
+    %dl
+      %dt= field "timestamp"
+      %dt= field "customers"

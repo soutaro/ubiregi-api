@@ -47,40 +47,7 @@
 = render "api-checkout-item"
 = render "api-checkout-payment"
 
-%h3#api-objects-customer Customer
-
-:markdown
-  A customer object associated with an account.
-  This can be used to send/retrieve a customer information to/from an account.
-
-.row
-  .span8
-    %h4 Fields
-
-    %dl
-      %dt id :: integer
-      %dd ID of the object.
-      %dt account_id :: ("current"|integer)
-      %dd Account id which this customer is associated with.
-      %dt account_name :: string
-      %dd Name of the account specified by `account_id`.  <em>ReadOnly</em>
-      %dt fields_attributes [$field_attribute]
-      %dd An array of customer field object.
-      %dt guid
-      %dd GUID.
-  .span8
-    %h4 Example
-
-    %pre
-      = preserve do
-        :escaped
-          {
-            "id": 100,
-            "account_id": 2,
-            "account_name": "A Curry Rice Shop",
-            "fields_attributes": $customer_fields,
-            "guid": $UUID-like-sequence
-          }
+= render "api-customer"
 
 %h3#api-objects-customer-field Customer Field
 

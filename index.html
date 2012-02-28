@@ -1076,28 +1076,107 @@
           </div>
           <h3>Notes</h3>
           <p>Make sure <code>amount</code> value is a string.</p>
-          <h3 id='api-objects-customer'>Customer</h3>
-          <p>A customer object associated with an account.
-          This can be used to send/retrieve a customer information to/from an account.</p>
+          <h1 id='object-customer'>Customer</h1>
+          <p><code>Customer</code> object represents a customer, which can be used in Customer Relation Management.</p>
+          <h2 id='object-customer-fields'>Fields</h2>
           <div class='row'>
-            <div class='span8'>
-              <h4>Fields</h4>
+            <div class='span6'>
               <dl>
-                <dt>id :: integer</dt>
-                <dd>ID of the object.</dd>
-                <dt>account_id :: ("current"|integer)</dt>
-                <dd>Account id which this customer is associated with.</dd>
-                <dt>account_name :: string</dt>
-                <dd>Name of the account specified by `account_id`.  <em>ReadOnly</em></dd>
-                <dt>fields_attributes [$field_attribute]</dt>
-                <dd>An array of customer field object.</dd>
+                <dt>id <span class='label notice'>Readonly</span></dt>
+                <dd>ID of the object</dd>
+                <dt>account_id</dt>
+                <dd>ID of account which this customer is associated with</dd>
+                <dt>account_name <span class='label notice'>Readonly</span></dt>
+                <dd>Name of the account specified by <code>account_id</code></dd>
+                <dt>fields</dt>
+                <dd>Array of <code>CustomerField</code> object</dd>
                 <dt>guid</dt>
-                <dd>GUID.</dd>
+                <dd>
+                  An GUID which uniquely identifies the customer.
+                  The GUID is generated in client side, a client should be careful to read it unique.
+                </dd>
+                <dt>deleted</dt>
+                <dd><code>true</code> if and only if the customer is deleted.</dd>
               </dl>
             </div>
-            <div class='span8'>
-              <h4>Example</h4>
-              <pre>{&#x000A;  &quot;id&quot;: 100,&#x000A;  &quot;account_id&quot;: 2,&#x000A;  &quot;account_name&quot;: &quot;A Curry Rice Shop&quot;,&#x000A;  &quot;fields_attributes&quot;: $customer_fields,&#x000A;  &quot;guid&quot;: $UUID-like-sequence&#x000A;}</pre>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;id&quot;: 100,&#x000A;  &quot;account_id&quot;: 2,&#x000A;  &quot;account_name&quot;: &quot;A Curry Rice Shop&quot;,&#x000A;  &quot;fields_attributes&quot;: [ $customer_fields ],&#x000A;  &quot;guid&quot;: $UUID-like-sequence&#x000A;}</pre>
+            </div>
+          </div>
+          <h2 id='get-on-customers'>GET on /customers</h2>
+          <p>Retrieve collection of customers available for the account.</p>
+          <h3>Request</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>GET /customers?since=...</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>since</dt>
+                <dt>until</dt>
+                <dt>glb</dt>
+              </dl>
+            </div>
+          </div>
+          <h3>Response</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:34Z&quot;,&#x000A;  &quot;next-url&quot;: &quot;https://ubiregi.com/api/3/customers?since=.....&quot;,&#x000A;  &quot;last_updated_at&quot;: &quot;2011-12-31T00:00:31Z&quot;,&#x000A;  &quot;customers&quot;: [ $customers ],&#x000A;}</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>timestamp</dt>
+                <dt>next-url</dt>
+                <dt>last_updated_at</dt>
+                <dt>customers</dt>
+              </dl>
+            </div>
+          </div>
+          <h3>Available Customers</h3>
+          <p>An customer is available only if the customer is associated with one of the following:</p>
+          
+          <ol>
+          <li>Current account's parents</li>
+          <li>Current account's children</li>
+          <li>Current account's siblings</li>
+          </ol>
+          <img src='images/available-customers.png'>
+          <p>The circles represent accounts and gray arrows represents parent-child associations.
+          Accounts covered with purple background are accessible accounts, so that their accounts
+          are available to current account (the red one).</p>
+          <h2 id='post-on-customers'>POST on /customers</h2>
+          <p>Create an <code>Customer</code> objects, or update <code>Customer</code> objects available for current account.</p>
+          <h3>Request</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;customers&quot;: [&#x000A;    {&#x000A;      &quot;account_id&quot;: 1, &#x000A;      &quot;guid&quot;: $UUID-like-sequence,&#x000A;      &quot;deleted&quot;: false,&#x000A;      &quot;fields&quot;: [ $customer_fields ],&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>customers</dt>
+                <dd>
+                  Array of <code>Customer</code> objects which will be updated/created.
+                  <dl>
+                    <dt>account_id</dt>
+                    <dt>guid</dt>
+                    <dt>deleted</dt>
+                    <dt>fields</dt>
+                    <dd>Array of <code>CustomerField</code>s.</dd>
+                  </dl>
+                </dd>
+              </dl>
+            </div>
+          </div>
+          <h3>Response</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2012-02-14T09:00:00Z&quot;,&#x000A;  &quot;customers&quot; : [ $customers ]&#x000A;}</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>timestamp</dt>
+                <dt>customers</dt>
+              </dl>
             </div>
           </div>
           <h3 id='api-objects-customer-field'>Customer Field</h3>
@@ -1316,41 +1395,6 @@
           <p>Collection of checkouts of the account.</p>
           <h3 id='api-resources-customers'>/customers</h3>
           <p>Collection of customers available for the account.</p>
-          <h4>GET on /customers</h4>
-          <p>Retrieve collection of all customers available for the account.</p>
-          <h4>POST on /customers</h4>
-          <p>Create/Update information of new customers available for the account.</p>
-          <div class='row'>
-            <div class='span8'>
-              <h5>Request</h5>
-              <pre>{&#x000A;  &quot;customers&quot;: [&#x000A;    {&#x000A;      &quot;account_id&quot;: 1, &#x000A;      &quot;guid&quot;: $UUID-like-sequence,&#x000A;      &quot;deleted&quot;: false,&#x000A;      &quot;fields_attributes&quot;: [&#x000A;        &quot;customer_id&quot;: 10,&#x000A;        &quot;guid&quot;: &quot;2012-02-15-abcdefg&quot;,&#x000A;        &quot;app_created_at&quot;: &quot;2012-02-14T00:00Z&quot;,&#x000A;        &quot;deleted&quot;: false,&#x000A;        &quot;name&quot;: &quot;customer.field.name&quot;,&#x000A;        &quot;value&quot;: &quot;SPJ&quot;&#x000A;      ]&#x000A;    }&#x000A;  ]&#x000A;}</pre>
-            </div>
-            <div class='span8'>
-              <h5>Fields</h5>
-              <dl>
-                <dt>account_id :: ("current"|integer)</dt>
-                <dt>guid</dt>
-                <dt>deleted :: boolean</dt>
-                <dt>fields_attributes</dt>
-                <dd>Array of customer field</dd>
-              </dl>
-            </div>
-          </div>
-          <div class='row'>
-            <div class='span8'>
-              <h5>Response</h5>
-              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2012-02-14T09:00:00Z&quot;,&#x000A;  &quot;customers&quot; : $customers&#x000A;}</pre>
-            </div>
-            <div class='span8'>
-              <p>
-                The order of the customer objects are preserved.
-              </p>
-              <p>
-                The update/creation is transactional.
-                There are only two cases; everything processed successfully, or nothing changed since an error found.
-              </p>
-            </div>
-          </div>
           <h3 id='api-resources-customer-notes'>/customers/notes</h3>
           <p>Collection of customer notes associated with <code>/customers</code>.</p>
           <h4>GET on /customers/notes</h4>

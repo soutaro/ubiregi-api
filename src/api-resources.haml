@@ -103,69 +103,6 @@
 :markdown
   Collection of customers available for the account.
 
-%h4 GET on /customers
-
-:markdown
-
-  Retrieve collection of all customers available for the account.
-
-%h4 POST on /customers
-
-:markdown
-
-  Create/Update information of new customers available for the account.
-
-.row
-  .span8
-    %h5 Request
-    %pre
-      = preserve do
-        :escaped
-          {
-            "customers": [
-              {
-                "account_id": 1, 
-                "guid": $UUID-like-sequence,
-                "deleted": false,
-                "fields_attributes": [
-                  "customer_id": 10,
-                  "guid": "2012-02-15-abcdefg",
-                  "app_created_at": "2012-02-14T00:00Z",
-                  "deleted": false,
-                  "name": "customer.field.name",
-                  "value": "SPJ"
-                ]
-              }
-            ]
-          }
-  .span8
-    %h5 Fields
-
-    %dl
-      %dt account_id :: ("current"|integer)
-      %dt guid
-      %dt deleted :: boolean
-      %dt fields_attributes
-      %dd Array of customer field
-
-.row
-  .span8
-    %h5 Response
-    %pre
-      = preserve do
-        :escaped
-          {
-            "timestamp": "2012-02-14T09:00:00Z",
-            "customers" : $customers
-          }
-  .span8
-    %p
-      The order of the customer objects are preserved.
-
-    %p
-      The update/creation is transactional.
-      There are only two cases; everything processed successfully, or nothing changed since an error found.
-
 %h3#api-resources-customer-notes /customers/notes
 
 :markdown

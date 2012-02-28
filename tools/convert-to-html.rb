@@ -16,6 +16,10 @@ class Context
     "<a href='#{url}'>#{name}</a>"
   end
 
+  def image_tag(name)
+    "<img src='images/#{name}'>"
+  end
+
   def render(name)
     current_source = self.source
     new_source = self.source.parent + Pathname(name+".haml")
