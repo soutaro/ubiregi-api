@@ -104,6 +104,10 @@
 
         %h3 Errors
       
+        %hr
+        .row{ :style => "text-align:center; margin-bottom:2em" }
+          &copy; 2011 Ubiregi Inc. All rights reserved.
+
     .container
       .row
         .span12.offset4
@@ -113,15 +117,28 @@
               Ubiregi is simple and clean yet powerful; so the API is.
           
           = render "introduction"
+          %hr
           = render "authentication"
-
-          %h1#restful-api RESTful API
-          
+          %hr
           = render "api-notes"
-          = render "api-objects"
-          = render "api-resources"
+          
+          = render "api-account"
+          = render "api-table"
+          = render "api-customer-tag"
+          = render "api-cashier"
+          = render "api-payment-type"
+          = render "api-menu-item"
+
+          = render "api-checkout"
+          = render "api-checkout-item"
+          = render "api-checkout-payment"
+
+          = render "api-customer"
+          = render "api-customer-field"
+          = render "api-customer-note"
+
+          = render "api-stock-event"
           
           %hr
-          .row{ :style => "text-align:center; margin-bottom:2em" }
-            &copy; 2011 Ubiregi Inc. All rights reserved.
-
+          
+            
