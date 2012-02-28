@@ -12,8 +12,6 @@
       %dd ID of the object
       %dt= field "account_id"
       %dd ID of account which this customer is associated with
-      %dt= field "account_name", :readonly
-      %dd Name of the account specified by <code>account_id</code>
       %dt= field "fields"
       %dd Array of <code>CustomerField</code> object
       %dt= field "guid"
@@ -30,7 +28,6 @@
           {
             "id": 100,
             "account_id": 2,
-            "account_name": "A Curry Rice Shop",
             "fields_attributes": [ $customer_fields ],
             "guid": $UUID-like-sequence,
             "deleted": true,

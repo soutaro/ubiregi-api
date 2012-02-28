@@ -1086,8 +1086,6 @@
                 <dd>ID of the object</dd>
                 <dt>account_id</dt>
                 <dd>ID of account which this customer is associated with</dd>
-                <dt>account_name <span class='label notice'>Readonly</span></dt>
-                <dd>Name of the account specified by <code>account_id</code></dd>
                 <dt>fields</dt>
                 <dd>Array of <code>CustomerField</code> object</dd>
                 <dt>guid</dt>
@@ -1100,7 +1098,7 @@
               </dl>
             </div>
             <div class='span6'>
-              <pre>{&#x000A;  &quot;id&quot;: 100,&#x000A;  &quot;account_id&quot;: 2,&#x000A;  &quot;account_name&quot;: &quot;A Curry Rice Shop&quot;,&#x000A;  &quot;fields_attributes&quot;: [ $customer_fields ],&#x000A;  &quot;guid&quot;: $UUID-like-sequence&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;id&quot;: 100,&#x000A;  &quot;account_id&quot;: 2,&#x000A;  &quot;fields_attributes&quot;: [ $customer_fields ],&#x000A;  &quot;guid&quot;: $UUID-like-sequence,&#x000A;  &quot;deleted&quot;: true,&#x000A;}</pre>
             </div>
           </div>
           <h2 id='get-on-customers'>GET on /customers</h2>
@@ -1179,56 +1177,87 @@
               </dl>
             </div>
           </div>
-          <h3 id='api-objects-customer-field'>Customer Field</h3>
+          <h1 id='object-customer-field'>CustomerField</h1>
           <p>A customer field belongs to a customer.
           This is mainly used to be included in a customer object.</p>
+          <h2 id='object-customer-field-fields'>Fields</h2>
           <div class='row'>
-            <div class='span8'>
-              <h4>Fields</h4>
+            <div class='span6'>
               <dl>
-                <dt>customer_id :: integer</dt>
+                <dt>id <span class='label notice'>Readonly</span></dt>
+                <dd>ID of the object.</dd>
+                <dt>customer_id</dt>
                 <dd>ID of customer which the field belongs to.</dd>
                 <dt>guid</dt>
                 <dd>GUID.</dd>
                 <dt>app_created_at</dt>
-                <dd>Time when the field has been created in a client app.  <em>WriteOnly</em></dd>
-                <dt>name :: string</dt>
+                <dd>Time when the field has been created in a client app.</dd>
+                <dt>name</dt>
                 <dd>
-                  Name of the field.  The value of this field is one of the followings:
-                  <dl>
-                    <dt>"customer.field.customerID"</dt>
-                    <dd>key string representing customer id.</dd>
-                    <dt>"customer.field.name"</dt>
-                    <dd>key string representing customer's name.</dd>
-                    <dt>"customer.field.ruby"</dt>
-                    <dd>key string representing customer's ruby.</dd>
-                    <dt>"customer.field.birthday"</dt>
-                    <dd>key string representing customer's birthday.</dd>
-                    <dt>"customer.field.sex"</dt>
-                    <dd>key string representing customer's sex.</dd>
-                    <dt>"customer.field.email"</dt>
-                    <dd>key string representing customer's email address.</dd>
-                    <dt>"customer.field.phone"</dt>
-                    <dd>key string representing customer's phone number.</dd>
-                    <dt>"customer.field.twitter"</dt>
-                    <dd>key string representing customer's twitter id.</dd>
-                    <dt>"customer.field.zip"</dt>
-                    <dd>key string representing customer's zip code.</dd>
-                    <dt>"customer.field.address1"</dt>
-                    <dd>key string representing customer's address (1).</dd>
-                    <dt>"customer.field.address2"</dt>
-                    <dd>key string representing customer's address (2).</dd>
-                  </dl>
+                  Name of the field.
                 </dd>
-                <dt>value :: string</dt>
-                <dd>Value of the field.</dd>
+                <dt>value</dt>
+                <dd>Value in string of the field</dd>
+                <dt>deleted</dt>
               </dl>
             </div>
-            <div class='span8'>
-              <h4>Example</h4>
-              <pre>{&#x000A;  &quot;customer_id&quot;: 1,&#x000A;  &quot;guid&quot;: $UUID-like-sequence,&#x000A;  &quot;app_created_at&quot;: &quot;2012-02-14T00:00:00Z&quot;,&#x000A;  &quot;name&quot;: &quot;customer.field.name&quot;,&#x000A;  &quot;value&quot;: &quot;Ubiregi Taro&quot;&#x000A;}</pre>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;customer_id&quot;: 1,&#x000A;  &quot;guid&quot;: $UUID-like-sequence,&#x000A;  &quot;app_created_at&quot;: &quot;2012-02-14T00:00:00Z&quot;,&#x000A;  &quot;name&quot;: &quot;customer.field.name&quot;,&#x000A;  &quot;value&quot;: &quot;Ubiregi Taro&quot;,&#x000A;  &quot;deleted&quot;: false,&#x000A;}</pre>
             </div>
           </div>
+          <h3>Customer Attributes</h3>
+          <dl>
+            <dt><em>Field Name</em></dt>
+            <dd><em>Description</em></dd>
+          </dl>
+          <dl>
+            <dt>"customer.field.customerID"</dt>
+            <dd>
+              Arbitaly customer ID.
+              The interpretation depends on the client.
+            </dd>
+            <dt>"customer.field.name"</dt>
+            <dd>
+              Name of the customer.
+            </dd>
+            <dt>"customer.field.ruby"</dt>
+            <dd>
+              Ruby of the name.
+            </dd>
+            <dt>"customer.field.birthday"</dt>
+            <dd>
+              Birthday.
+              The birthday value is expected to be formatted in <code>YYYY-MM-DD</code>,
+              where <code>YYYY</code> is year in 4 digits, <code>MM</code> is month in 2 digits, and <code>DD</code> is day in 2 digits.
+            </dd>
+            <dt>"customer.field.sex"</dt>
+            <dd>
+              Sex of the customer.
+              The value is expected to be one of <code>"F"</code> and <code>"M"</code>, for female and male, respectively.
+            </dd>
+            <dt>"customer.field.email"</dt>
+            <dd>Email address of the customer.</dd>
+            <dt>"customer.field.phone"</dt>
+            <dd>Phone number of the customer.</dd>
+            <dt>"customer.field.twitter"</dt>
+            <dd>Twitter ID of the customer, without <code>@</code>.</dd>
+            <dt>"customer.field.zip"</dt>
+            <dd>Zip code of the customer.</dd>
+            <dt>"customer.field.address1"</dt>
+            <dt>"customer.field.address2"</dt>
+            <dd>
+              Address of the customer.
+              <code>address1</code> is expected to be an address.
+              <code>address2</code> is expected to be additional information, like room number or building number.
+            </dd>
+          </dl>
+          <h3>Updating CustomerField</h3>
+          <p>Updating value of a <code>CustomerField</code> object is not recommended.
+          Just create new field, and delte it (set <code>deleted</code>).</p>
+          
+          <p>This is to avoid conflicting changes in two places, for example in your app and in the Ubiregi iPad app.
+          If you do not update an existing <code>CustomerField</code>, the conflict will result in duplicated fields, and
+          user can choose one, and then delete the other. This is safe.</p>
           <h3 id='api-objects-customer-note'>Customer Note</h3>
           <p>A customer note belongs to a customer.</p>
           <div class='row'>

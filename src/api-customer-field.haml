@@ -1,0 +1,88 @@
+%h1#object-customer-field CustomerField
+
+:markdown
+  A customer field belongs to a customer.
+  This is mainly used to be included in a customer object.
+
+%h2#object-customer-field-fields Fields
+
+.row
+  .span6
+    %dl
+      %dt= field "id", :readonly
+      %dd ID of the object.
+      %dt= field "customer_id"
+      %dd ID of customer which the field belongs to.
+      %dt= field "guid"
+      %dd GUID.
+      %dt= field "app_created_at"
+      %dd Time when the field has been created in a client app.
+      %dt= field "name"
+      %dd 
+        Name of the field.
+      %dt= field "value"
+      %dd Value in string of the field
+      %dt= field "deleted"
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "customer_id": 1,
+            "guid": $UUID-like-sequence,
+            "app_created_at": "2012-02-14T00:00:00Z",
+            "name": "customer.field.name",
+            "value": "Ubiregi Taro",
+            "deleted": false,
+          }
+
+%h3 Customer Attributes
+
+%dl
+  %dt <em>Field Name</em>
+  %dd <em>Description</em>
+
+%dl
+  %dt "customer.field.customerID"
+  %dd
+    Arbitaly customer ID.
+    The interpretation depends on the client.
+  %dt "customer.field.name"
+  %dd
+    Name of the customer.
+  %dt "customer.field.ruby"
+  %dd
+    Ruby of the name.
+  %dt "customer.field.birthday"
+  %dd
+    Birthday.
+    The birthday value is expected to be formatted in <code>YYYY-MM-DD</code>,
+    where <code>YYYY</code> is year in 4 digits, <code>MM</code> is month in 2 digits, and <code>DD</code> is day in 2 digits.
+  %dt "customer.field.sex"
+  %dd
+    Sex of the customer.
+    The value is expected to be one of <code>"F"</code> and <code>"M"</code>, for female and male, respectively.
+  %dt "customer.field.email"
+  %dd Email address of the customer.
+  %dt "customer.field.phone"
+  %dd Phone number of the customer.
+  %dt "customer.field.twitter"
+  %dd Twitter ID of the customer, without <code>@</code>.
+  %dt "customer.field.zip"
+  %dd Zip code of the customer.
+  %dt "customer.field.address1"
+  %dt "customer.field.address2"
+  %dd
+    Address of the customer.
+    <code>address1</code> is expected to be an address.
+    <code>address2</code> is expected to be additional information, like room number or building number.
+  
+%h3 Updating CustomerField
+
+:markdown
+  Updating value of a `CustomerField` object is not recommended.
+  Just create new field, and delte it (set `deleted`).
+  
+  This is to avoid conflicting changes in two places, for example in your app and in the Ubiregi iPad app.
+  If you do not update an existing `CustomerField`, the conflict will result in duplicated fields, and
+  user can choose one, and then delete the other. This is safe.
