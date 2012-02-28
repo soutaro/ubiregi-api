@@ -12,9 +12,9 @@
         <h3><a href='#introduction'>Introduction</a></h3>
         <ul>
           <li><a href='#introduction-implementation-status'>Implementation Status</a></li>
-          <li><a href='#introduction-examples'>Examples</a></li>
           <li><a href='#introduction-quick-start'>Quick Start</a></li>
-          <li><a href='#introduction-general-notes'>General Notes</a></li>
+          <li><a href='#introduction-examples'>Examples</a></li>
+          <li><a href='#introduction-general-notes'>Note</a></li>
         </ul>
         <hr />
         <h3><a href='#authentication'>Authentication</a></h3>
@@ -24,79 +24,76 @@
           <li><a href='#authentication-the-protocol'>The Protocol</a></li>
         </ul>
         <hr />
-        <h3><a href='#api-general-notes'>General Notes</a></h3>
-        <ul>
-          <li>Standard Set of APIs on Collection</li>
-          <li>Standard Index Parameters</li>
-          <li>Fetching Whole Collection</li>
-          <li>POST Convention</li>
-        </ul>
-        <h3><a href='#object-account'>Account</a></h3>
+        <h3>API Objects</h3>
+        <h4><a href='#notations'>Notations</a></h4>
+        <h4><a href='#collection-api-set'>Collection API</a></h4>
+        <h4><a href='#object-account'>Account</a></h4>
         <ul>
           <li><a href='#object-account-fields'>Fields</a></li>
           <li><a href='#get-on-accounts-account-id'>GET on /accounts/<em>account_id</em></a></li>
         </ul>
-        <h3><a href='#object-table'>Table</a></h3>
+        <h4><a href='#object-table'>Table</a></h4>
         <ul>
           <li><a href='#object-table-fields'>Fields</a></li>
         </ul>
-        <h3><a href='#object-customer-tag'>CustomerTag</a></h3>
+        <h4><a href='#object-customer-tag'>CustomerTag</a></h4>
         <ul>
           <li><a href='#object-customer-tag-fields'>Fields</a></li>
           <li><a href='#post-on-accounts-account-id-customer-tags'>POST on /accounts/<em>account_id</em>/customer_tags</a></li>
         </ul>
-        <h3><a href='#object-cashier'>Cashier</a></h3>
+        <h4><a href='#object-cashier'>Cashier</a></h4>
         <ul>
           <li><a href='#object-cashier-fields'>Fields</a></li>
           <li><a href='#post-on-accounts-account-id-cashiers'>POST on /accounts/<em>account_id</em>/cashiers</a></li>
         </ul>
-        <h3><a href='#object-payment-type'>PaymentType</a></h3>
+        <h4><a href='#object-payment-type'>PaymentType</a></h4>
         <ul>
           <li><a href='#object-payment-type-fields'>Fields</a></li>
           <li><a href='#post-on-accounts-account-id-payment-types'>POST on /accounts/<em>account_id</em>/payment_types</a></li>
         </ul>
-        <h3><a href='#object-menu-item'>MenuItem</a></h3>
+        <h4><a href='#object-menu-item'>MenuItem</a></h4>
         <ul>
           <li><a href='#object-menu-item-fields'>Fields</a></li>
           <li><a href='#get-on-menus-menu-id-items'>GET on /menus/<em>menu_id</em>/items</a></li>
           <li><a href='#post-on-menus-menu-id-items'>POST on /menus/<em>menu_id</em>/items</a></li>
         </ul>
-        <h3><a href='#object-checkout'>Checkout</a></h3>
+        <h4><a href='#object-checkout'>Checkout</a></h4>
         <ul>
           <li><a href='#object-checkout-fields'>Fields</a></li>
           <li><a href='#get-on-accounts-account-id-checkouts'>GET on /accounts/<em>account_id</em>/checkouts</a></li>
           <li><a href='#post-on-accounts-account-id-checkouts'>POST on /accounts/<em>account_id</em>/checkouts</a></li>
         </ul>
-        <h3><a href='#object-checkout-item'>CheckoutItem</a></h3>
+        <h4><a href='#object-checkout-item'>CheckoutItem</a></h4>
         <ul>
           <li><a href='#object-checkout-item-fields'>Fields</a></li>
         </ul>
-        <h3><a href='#object-checkout-payment'>CheckoutPayment</a></h3>
+        <h4><a href='#object-checkout-payment'>CheckoutPayment</a></h4>
         <ul>
           <li><a href='#object-checkout-payment-fields'>Fields</a></li>
         </ul>
-        <h3><a href='#object-customer'>Customer</a></h3>
+        <h4><a href='#object-customer'>Customer</a></h4>
         <ul>
           <li><a href='#object-customer-fields'>Fields</a></li>
           <li><a href='#get-on-customers'>GET on /customers</a></li>
           <li><a href='#post-on-customers'>POST on /customers</a></li>
         </ul>
-        <h3><a href='#object-customer-field'>CustomerField</a></h3>
+        <h4><a href='#object-customer-field'>CustomerField</a></h4>
         <ul>
           <li><a href='#object-customer-field-fields'>Fields</a></li>
         </ul>
-        <h3><a href='#object-customer-note'>CustomerNote</a></h3>
+        <h4><a href='#object-customer-note'>CustomerNote</a></h4>
         <ul>
           <li><a href='#object-customer-note-fields'>Fields</a></li>
           <li><a href='#get-on-customers-notes'>GET on /customers/notes</a></li>
           <li><a href='#post-on-customers-notes'>POST on /customers/notes</a></li>
         </ul>
-        <h3><a href='#object-stock-event'>StockEvent</a></h3>
+        <h4><a href='#object-stock-event'>StockEvent</a></h4>
         <ul>
           <li><a href='#object-stock-event-fields'>Fields</a></li>
           <li><a href='#get-on-accounts-account-id-stocks-events'>GET on /accounts/<em>account_id</em>/stocks/events</a></li>
           <li><a href='#post-on-accounts-account-id-stocks-events'>POST on /accounts/<em>account_id</em>/stocks/events</a></li>
         </ul>
+        <h4><a href='#api-general-notes'>General Notes</a></h4>
         <hr />
         <h3>Errors</h3>
         <hr />
@@ -210,14 +207,6 @@
               </tr>
             </tbody>
           </table>
-          <h2 id='introduction-examples'>Examples</h2>
-          <dl>
-            <dt><a href='https://github.com/ubiregiinc/Ubiregi-API-Clients'>Ubiregi-API-Clients</a></dt>
-            <dd>
-              Collection of ubiregin api client examples.
-              We are still working for that.
-            </dd>
-          </dl>
           <h2 id='introduction-quick-start'>Quick Start</h2>
           <ol>
             <li>Signup to ubiregi.com</li>
@@ -261,6 +250,14 @@
           <p>
             All requests to Ubiregi API must be HTTPS requests.
           </p>
+          <h2 id='introduction-examples'>Examples</h2>
+          <dl>
+            <dt><a href='https://github.com/ubiregiinc/Ubiregi-API-Clients'>Ubiregi-API-Clients</a></dt>
+            <dd>
+              Collection of ubiregin api client examples.
+              We are still working for that.
+            </dd>
+          </dl>
           <hr />
           <h1 id='authentication'>Authentication</h1>
           <p>
@@ -339,8 +336,41 @@
             Check the <a href='https://github.com/ubiregiinc/Ubiregi-API-Clients'>examples</a> to see how the authentication is exactly.
           </p>
           <hr />
-          <h2 id='api-general-notes'>General Notes</h2>
-          <h3>Standard Set of APIs on Collection</h3>
+          <h1 id='notations'>Notations</h1>
+          <dl>
+            <dt>integer</dt>
+            <dd>The value should integer.</dd>
+            <dt>number</dt>
+            <dd>The value should be number; real number or integer.</dd>
+            <dt>string</dt>
+            <dd>The value should be a string.</dd>
+            <dt>boolean</dt>
+            <dd>The value should be a boolean.</dd>
+          </dl>
+          <dl>
+            <dt>array of $type</dt>
+            <dd>array of values which type is $type.</dd>
+          </dl>
+          <dl>
+            <dt>$<em>type</em></dt>
+            <dd>Object of <em>type</em>.</dd>
+            <dt>$<em>type</em><code>s</code></dt>
+            <dd>
+              Sequence of objects of <em>type</em>.
+              Usually contents of an array.
+            </dd>
+            <dt>$base64Encoded</dt>
+            <dd>Base64 encoded string of a binary data.</dd>
+            <dt>$UUID-like-sequence</dt>
+            <dd>
+              String which is expected to be unique in the world.
+              It is UUID in the case the sequence is generated in server.
+              If it is generated by iOS, it is not an exact UUID but an extended one by Apple.
+            </dd>
+            <dt>$Time</dt>
+            <dd>ISO8601 format string of a time.</dd>
+          </dl>
+          <h1 id='collection-api-set'>Standard Set of APIs on Collections</h1>
           <p>
             Most resource collections provides the following set of APIs.
           </p>
@@ -349,7 +379,7 @@
             <li>Creating or updating items (POST)</li>
             <li><span class="label success">Optional</span> Retrieving one item (GET)</li>
           </ul>
-          <h3>Standard Index Parameters</h3>
+          <h2>Standard Index Parameters</h2>
           <p>
             Indexing actions take a set of parameters; <code>since</code>, <code>until</code>, and <code>glb</code>.
             They are used to limit the size of the result sets.
@@ -395,7 +425,7 @@
               The name will be different, <code>items</code> for MenuItems, <code>categories</code> for Categories, and <code>checkouts</code> for Checkouts.</p>
             </dd>
           </dl>
-          <h3>Fetching Whole Collection</h3>
+          <h2>Fetching Whole Collection</h2>
           <p>There are limitation on the number of objects contained in one request; this is the reason we accept <code>glb</code> parameter.
           You might have a question that how to get the whole collection?
           A set of requests to fetch collections can be interleaved by requests which updates objects which is contained in the collection.
@@ -408,7 +438,7 @@
           <li>If contains, fetch the <code>next-url</code> and go step 2 again.</li>
           <li>If not contains, send a request again but with <code>since</code> = <code>timestamp</code>, and go step 2 again.</li>
           </ol>
-          <h3>POST Convention</h3>
+          <h2>POST Convention</h2>
           <p>
             POST actions to collection create or update more than one items.
             This helps to make updating many items faster.
@@ -427,10 +457,6 @@
           <p>There is no limitation on number of objects in one request, but you should take care of it.
           100 items in a request will be ok. 10,000 items in a request should cause a problem.
           We will ask you to stop posting too big request, if there are some problem.</p>
-          <h3>IDs are Universal</h3>
-          <p>There are only one scope of ID, <em>Universal</em>.</p>
-          
-          <p>If this doc says <em>ID</em>, it is an one origin integer value which uniquely determins an object on ubiregi server.</p>
           <h1 id='object-account'>Account</h1>
           <p><code>Account</code> object represents an Ubiregi account.
           This is one of the most fat object such that it has most related data with the account including tables, cashiers, payment types.
@@ -1478,6 +1504,12 @@
               </dl>
             </div>
           </div>
+          <hr />
+          <h2 id='api-general-notes'>General Notes</h2>
+          <h3>IDs are Universal</h3>
+          <p>There are only one scope of ID, <em>Universal</em>.</p>
+          
+          <p>If this doc says <em>ID</em>, it is an one origin integer value which uniquely determins an object on ubiregi server.</p>
           <hr />
         </div>
       </div>

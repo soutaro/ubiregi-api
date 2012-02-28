@@ -12,9 +12,9 @@
         %h3= link_to "Introduction", "#introduction"
         %ul
           %li= link_to "Implementation Status", "#introduction-implementation-status"
-          %li= link_to "Examples", "#introduction-examples"
           %li= link_to "Quick Start", "#introduction-quick-start"
-          %li= link_to "General Notes", "#introduction-general-notes"
+          %li= link_to "Examples", "#introduction-examples"
+          %li= link_to "Note", "#introduction-general-notes"
 
         %hr
 
@@ -26,82 +26,81 @@
 
         %hr
 
-        %h3= link_to "General Notes", "#api-general-notes"
+        %h3 API Objects
 
-        %ul
-          %li Standard Set of APIs on Collection
-          %li Standard Index Parameters
-          %li Fetching Whole Collection
-          %li POST Convention
+        %h4= link_to "Notations", "#notations"
+        %h4= link_to "Collection API", "#collection-api-set"
 
-        %h3= link_to "Account", "#object-account"
+        %h4= link_to "Account", "#object-account"
         %ul
           %li= link_to "Fields", "#object-account-fields"
           %li= link_to "GET on /accounts/<em>account_id</em>", "#get-on-accounts-account-id"
 
-        %h3= link_to "Table", "#object-table"
+        %h4= link_to "Table", "#object-table"
         %ul
           %li= link_to "Fields", "#object-table-fields"
 
-        %h3= link_to "CustomerTag", "#object-customer-tag"
+        %h4= link_to "CustomerTag", "#object-customer-tag"
         %ul
           %li= link_to "Fields", "#object-customer-tag-fields"
           %li= link_to "POST on /accounts/<em>account_id</em>/customer_tags", "#post-on-accounts-account-id-customer-tags"
 
-        %h3= link_to "Cashier", "#object-cashier"
+        %h4= link_to "Cashier", "#object-cashier"
         %ul
           %li= link_to "Fields", "#object-cashier-fields"
           %li= link_to "POST on /accounts/<em>account_id</em>/cashiers", "#post-on-accounts-account-id-cashiers"
         
-        %h3= link_to "PaymentType", "#object-payment-type"
+        %h4= link_to "PaymentType", "#object-payment-type"
         %ul
           %li= link_to "Fields", "#object-payment-type-fields"
           %li= link_to "POST on /accounts/<em>account_id</em>/payment_types", "#post-on-accounts-account-id-payment-types"
 
-        %h3= link_to "MenuItem", "#object-menu-item"
+        %h4= link_to "MenuItem", "#object-menu-item"
         %ul
           %li= link_to "Fields", "#object-menu-item-fields"
           %li= link_to "GET on /menus/<em>menu_id</em>/items", "#get-on-menus-menu-id-items"
           %li= link_to "POST on /menus/<em>menu_id</em>/items", "#post-on-menus-menu-id-items"
 
-        %h3= link_to "Checkout", "#object-checkout"
+        %h4= link_to "Checkout", "#object-checkout"
         %ul
           %li= link_to "Fields", "#object-checkout-fields"
           %li= link_to "GET on /accounts/<em>account_id</em>/checkouts", "#get-on-accounts-account-id-checkouts"
           %li= link_to "POST on /accounts/<em>account_id</em>/checkouts", "#post-on-accounts-account-id-checkouts"
 
-        %h3= link_to "CheckoutItem", "#object-checkout-item"
+        %h4= link_to "CheckoutItem", "#object-checkout-item"
         %ul
           %li= link_to "Fields", "#object-checkout-item-fields"
         
-        %h3= link_to "CheckoutPayment", "#object-checkout-payment"
+        %h4= link_to "CheckoutPayment", "#object-checkout-payment"
         %ul
           %li= link_to "Fields", "#object-checkout-payment-fields"
         
-        %h3= link_to "Customer", "#object-customer"
+        %h4= link_to "Customer", "#object-customer"
         %ul
           %li= link_to "Fields", "#object-customer-fields"
           %li= link_to "GET on /customers", "#get-on-customers"
           %li= link_to "POST on /customers", "#post-on-customers"
 
-        %h3= link_to "CustomerField", "#object-customer-field"
+        %h4= link_to "CustomerField", "#object-customer-field"
         %ul
           %li= link_to "Fields", "#object-customer-field-fields"
 
-        %h3= link_to "CustomerNote", "#object-customer-note"
+        %h4= link_to "CustomerNote", "#object-customer-note"
         %ul
           %li= link_to "Fields", "#object-customer-note-fields"
           %li= link_to "GET on /customers/notes", "#get-on-customers-notes"
           %li= link_to "POST on /customers/notes", "#post-on-customers-notes"
 
-        %h3= link_to "StockEvent", "#object-stock-event"
+        %h4= link_to "StockEvent", "#object-stock-event"
         %ul
           %li= link_to "Fields", "#object-stock-event-fields"
           %li= link_to "GET on /accounts/<em>account_id</em>/stocks/events", "#get-on-accounts-account-id-stocks-events"
           %li= link_to "POST on /accounts/<em>account_id</em>/stocks/events", "#post-on-accounts-account-id-stocks-events"
 
+        %h4= link_to "General Notes", "#api-general-notes"
+        
         %hr
-
+        
         %h3 Errors
       
         %hr
@@ -119,8 +118,11 @@
           = render "introduction"
           %hr
           = render "authentication"
+          
           %hr
-          = render "api-notes"
+
+          = render "api-meta-vars"
+          = render "api-collection"
           
           = render "api-account"
           = render "api-table"
@@ -140,5 +142,7 @@
           = render "api-stock-event"
           
           %hr
+          = render "api-notes"
           
-            
+          %hr
+          
