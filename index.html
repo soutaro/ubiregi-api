@@ -1426,14 +1426,14 @@
                 <dd>Type of the event. One of <code>"inventory"</code>, <code>"arrival"</code>, <code>"shipping"</code>, and <code>"order"</code>.</dd>
                 <dt>amount <span class='label immutable'>immutable</span></dt>
                 <dd>An integer which represents amount of the event</dd>
-                <dt>uuid <span class='label immutable'>immutable</span></dt>
+                <dt>guid <span class='label immutable'>immutable</span></dt>
                 <dd>UUID associated to the event.  This is used to prevent duplicated posts.</dd>
                 <dt>body <span class='label immutable'>immutable</span></dt>
                 <dd>An arbitrary JSON object.  The usage of the value is not decided yet.</dd>
               </dl>
             </div>
             <div class='span6'>
-              <pre>{&#x000A;  &quot;id&quot; : 1,&#x000A;  &quot;menu_item_id&quot; : 2,&#x000A;  &quot;app_created_at&quot; : &quot;2012-02-14T00:00:00Z&quot;,&#x000A;  &quot;inventory__at&quot; : &quot;2012-02-14T01:00:00Z&quot;,&#x000A;  &quot;event_type&quot; : &quot;arrival&quot;,&#x000A;  &quot;amount&quot; : 55,&#x000A;  &quot;uuid&quot; : $UUID-like-sequence,&#x000A;  &quot;body&quot; : { &quot;note&quot; : &quot;This object represents that 55 items specified by `menu_item_id` has arrived&quot; },&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;id&quot; : 1,&#x000A;  &quot;menu_item_id&quot; : 2,&#x000A;  &quot;app_created_at&quot; : &quot;2012-02-14T00:00:00Z&quot;,&#x000A;  &quot;inventory__at&quot; : &quot;2012-02-14T01:00:00Z&quot;,&#x000A;  &quot;event_type&quot; : &quot;arrival&quot;,&#x000A;  &quot;amount&quot; : 55,&#x000A;  &quot;guid&quot; : $UUID-like-sequence,&#x000A;  &quot;body&quot; : { &quot;note&quot; : &quot;This object represents that 55 items specified by `menu_item_id` has arrived&quot; },&#x000A;}</pre>
             </div>
           </div>
           <h3>Amount of an Event</h3>
