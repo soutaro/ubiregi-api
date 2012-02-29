@@ -1119,10 +1119,13 @@
               <dl>
                 <dt>id <span class='label readonly'>Readonly</span> <span class='label immutable'>immutable</span></dt>
                 <dd>ID of the object</dd>
-                <dt>account_id <span class='label immutable'>immutable</span></dt>
+                <dt>account_id <span class='label readonly'>Readonly</span> <span class='label immutable'>immutable</span></dt>
                 <dd>ID of account which this customer is associated with</dd>
                 <dt>fields</dt>
-                <dd>Array of <code>CustomerField</code> object</dd>
+                <dd>
+                  Array of <code>CustomerField</code> object.
+                  <code>fields</code> can not be empty.
+                </dd>
                 <dt>guid <span class='label immutable'>immutable</span></dt>
                 <dd>
                   An GUID which uniquely identifies the customer.
@@ -1182,7 +1185,7 @@
           <h3>Request</h3>
           <div class='row'>
             <div class='span6'>
-              <pre>{&#x000A;  &quot;customers&quot;: [&#x000A;    {&#x000A;      &quot;account_id&quot;: 1, &#x000A;      &quot;guid&quot;: $UUID-like-sequence,&#x000A;      &quot;deleted&quot;: false,&#x000A;      &quot;updated_fields&quot;: [ $customer_fields ],&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;customers&quot;: [&#x000A;    {&#x000A;      &quot;guid&quot;: $UUID-like-sequence,&#x000A;      &quot;deleted&quot;: false,&#x000A;      &quot;updated_fields&quot;: [ $customer_fields ],&#x000A;    }&#x000A;  ]&#x000A;}</pre>
             </div>
             <div class='span6'>
               <dl>
@@ -1190,11 +1193,12 @@
                 <dd>
                   Array of <code>Customer</code> objects which will be updated/created.
                   <dl>
-                    <dt>account_id</dt>
                     <dt>guid</dt>
                     <dt>deleted</dt>
                     <dt>updated_fields</dt>
-                    <dd>Array of updated or newly inserted <code>CustomerField</code>s.</dd>
+                    <dd>
+                      Array of updated or newly inserted <code>CustomerField</code>s.
+                    </dd>
                   </dl>
                 </dd>
               </dl>
@@ -1225,8 +1229,6 @@
               <dl>
                 <dt>id <span class='label readonly'>Readonly</span> <span class='label immutable'>immutable</span></dt>
                 <dd>ID of the object.</dd>
-                <dt>customer_id <span class='label immutable'>immutable</span></dt>
-                <dd>ID of customer which the field belongs to.</dd>
                 <dt>guid <span class='label immutable'>immutable</span></dt>
                 <dd>GUID.</dd>
                 <dt>app_created_at <span class='label writeonly'>Writeonly</span> <span class='label immutable'>immutable</span></dt>
@@ -1239,7 +1241,7 @@
               </dl>
             </div>
             <div class='span6'>
-              <pre>{&#x000A;  &quot;customer_id&quot;: 1,&#x000A;  &quot;guid&quot;: $UUID-like-sequence,&#x000A;  &quot;app_created_at&quot;: &quot;2012-02-14T00:00:00Z&quot;,&#x000A;  &quot;name&quot;: &quot;customer.field.name&quot;,&#x000A;  &quot;value&quot;: &quot;Ubiregi Taro&quot;,&#x000A;  &quot;deleted&quot;: false,&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;id&quot;: 1345,&#x000A;  &quot;guid&quot;: $UUID-like-sequence,&#x000A;  &quot;app_created_at&quot;: &quot;2012-02-14T00:00:00Z&quot;,&#x000A;  &quot;name&quot;: &quot;customer.field.name&quot;,&#x000A;  &quot;value&quot;: &quot;Ubiregi Taro&quot;,&#x000A;  &quot;deleted&quot;: false,&#x000A;}</pre>
             </div>
           </div>
           <h3>Customer Attributes</h3>

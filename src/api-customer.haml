@@ -10,10 +10,12 @@
     %dl
       %dt= field "id", :readonly, :immutable
       %dd ID of the object
-      %dt= field "account_id", :immutable
+      %dt= field "account_id", :readonly, :immutable
       %dd ID of account which this customer is associated with
       %dt= field "fields"
-      %dd Array of <code>CustomerField</code> object
+      %dd
+        Array of <code>CustomerField</code> object.
+        <code>fields</code> can not be empty.
       %dt= field "guid", :immutable
       %dd
         An GUID which uniquely identifies the customer.
@@ -103,7 +105,6 @@
           {
             "customers": [
               {
-                "account_id": 1, 
                 "guid": $UUID-like-sequence,
                 "deleted": false,
                 "updated_fields": [ $customer_fields ],
@@ -116,11 +117,11 @@
       %dd
         Array of <code>Customer</code> objects which will be updated/created.
         %dl
-          %dt= field "account_id"
           %dt= field "guid"
           %dt= field "deleted"
           %dt= field "updated_fields"
-          %dd Array of updated or newly inserted <code>CustomerField</code>s.
+          %dd
+            Array of updated or newly inserted <code>CustomerField</code>s.
 
 %h3 Response
 .row
