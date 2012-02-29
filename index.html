@@ -735,13 +735,13 @@
                 </dd>
                 <dt>kind</dt>
                 <dd>
-                  One of <code>"CASH"</code>, <code>"CARD"</code>, or <code>"OTHER"</code>.
-                  <code>"CASH"</code> kind payment type exists in all accounts.
+                  One of <code>"cash"</code>, <code>"card"</code>, or <code>"other"</code>.
+                  <code>"cash"</code> kind payment type exists in all accounts.
                 </dd>
               </dl>
             </div>
             <div class='span6'>
-              <pre>{&#x000A;  &quot;id&quot;: 111,&#x000A;  &quot;name&quot;: &quot;Credit card&quot;,&#x000A;  &quot;position&quot;: 3,&#x000A;  &quot;change&quot;: true,&#x000A;  &quot;kind&quot;: &quot;CARD&quot;,&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;id&quot;: 111,&#x000A;  &quot;name&quot;: &quot;Credit card&quot;,&#x000A;  &quot;position&quot;: 3,&#x000A;  &quot;change&quot;: true,&#x000A;  &quot;kind&quot;: &quot;card&quot;,&#x000A;}</pre>
             </div>
           </div>
           <h2 id='post-on-accounts-account-id-payment-types'>POST on /accounts/<em>account_id</em>/payment_types</h2>
@@ -749,7 +749,7 @@
           <h3>Request</h3>
           <div class='row'>
             <div class='span6'>
-              <pre>{&#x000A;  &quot;payment_types&quot;: [&#x000A;    {&#x000A;      &quot;name&quot;: &quot;Book Coupon&quot;,&#x000A;      &quot;change&quot;: true,&#x000A;      &quot;kind&quot;: &quot;OTHER&quot;&#x000A;    },&#x000A;    {&#x000A;      &quot;id&quot;: 123,&#x000A;      &quot;change&quot;: false,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;payment_types&quot;: [&#x000A;    {&#x000A;      &quot;name&quot;: &quot;Book Coupon&quot;,&#x000A;      &quot;change&quot;: true,&#x000A;      &quot;kind&quot;: &quot;other&quot;&#x000A;    },&#x000A;    {&#x000A;      &quot;id&quot;: 123,&#x000A;      &quot;change&quot;: false,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
             </div>
             <div class='span6'>
               <dl>
