@@ -12,7 +12,7 @@
       %dd ID of the object.
       %dt= field "name"
       %dd Name of the payment type.
-      %dt= field "position"
+      %dt= field "position",
       %dd
         Position of the type. <code>null</code> in the case the payment methods is disabled.
       %dt= field "change"
@@ -20,8 +20,8 @@
         <code>true</code> if customers will receive change.
       %dt= field "kind"
       %dd
-        One of <code>"CASH"</code>, <code>"CARD"</code>, or <code>"OTHER"</code>.
-        <code>"CASH"</code> kind payment type exists in all accounts.
+        One of <code>"cash"</code>, <code>"card"</code>, or <code>"other"</code>.
+        <code>"cash"</code> kind payment type exists in all accounts.
 
   .span6
     %pre
@@ -32,7 +32,7 @@
             "name": "Credit card",
             "position": 3,
             "change": true,
-            "kind": "CARD",
+            "kind": "card",
           }
 
 
@@ -52,7 +52,7 @@
               {
                 "name": "Book Coupon",
                 "change": true,
-                "kind": "OTHER"
+                "kind": "other"
               },
               {
                 "id": 123,

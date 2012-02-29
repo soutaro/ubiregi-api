@@ -1534,6 +1534,46 @@
             </dd>
           </dl>
           <h2>Permissions on Objects of Other Accounts</h2>
+          <p>Ubiregi API permission model is very simple.
+          The permission to a object is decided by its owner account's <em>role</em>.</p>
+          
+          <p>There are three permissions, <em>nothing</em>, <em>readonly</em> and <em>writable</em>.</p>
+          <dl>
+            <dt>nothing</dt>
+            <dd>Any access will be rejected.</dd>
+            <dt>readonly</dt>
+            <dd>Reading is allowed, but can not update.</dd>
+            <dt>writable</dt>
+            <dd>Full access allowed.</dd>
+          </dl>
+          <p>There are five roles, <em>current</em>, <em>children</em>, <em>parents</em>, <em>siblings</em>, and <em>others</em>.</p>
+          <dl>
+            <dt>current</dt>
+            <dd>The account which is authenticated.</dd>
+            <dt>children</dt>
+            <dd>Children of current account.</dd>
+            <dt>parents</dt>
+            <dd>The accounts of which the current account is a child.</dd>
+            <dt>siblings</dt>
+            <dd>The accounts which shares parents with current account.</dd>
+            <dt>others</dt>
+            <dd>Accounts which is not current, children, parents, and siblings.</dd>
+          </dl>
+          <p>The permission is defined as following:</p>
+          <dl>
+            <dt>readonly</dt>
+            <dd>Parents' and siblings' information, menus, checkouts, customers, and stock events.</dd>
+            <dt>writable</dt>
+            <dd>Current's and childrens' information, menus, checkouts, customers, and stock events.</dd>
+            <dt>nothing</dt>
+            <dd>Anything else.</dd>
+          </dl>
+          <p>and it is figured out as following.</p>
+          <img src='images/object-permissions.png'>
+          <p>Each circle represents an <code>Account</code>.
+          Gray arrows represent parent-child links between accounts.
+          Red, green, blue, purple, and gray circles represent <em>current</em>, <em>children</em>, <em>parents</em>, <em>siblings</em>, and <em>others</em> accounts respectively.
+          Green background is for the object which owns objects with <em>writable</em> permission, and light-pink background is for <em>readonly</em> permission.</p>
           <h2>Stock Calculation Model</h2>
           <h2>app_created_at Usage</h2>
           <p><code>app_created_at</code> field is to remember when the object is created in the iPad app.

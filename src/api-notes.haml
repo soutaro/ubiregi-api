@@ -22,6 +22,57 @@
 
 %h2 Permissions on Objects of Other Accounts
 
+:markdown
+  Ubiregi API permission model is very simple.
+  The permission to a object is decided by its owner account's *role*.
+  
+  There are three permissions, *nothing*, *readonly* and *writable*.
+
+%dl
+  %dt nothing
+  %dd Any access will be rejected.
+  %dt readonly
+  %dd Reading is allowed, but can not update.
+  %dt writable
+  %dd Full access allowed.
+  
+:markdown
+  There are five roles, *current*, *children*, *parents*, *siblings*, and *others*.
+
+%dl
+  %dt current
+  %dd The account which is authenticated.
+  %dt children
+  %dd Children of current account.
+  %dt parents
+  %dd The accounts of which the current account is a child.
+  %dt siblings
+  %dd The accounts which shares parents with current account.
+  %dt others
+  %dd Accounts which is not current, children, parents, and siblings.
+  
+:markdown
+  The permission is defined as following:
+
+%dl
+  %dt readonly
+  %dd Parents' and siblings' information, menus, checkouts, customers, and stock events.
+  %dt writable
+  %dd Current's and childrens' information, menus, checkouts, customers, and stock events.
+  %dt nothing
+  %dd Anything else.
+
+:markdown
+  and it is figured out as following.
+
+= image_tag "object-permissions.png"
+
+:markdown
+  Each circle represents an `Account`.
+  Gray arrows represent parent-child links between accounts.
+  Red, green, blue, purple, and gray circles represent *current*, *children*, *parents*, *siblings*, and *others* accounts respectively.
+  Green background is for the object which owns objects with *writable* permission, and light-pink background is for *readonly* permission.
+
 %h2 Stock Calculation Model
 
 %h2 app_created_at Usage
