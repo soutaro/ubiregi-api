@@ -1564,9 +1564,9 @@
           <p>The permission is defined as following:</p>
           <dl>
             <dt>readonly</dt>
-            <dd>Parents' and siblings' information, menus, checkouts, customers, and stock events.</dd>
+            <dd>Parents' and siblings' information, menus, checkouts, and stock events.</dd>
             <dt>writable</dt>
-            <dd>Current's and childrens' information, menus, checkouts, customers, and stock events.</dd>
+            <dd>Current's and childrens' information, menus, checkouts, and stock events.</dd>
             <dt>nothing</dt>
             <dd>Anything else.</dd>
           </dl>
@@ -1576,6 +1576,8 @@
           Gray arrows represent parent-child links between accounts.
           Red, green, blue, purple, and gray circles represent <em>current</em>, <em>children</em>, <em>parents</em>, <em>siblings</em>, and <em>others</em> accounts respectively.
           Green background is for the object which owns objects with <em>writable</em> permission, and light-pink background is for <em>readonly</em> permission.</p>
+          
+          <p>Note that <code>Customer</code>s have their own permission model.</p>
           <h2>Stock Calculation Model</h2>
           <h2>app_created_at Usage</h2>
           <p><code>app_created_at</code> field is to remember when the object is created in the iPad app.

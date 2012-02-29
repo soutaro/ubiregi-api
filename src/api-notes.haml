@@ -56,9 +56,9 @@
 
 %dl
   %dt readonly
-  %dd Parents' and siblings' information, menus, checkouts, customers, and stock events.
+  %dd Parents' and siblings' information, menus, checkouts, and stock events.
   %dt writable
-  %dd Current's and childrens' information, menus, checkouts, customers, and stock events.
+  %dd Current's and childrens' information, menus, checkouts, and stock events.
   %dt nothing
   %dd Anything else.
 
@@ -72,6 +72,8 @@
   Gray arrows represent parent-child links between accounts.
   Red, green, blue, purple, and gray circles represent *current*, *children*, *parents*, *siblings*, and *others* accounts respectively.
   Green background is for the object which owns objects with *writable* permission, and light-pink background is for *readonly* permission.
+
+  Note that `Customer`s have their own permission model.
 
 %h2 Stock Calculation Model
 
