@@ -507,10 +507,12 @@
                 <dd>Array of IDs of parent accounts.</dd>
                 <dt>children</dt>
                 <dd>Array of IDs of child accounts.</dd>
+                <dt>siblings</dt>
+                <dd>Array of IDs of sibling accounts.</dd>
               </dl>
             </div>
             <div class='span6'>
-              <pre>{&#x000A;  &quot;id&quot;: 123,&#x000A;  &quot;created_at&quot;: &quot;2011-12-31:00:00:31Z&quot;,&#x000A;  &quot;updated_at&quot;: &quot;2012-01-30:00:30:11Z&quot;,&#x000A;  &quot;login&quot;: &quot;ubiregi-cafe&quot;,&#x000A;  &quot;email&quot;: &quot;cafe@ubiregi.com&quot;,&#x000A;  &quot;name&quot;: &quot;Ubiregi Cafe&quot;,&#x000A;  &quot;expire_at&quot;: &quot;2011-11-13T00:00:00Z&quot;,&#x000A;  &quot;subscription&quot;: &quot;standard&quot;,&#x000A;  &quot;currency&quot;: &quot;JPY&quot;,&#x000A;  &quot;date_offset&quot;: 6,&#x000A;  &quot;timezone&quot;: &quot;Asia/Tokyo&quot;,&#x000A;  &quot;receipt_title&quot;: &quot;RECEIPT&quot;,&#x000A;  &quot;receipt_footer&quot;: &quot;Footer to be printed in receipts&quot;,&#x000A;  &quot;receipt_logo&quot;: $base64Encoded,&#x000A;  &quot;menus&quot;: [ 8 ],&#x000A;  &quot;tables&quot;: [ $tables ],&#x000A;  &quot;customer_tags&quot;: [ $customer_tags ],&#x000A;  &quot;payment_types&quot;: [ $payment_types ],&#x000A;  &quot;cashiers&quot;: [ $cashiers ],&#x000A;  &quot;parents&quot;: [ 100 ],&#x000A;  &quot;children&quot;: [ 200, 124 ],&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;id&quot;: 123,&#x000A;  &quot;created_at&quot;: &quot;2011-12-31:00:00:31Z&quot;,&#x000A;  &quot;updated_at&quot;: &quot;2012-01-30:00:30:11Z&quot;,&#x000A;  &quot;login&quot;: &quot;ubiregi-cafe&quot;,&#x000A;  &quot;email&quot;: &quot;cafe@ubiregi.com&quot;,&#x000A;  &quot;name&quot;: &quot;Ubiregi Cafe&quot;,&#x000A;  &quot;expire_at&quot;: &quot;2011-11-13T00:00:00Z&quot;,&#x000A;  &quot;subscription&quot;: &quot;standard&quot;,&#x000A;  &quot;currency&quot;: &quot;JPY&quot;,&#x000A;  &quot;date_offset&quot;: 6,&#x000A;  &quot;timezone&quot;: &quot;Asia/Tokyo&quot;,&#x000A;  &quot;receipt_title&quot;: &quot;RECEIPT&quot;,&#x000A;  &quot;receipt_footer&quot;: &quot;Footer to be printed in receipts&quot;,&#x000A;  &quot;receipt_logo&quot;: $base64Encoded,&#x000A;  &quot;menus&quot;: [ 8 ],&#x000A;  &quot;tables&quot;: [ $tables ],&#x000A;  &quot;customer_tags&quot;: [ $customer_tags ],&#x000A;  &quot;payment_types&quot;: [ $payment_types ],&#x000A;  &quot;cashiers&quot;: [ $cashiers ],&#x000A;  &quot;parents&quot;: [ 100 ],&#x000A;  &quot;children&quot;: [ 200, 124 ],&#x000A;  &quot;siblings&quot;: [ 100, 2031, 581 ],&#x000A;}</pre>
             </div>
           </div>
           <h2 id='get-on-accounts-account-id'>GET on /accounts/<em>account_id</em></h2>

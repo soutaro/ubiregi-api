@@ -53,6 +53,8 @@
       %dd Array of IDs of parent accounts.
       %dt= field "children"
       %dd Array of IDs of child accounts.
+      %dt= field "siblings"
+      %dd Array of IDs of sibling accounts.
   .span6
     %pre
       = preserve do
@@ -79,6 +81,7 @@
             "cashiers": [ $cashiers ],
             "parents": [ 100 ],
             "children": [ 200, 124 ],
+            "siblings": [ 100, 2031, 581 ],
           }
 
 %h2#get-on-accounts-account-id GET on /accounts/<em>account_id</em>
