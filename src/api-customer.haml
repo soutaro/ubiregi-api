@@ -106,7 +106,7 @@
                 "account_id": 1, 
                 "guid": $UUID-like-sequence,
                 "deleted": false,
-                "fields": [ $customer_fields ],
+                "updated_fields": [ $customer_fields ],
               }
             ]
           }
@@ -119,8 +119,8 @@
           %dt= field "account_id"
           %dt= field "guid"
           %dt= field "deleted"
-          %dt= field "fields"
-          %dd Array of <code>CustomerField</code>s.
+          %dt= field "updated_fields"
+          %dd Array of updated or newly inserted <code>CustomerField</code>s.
 
 %h3 Response
 .row
@@ -136,3 +136,11 @@
     %dl
       %dt= field "timestamp"
       %dt= field "customers"
+
+%h3 updated_fields
+
+:markdown
+  It is not allowed to destroy `CustomerField`s.
+  Thus, `fields` attribute in POST requests are not defined, but `updated_fields` should be used instead.
+  To (logically) destroy `CustomerField`s, set its `deleted` field to `true`.
+
