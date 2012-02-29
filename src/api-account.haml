@@ -49,11 +49,11 @@
       %dd Array of <code>PaymentType</code>s.
       %dt= field "cashiers"
       %dd Array of <code>Cashier</code>s.
-      %dt= field "parents"
+      %dt= field "parent_ids"
       %dd Array of IDs of parent accounts.
-      %dt= field "children"
+      %dt= field "child_ids
       %dd Array of IDs of child accounts.
-      %dt= field "siblings"
+      %dt= field "sibling_ids
       %dd Array of IDs of sibling accounts.
   .span6
     %pre
@@ -79,9 +79,9 @@
             "customer_tags": [ $customer_tags ],
             "payment_types": [ $payment_types ],
             "cashiers": [ $cashiers ],
-            "parents": [ 100 ],
-            "children": [ 200, 124 ],
-            "siblings": [ 100, 2031, 581 ],
+            "parent_ids": [ 100 ],
+            "child_ids": [ 200, 124 ],
+            "sibling_ids": [ 100, 2031, 581 ],
           }
 
 %h2#get-on-accounts-account-id GET on /accounts/<em>account_id</em>
