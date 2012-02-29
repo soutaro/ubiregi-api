@@ -30,8 +30,8 @@
         One of <code>"close"</code>, <code>"open"</code>, <code>"deleted"</code>, or <code>"cancel"</code>.
         <code>"close"</code> is for closed checkout, such that the cashier already finished editing the checkout.
         <code>"open"</code> is for open checkout, such that the cashier is continuing editing the checkout.
-        <code>"deleted"</code> is for deleted checkout, such that the checkout once was closed, but later deleted.
-        <code>"cancel"</code> is for canceled checkout, such that the checkout was canceled without closing it.
+        <code>"cancel"</code> is for deleted checkout, such that the checkout once was closed, but later canceled.
+        <code>"deleted"</code> is for canceled checkout, such that the checkout was deleted without closing it.
       %dt= field "cashier_id"
       %dd ID of the cashier who processed the checkout. May be <code>null</code> if input skipped.
       %dt= field "customers_count"
