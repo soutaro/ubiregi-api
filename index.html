@@ -1579,6 +1579,34 @@
           
           <p>Note that <code>Customer</code>s have their own permission model.</p>
           <h2>Stock Calculation Model</h2>
+          <p>Each <code>MenuItem</code> has its own stock count.
+          <code>stock</code>, <code>last_inventory_at</code>, and <code>incoming_stock</code> are updated when new <code>StockEvent</code> is created.</p>
+          <dl>
+            <dt>last_inventory_at</dt>
+            <dd>
+              Find the latest <code>inventory</code> event, and set its <code>inventory_at</code>.
+            </dd>
+            <dt>stock</dt>
+            <dd>
+              Find the <em>latest_inventory_event</em> and its <em>following_events</em>, and calculate the following:
+              <blockquote>
+              <em>last_inventory_amount</em> - <em>shipped_amount</em> + <em>arrived_amount</em><br>
+              where:
+              <blockquote>
+              <em>last_inventory_amount</em> = <em>latest_inventory_event</em>.<code>amount</code><br>
+              <em>shipped_amount</em> = Σ <em>following_shipping_events</em>.<code>amount</code><br>
+              <em>arrived_amount</em> = Σ <em>arrival_events</em>.<code>amount</code><br>
+              </blockquote>
+              </blockquote>
+            </dd>
+            <dt>incoming_stock</dt>
+            <dd>
+              Calculate all <em>order_events</em> and <em>arrival_events</em>, and calculate the following:
+              <blockquote>
+              Σ <em>order_events</em>.<code>amount</code> - Σ <em>arrival_events</em>.<code>amount</code>
+              </blockquote>
+            </dd>
+          </dl>
           <h2>app_created_at Usage</h2>
           <p><code>app_created_at</code> field is to remember when the object is created in the iPad app.
           It generally meaningless; iPad clock may be inacculate, the clock can easily changed.</p>

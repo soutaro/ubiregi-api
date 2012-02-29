@@ -77,6 +77,33 @@
 
 %h2 Stock Calculation Model
 
+:markdown
+  Each `MenuItem` has its own stock count.
+  `stock`, `last_inventory_at`, and `incoming_stock` are updated when new `StockEvent` is created.
+  
+%dl
+  %dt last_inventory_at
+  %dd
+    Find the latest <code>inventory</code> event, and set its <code>inventory_at</code>.
+  %dt stock
+  %dd
+    Find the <em>latest_inventory_event</em> and its <em>following_events</em>, and calculate the following:
+    <blockquote>
+    <em>last_inventory_amount</em> - <em>shipped_amount</em> + <em>arrived_amount</em><br>
+    where:
+    <blockquote>
+    <em>last_inventory_amount</em> = <em>latest_inventory_event</em>.<code>amount</code><br>
+    <em>shipped_amount</em> = Σ <em>following_shipping_events</em>.<code>amount</code><br>
+    <em>arrived_amount</em> = Σ <em>arrival_events</em>.<code>amount</code><br>
+    </blockquote>
+    </blockquote>
+  %dt incoming_stock
+  %dd
+    Calculate all <em>order_events</em> and <em>arrival_events</em>, and calculate the following:
+    <blockquote>
+    Σ <em>order_events</em>.<code>amount</code> - Σ <em>arrival_events</em>.<code>amount</code>
+    </blockquote>
+ 
 %h2 app_created_at Usage
 
 :markdown
