@@ -13,15 +13,15 @@
 .row
   .span6
     %dl
-      %dt= field "id"
+      %dt= field "id", :readonly, :immutable
       %dd Account ID.
-      %dt= field "login", :optional
+      %dt= field "login"
       %dd Account's login
-      %dt= field "email", :optional
+      %dt= field "email"
       %dd Account's email
       %dt= field "name"
       %dd Account name to be displayed to users.
-      %dt= field "expire_at", :optional
+      %dt= field "expire_at"
       %dd
         Expiration data.
         May be `null` in the case there is no expiration on subscription.

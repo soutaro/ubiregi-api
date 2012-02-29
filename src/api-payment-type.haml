@@ -8,11 +8,11 @@
 .row
   .span6
     %dl
-      %dt= field "id"
+      %dt= field "id", :readonly, :immutable
       %dd ID of the object.
       %dt= field "name"
       %dd Name of the payment type.
-      %dt= field "position", :optional
+      %dt= field "position"
       %dd
         Position of the type. <code>null</code> in the case the payment methods is disabled.
       %dt= field "change"

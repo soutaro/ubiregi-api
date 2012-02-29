@@ -9,11 +9,11 @@
 .row
   .span6
     %dl
-      %dt= field "id"
+      %dt= field "id", :readonly, :immutable
       %dd ID of the object.
       %dt= field "name"
       %dd Name of the tag.
-      %dt= field "position", :optional
+      %dt= field "position"
       %dd
         Position of the tag. <code>null</code> in the case the tag is inactive.
         The interpretation depends on client, however the value should be from 1 to 12.

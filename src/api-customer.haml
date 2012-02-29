@@ -8,13 +8,13 @@
 .row
   .span6
     %dl
-      %dt= field "id", :readonly
+      %dt= field "id", :readonly, :immutable
       %dd ID of the object
-      %dt= field "account_id"
+      %dt= field "account_id", :immutable
       %dd ID of account which this customer is associated with
       %dt= field "fields"
       %dd Array of <code>CustomerField</code> object
-      %dt= field "guid"
+      %dt= field "guid", :immutable
       %dd
         An GUID which uniquely identifies the customer.
         The GUID is generated in client side, a client should be careful to read it unique.

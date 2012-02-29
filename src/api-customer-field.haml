@@ -9,17 +9,16 @@
 .row
   .span6
     %dl
-      %dt= field "id", :readonly
+      %dt= field "id", :readonly, :immutable
       %dd ID of the object.
-      %dt= field "customer_id"
+      %dt= field "customer_id", :immutable
       %dd ID of customer which the field belongs to.
-      %dt= field "guid"
+      %dt= field "guid", :immutable
       %dd GUID.
-      %dt= field "app_created_at"
+      %dt= field "app_created_at", :writeonly, :immutable
       %dd Time when the field has been created in a client app.
-      %dt= field "name"
-      %dd 
-        Name of the field.
+      %dt= field "name", :immutable
+      %dd Name of the field.
       %dt= field "value"
       %dd Value in string of the field
       %dt= field "deleted"
