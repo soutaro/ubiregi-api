@@ -6,7 +6,7 @@
     <link href='top.css' rel='stylesheet' />
   </head>
   <body>
-    <div class='menu span4' style='background-color:#E0E0F0; position:fixed; left:50%; margin-left:-470px; height:100%; overflow-y:scroll'>
+    <div class='menu span5'>
       <div style='padding:10px'>
         <h1>Ubiregi API</h1>
         <h3><a href='#introduction'>Introduction</a></h3>
@@ -339,12 +339,12 @@
           <h1 id='notations'>Notations</h1>
           <h2>Field Attributes</h2>
           <p>The field definition may have following attributes:</p>
-          <span class='label'>readonly</span>
+          <span class='label readonly'>readonly</span>
           <p>Calculation of the value of the field is a task of server.
           Client can not set the value.</p>
-          <span class='label'>writeonly</span>
+          <span class='label writeonly'>writeonly</span>
           <p>The server never send the value of the attribute.</p>
-          <span class='label'>immutable</span>
+          <span class='label immutable'>immutable</span>
           <p>The client may post the value on creating a object,
           but it can not update the value once the object is created.</p>
           <h2>Meta Variables</h2>
@@ -465,7 +465,7 @@
           <div class='row'>
             <div class='span6'>
               <dl>
-                <dt>id <span class='label important'>Readonly</span> <span class='label notice'>immutable</span></dt>
+                <dt>id <span class='label readonly'>Readonly</span> <span class='label immutable'>immutable</span></dt>
                 <dd>Account ID.</dd>
                 <dt>login</dt>
                 <dd>Account's login</dd>
@@ -487,11 +487,11 @@
                 </dd>
                 <dt>timezone</dt>
                 <dd>Timezone.</dd>
-                <dt>receipt_title <span class='label warning'>Optional</span></dt>
+                <dt>receipt_title <span class='label optional'>Optional</span></dt>
                 <dd>Receipt title.</dd>
-                <dt>receipt_footer <span class='label warning'>Optional</span></dt>
+                <dt>receipt_footer <span class='label optional'>Optional</span></dt>
                 <dd>Footer text to be printed on receipt.</dd>
-                <dt>receipt_logo <span class='label warning'>Optional</span></dt>
+                <dt>receipt_logo <span class='label optional'>Optional</span></dt>
                 <dd>Base64 encoded logo image to be printed on receipt.</dd>
                 <dt>menus</dt>
                 <dd>Array of IDs of <code>Menu</code>.</dd>
@@ -558,7 +558,7 @@
           <div class='row'>
             <div class='span6'>
               <dl>
-                <dt>id <span class='label important'>Readonly</span> <span class='label notice'>immutable</span></dt>
+                <dt>id <span class='label readonly'>Readonly</span> <span class='label immutable'>immutable</span></dt>
                 <dd>ID of the object.</dd>
                 <dt>name</dt>
                 <dd>Name of the table.</dd>
@@ -581,7 +581,7 @@
           <div class='row'>
             <div class='span6'>
               <dl>
-                <dt>id <span class='label important'>Readonly</span> <span class='label notice'>immutable</span></dt>
+                <dt>id <span class='label readonly'>Readonly</span> <span class='label immutable'>immutable</span></dt>
                 <dd>ID of the object.</dd>
                 <dt>name</dt>
                 <dd>Name of the tag.</dd>
@@ -591,11 +591,11 @@
                   The interpretation depends on client, however the value should be from 1 to 12.
                   There is no validation on ubiregi.com server on the uniqueness of <code>position</code>.
                 </dd>
-                <dt>icon_name <span class='label success'>Writeonly</span></dt>
+                <dt>icon_name <span class='label writeonly'>Writeonly</span></dt>
                 <dd>Name of icon.</dd>
-                <dt>icon <span class='label important'>Readonly</span></dt>
+                <dt>icon <span class='label readonly'>Readonly</span></dt>
                 <dd>Icon image for the tag.</dd>
-                <dt>icon_mime <span class='label important'>Readonly</span></dt>
+                <dt>icon_mime <span class='label readonly'>Readonly</span></dt>
                 <dd>MIME type of the icon. Usually <code>image/png</code>.</dd>
               </dl>
             </div>
@@ -656,7 +656,7 @@
           <div class='row'>
             <div class='span6'>
               <dl>
-                <dt>id <span class='label important'>Readonly</span> <span class='label notice'>immutable</span></dt>
+                <dt>id <span class='label readonly'>Readonly</span> <span class='label immutable'>immutable</span></dt>
                 <dd>ID of the object.</dd>
                 <dt>name</dt>
                 <dd>Name of the cashier.</dd>
@@ -664,7 +664,7 @@
                 <dd><code>true</code> if the cashier is enabled. <code>false</code> if the cashier is disabled.</dd>
                 <dt>icon</dt>
                 <dd>Base64 encoded binary data of icon.</dd>
-                <dt>icon_mime <span class='label important'>Readonly</span></dt>
+                <dt>icon_mime <span class='label readonly'>Readonly</span></dt>
                 <dd>MIME type of the icon. Usually, <code>"image/png"</code> or <code>"image/jpeg"</code>.</dd>
               </dl>
             </div>
@@ -721,7 +721,7 @@
           <div class='row'>
             <div class='span6'>
               <dl>
-                <dt>id <span class='label important'>Readonly</span> <span class='label notice'>immutable</span></dt>
+                <dt>id <span class='label readonly'>Readonly</span> <span class='label immutable'>immutable</span></dt>
                 <dd>ID of the object.</dd>
                 <dt>name</dt>
                 <dd>Name of the payment type.</dd>
@@ -784,9 +784,9 @@
           <div class='row'>
             <div class='span6'>
               <dl>
-                <dt>id <span class='label important'>Readonly</span> <span class='label notice'>immutable</span></dt>
+                <dt>id <span class='label readonly'>Readonly</span> <span class='label immutable'>immutable</span></dt>
                 <dd>ID of the object.</dd>
-                <dt>sku <span class='label notice'>immutable</span></dt>
+                <dt>sku <span class='label immutable'>immutable</span></dt>
                 <dd>SKU of the item.</dd>
                 <dt>name</dt>
                 <dd>Name of the item.</dd>
@@ -815,15 +815,15 @@
                 <dd>
                   The category the item is belonging to. <code>null</code> if the item is disabled.
                 </dd>
-                <dt>stock <span class='label important'>Readonly</span></dt>
+                <dt>stock <span class='label readonly'>Readonly</span></dt>
                 <dd>
                   The stocks with respect to <code>StockEvent</code>s.
                 </dd>
-                <dt>last_inventory_at <span class='label important'>Readonly</span></dt>
+                <dt>last_inventory_at <span class='label readonly'>Readonly</span></dt>
                 <dd>
                   The time at which the most recent inventory was made according to <code>StockEvent</code>s.
                 </dd>
-                <dt>incoming_stock <span class='label important'>Readonly</span></dt>
+                <dt>incoming_stock <span class='label readonly'>Readonly</span></dt>
                 <dd>
                   The number of the item which was ordered but not yet arrived.
                 </dd>
@@ -905,20 +905,20 @@
           <div class='row'>
             <div class='span6'>
               <dl>
-                <dt>id <span class='label important'>Readonly</span> <span class='label notice'>immutable</span></dt>
+                <dt>id <span class='label readonly'>Readonly</span> <span class='label immutable'>immutable</span></dt>
                 <dd>ID of the object</dd>
-                <dt>guid <span class='label notice'>immutable</span></dt>
+                <dt>guid <span class='label immutable'>immutable</span></dt>
                 <dd>
                   UUID of checkout.
                   The ID is generated by clients, thus it may not be unique.
                   This is used to prevent a checkout posted from being inserted more than one time.
                   The tuple of <code>guid</code>, <code>paid_at</code>, and <code>account_id</code> is used to identify a checkout.
                 </dd>
-                <dt>account_id <span class='label notice'>immutable</span></dt>
+                <dt>account_id <span class='label immutable'>immutable</span></dt>
                 <dd>ID of account which the checkout is belonging to.</dd>
                 <dt>paid_at</dt>
                 <dd>Record when the bill is paid at.</dd>
-                <dt>price <span class='label important'>Readonly</span></dt>
+                <dt>price <span class='label readonly'>Readonly</span></dt>
                 <dd><strong>A string</strong> which represents server's culculated total sales of the checkout.</dd>
                 <dt>change</dt>
                 <dd><strong>A string</strong> which represents change given to the customer.</dd>
@@ -946,7 +946,7 @@
                 <dd>Array of ID of <code>Table</code>.</dd>
                 <dt>customer_tag_ids</dt>
                 <dd>Array of ID of <code>CustomerTags</code>.</dd>
-                <dt>modifier <span class='label important'>Readonly</span> <span class='label warning'>Optional</span></dt>
+                <dt>modifier <span class='label readonly'>Readonly</span> <span class='label optional'>Optional</span></dt>
                 <dd>Only for compatibility.</dd>
               </dl>
             </div>
@@ -1063,7 +1063,7 @@
           <div class='row'>
             <div class='span6'>
               <dl>
-                <dt>id <span class='label important'>Readonly</span> <span class='label notice'>immutable</span></dt>
+                <dt>id <span class='label readonly'>Readonly</span> <span class='label immutable'>immutable</span></dt>
                 <dd>ID of the object</dd>
                 <dt>menu_item_id</dt>
                 <dd>ID of the menu item</dd>
@@ -1095,7 +1095,7 @@
           <div class='row'>
             <div class='span6'>
               <dl>
-                <dt>id <span class='label important'>Readonly</span> <span class='label notice'>immutable</span></dt>
+                <dt>id <span class='label readonly'>Readonly</span> <span class='label immutable'>immutable</span></dt>
                 <dd>ID of the object</dd>
                 <dt>payment_type_id</dt>
                 <dd>ID of <code>PaymentType</code></dd>
@@ -1115,13 +1115,13 @@
           <div class='row'>
             <div class='span6'>
               <dl>
-                <dt>id <span class='label important'>Readonly</span> <span class='label notice'>immutable</span></dt>
+                <dt>id <span class='label readonly'>Readonly</span> <span class='label immutable'>immutable</span></dt>
                 <dd>ID of the object</dd>
-                <dt>account_id <span class='label notice'>immutable</span></dt>
+                <dt>account_id <span class='label immutable'>immutable</span></dt>
                 <dd>ID of account which this customer is associated with</dd>
                 <dt>fields</dt>
                 <dd>Array of <code>CustomerField</code> object</dd>
-                <dt>guid <span class='label notice'>immutable</span></dt>
+                <dt>guid <span class='label immutable'>immutable</span></dt>
                 <dd>
                   An GUID which uniquely identifies the customer.
                   The GUID is generated in client side, a client should be careful to read it unique.
@@ -1217,15 +1217,15 @@
           <div class='row'>
             <div class='span6'>
               <dl>
-                <dt>id <span class='label important'>Readonly</span> <span class='label notice'>immutable</span></dt>
+                <dt>id <span class='label readonly'>Readonly</span> <span class='label immutable'>immutable</span></dt>
                 <dd>ID of the object.</dd>
-                <dt>customer_id <span class='label notice'>immutable</span></dt>
+                <dt>customer_id <span class='label immutable'>immutable</span></dt>
                 <dd>ID of customer which the field belongs to.</dd>
-                <dt>guid <span class='label notice'>immutable</span></dt>
+                <dt>guid <span class='label immutable'>immutable</span></dt>
                 <dd>GUID.</dd>
-                <dt>app_created_at <span class='label success'>Writeonly</span> <span class='label notice'>immutable</span></dt>
+                <dt>app_created_at <span class='label writeonly'>Writeonly</span> <span class='label immutable'>immutable</span></dt>
                 <dd>Time when the field has been created in a client app.</dd>
-                <dt>name <span class='label notice'>immutable</span></dt>
+                <dt>name <span class='label immutable'>immutable</span></dt>
                 <dd>Name of the field.</dd>
                 <dt>value</dt>
                 <dd>Value in string of the field</dd>
@@ -1295,15 +1295,15 @@
           <div class='row'>
             <div class='span6'>
               <dl>
-                <dt>id <span class='label important'>Readonly</span> <span class='label notice'>immutable</span></dt>
+                <dt>id <span class='label readonly'>Readonly</span> <span class='label immutable'>immutable</span></dt>
                 <dd>ID of this object.</dd>
-                <dt>customer_id <span class='label notice'>immutable</span></dt>
+                <dt>customer_id <span class='label immutable'>immutable</span></dt>
                 <dd>ID which thie object belongs to.</dd>
-                <dt>app_created_at <span class='label success'>Writeonly</span> <span class='label notice'>immutable</span></dt>
+                <dt>app_created_at <span class='label writeonly'>Writeonly</span> <span class='label immutable'>immutable</span></dt>
                 <dd>Time when the note is created in a client app</dd>
-                <dt>guid <span class='label notice'>immutable</span></dt>
+                <dt>guid <span class='label immutable'>immutable</span></dt>
                 <dd>GUID</dd>
-                <dt>checkout_id <span class='label notice'>immutable</span></dt>
+                <dt>checkout_id <span class='label immutable'>immutable</span></dt>
                 <dd>ID of <code>Checkout</code> object, which the note is associated with.</dd>
                 <dt>kind</dt>
                 <dd>
@@ -1316,7 +1316,7 @@
                 <dd>
                   Base64 encoded photo data, resized to 256px x 256px (for thumbnail).
                 </dd>
-                <dt>photo_url <span class='label important'>Readonly</span></dt>
+                <dt>photo_url <span class='label readonly'>Readonly</span></dt>
                 <dd>URL of full size photo. May be absent. (we are working for this.)</dd>
               </dl>
             </div>
@@ -1412,21 +1412,21 @@
           <div class='row'>
             <div class='span6'>
               <dl>
-                <dt>id <span class='label important'>Readonly</span> <span class='label notice'>immutable</span></dt>
+                <dt>id <span class='label readonly'>Readonly</span> <span class='label immutable'>immutable</span></dt>
                 <dd>ID of the event.</dd>
-                <dt>menu_item_id <span class='label notice'>immutable</span></dt>
+                <dt>menu_item_id <span class='label immutable'>immutable</span></dt>
                 <dd>ID of the menu item associated with the event.</dd>
-                <dt> app_created_at <span class='label success'>Writeonly</span> <span class='label notice'>immutable</span></dt>
+                <dt> app_created_at <span class='label writeonly'>Writeonly</span> <span class='label immutable'>immutable</span></dt>
                 <dd>Time when the event has been created in a client app.</dd>
-                <dt>inventory_at <span class='label notice'>immutable</span></dt>
+                <dt>inventory_at <span class='label immutable'>immutable</span></dt>
                 <dd>Time when the inentory event has occured.  It maybe different from <code>app_created_at</code>.</dd>
-                <dt>event_type <span class='label notice'>immutable</span></dt>
+                <dt>event_type <span class='label immutable'>immutable</span></dt>
                 <dd>Type of the event. One of <code>"inventory"</code>, <code>"arrival"</code>, <code>"shipping"</code>, and <code>"order"</code>.</dd>
-                <dt>amount <span class='label notice'>immutable</span></dt>
+                <dt>amount <span class='label immutable'>immutable</span></dt>
                 <dd>An integer which represents amount of the event</dd>
-                <dt>uuid <span class='label notice'>immutable</span></dt>
+                <dt>uuid <span class='label immutable'>immutable</span></dt>
                 <dd>UUID associated to the event.  This is used to prevent duplicated posts.</dd>
-                <dt>body <span class='label notice'>immutable</span></dt>
+                <dt>body <span class='label immutable'>immutable</span></dt>
                 <dd>An arbitrary JSON object.  The usage of the value is not decided yet.</dd>
               </dl>
             </div>
@@ -1524,11 +1524,11 @@
           <h2>Special Fields</h2>
           <p>Most objects have special fields, <code>created_at</code> and <code>updated_at</code>.</p>
           <dl>
-            <dt>created_at <span class='label important'>Readonly</span></dt>
+            <dt>created_at <span class='label readonly'>Readonly</span></dt>
             <dd>
               Server time at which the object is created.
             </dd>
-            <dt>updated_at <span class='label important'>Readonly</span></dt>
+            <dt>updated_at <span class='label readonly'>Readonly</span></dt>
             <dd>
               Server time at which the object is updated.
             </dd>

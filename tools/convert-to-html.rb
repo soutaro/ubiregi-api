@@ -60,13 +60,13 @@ class Context
     b = options.map {|option|
       case option
       when :optional
-        "<span class='label warning'>Optional</span>"
+        "<span class='label optional'>Optional</span>"
       when :readonly
-        "<span class='label important'>Readonly</span>"
+        "<span class='label readonly'>Readonly</span>"
       when :writeonly
-        "<span class='label success'>Writeonly</span>"
+        "<span class='label writeonly'>Writeonly</span>"
       when :immutable
-        "<span class='label notice'>immutable</span>"
+        "<span class='label immutable'>immutable</span>"
       end
     }.join(" ")
     a + " " + b
