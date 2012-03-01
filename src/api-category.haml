@@ -1,0 +1,114 @@
+%h1#object-category Category
+
+:markdown
+  `Category` is set of `MenuItem`s to organize and help user to input checkouts.
+
+%h2#object-category-fields Fields
+
+.row
+  .span6
+    %dl
+      %dt= field "id", :readonly, :immutable
+      %dd ID of the object.
+      %dt= field "name"
+      %dd Name of the item.
+      %dt= field "position"
+      %dd
+        Position of the cateogry in menu. <code>null</code> if the category is disabled.
+
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "id": 371,
+            "name": "Coke",
+            "position": 1021,
+          }
+
+%h2#get-on-menus-menu-id-categories GET on /menus/<em>menu_id</em>/categories
+
+:markdown
+  Retrieves `Category`s defined in menu specified by *menu_id*.
+
+%h3 Request
+
+.row
+  .span6
+    %pre
+      = preserve do
+        GET /menus/13/categories?since=2011-01-01T18:00:13Z
+  .span6
+    %dl
+      %dt= field "since"
+      %dt= field "until"
+      %dt= field "glb"
+
+%h3 Response
+
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "timestamp": "2012-01-03T03:11:03Z",
+            "next-url": "https://ubiregi.com/api/3/menus/13/categories?since=2011-01-01T18:00:13Z&until=2011-01-03T03:11:03Z&glb=13476",
+            "last-updated-at": "2012-01-02T21:14:08Z",
+            "categories": [ $categories ],
+          }
+  .span6
+    %dl
+      %dt= field "timestamp"
+      %dt= field "next-url"
+      %dt= field "last-updated-at"
+      %dt= field "categories"
+
+%h2#post-on-menus-menu-id-categories POST on /menus/<em>menu_id</em>/categories
+
+:markdown
+  Update/Create the categories of the menu specified by *menu_id*.
+
+%h3 Request
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "categories": [
+              {
+                "name": "Soft drinks",
+                "position": 102,
+              },
+              {
+                "id": 1022,
+                "position": null,
+              }
+            ]
+          }
+  .span6
+    %dl
+      %dt= field "items"
+      %dd
+        Array of <code>Category</code> objects to be updated/created.
+        %dl
+          %dt id
+          %dt name
+          %dt position
+
+%h3 Response
+
+.row
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "timestamp": "2011-11-02T09:11:12Z",
+            "categories" : [ $categories ],
+          }
+  .span6
+    %dl
+      %dt= field "timestamp"
+      %dt= field "categories"

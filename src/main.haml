@@ -61,6 +61,18 @@
           %li= link_to "GET on /menus/<em>menu_id</em>/items", "#get-on-menus-menu-id-items"
           %li= link_to "POST on /menus/<em>menu_id</em>/items", "#post-on-menus-menu-id-items"
 
+        %h4= link_to "Categry", "#object-category"
+        %ul
+          %li= link_to "Fields", "#object-category-fields"
+          %li= link_to "GET on /menus/<em>menu_id</em>/categories", "#get-on-menus-menu-id-categories"
+          %li= link_to "POST on /menus/<em>menu_id</em>/categories", "#post-on-menus-menu-id-categories"
+
+        %h4= link_to "StockEvent", "#object-stock-event"
+        %ul
+          %li= link_to "Fields", "#object-stock-event-fields"
+          %li= link_to "GET on /accounts/<em>account_id</em>/stocks/events", "#get-on-accounts-account-id-stocks-events"
+          %li= link_to "POST on /accounts/<em>account_id</em>/stocks/events", "#post-on-accounts-account-id-stocks-events"
+
         %h4= link_to "Checkout", "#object-checkout"
         %ul
           %li= link_to "Fields", "#object-checkout-fields"
@@ -90,12 +102,6 @@
           %li= link_to "Fields", "#object-customer-note-fields"
           %li= link_to "GET on /customers/notes", "#get-on-customers-notes"
           %li= link_to "POST on /customers/notes", "#post-on-customers-notes"
-
-        %h4= link_to "StockEvent", "#object-stock-event"
-        %ul
-          %li= link_to "Fields", "#object-stock-event-fields"
-          %li= link_to "GET on /accounts/<em>account_id</em>/stocks/events", "#get-on-accounts-account-id-stocks-events"
-          %li= link_to "POST on /accounts/<em>account_id</em>/stocks/events", "#post-on-accounts-account-id-stocks-events"
 
         %h4= link_to "API Notes", "#api-notes"
         
@@ -129,8 +135,11 @@
           = render "api-customer-tag"
           = render "api-cashier"
           = render "api-payment-type"
+          = render "api-category"
           = render "api-menu-item"
 
+          = render "api-stock-event"
+          
           = render "api-checkout"
           = render "api-checkout-item"
           = render "api-checkout-payment"
@@ -139,8 +148,6 @@
           = render "api-customer-field"
           = render "api-customer-note"
 
-          = render "api-stock-event"
-          
           %hr
           = render "api-notes"
           
