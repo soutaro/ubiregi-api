@@ -4,6 +4,7 @@
     <meta charset='utf-8' />
     <link href='bootstrap.min.css' rel='stylesheet' />
     <link href='top.css' rel='stylesheet' />
+    <meta content='width=1120' name='viewport' />
   </head>
   <body>
     <div class='menu span5'>
@@ -1119,6 +1120,11 @@
                 <dd>ID of account which the checkout is belonging to.</dd>
                 <dt>paid_at</dt>
                 <dd>Record when the bill is paid at.</dd>
+                <dt>sales_date <span class='label readonly'>Readonly</span></dt>
+                <dd>
+                  The date for <code>paid_at</code> with respect to its account's <code>timezone</code> and <code>date_offset</code>.
+                  (The example here assumes account's timezone is <code>"Asia/Tokyo"</code> and date_offset is <code>0</code>.)
+                </dd>
                 <dt>price <span class='label readonly'>Readonly</span></dt>
                 <dd><strong>A string</strong> which represents server's culculated total sales of the checkout.</dd>
                 <dt>change</dt>
@@ -1152,7 +1158,7 @@
               </dl>
             </div>
             <div class='span6'>
-              <pre>{&#x000A;  &quot;id&quot;: 1,&#x000A;  &quot;guid&quot;: &quot;8928309238-d987aerkeh-9847tdfkzhg4&quot;,&#x000A;  &quot;account_id&quot;: 1,&#x000A;  &quot;paid_at&quot;: &quot;2011-12-24T16:20:20Z&quot;,&#x000A;  &quot;price&quot;: &quot;385.0&quot;,&#x000A;  &quot;change&quot;: &quot;4000.0&quot;,&#x000A;  &quot;status&quot;: &quot;close&quot;,&#x000A;  &quot;cashier_id&quot;: null,&#x000A;  &quot;customers_count&quot;: 0,&#x000A;  &quot;payments&quot;: [ $Payments ],&#x000A;  &quot;items&quot;: [ $CheckoutItems ],&#x000A;  &quot;table_ids&quot;: [ 99, 8 ],&#x000A;  &quot;customer_tag_ids&quot;: [ 10, 1003 ],&#x000A;  &quot;modifier&quot;: &quot;0.0&quot;&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;id&quot;: 1,&#x000A;  &quot;guid&quot;: &quot;8928309238-d987aerkeh-9847tdfkzhg4&quot;,&#x000A;  &quot;account_id&quot;: 1,&#x000A;  &quot;paid_at&quot;: &quot;2011-12-24T16:20:20Z&quot;,&#x000A;  &quot;sales_date&quot;: &quot;2011-12-25&quot;,&#x000A;  &quot;price&quot;: &quot;385.0&quot;,&#x000A;  &quot;change&quot;: &quot;4000.0&quot;,&#x000A;  &quot;status&quot;: &quot;close&quot;,&#x000A;  &quot;cashier_id&quot;: null,&#x000A;  &quot;customers_count&quot;: 0,&#x000A;  &quot;payments&quot;: [ $Payments ],&#x000A;  &quot;items&quot;: [ $CheckoutItems ],&#x000A;  &quot;table_ids&quot;: [ 99, 8 ],&#x000A;  &quot;customer_tag_ids&quot;: [ 10, 1003 ],&#x000A;  &quot;modifier&quot;: &quot;0.0&quot;,&#x000A;}</pre>
             </div>
           </div>
           <h2 id='get-on-accounts-account-id-checkouts'>GET on /accounts/<em>account_id</em>/checkouts</h2>
