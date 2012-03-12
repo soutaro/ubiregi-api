@@ -37,7 +37,13 @@
   .span6
     %dl
       %dt= field "errors", :readonly, :immutable
-      %dd Array of an object.  An element of array consists of <code>object</code> attribute, which value is request JSON itself, and <code>messages</code> attribute, which value is an array of error messages.
+      %dd 
+        Array of an object.  
+        %dl
+          %dt= field "object", :readonly, :immutable
+          %dd A JSON object included in request JSON that related to the reason why this request failed.
+          %dt= field "messages", :readonly, :immutable
+          %dd An array of error messages.
       %dt= field "timestamp", :readonly, :immutable
       %dd The server time that a request failed.
 
@@ -47,17 +53,14 @@
         :escaped
           {
             "errors": [
-              "object" : {
-                "cashiers": [
-                  {
-                    "id": 3,
-                    "name": "Existing Cashier",
-                    "enabled":true,
-                    "icon":$non-base64Encoded
-                  }
-                ]
-              },
-              "messages": [$strings]
+              {
+                "object" : {
+                  "name": "Existing Cashier",
+                  "enabled":true,
+                  "icon":"hogehoge"
+                },
+                "messages": ["invalid icon"]
+              }
             ],
             "timestamp": "2012-03-11T09:00:00Z"
           }

@@ -1651,13 +1651,21 @@
             <div class='span6'>
               <dl>
                 <dt>errors <span class='label readonly'>Readonly</span> <span class='label immutable'>immutable</span></dt>
-                <dd>Array of an object.  An element of array consists of <code>object</code> attribute, which value is request JSON itself, and <code>messages</code> attribute, which value is an array of error messages.</dd>
+                <dd>
+                  Array of an object.
+                  <dl>
+                    <dt>object <span class='label readonly'>Readonly</span> <span class='label immutable'>immutable</span></dt>
+                    <dd>A JSON object included in request JSON that related to the reason why this request failed.</dd>
+                    <dt>messages <span class='label readonly'>Readonly</span> <span class='label immutable'>immutable</span></dt>
+                    <dd>An array of error messages.</dd>
+                  </dl>
+                </dd>
                 <dt>timestamp <span class='label readonly'>Readonly</span> <span class='label immutable'>immutable</span></dt>
                 <dd>The server time that a request failed.</dd>
               </dl>
             </div>
             <div class='span6'>
-              <pre>{&#x000A;  &quot;errors&quot;: [&#x000A;    &quot;object&quot; : {&#x000A;      &quot;cashiers&quot;: [&#x000A;        {&#x000A;          &quot;id&quot;: 3,&#x000A;          &quot;name&quot;: &quot;Existing Cashier&quot;,&#x000A;          &quot;enabled&quot;:true,&#x000A;          &quot;icon&quot;:$non-base64Encoded&#x000A;        }&#x000A;      ]&#x000A;    },&#x000A;    &quot;messages&quot;: [$strings]&#x000A;  ],&#x000A;  &quot;timestamp&quot;: &quot;2012-03-11T09:00:00Z&quot;&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;errors&quot;: [&#x000A;    {&#x000A;      &quot;object&quot; : {&#x000A;        &quot;name&quot;: &quot;Existing Cashier&quot;,&#x000A;        &quot;enabled&quot;:true,&#x000A;        &quot;icon&quot;:&quot;hogehoge&quot;&#x000A;      },&#x000A;      &quot;messages&quot;: [&quot;invalid icon&quot;]&#x000A;    }&#x000A;  ],&#x000A;  &quot;timestamp&quot;: &quot;2012-03-11T09:00:00Z&quot;&#x000A;}</pre>
             </div>
           </div>
           <hr />
