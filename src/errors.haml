@@ -1,18 +1,15 @@
-%h1 Error Handling
+%h1#errors Errors
 
 :markdown
   Errors are notified via HTTP response status. Error code are following
-  the standarad HTTP error code syntax. If there are something bad in
+  the standard HTTP error code convention. If there are something bad in
   your request, you will get `4xx`. If there are something wrong
   happen on the server, you will get `5xx`.
 
-:markdown
-  The response body contains JSON object which represents the detail of the error.
-
-%h2 Status code
+%h2#errors-status-code Status code
 
 %p 
-  We define two status code, where the meaning is shared between all requests.
+  We define four status code, where the meaning is shared between all requests.
 
 %dl
   %dt 401 (Unauthorized)
@@ -28,22 +25,39 @@
     Resources client want to require is not found.  If the status code is 404,
     we recommend you to check account id, menu id, customer id, and so on in request JSON.
 
-%h2 JSON body example
+%h2#errors-error-object Error object
 
-%pre
-  = preserve do
-    :escaped
-      [
-        {
-          "reason": "you are not allowed to change the information of this account"
-        }
-      ]
+:markdown
+  The error response contains JSON object which represents the detail of the error.  The format
+  of Error object is as the followings:
 
-%pre
-  = preserve do
-    :escaped
-      [
-        {
-          "reason": "the resource you requested was not found"
-        }
-      ]
+%h2#errors-error-object-fields Fields
+
+.row
+  .span6
+    %dl
+      %dt= field "errors", :readonly, :immutable
+      %dd Array of an object.  An element of array consists of "object", which is request JSON itself, and "messages", which is an array of error messages.
+      %dt= field "timestamp", :readonly, :immutable
+      %dd The server time that a request failed.
+
+  .span6
+    %pre
+      = preserve do
+        :escaped
+          {
+            "errors": [
+              "object" : {
+                "cashiers": [
+                  {
+                    "id": 3,
+                    "name": "Existing Cashier",
+                    "enabled":true,
+                    "icon":$non-base64Encoded
+                  }
+                ]
+              },
+              "messages": [$strings]
+            ],
+            "timestamp": "2012-03-11T09:00:00Z"
+          }
