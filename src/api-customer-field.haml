@@ -11,8 +11,6 @@
     %dl
       %dt= field "id", :readonly, :immutable
       %dd ID of the object.
-      %dt= field "customer_id", :immutable
-      %dd ID of customer which the field belongs to.
       %dt= field "guid", :immutable
       %dd GUID.
       %dt= field "app_created_at", :writeonly, :immutable
@@ -27,7 +25,7 @@
       = preserve do
         :escaped
           {
-            "customer_id": 1,
+            "id": 1345,
             "guid": $UUID-like-sequence,
             "app_created_at": "2012-02-14T00:00:00Z",
             "name": "customer.field.name",
