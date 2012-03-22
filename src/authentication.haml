@@ -77,8 +77,23 @@
       This can be used to block the app.
       You are responsible to keep it secret.
 
+      %p
+        Provided an <em>app-secret</em>, you can construct the value of <code>X-Ubiregi-App-Secret</code> by following steps:
+
+        %ol
+          %li 
+            Prepare <em>salt</em>.  <em>salt</em> is an arbitrary ASCII string (a randomized string is desirable), which doesn't include <code>":"</code>.
+          %li Prepare <em>salt-app-secret</em>.  <em>salt-app-secret</em> is just concatenation of <em>salt</em> and <em>app-secret</em>.  No separator is needed between two.
+          %li 
+            Prepare <em>encoded-app-secret</em>.  <em>encoded-app-secret</em> is SHA1 digest of <em>app-secret</em>.  Each byte must be represented as two hex character.
+            Typically, the result of <em>encoded-app-secret</em> should equal to the result of the following Ruby code:
+            %pre
+              Digest::SHA1.hexdigest(salt + app-secret)
+          %li Set <em>encoded-app-secret</em> to the value of <code>X-Ubiregi-App-Secret</code>
+        
+
 %p
-  If <code>X-Ubiregi-Auth-Token</code> is invalid, your request will result in <code>401</code> (Unauthorized) status.
+  If <code>X-Ubiregi-Auth-Token</code> or <code>X-Ubiregi-App-Secret</code> is invalid, your request will result in <code>401</code> (Unauthorized) status.
 
 %p
   Note that there are another possibility to make your request failed.
