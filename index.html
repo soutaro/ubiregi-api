@@ -216,6 +216,18 @@
             Currently we provide very simple token based authentication mechanism.
             Every installations of client have their own secret tokens which can be used for API access.
           </p>
+          <h2 id='authentication-registration'>App Registration</h2>
+          <p>
+            Before starting developing with Ubiregi API, you need to register your app on ubiregi.com
+            Visit <a href='https://ubiregi.com/developer'>Ubiregi for Developers</a>, and fill the form (You must have an Ubiregi account).
+          </p>
+          <img src="images/registration.png" width="90%">
+          <p>
+            After registration, your app will have <em>Install URL</em> and <em>Secret</em>.
+            Install URL is the URL to tell your users to install your app.
+            Secret is a random string which identifies access from your app.
+            You <em>should</em> keep the value secret, since it can be used to block bad apps.
+          </p>
           <h2 id='authentication-installation'>Installation</h2>
           <p>
             A user will <it>install</it> apps to ubiregi.com.
@@ -262,32 +274,27 @@
             <tr>
               <th width='190'><code>X-Ubiregi-Auth-Token</code></th>
               <td>
-                Users secret token to identify user and installation.
+                The authentication token of the user for your app installation.
                 This is used for authentication.
-                Both of you and users are responsible to keep it secret.
               </td>
             </tr>
             <tr>
               <th><code>X-Ubiregi-App-Secret</code></th>
               <td>
-                To identify your app.
-                This can be used to block the app.
-                You are responsible to keep it secret.
-                <p>
-                  Provided an <em>app-secret</em>, you can construct the value of <code>X-Ubiregi-App-Secret</code> by following steps:
-                  <ol>
-                    <li>
-                      Prepare <em>salt</em>.  <em>salt</em> is an arbitrary ASCII string (a randomized string is desirable), which doesn't include <code>":"</code>.
-                    </li>
-                    <li>Prepare <em>salt-app-secret</em>.  <em>salt-app-secret</em> is just concatenation of <em>salt</em> and <em>app-secret</em>.  No separator is needed between two.</li>
-                    <li>
-                      Prepare <em>encoded-app-secret</em>.  <em>encoded-app-secret</em> is SHA1 digest of <em>app-secret</em>.  Each byte must be represented as two hex character.
-                      Typically, the result of <em>encoded-app-secret</em> should equal to the result of the following Ruby code:
-                      <pre>Digest::SHA1.hexdigest(salt + app-secret)</pre>
-                    </li>
-                    <li>Set <em>encoded-app-secret</em> to the value of <code>X-Ubiregi-App-Secret</code></li>
-                  </ol>
-                </p>
+                <div>
+                  Hash of your app's secret.
+                  This is used to identify which app send the access, and can be used to block the app.
+                  You are responsible to keep it secret.
+                </div>
+                <div>
+                  Given your app's <em>secret</em> and your generated <em>salt</em>, compute
+                </div>
+                <blockquote>
+                  <em>salt</em><code>:</code><em>h(salt . secret)</em>
+                </blockquote>
+                <div>
+                  where, <em>h</em> is SHA1 hashing function, and <em>.</em> is concatination of two strings.
+                </div>
               </td>
             </tr>
           </table>
@@ -302,6 +309,8 @@
           <p>
             Check the <a href='#introduction-examples'>examples</a> to see how the authentication is exactly.
           </p>
+          <h3>Example of Computation of X-Ubiregi-App-Secret</h3>
+          <pre>secret = &quot;topsecret&quot;&#x000A;salt = Time.now.strftime(&quot;%Y%m%d%H%M%S&quot;)        # Assume &quot;20120101032111&quot;&#x000A;digest = Digest::SHA1.hexdigest(salt + secret)  # &quot;4fec3a3e9dfb1b3ea7d7ba9cfd067286a1f23a03&quot;&#x000A;&#x000A;app_secret = salt + &quot;:&quot; + digest                # &quot;20120101032111:4fec3a3e9dfb1b3ea7d7ba9cfd067286a1f23a03&quot;</pre>
           <hr />
           <h1 id='notations'>Notations</h1>
           <h2>Field Attributes</h2>

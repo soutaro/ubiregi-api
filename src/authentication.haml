@@ -67,30 +67,21 @@
   %tr
     %th{ :width => "190" } <code>X-Ubiregi-Auth-Token</code>
     %td
-      Users secret token to identify user and installation.
+      The authentication token of the user for your app installation.
       This is used for authentication.
-      Both of you and users are responsible to keep it secret.
   %tr
     %th <code>X-Ubiregi-App-Secret</code>
     %td
-      To identify your app.
-      This can be used to block the app.
-      You are responsible to keep it secret.
-
-      %p
-        Provided an <em>app-secret</em>, you can construct the value of <code>X-Ubiregi-App-Secret</code> by following steps:
-
-        %ol
-          %li 
-            Prepare <em>salt</em>.  <em>salt</em> is an arbitrary ASCII string (a randomized string is desirable), which doesn't include <code>":"</code>.
-          %li Prepare <em>salt-app-secret</em>.  <em>salt-app-secret</em> is just concatenation of <em>salt</em> and <em>app-secret</em>.  No separator is needed between two.
-          %li 
-            Prepare <em>encoded-app-secret</em>.  <em>encoded-app-secret</em> is SHA1 digest of <em>app-secret</em>.  Each byte must be represented as two hex character.
-            Typically, the result of <em>encoded-app-secret</em> should equal to the result of the following Ruby code:
-            %pre
-              Digest::SHA1.hexdigest(salt + app-secret)
-          %li Set <em>encoded-app-secret</em> to the value of <code>X-Ubiregi-App-Secret</code>
-        
+      %div
+        Hash of your app's secret.
+        This is used to identify which app send the access, and can be used to block the app.
+        You are responsible to keep it secret.
+      %div
+        Given your app's <em>secret</em> and your generated <em>salt</em>, compute
+      %blockquote
+        <em>salt</em><code>:</code><em>h(salt . secret)</em>
+      %div
+        where, <em>h</em> is SHA1 hashing function, and <em>.</em> is concatination of two strings.
 
 %p
   If <code>X-Ubiregi-Auth-Token</code> or <code>X-Ubiregi-App-Secret</code> is invalid, your request will result in <code>401</code> (Unauthorized) status.
@@ -102,3 +93,14 @@
 
 %p
   Check the #{ link_to 'examples', '#introduction-examples' } to see how the authentication is exactly.
+
+%h3 Example of Computation of X-Ubiregi-App-Secret
+
+%pre
+  = preserve do
+    :escaped
+      secret = "topsecret"
+      salt = Time.now.strftime("%Y%m%d%H%M%S")        # Assume "20120101032111"
+      digest = Digest::SHA1.hexdigest(salt + secret)  # "4fec3a3e9dfb1b3ea7d7ba9cfd067286a1f23a03"
+      
+      app_secret = salt + ":" + digest                # "20120101032111:4fec3a3e9dfb1b3ea7d7ba9cfd067286a1f23a03"
