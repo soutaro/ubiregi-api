@@ -4,6 +4,20 @@
   Currently we provide very simple token based authentication mechanism.
   Every installations of client have their own secret tokens which can be used for API access.
 
+%h2#authentication-registration App Registration
+
+%p
+  Before starting developing with Ubiregi API, you need to register your app on ubiregi.com
+  Visit #{link_to "Ubiregi for Developers", "https://ubiregi.com/developer"}, and fill the form (You must have an Ubiregi account).
+
+<img src="images/registration.png" width="90%">
+
+%p
+  After registration, your app will have <em>Install URL</em> and <em>Secret</em>.
+  Install URL is the URL to tell your users to install your app.
+  Secret is a random string which identifies access from your app.
+  You <em>should</em> keep the value secret, since it can be used to block bad apps.
+
 %h2#authentication-installation Installation
 
 %p
