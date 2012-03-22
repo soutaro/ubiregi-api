@@ -94,7 +94,7 @@
 %p
   Check the #{ link_to 'examples', '#introduction-examples' } to see how the authentication is exactly.
 
-%h3 Example of Computation of X-Ubiregi-App-Secret
+%h3 Example of Computation of X-Ubiregi-App-Secret in Ruby
 
 %pre
   = preserve do
@@ -104,3 +104,28 @@
       digest = Digest::SHA1.hexdigest(salt + secret)  # "4fec3a3e9dfb1b3ea7d7ba9cfd067286a1f23a03"
       
       app_secret = salt + ":" + digest                # "20120101032111:4fec3a3e9dfb1b3ea7d7ba9cfd067286a1f23a03"
+
+%h3 Example of Computation of X-Ubiregi-App-Secret in Scala
+
+%pre
+  = preserve do
+    :escaped
+
+      def encode_secret(secret: String): String = {
+        def generateSalt(): String = {
+          val random = SecureRandom.getInstance('SHA1PRNG');
+          random.setSeed(System.currentTimeMillis())
+          '%08x'.format(random.nextInt())
+        }
+        val salt = generateSalt()
+        val hexDigest = sha1HexDigest(salt + secret)
+        (salt + ":" + hexDigest)
+      }
+      def sha1HexDigest(from: String): String = {
+        val sha1 = MessageDigest.getInstance('SHA')
+        sha1.reset()
+        sha1.update(from.getBytes('UTF-8'))
+        sha1.digest().map{n => '%02x'.format(n & 0xff)}.mkString
+      }
+      val secret = "topsecret"
+      val appSecret = encode_secret(secret)
