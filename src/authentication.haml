@@ -63,8 +63,13 @@
       This can be used to block the app.
       You are responsible to keep it secret.
 
+      %p
+        Provided an $<em>app-secret</em>, you must specify $<em>salt</em>":"$<em>encrypted-app-secret</em> as the value of <code>X-Ubiregi-App-Secret</code>.
+        $<em>encrypted-app-secret</em> is a SHA1 hex digest of $<em>app-secret</em>"."$<em>salt</em>.  
+        $<em>salt</em> can be an arbitrary ASCII string (a randomized string is desirable), which doesn't include ":".
+
 %p
-  If <code>X-Ubiregi-Auth-Token</code> is invalid, your request will result in <code>401</code> (Unauthorized) status.
+  If <code>X-Ubiregi-Auth-Token</code> or <code>X-Ubiregi-App-Secret</code> is invalid, your request will result in <code>401</code> (Unauthorized) status.
 
 %p
   Note that there are another possibility to make your request failed.
