@@ -65,8 +65,15 @@
 
       %p
         Provided an $<em>app-secret</em>, you must specify $<em>salt</em>":"$<em>encrypted-app-secret</em> as the value of <code>X-Ubiregi-App-Secret</code>.
-        $<em>encrypted-app-secret</em> is a SHA1 hex digest of $<em>app-secret</em>"."$<em>salt</em>.  
         $<em>salt</em> can be an arbitrary ASCII string (a randomized string is desirable), which doesn't include ":".
+
+      %p
+        Note that $<em>encrypted-app-secret</em> must be SHA1 digest of $<em>app-secret</em> and each byte must be represented as two hex character.
+        Typically, the result of $<em>encrypted-app-secret</em> should equal to the result of the following Ruby code:
+
+        %pre
+          Digest::SHA1.hexdigest($salt + '.' + $app-secret)
+        
 
 %p
   If <code>X-Ubiregi-Auth-Token</code> or <code>X-Ubiregi-App-Secret</code> is invalid, your request will result in <code>401</code> (Unauthorized) status.
