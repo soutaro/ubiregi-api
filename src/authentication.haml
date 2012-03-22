@@ -64,15 +64,15 @@
       You are responsible to keep it secret.
 
       %p
-        Provided an $<em>app-secret</em>, you must specify $<em>salt</em>":"$<em>encrypted-app-secret</em> as the value of <code>X-Ubiregi-App-Secret</code>.
-        $<em>salt</em> can be an arbitrary ASCII string (a randomized string is desirable), which doesn't include ":".
+        Provided an <em>app-secret</em>, you must specify <em>salt</em><code>":"<em>encoded-app-secret</em> as the value of <code>X-Ubiregi-App-Secret</code>.
+        <em>salt</em> can be an arbitrary ASCII string (a randomized string is desirable), which doesn't include <code>":"</code>.
 
       %p
-        Note that $<em>encrypted-app-secret</em> must be SHA1 digest of $<em>app-secret</em> and each byte must be represented as two hex character.
-        Typically, the result of $<em>encrypted-app-secret</em> should equal to the result of the following Ruby code:
+        Note that <em>encoded-app-secret</em> must be SHA1 digest of <em>app-secret</em> and each byte must be represented as two hex character.
+        Typically, the result of <em>encoded-app-secret</em> should equal to the result of the following Ruby code:
 
         %pre
-          Digest::SHA1.hexdigest($salt + '.' + $app-secret)
+          Digest::SHA1.hexdigest(salt + app-secret)
         
 
 %p
