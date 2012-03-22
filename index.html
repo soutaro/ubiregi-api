@@ -149,73 +149,6 @@
             (In fact, the API v3 is essentialy more powerful than API v2, which is
             used by Ubiregi 2.x)
           </p>
-          <h2 id='introduction-implementation-status'>Implementation Status</h2>
-          <table class='condensed-table'>
-            <thead>
-              <tr>
-                <th>Resource(s)</th>
-                <th>Implementation</th>
-                <th>Documentation</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>/accounts/<em>:account_id</em></th>
-                <td>Finished</td>
-                <td>Finished</td>
-              </tr>
-              <tr>
-                <th>/accounts/<em>:account_id</em>/cashiers</th>
-                <td>Finished</td>
-                <td>Finished</td>
-              </tr>
-              <tr>
-                <th>/accounts/<em>:account_id</em>/customer_tags</th>
-                <td>Finished</td>
-                <td>Finished</td>
-              </tr>
-              <tr>
-                <th>/accounts/<em>:account_id</em>/payment_types</th>
-                <td>Finished</td>
-                <td>Finished</td>
-              </tr>
-              <tr>
-                <th>/accounts/<em>:account_id</em>/tables</th>
-                <td>Not yet</td>
-                <td>Started</td>
-              </tr>
-              <tr>
-                <th>/menus/:menu_id/items</th>
-                <td>Finished</td>
-                <td>Finished</td>
-              </tr>
-              <tr>
-                <th>/menus/:menu_id/categories</th>
-                <td>Finished</td>
-                <td>Finished</td>
-              </tr>
-              <tr>
-                <th>/accounts/<em>:account_id</em>/checkouts</th>
-                <td>Finished</td>
-                <td>Finished</td>
-              </tr>
-              <tr>
-                <th>/customers</th>
-                <td>Finished</td>
-                <td>Finished</td>
-              </tr>
-              <tr>
-                <th>/customers/notes</th>
-                <td>Finished</td>
-                <td>Finished</td>
-              </tr>
-              <tr>
-                <th>/accounts/<em>:account_id</em>/stocks/events</th>
-                <td>Finished</td>
-                <td>Finished</td>
-              </tr>
-            </tbody>
-          </table>
           <h2 id='introduction-quick-start'>Quick Start</h2>
           <ol>
             <li>Signup to ubiregi.com</li>
@@ -228,6 +161,17 @@
             General Notes
             <small>Things every developer should know</small>
           </h2>
+          <h4>Github project, Lingr chat room</h4>
+          <p>
+            Lingr chart room, <a href='http://lingr.com/room/UbiregiAPI'>Ubiregi API Discussion</a> is available for talking with Ubiregists, in Japanese or English.
+            Check the room, and tell us your questions.
+            The room is password protected, the password is <code>topsecret</code>.
+          </p>
+          <p>
+            We also have github project for communication.
+            Since the project now is private, tell us your github account.
+            We will authorize you as a team member.
+          </p>
           <h4>The API is Entirely HTTP-based, and Almost RESTful</h4>
           <p>
             Methods to retrieve data from the Ubiregi API requires a GET
@@ -261,10 +205,9 @@
           </p>
           <h2 id='introduction-examples'>Examples</h2>
           <dl>
-            <dt><a href='https://github.com/ubiregiinc/Ubiregi-API-Clients'>Ubiregi-API-Clients</a></dt>
+            <dt><a href='https://github.com/ubiregiinc/ubiregi-api-client-scala'>Ubiregi-API-Client for Scala</a></dt>
             <dd>
-              Collection of ubiregin api client examples.
-              We are still working for that.
+              Simple library which abstracts API calls and authentications, for Scala.
             </dd>
           </dl>
           <hr />
@@ -342,7 +285,7 @@
             After the user renew the subscription, the status will be recovered.
           </p>
           <p>
-            Check the <a href='https://github.com/ubiregiinc/Ubiregi-API-Clients'>examples</a> to see how the authentication is exactly.
+            Check the <a href='#introduction-examples'>examples</a> to see how the authentication is exactly.
           </p>
           <hr />
           <h1 id='notations'>Notations</h1>
