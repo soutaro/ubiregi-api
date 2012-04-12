@@ -55,7 +55,7 @@
 %h2#authentication-authorization Authorization
 
 %p
-  There is only one authorizatioin levels, <strong>everything</strong>.
+  There is only one authorization levels, <strong>everything</strong>.
   If a user allows an app to access its data (installs the app), the app can access everything.
 
 %h2#authentication-the-protocol The Protocol
@@ -81,7 +81,7 @@
       %blockquote
         <em>salt</em><code>:</code><em>h(salt . secret)</em>
       %div
-        where, <em>h</em> is SHA1 hashing function, and <em>.</em> is concatination of two strings.
+        where, <em>h</em> is SHA1 hashing function, and <em>.</em> is concatenation of two strings.
 
 %p
   If <code>X-Ubiregi-Auth-Token</code> or <code>X-Ubiregi-App-Secret</code> is invalid, your request will result in <code>401</code> (Unauthorized) status.

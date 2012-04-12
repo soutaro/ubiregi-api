@@ -122,7 +122,7 @@
             </div>
           </div>
           <p>
-            Ubiregi API is currently <strong>beta version</strong>.  There are <strong>no guarantees</strong> to use it.  Behaviours of the API
+            Ubiregi API is currently <strong>beta version</strong>.  There are <strong>no guarantees</strong> to use it.  Behaviors of the API
             maybe <strong>changed or fixed without notice</strong>.
           </p>
           <h1 id='introduction'>Introduction</h1>
@@ -146,12 +146,12 @@
           <p>
             Ubiregi API provides almost full access to Ubiregi's data. Everything
             except authentication is the same with what the Ubiregi app is doing.
-            (In fact, the API v3 is essentialy more powerful than API v2, which is
+            (In fact, the API v3 is essentially more powerful than API v2, which is
             used by Ubiregi 2.x)
           </p>
           <h2 id='introduction-quick-start'>Quick Start</h2>
           <ol>
-            <li>Signup to ubiregi.com</li>
+            <li>Sign-up to ubiregi.com</li>
             <li>Register for developer account and new application</li>
             <li>Install the application on your account</li>
             <li>Download the examples.</li>
@@ -181,7 +181,7 @@
           </p>
           <p>
             The API is almost RESTful.
-            Every operations are update of attributes of resouces.
+            Every operations are update of attributes of resources.
           </p>
           <h4>Ubiregi Web App is Built on Rails</h4>
           <p>
@@ -262,7 +262,7 @@
           </p>
           <h2 id='authentication-authorization'>Authorization</h2>
           <p>
-            There is only one authorizatioin levels, <strong>everything</strong>.
+            There is only one authorization levels, <strong>everything</strong>.
             If a user allows an app to access its data (installs the app), the app can access everything.
           </p>
           <h2 id='authentication-the-protocol'>The Protocol</h2>
@@ -292,7 +292,7 @@
                   <em>salt</em><code>:</code><em>h(salt . secret)</em>
                 </blockquote>
                 <div>
-                  where, <em>h</em> is SHA1 hashing function, and <em>.</em> is concatination of two strings.
+                  where, <em>h</em> is SHA1 hashing function, and <em>.</em> is concatenation of two strings.
                 </div>
               </td>
             </tr>
@@ -463,7 +463,7 @@
           <h1 id='object-account'>Account</h1>
           <p><code>Account</code> object represents an Ubiregi account.
           This is one of the most fat object such that it has most related data with the account including tables, cashiers, payment types.
-          Fetching an <code>Account</code> object should be the entory point for most API clients.</p>
+          Fetching an <code>Account</code> object should be the entry point for most API clients.</p>
           
           <p><code>Account</code> objects are readonly. There are no API to update.</p>
           <h2 id='object-account-fields'>Fields</h2>
@@ -557,7 +557,7 @@
           However, it will be deprecated soon.
           Using <code>CustomerTag</code> instead of <code>Table</code> is encouraged.</p>
           
-          <p>Since it will soom be deprecated, there are no API to update.
+          <p>Since it will soon be deprecated, there are no API to update.
           The only way to edit <code>Table</code> is logging in to the Ubiregi web app.</p>
           
           <p>Retrieving <code>Table</code>s can be done through <code>Account</code> objects.</p>
@@ -607,7 +607,7 @@
               </dl>
             </div>
             <div class='span6'>
-              <pre>{&#x000A;  &quot;id&quot;: 123,&#x000A;  &quot;name&quot;: &quot;Dating&quot;,&#x000A;  &quot;potision&quot;: null,&#x000A;  &quot;icon&quot;: $base64Encoded,&#x000A;  &quot;icon_mime&quot;: &quot;image/png&quot;,&#x000A;}</pre>
+              <pre>{&#x000A;  &quot;id&quot;: 123,&#x000A;  &quot;name&quot;: &quot;Dating&quot;,&#x000A;  &quot;position&quot;: null,&#x000A;  &quot;icon&quot;: $base64Encoded,&#x000A;  &quot;icon_mime&quot;: &quot;image/png&quot;,&#x000A;}</pre>
             </div>
           </div>
           <h3>Setting an Icon</h3>
@@ -797,7 +797,7 @@
                 <dd>Name of the item.</dd>
                 <dt>position</dt>
                 <dd>
-                  Position of the cateogry in menu. <code>null</code> if the category is disabled.
+                  Position of the category in menu. <code>null</code> if the category is disabled.
                 </dd>
               </dl>
             </div>
@@ -887,11 +887,11 @@
                   <code>"intax"</code> is used for normal items, such that the VAT is included in the price.
                   <code>"outtax"</code> is to mark that the VAT is not included in the price.
                   <code>"percent"</code> is for discounting/premiums.
-                  If <code>"20"</code> is the price of the item and the price_type is <code>"percent"</code>, The price is <em>20% of premiour</em>.
+                  If <code>"20"</code> is the price of the item and the price_type is <code>"percent"</code>, The price is <em>20% of premier</em>.
                   <code>"nosales"</code> is mark that the total sales with this item is not included in sales.
                 </dd>
                 <dt>price</dt>
-                <dd>Price of the item. <strong>Note that price is a string</strong> to avoid inacculate compuation using floats.</dd>
+                <dd>Price of the item. <strong>Note that price is a string</strong> to avoid inaccurate computation using floats.</dd>
                 <dt>vat</dt>
                 <dd>
                   Percentage of VAT in integer. Present if <code>price_type</code> is <code>"intax"</code> or <code>"outtax"</code>.
@@ -1003,7 +1003,7 @@
                 <dt> app_created_at <span class='label writeonly'>Writeonly</span> <span class='label immutable'>immutable</span></dt>
                 <dd>Time when the event has been created in a client app.</dd>
                 <dt>inventory_at <span class='label immutable'>immutable</span></dt>
-                <dd>Time when the inentory event has occured.  It maybe different from <code>app_created_at</code>.</dd>
+                <dd>Time when the inventory event has occured.  It maybe different from <code>app_created_at</code>.</dd>
                 <dt>event_type <span class='label immutable'>immutable</span></dt>
                 <dd>Type of the event. One of <code>"inventory"</code>, <code>"arrival"</code>, <code>"shipping"</code>, and <code>"order"</code>.</dd>
                 <dt>amount <span class='label immutable'>immutable</span></dt>
@@ -1124,7 +1124,7 @@
                   (The example here assumes account's timezone is <code>"Asia/Tokyo"</code> and date_offset is <code>0</code>.)
                 </dd>
                 <dt>price <span class='label readonly'>Readonly</span></dt>
-                <dd><strong>A string</strong> which represents server's culculated total sales of the checkout.</dd>
+                <dd><strong>A string</strong> which represents server's calculated total sales of the checkout.</dd>
                 <dt>change</dt>
                 <dd><strong>A string</strong> which represents change given to the customer.</dd>
                 <dt>status</dt>
@@ -1141,7 +1141,7 @@
                 <dt>customers_count</dt>
                 <dd>
                   Number of customers associated with the checkout.
-                  Zero in the case ommited.
+                  Zero in the case omitted.
                 </dd>
                 <dt>payments</dt>
                 <dd>Array of <code>CheckoutPayment</code>, which describes how the checkout is got paid.</dd>
@@ -1293,7 +1293,7 @@
           </div>
           <h3>Notes</h3>
           <p>Make sure the amounts of currency; <code>sales</code>, <code>tax</code>, <code>discount_sales</code>, and <code>discount_tax</code>; are represented as a string, not a number.
-          The price is culculated as follows: <code>sales</code> + <code>tax</code> - (<code>discount_sales</code> + <code>discount_tax</code>).</p>
+          The price is calculated as follows: <code>sales</code> + <code>tax</code> - (<code>discount_sales</code> + <code>discount_tax</code>).</p>
           <h1 id='object-checkout-payment'>CheckoutPayment</h1>
           <p>Pair of amount the customer paid, and method the payment maid with.</p>
           <h2 id='object-checkout-payment-fields'>Fields</h2>
@@ -1455,7 +1455,7 @@
           <dl>
             <dt>"customer.field.customerID"</dt>
             <dd>
-              Arbitaly customer ID.
+              Arbitary customer ID.
               The interpretation depends on the client.
             </dd>
             <dt>"customer.field.name"</dt>
@@ -1495,7 +1495,7 @@
           </dl>
           <h3>Updating CustomerField</h3>
           <p>Updating value of a <code>CustomerField</code> object is not recommended.
-          Just create new field, and delte it (set <code>deleted</code>).</p>
+          Just create new field, and delete it (set <code>deleted</code>).</p>
           
           <p>This is to avoid conflicting changes in two places, for example in your app and in the Ubiregi iPad app.
           If you do not update an existing <code>CustomerField</code>, the conflict will result in duplicated fields, and
@@ -1509,7 +1509,7 @@
                 <dt>id <span class='label readonly'>Readonly</span> <span class='label immutable'>immutable</span></dt>
                 <dd>ID of this object.</dd>
                 <dt>customer_id <span class='label immutable'>immutable</span></dt>
-                <dd>ID which thie object belongs to.</dd>
+                <dd>ID which their object belongs to.</dd>
                 <dt>app_created_at <span class='label writeonly'>Writeonly</span> <span class='label immutable'>immutable</span></dt>
                 <dd>Time when the note is created in a client app</dd>
                 <dt>guid <span class='label immutable'>immutable</span></dt>
@@ -1542,7 +1542,7 @@
           <p><strong>Reading Photo</strong> &nbsp;&nbsp;
           When you are downloading <code>CustomerNote</code>, <code>photo</code> attribute is <em>thumbnail</em> generated in ubiregi.com server.
           The thumbnail is 256px x 256px size, JPEG data.
-          The size should be convinient for many cases in your app to show a thumbnail to users.
+          The size should be convenient for many cases in your app to show a thumbnail to users.
           In the case you really need full size data, access the <code>photo_url</code> and download it.</p>
           <h2 id='get-on-customers-notes'>GET on /customers/notes</h2>
           <h3>Request</h3>
@@ -1620,7 +1620,7 @@
           <h2>IDs are Universal</h2>
           <p>There are only one scope of ID, <em>Universal</em>.</p>
           
-          <p>If this doc says <em>ID</em>, it is an one origin integer value which uniquely determins an object on ubiregi server.</p>
+          <p>If this doc says <em>ID</em>, it is an one origin integer value which uniquely determines an object on ubiregi server.</p>
           <h2>Special Fields</h2>
           <p>Most objects have special fields, <code>created_at</code> and <code>updated_at</code>.</p>
           <dl>
@@ -1664,7 +1664,7 @@
             <dt>readonly</dt>
             <dd>Parents' and siblings' information, menus, checkouts, and stock events.</dd>
             <dt>writable</dt>
-            <dd>Current's and childrens' information, menus, checkouts, and stock events.</dd>
+            <dd>Current's and children information, menus, checkouts, and stock events.</dd>
             <dt>nothing</dt>
             <dd>Anything else.</dd>
           </dl>
@@ -1707,12 +1707,12 @@
           </dl>
           <h2>app_created_at Usage</h2>
           <p><code>app_created_at</code> field is to remember when the object is created in the iPad app.
-          It generally meaningless; iPad clock may be inacculate, the clock can easily changed.</p>
+          It generally meaningless; iPad clock may be inaccurate, the clock can easily changed.</p>
           
           <p>It is recommended to record some time, or just use the time of post.</p>
           <h2>Private Fields</h2>
           <p>There may be private fields, not defined in this document but you find in the response from server.
-          It is okay if you use these fields, but keep in your mind <em>they are private</em> so that it may be removed without any anouncement.</p>
+          It is okay if you use these fields, but keep in your mind <em>they are private</em> so that it may be removed without any announcement.</p>
           <h1 id='errors'>Errors</h1>
           <p>Errors are notified via HTTP response status. Error code are following
           the standard HTTP error code convention. If there are something bad in
