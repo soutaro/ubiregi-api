@@ -87,11 +87,6 @@
   If <code>X-Ubiregi-Auth-Token</code> or <code>X-Ubiregi-App-Secret</code> is invalid, your request will result in <code>401</code> (Unauthorized) status.
 
 %p
-  Note that there are another possibility to make your request failed.
-  <code>402</code> (Payment required) may be returned in the case the user's subscription got expired.
-  After the user renew the subscription, the status will be recovered.
-
-%p
   Check the #{ link_to 'examples', '#introduction-examples' } to see how the authentication is exactly.
 
 %h3 Example of Computation of X-Ubiregi-App-Secret in Ruby
@@ -129,3 +124,39 @@
       }
       val secret = "topsecret"
       val appSecret = encode_secret(secret)
+
+%h2 Account Expiration
+
+Account may be expired.
+
+%dl
+  %dt Expired account at time <em>t</em>
+  %dd
+    If an account does not have valid subscription at time <em>t</em>, the account is <em>expired</em>.
+  %dt Visible checkouts
+  %dd
+    Checkouts which can be downloaded from ubiregi.com server.
+    The computation of monthly sales and so on only takes visible checkouts as their input.
+  %dt Invisible checkouts
+  %dd
+    Checkouts which can not be downloaded from ubiregi.com server.
+    Invisible checkouts will be ignored, but they are stored on ubiregi.com server.
+  %dt Expired checkout at time <em>t</em>
+  %dd
+    Checkouts, where its account is expired at its <code>paid_at</code> and closed.
+
+%ul
+  %li Expired checkout at time <em>t</em> is invisible.
+  %li Checkouts where its <code>paid_at</code> is less than 3 days (72 hours) ago from <em>t</em> is visible, even if they are expired.
+
+:markdown
+  The definition of checkout visibility is described in the following figure.
+  Green and gray dots are visible and invisible checkouts respectively (assume all checkouts are closed).
+  Group of visible checkouts in left is because the existence of a subscription.
+  Another group of visible checkouts in right is because its `paid_at` is new.
+  
+= image_tag "checkout-visibility.png"
+
+:markdown
+  These definitions about checkout visibility may cause a problem, when your user's account is expired and your user is using CRM.
+  Customer's history may have a reference to invisible checkouts.

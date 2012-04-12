@@ -163,7 +163,7 @@
           </h2>
           <h4>Github project</h4>
           <p>
-            We have <a href='http://github.com/ubiregiinc/ubiregi-api'>github project</a> to communicate with Ubiregi API users.
+            We have <a href='https://github.com/ubiregiinc/ubiregi-api'>github project</a> to communicate with Ubiregi API users.
             It has an issue tracker, and we are using it.
           </p>
           <p>
@@ -301,17 +301,45 @@
             If <code>X-Ubiregi-Auth-Token</code> or <code>X-Ubiregi-App-Secret</code> is invalid, your request will result in <code>401</code> (Unauthorized) status.
           </p>
           <p>
-            Note that there are another possibility to make your request failed.
-            <code>402</code> (Payment required) may be returned in the case the user's subscription got expired.
-            After the user renew the subscription, the status will be recovered.
-          </p>
-          <p>
             Check the <a href='#introduction-examples'>examples</a> to see how the authentication is exactly.
           </p>
           <h3>Example of Computation of X-Ubiregi-App-Secret in Ruby</h3>
           <pre>secret = &quot;topsecret&quot;&#x000A;salt = Time.now.strftime(&quot;%Y%m%d%H%M%S&quot;)        # Assume &quot;20120101032111&quot;&#x000A;digest = Digest::SHA1.hexdigest(salt + secret)  # &quot;4fec3a3e9dfb1b3ea7d7ba9cfd067286a1f23a03&quot;&#x000A;&#x000A;app_secret = salt + &quot;:&quot; + digest                # &quot;20120101032111:4fec3a3e9dfb1b3ea7d7ba9cfd067286a1f23a03&quot;</pre>
           <h3>Example of Computation of X-Ubiregi-App-Secret in Scala</h3>
           <pre>def encode_secret(secret: String): String = {&#x000A;  def generateSalt(): String = {&#x000A;    val random = SecureRandom.getInstance('SHA1PRNG');&#x000A;    random.setSeed(System.currentTimeMillis())&#x000A;    '%08x'.format(random.nextInt())&#x000A;  }&#x000A;  val salt = generateSalt()&#x000A;  val hexDigest = sha1HexDigest(salt + secret)&#x000A;  (salt + &quot;:&quot; + hexDigest)&#x000A;}&#x000A;def sha1HexDigest(from: String): String = {&#x000A;  val sha1 = MessageDigest.getInstance('SHA')&#x000A;  sha1.reset()&#x000A;  sha1.update(from.getBytes('UTF-8'))&#x000A;  sha1.digest().map{n =&gt; '%02x'.format(n &amp; 0xff)}.mkString&#x000A;}&#x000A;val secret = &quot;topsecret&quot;&#x000A;val appSecret = encode_secret(secret)</pre>
+          <h2>Account Expiration</h2>
+          Account may be expired.
+          <dl>
+            <dt>Expired account at time <em>t</em></dt>
+            <dd>
+              If an account does not have valid subscription at time <em>t</em>, the account is <em>expired</em>.
+            </dd>
+            <dt>Visible checkouts</dt>
+            <dd>
+              Checkouts which can be downloaded from ubiregi.com server.
+              The computation of monthly sales and so on only takes visible checkouts as their input.
+            </dd>
+            <dt>Invisible checkouts</dt>
+            <dd>
+              Checkouts which can not be downloaded from ubiregi.com server.
+              Invisible checkouts will be ignored, but they are stored on ubiregi.com server.
+            </dd>
+            <dt>Expired checkout at time <em>t</em></dt>
+            <dd>
+              Checkouts, where its account is expired at its <code>paid_at</code> and closed.
+            </dd>
+          </dl>
+          <ul>
+            <li>Expired checkout at time <em>t</em> is invisible.</li>
+            <li>Checkouts where its <code>paid_at</code> is less than 3 days (72 hours) ago from <em>t</em> is visible, even if they are expired.</li>
+          </ul>
+          <p>The definition of checkout visibility is described in the following figure.
+          Green and gray dots are visible and invisible checkouts respectively (assume all checkouts are closed).
+          Group of visible checkouts in left is because the existence of a subscription.
+          Another group of visible checkouts in right is because its <code>paid_at</code> is new.</p>
+          <img src='images/checkout-visibility.png'>
+          <p>These definitions about checkout visibility may cause a problem, when your user's account is expired and your user is using CRM.
+          Customer's history may have a reference to invisible checkouts.</p>
           <hr />
           <h1 id='notations'>Notations</h1>
           <h2>Field Attributes</h2>
@@ -1697,8 +1725,6 @@
           <dl>
             <dt>401 (Unauthorized)</dt>
             <dd>The request does not contains valid authentication token for your application.</dd>
-            <dt>402 (Payment required)</dt>
-            <dd>The account's subscriptions are all expired.</dd>
             <dt>403 (Forbidden)</dt>
             <dd>
               Your request is rejected by the server.  For example, if you modify read-only
