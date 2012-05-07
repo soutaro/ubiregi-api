@@ -74,6 +74,7 @@
         <ul>
           <li><a href='#object-checkout-fields'>Fields</a></li>
           <li><a href='#get-on-accounts-account-id-checkouts'>GET on /accounts/<em>account_id</em>/checkouts</a></li>
+          <li><a href='#get-on-accounts-account-id-checkouts-close'>GET on /accounts/<em>account_id</em>/checkouts/close</a></li>
           <li><a href='#post-on-accounts-account-id-checkouts'>POST on /accounts/<em>account_id</em>/checkouts</a></li>
         </ul>
         <h4><a href='#object-checkout-item'>CheckoutItem</a></h4>
@@ -1186,6 +1187,38 @@
                 <dt>timestamp</dt>
                 <dt>next-url</dt>
                 <dt>last_updated_at</dt>
+                <dt>checkouts</dt>
+                <dd>Array of <code>Checkout</code>s for the request.</dd>
+              </dl>
+            </div>
+          </div>
+          <h2 id='get-on-accounts-account-id-checkouts-close' style='font-size:30px'>GET on /accounts/<em>account_id</em>/checkouts/close</h2>
+          <p>Retrieves the <em>closed</em> checkouts of the account which specified with <em>account_id</em>.
+          Checkout which <code>status</code> is <code>"close"</code> or <code>"cancel"</code> is <em>closed</em> checkout.</p>
+          <h3>Request</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>GET /accounts/current/checkouts/close&#x000A;GET /accounts/113/checkouts/close?since=....</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>since</dt>
+                <dt>until</dt>
+                <dt>glb</dt>
+              </dl>
+            </div>
+          </div>
+          <h3>Response</h3>
+          <div class='row'>
+            <div class='span6'>
+              <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2011-11-02T09:11:34Z&quot;,&#x000A;  &quot;next-url&quot;: &quot;https://ubiregi.com/api/3/accounts/31/checkouts/close?since=.....&quot;,&#x000A;  &quot;last_updated_at&quot;: &quot;2011-12-31T00:00:31Z&quot;,&#x000A;  &quot;checkouts&quot;: [ $checkouts ],&#x000A;}</pre>
+            </div>
+            <div class='span6'>
+              <dl>
+                <dt>timestamp</dt>
+                <dt>next-url</dt>
+                <dt>last_updated_at</dt>
+                <dd>The latest <s>closed</s> checkout <code>updated_at</code>.</dd>
                 <dt>checkouts</dt>
                 <dd>Array of <code>Checkout</code>s for the request.</dd>
               </dl>
