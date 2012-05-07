@@ -117,3 +117,18 @@
 :markdown
   There may be private fields, not defined in this document but you find in the response from server.
   It is okay if you use these fields, but keep in your mind *they are private* so that it may be removed without any announcement.
+
+%h2 Downloading Images
+
+:markdown
+  Image fields including `icon` and `photo` are `null` by default.
+  This is to reduce the size of data transmission.
+  
+  To download the image data, give an http query parameter `image=blob`.
+
+%h3 Example: Downloading with Icons
+
+:markdown
+  > GET /accounts/current?image=blob
+  
+  > GET /accounts/customer/notes?image=blob

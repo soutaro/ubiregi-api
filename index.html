@@ -1746,6 +1746,15 @@
           <h2>Private Fields</h2>
           <p>There may be private fields, not defined in this document but you find in the response from server.
           It is okay if you use these fields, but keep in your mind <em>they are private</em> so that it may be removed without any announcement.</p>
+          <h2>Downloading Images</h2>
+          <p>Image fields including <code>icon</code> and <code>photo</code> are <code>null</code> by default.
+          This is to reduce the size of data transmission.</p>
+          
+          <p>To download the image data, give an http query parameter <code>image=blob</code>.</p>
+          <h3>Example: Downloading with Icons</h3>
+          <blockquote><p>GET /accounts/current?image=blob</p>
+          
+          <p>GET /accounts/customer/notes?image=blob</p></blockquote>
           <h1 id='errors'>Errors</h1>
           <p>Errors are notified via HTTP response status. Error code are following
           the standard HTTP error code convention. If there are something bad in
