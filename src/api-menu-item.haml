@@ -75,11 +75,21 @@
     %pre
       = preserve do
         GET /menus/13/items?since=2011-01-01T18:00:13Z
+        GET /menus/13/items?sku=item12345
+        GET /menus/13/items?id=123
   .span6
     %dl
       %dt= field "since"
       %dt= field "until"
       %dt= field "glb"
+      %dt= field "sku"
+      %dd
+        This parameter is to download a menu item with given sku.
+        Since sku is unique in a menu, one or zero item will be retrieved.
+      %dt= field "id"
+      %dd
+        This parameter is to download a menu item with given id.
+        Since id is unique in a menu, one or zero item will be retrieved.
 
 %h3 Response
 
