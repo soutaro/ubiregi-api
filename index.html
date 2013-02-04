@@ -437,8 +437,8 @@ but it can not update the value once the object is created.</p>
 You might have a question that how to get the whole collection?
 A set of requests to fetch collections can be interleaved by requests which updates objects which is contained in the collection.
 In that case, the <code>updated_at</code> field will be updated and because of the <code>until</code> parameter included in the fetch request, the updated objects can not be fetched.</p>
-<p><code>last-updated-at</code> field is to handle such case.
-If there are no <code>next-url</code> field sent, which means there are no more object for the parameters you specified, check if the <code>timestamp</code> field is newer than <code>last-updated-at</code>.</p>
+<p><code>last_updated_at</code> field is to handle such case.
+If there are no <code>next-url</code> field sent, which means there are no more object for the parameters you specified, check if the <code>timestamp</code> field is newer than <code>last_updated_at</code>.</p>
 <ol>
 <li>Send a request without <code>until</code> and <code>glb</code> parameters.</li>
 <li>Check if the response contains <code>next-url</code> field.</li>
@@ -821,13 +821,13 @@ The child account's cashiers can be updated by parents.</p>
 <h3>Response</h3>
 <div class='row'>
   <div class='span6'>
-    <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2012-01-03T03:11:03Z&quot;,&#x000A;  &quot;next-url&quot;: &quot;https://ubiregi.com/api/3/menus/13/categories?since=2011-01-01T18:00:13Z&amp;until=2011-01-03T03:11:03Z&amp;glb=13476&quot;,&#x000A;  &quot;last-updated-at&quot;: &quot;2012-01-02T21:14:08Z&quot;,&#x000A;  &quot;categories&quot;: [ $categories ],&#x000A;}</pre>
+    <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2012-01-03T03:11:03Z&quot;,&#x000A;  &quot;next-url&quot;: &quot;https://ubiregi.com/api/3/menus/13/categories?since=2011-01-01T18:00:13Z&amp;until=2011-01-03T03:11:03Z&amp;glb=13476&quot;,&#x000A;  &quot;last_updated_at&quot;: &quot;2012-01-02T21:14:08Z&quot;,&#x000A;  &quot;categories&quot;: [ $categories ],&#x000A;}</pre>
   </div>
   <div class='span6'>
     <dl>
       <dt>timestamp</dt>
       <dt>next-url</dt>
-      <dt>last-updated-at</dt>
+      <dt>last_updated_at</dt>
       <dt>categories</dt>
     </dl>
   </div>
@@ -948,13 +948,13 @@ The child account's cashiers can be updated by parents.</p>
 <h3>Response</h3>
 <div class='row'>
   <div class='span6'>
-    <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2012-01-03T03:11:03Z&quot;,&#x000A;  &quot;next-url&quot;: &quot;https://ubiregi.com/api/3/menus/13/items?since=2011-01-01T18:00:13Z&amp;until=2011-01-03T03:11:03Z&amp;glb=13476&quot;,&#x000A;  &quot;last-updated-at&quot;: &quot;2012-01-02T21:14:08Z&quot;,&#x000A;  &quot;items&quot;: [ $menu_items ],&#x000A;}</pre>
+    <pre>{&#x000A;  &quot;timestamp&quot;: &quot;2012-01-03T03:11:03Z&quot;,&#x000A;  &quot;next-url&quot;: &quot;https://ubiregi.com/api/3/menus/13/items?since=2011-01-01T18:00:13Z&amp;until=2011-01-03T03:11:03Z&amp;glb=13476&quot;,&#x000A;  &quot;last_updated_at&quot;: &quot;2012-01-02T21:14:08Z&quot;,&#x000A;  &quot;items&quot;: [ $menu_items ],&#x000A;}</pre>
   </div>
   <div class='span6'>
     <dl>
       <dt>timestamp</dt>
       <dt>next-url</dt>
-      <dt>last-updated-at</dt>
+      <dt>last_updated_at</dt>
       <dt>items</dt>
     </dl>
   </div>
