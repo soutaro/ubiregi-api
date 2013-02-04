@@ -72,8 +72,8 @@
   In that case, the `updated_at` field will be updated and because of the `until` parameter included in the fetch request, the updated objects can not be fetched.
 
 :markdown
-  `last-updated-at` field is to handle such case.
-  If there are no `next-url` field sent, which means there are no more object for the parameters you specified, check if the `timestamp` field is newer than `last-updated-at`.
+  `last_updated_at` field is to handle such case.
+  If there are no `next-url` field sent, which means there are no more object for the parameters you specified, check if the `timestamp` field is newer than `last_updated_at`.
 
 :markdown
   1. Send a request without `until` and `glb` parameters.
