@@ -26,6 +26,13 @@
       %dd UUID associated to the event.  This is used to prevent duplicated posts.
       %dt= field "body", :immutable
       %dd An arbitrary JSON object.  The usage of the value is not decided yet.
+      %dt= field "deleted"
+      %dd <code>true</code> or <code>false</code>.
+      %dt= field "checkout_guid"
+      %dd
+        GUID of checkout which is associated with the stock event.
+        <code>null</code> if there is no checkout to be associated with.
+
   .span6
     %pre
       = preserve do
@@ -39,6 +46,8 @@
             "amount" : 55,
             "guid" : $UUID-like-sequence,
             "body" : { "note" : "This object represents that 55 items specified by `menu_item_id` has arrived" },
+            "deleted": false,
+            "checkout_guid": $UUID-like-sequence
           }
 
 %h3 Amount of an Event
@@ -121,6 +130,8 @@
                 "body" : {
                   "author": "Soutaro Matsumoto",
                 },
+                "deleted": false,
+                "checkout_guid": null,
               }
             ]
           }
@@ -137,6 +148,9 @@
           %dt= field "amount"
           %dt= field "uuid"
           %dt= field "body"
+          %dt= field "deleted"
+          %dd If there is not <code>deleted</code> in the request, it will be treated as if <code>false</code> is specified.
+          %dt= field "checkoug_guid"
 
 %h3 Response
 .row

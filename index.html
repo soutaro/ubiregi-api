@@ -1,10 +1,10 @@
 <html>
   <head>
     <title>Ubiregi API (Beta)</title>
-    <meta charset='utf-8' />
-    <link href='bootstrap.min.css' rel='stylesheet' />
-    <link href='top.css' rel='stylesheet' />
-    <meta content='width=1120' name='viewport' />
+    <meta charset='utf-8'>
+    <link href='bootstrap.min.css' rel='stylesheet'>
+    <link href='top.css' rel='stylesheet'>
+    <meta content='width=1120' name='viewport'>
   </head>
   <body>
     <div class='menu span5'>
@@ -17,14 +17,14 @@
           <li><a href='#introduction-examples'>Examples</a></li>
           <li><a href='#introduction-general-notes'>Note</a></li>
         </ul>
-        <hr />
+        <hr>
         <h3><a href='#authentication'>Authentication</a></h3>
         <ul>
           <li><a href='#authentication-installation'>Installation</a></li>
           <li><a href='#authentication-authorization'>Authorization</a></li>
           <li><a href='#authentication-the-protocol'>The Protocol</a></li>
         </ul>
-        <hr />
+        <hr>
         <h3>API Objects</h3>
         <h4><a href='#notations'>Notations</a></h4>
         <h4><a href='#collection-api-set'>Collection API</a></h4>
@@ -107,7 +107,7 @@
           <li><a href='#errors-status-code'>Status code</a></li>
           <li><a href='#errors-error-object'>Error object</a></li>
         </ul>
-        <hr />
+        <hr>
         <div class='row' style='text-align:center; margin-bottom:2em'>
           &copy; 2011 Ubiregi Inc. All rights reserved.
         </div>
@@ -213,7 +213,7 @@
     Simple library which abstracts API calls and authentications, for Scala.
   </dd>
 </dl>
-          <hr />
+          <hr>
           <h1 id='authentication'>Authentication</h1>
 <p>
   Currently we provide very simple token based authentication mechanism.
@@ -242,7 +242,7 @@
   <li>Each installation have their own secret token</li>
   <li>
     There are no automated way to notify app its secret token
-    <br />
+    <br>
     (We are planning to provide standardized mechanisms such as OAuth.)
   </li>
 </ul>
@@ -342,9 +342,9 @@ Green and gray dots are visible and invisible checkouts respectively (assume all
 Group of visible checkouts in left is because the existence of a subscription.
 Another group of visible checkouts in right is because its <code>paid_at</code> is new.</p>
 <img src='images/checkout-visibility.png'>
-<p>These definitions about checkout visibility may cause a problem, when your user's account is expired and your user is using CRM.
-Customer's history may have a reference to invisible checkouts.</p>
-          <hr />
+<p>These definitions about checkout visibility may cause a problem, when your user&#39;s account is expired and your user is using CRM.
+Customer&#39;s history may have a reference to invisible checkouts.</p>
+          <hr>
           <h1 id='notations'>Notations</h1>
 <h2>Field Attributes</h2>
 <p>The field definition may have following attributes:</p>
@@ -527,8 +527,8 @@ Fetching an <code>Account</code> object should be the entry point for most API c
 <h2 id='get-on-accounts-account-id'>GET on /accounts/<em>account_id</em></h2>
 <p>Retrieves an <code>Account</code> object with <em>account_id</em>.</p>
 
-<p><em>account_id</em> can be either the ID of account or an string <code>"current"</code>.
-If <code>"current"</code> is specified, it is understood as the ID of current account.</p>
+<p><em>account_id</em> can be either the ID of account or an string <code>&quot;current&quot;</code>.
+If <code>&quot;current&quot;</code> is specified, it is understood as the ID of current account.</p>
 <h3>Request</h3>
 <div class='row'>
   <div class='span6'>
@@ -612,13 +612,13 @@ This can be used to record that <em>the customer is 20th girl</em>, <em>they cam
 <p>Icons can be set through <code>icon_name</code> attribute.
 The value of <code>icon_name</code> should be one of the following list.</p>
 
-<p><strong><em> FIXME </em></strong></p>
+<p>*** FIXME ***</p>
 
 <p>Icons are sent from server as its binary image in Base64 encoded form.</p>
 
 <p>Thus, <code>icon_name</code> is a <em>writeonly</em> attribute and <code>icon</code> and <code>icon_mime</code> are <em>readonly</em> attributes.</p>
 <h2 id='post-on-accounts-account-id-customer-tags'>POST on /accounts/<em>account_id</em>/customer_tags</h2>
-<p>Update the customer_tags of an account specified by <em>account_id</em>.</p>
+<p>Update the customer<em>tags of an account specified by *account</em>id*.</p>
 <h3>Request</h3>
 <div class='row'>
   <div class='span6'>
@@ -679,7 +679,7 @@ The value of <code>icon_name</code> should be one of the following list.</p>
 </div>
 <h2 id='post-on-accounts-account-id-cashiers'>POST on /accounts/<em>account_id</em>/cashiers</h2>
 <p>Update the cashiers of an account specified by <em>:account_id</em>.
-The child account's cashiers can be updated by parents.</p>
+The child account&#39;s cashiers can be updated by parents.</p>
 <h3>Request</h3>
 <div class='row'>
   <div class='span6'>
@@ -999,7 +999,7 @@ The child account's cashiers can be updated by parents.</p>
           <h1 id='object-stock-event'>Stock Event</h1>
 <p>Event object related to stock control.
 The object is used to tell someone that stock-related event has occured.
-Type of a stock event is either "inventory", "arrival", "shipping", or "order".</p>
+Type of a stock event is either &quot;inventory&quot;, &quot;arrival&quot;, &quot;shipping&quot;, or &quot;order&quot;.</p>
 <h2 id='object-stock-event-fields'>Fields</h2>
 <div class='row'>
   <div class='span6'>
@@ -1020,14 +1020,21 @@ Type of a stock event is either "inventory", "arrival", "shipping", or "order".<
       <dd>UUID associated to the event.  This is used to prevent duplicated posts.</dd>
       <dt>body <span class='label immutable'>immutable</span></dt>
       <dd>An arbitrary JSON object.  The usage of the value is not decided yet.</dd>
+      <dt>deleted</dt>
+      <dd><code>true</code> or <code>false</code>.</dd>
+      <dt>checkout_guid</dt>
+      <dd>
+        GUID of checkout which is associated with the stock event.
+        <code>null</code> if there is no checkout to be associated with.
+      </dd>
     </dl>
   </div>
   <div class='span6'>
-    <pre>{&#x000A;  &quot;id&quot; : 1,&#x000A;  &quot;menu_item_id&quot; : 2,&#x000A;  &quot;app_created_at&quot; : &quot;2012-02-14T00:00:00Z&quot;,&#x000A;  &quot;inventory__at&quot; : &quot;2012-02-14T01:00:00Z&quot;,&#x000A;  &quot;event_type&quot; : &quot;arrival&quot;,&#x000A;  &quot;amount&quot; : 55,&#x000A;  &quot;guid&quot; : $UUID-like-sequence,&#x000A;  &quot;body&quot; : { &quot;note&quot; : &quot;This object represents that 55 items specified by `menu_item_id` has arrived&quot; },&#x000A;}</pre>
+    <pre>{&#x000A;  &quot;id&quot; : 1,&#x000A;  &quot;menu_item_id&quot; : 2,&#x000A;  &quot;app_created_at&quot; : &quot;2012-02-14T00:00:00Z&quot;,&#x000A;  &quot;inventory__at&quot; : &quot;2012-02-14T01:00:00Z&quot;,&#x000A;  &quot;event_type&quot; : &quot;arrival&quot;,&#x000A;  &quot;amount&quot; : 55,&#x000A;  &quot;guid&quot; : $UUID-like-sequence,&#x000A;  &quot;body&quot; : { &quot;note&quot; : &quot;This object represents that 55 items specified by `menu_item_id` has arrived&quot; },&#x000A;  &quot;deleted&quot;: false,&#x000A;  &quot;checkout_guid&quot;: $UUID-like-sequence&#x000A;}</pre>
   </div>
 </div>
 <h3>Amount of an Event</h3>
-<p>The interpretation of <code>amount</code> depends on the event's <code>event_type</code>.</p>
+<p>The interpretation of <code>amount</code> depends on the event&#39;s <code>event_type</code>.</p>
 
 <p>Assume there is a <code>StockEvent</code> object with <code>amount = 55</code>.
 It says the following facts depending on <code>event_type</code>:</p>
@@ -1075,7 +1082,7 @@ Since there is no mutable field in <code>StockEvent</code>, it is impossible to 
 <h3>Request</h3>
 <div class='row'>
   <div class='span6'>
-    <pre>{&#x000A;  &quot;events&quot;: [&#x000A;    {&#x000A;      &quot;menu_item_id&quot; : 21,&#x000A;      &quot;app_created_at&quot; : &quot;2012-02-14T00:00:00Z&quot;,&#x000A;      &quot;inventory__at&quot; : &quot;2012-02-14T01:00:00Z&quot;,&#x000A;      &quot;event_type&quot; : &quot;arrival&quot;,&#x000A;      &quot;amount&quot; : 55,&#x000A;      &quot;uuid&quot; : $UUID-like-sequence,&#x000A;      &quot;body&quot; : {&#x000A;        &quot;author&quot;: &quot;Soutaro Matsumoto&quot;,&#x000A;      },&#x000A;    }&#x000A;  ]&#x000A;}</pre>
+    <pre>{&#x000A;  &quot;events&quot;: [&#x000A;    {&#x000A;      &quot;menu_item_id&quot; : 21,&#x000A;      &quot;app_created_at&quot; : &quot;2012-02-14T00:00:00Z&quot;,&#x000A;      &quot;inventory__at&quot; : &quot;2012-02-14T01:00:00Z&quot;,&#x000A;      &quot;event_type&quot; : &quot;arrival&quot;,&#x000A;      &quot;amount&quot; : 55,&#x000A;      &quot;uuid&quot; : $UUID-like-sequence,&#x000A;      &quot;body&quot; : {&#x000A;        &quot;author&quot;: &quot;Soutaro Matsumoto&quot;,&#x000A;      },&#x000A;      &quot;deleted&quot;: false,&#x000A;      &quot;checkout_guid&quot;: null,&#x000A;    }&#x000A;  ]&#x000A;}</pre>
   </div>
   <div class='span6'>
     <dl>
@@ -1090,6 +1097,9 @@ Since there is no mutable field in <code>StockEvent</code>, it is impossible to 
           <dt>amount</dt>
           <dt>uuid</dt>
           <dt>body</dt>
+          <dt>deleted</dt>
+          <dd>If there is not <code>deleted</code> in the request, it will be treated as if <code>false</code> is specified.</dd>
+          <dt>checkoug_guid</dt>
         </dl>
       </dd>
     </dl>
@@ -1201,7 +1211,7 @@ In other case, the request will result in <code>404</code> not found.</p>
 </div>
 <h2 id='get-on-accounts-account-id-checkouts-close' style='font-size:30px'>GET on /accounts/<em>account_id</em>/checkouts/close</h2>
 <p>Retrieves the <em>closed</em> checkouts of the account which specified with <em>account_id</em>.
-Checkout which <code>status</code> is <code>"close"</code> or <code>"cancel"</code> is <em>closed</em> checkout.</p>
+Checkout which <code>status</code> is <code>&quot;close&quot;</code> or <code>&quot;cancel&quot;</code> is <em>closed</em> checkout.</p>
 <h3>Request</h3>
 <div class='row'>
   <div class='span6'>
@@ -1415,9 +1425,9 @@ The price is calculated as follows: <code>sales</code> + <code>tax</code> - (<co
 <p>An customer is available only if the customer is associated with one of the following:</p>
 
 <ol>
-<li>Current account's parents</li>
-<li>Current account's children</li>
-<li>Current account's siblings</li>
+<li>Current account&#39;s parents</li>
+<li>Current account&#39;s children</li>
+<li>Current account&#39;s siblings</li>
 </ol>
 <img src='images/available-customers.png'>
 <p>The circles represent accounts and gray arrows represents parent-child associations.
@@ -1655,7 +1665,7 @@ In the case you really need full size data, access the <code>photo_url</code> an
     </dl>
   </div>
 </div>
-          <hr />
+          <hr>
           <h1 id='api-notes'>API Notes</h1>
 <h2>IDs are Universal</h2>
 <p>There are only one scope of ID, <em>Universal</em>.</p>
@@ -1675,7 +1685,7 @@ In the case you really need full size data, access the <code>photo_url</code> an
 </dl>
 <h2>Permissions on Objects of Other Accounts</h2>
 <p>Ubiregi API permission model is very simple.
-The permission to a object is decided by its owner account's <em>role</em>.</p>
+The permission to a object is decided by its owner account&#39;s <em>role</em>.</p>
 
 <p>There are three permissions, <em>nothing</em>, <em>readonly</em> and <em>writable</em>.</p>
 <dl>
@@ -1759,9 +1769,11 @@ This is to reduce the size of data transmission.</p>
 
 <p>To download the image data, give an http query parameter <code>image=blob</code>.</p>
 <h3>Example: Downloading with Icons</h3>
-<blockquote><p>GET /accounts/current?image=blob</p>
+<blockquote>
+<p>GET /accounts/current?image=blob</p>
 
-<p>GET /accounts/customer/notes?image=blob</p></blockquote>
+<p>GET /accounts/customer/notes?image=blob</p>
+</blockquote>
           <h1 id='errors'>Errors</h1>
 <p>Errors are notified via HTTP response status. Error code are following
 the standard HTTP error code convention. If there are something bad in
@@ -1810,7 +1822,7 @@ of Error object is as the followings:</p>
     <pre>{&#x000A;  &quot;errors&quot;: [&#x000A;    {&#x000A;      &quot;object&quot; : {&#x000A;        &quot;name&quot;: &quot;Existing Cashier&quot;,&#x000A;        &quot;enabled&quot;:true,&#x000A;        &quot;icon&quot;:&quot;hogehoge&quot;&#x000A;      },&#x000A;      &quot;messages&quot;: [&quot;invalid icon&quot;]&#x000A;    }&#x000A;  ],&#x000A;  &quot;timestamp&quot;: &quot;2012-03-11T09:00:00Z&quot;&#x000A;}</pre>
   </div>
 </div>
-          <hr />
+          <hr>
         </div>
       </div>
     </div>
